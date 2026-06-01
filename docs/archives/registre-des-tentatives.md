@@ -13,3 +13,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 1 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 1 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 2
 - 1 juin 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
+- 1 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
