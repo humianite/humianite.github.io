@@ -15,3 +15,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 1 juin 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
 - 1 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 2 juin 2026, 12 h 00 : feat: tentative n° 3 — relire la documentation de l’humanité
+- 2 juin 2026, 12 h 01 : fix: la documentation renvoie à elle-même
