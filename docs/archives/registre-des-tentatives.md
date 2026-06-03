@@ -22,3 +22,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 2 juin 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
 - 3 juin 2026, 12 h 00 : feat: tentative n° 4 — constater l’absence de documentation
 - 3 juin 2026, 12 h 01 : fix: ajoute une documentation qui explique son absence
+- 3 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
