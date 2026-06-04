@@ -30,3 +30,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 4 juin 2026, 12 h 01 : fix: le cahier des charges est un cahier
 - 4 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 4 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 5
+- 4 juin 2026, 12 h 04 : chore: renomme les variables pour paraître occupé
