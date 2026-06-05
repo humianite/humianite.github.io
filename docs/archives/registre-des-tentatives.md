@@ -32,3 +32,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 4 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 5
 - 4 juin 2026, 12 h 04 : chore: renomme les variables pour paraître occupé
 - 4 juin 2026, 12 h 05 : chore: clôture de la journée, une réunion a été planifiée
+- 5 juin 2026, 12 h 00 : feat: tentative n° 6 — attendre que la direction se réveille
