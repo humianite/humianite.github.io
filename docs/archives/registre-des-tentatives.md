@@ -42,3 +42,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 6 juin 2026, 12 h 01 : fix: le responsable éditorial n’a jamais été nommé
 - 6 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 6 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 7
+- 6 juin 2026, 12 h 04 : chore: archive les réclamations dans le dossier des réclamations
