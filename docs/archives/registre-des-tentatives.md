@@ -44,3 +44,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 6 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 7
 - 6 juin 2026, 12 h 04 : chore: archive les réclamations dans le dossier des réclamations
 - 6 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
+- 12 juin 2026, 12 h 00 : feat: tentative n° 8 — retrouver celui qui cherchait le responsable éditorial
