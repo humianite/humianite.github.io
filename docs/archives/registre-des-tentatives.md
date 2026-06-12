@@ -45,3 +45,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 6 juin 2026, 12 h 04 : chore: archive les réclamations dans le dossier des réclamations
 - 6 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 12 juin 2026, 12 h 00 : feat: tentative n° 8 — retrouver celui qui cherchait le responsable éditorial
+- 12 juin 2026, 12 h 01 : fix: l’enquêteur était le disparu
