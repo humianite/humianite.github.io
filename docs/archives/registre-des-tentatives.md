@@ -51,3 +51,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 12 juin 2026, 12 h 04 : chore: vérifie que le site ne collecte toujours rien
 - 12 juin 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
 - 17 juin 2026, 12 h 00 : feat: tentative n° 9 — reproduire une opinion en environnement contrôlé
+- 17 juin 2026, 12 h 01 : fix: l’opinion ne survit pas hors de son propriétaire
