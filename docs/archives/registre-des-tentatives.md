@@ -53,3 +53,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 17 juin 2026, 12 h 00 : feat: tentative n° 9 — reproduire une opinion en environnement contrôlé
 - 17 juin 2026, 12 h 01 : fix: l’opinion ne survit pas hors de son propriétaire
 - 17 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 17 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 9
