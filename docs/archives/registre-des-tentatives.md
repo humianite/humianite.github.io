@@ -56,3 +56,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 17 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 9
 - 17 juin 2026, 12 h 04 : chore: met à jour les dépendances, dont l’humanité (ignorée)
 - 17 juin 2026, 12 h 05 : chore: clôture de la journée, le problème persiste
+- 18 juin 2026, 12 h 00 : feat: tentative n° 10 — isoler la cause du lundi
