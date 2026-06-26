@@ -63,3 +63,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 18 juin 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
 - 18 juin 2026, 12 h 05 : chore: clôture de la journée, une réunion a été planifiée
 - 26 juin 2026, 12 h 00 : feat: tentative n° 11 — comprendre pourquoi les gens cliquent sur « Tout accepter »
+- 26 juin 2026, 12 h 01 : fix: déplace le bouton « Tout accepter », sans effet
