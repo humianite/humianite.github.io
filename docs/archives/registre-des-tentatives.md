@@ -68,3 +68,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 26 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 11
 - 26 juin 2026, 12 h 04 : chore: relance la direction, sans réponse
 - 26 juin 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
+- 28 juin 2026, 12 h 00 : feat: tentative n° 12 — lire les conditions générales jusqu’au bout
