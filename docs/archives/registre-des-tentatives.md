@@ -74,3 +74,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 28 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 12
 - 28 juin 2026, 12 h 04 : chore: arrose la plante du guichet
 - 28 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
+- 29 juin 2026, 12 h 00 : feat: tentative n° 13 — distinguer une urgence d’une réunion
