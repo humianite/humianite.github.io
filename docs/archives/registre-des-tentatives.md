@@ -76,3 +76,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 28 juin 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 29 juin 2026, 12 h 00 : feat: tentative n° 13 — distinguer une urgence d’une réunion
 - 29 juin 2026, 12 h 01 : fix: toute urgence est une réunion qui s’ignore
+- 29 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
