@@ -82,3 +82,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 29 juin 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
 - 30 juin 2026, 12 h 00 : feat: tentative n° 14 — planifier la réunion sur la réunion
 - 30 juin 2026, 12 h 01 : fix: la réunion est reportée à une réunion ultérieure
+- 30 juin 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
