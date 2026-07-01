@@ -86,3 +86,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 30 juin 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 14
 - 30 juin 2026, 12 h 04 : chore: déplace l’agrafeuse de 1,40 m
 - 30 juin 2026, 12 h 05 : chore: clôture de la journée, le problème persiste
+- 1 juillet 2026, 12 h 00 : feat: tentative n° 15 — expliquer le second degré à un formulaire
