@@ -92,3 +92,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 1 juillet 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 15
 - 1 juillet 2026, 12 h 04 : chore: archive les réclamations dans le dossier des réclamations
 - 1 juillet 2026, 12 h 05 : chore: clôture de la journée, une réunion a été planifiée
+- 2 juillet 2026, 12 h 00 : feat: tentative n° 16 — faire admettre un candidat, pour voir
