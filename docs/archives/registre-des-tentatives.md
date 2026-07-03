@@ -102,3 +102,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 3 juillet 2026, 12 h 01 : fix: sept
 - 3 juillet 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 3 juillet 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 17
+- 3 juillet 2026, 12 h 04 : chore: met à jour les dépendances, dont l’humanité (ignorée)
