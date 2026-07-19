@@ -115,3 +115,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 19 juillet 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 19 juillet 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 19
 - 19 juillet 2026, 12 h 04 : chore: relance la direction, sans réponse
+- 19 juillet 2026, 12 h 05 : chore: clôture de la journée, le problème persiste
