@@ -110,3 +110,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 4 juillet 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 18
 - 4 juillet 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
 - 4 juillet 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
+- 19 juillet 2026, 12 h 00 : feat: tentative n° 19 — écrire un test qui passe
