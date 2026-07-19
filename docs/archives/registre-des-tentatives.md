@@ -114,3 +114,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 19 juillet 2026, 12 h 01 : fix: le test passait parce qu’il ne testait rien
 - 19 juillet 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 19 juillet 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 19
+- 19 juillet 2026, 12 h 04 : chore: relance la direction, sans réponse
