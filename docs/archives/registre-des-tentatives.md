@@ -130,3 +130,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 2 août 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
 - 3 août 2026, 12 h 00 : feat: tentative n° 22 — établir l’existence du stagiaire
 - 3 août 2026, 12 h 01 : fix: le stagiaire existe à titre provisoire
+- 3 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
