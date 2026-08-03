@@ -131,3 +131,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 3 août 2026, 12 h 00 : feat: tentative n° 22 — établir l’existence du stagiaire
 - 3 août 2026, 12 h 01 : fix: le stagiaire existe à titre provisoire
 - 3 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 3 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 22
