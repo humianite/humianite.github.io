@@ -128,3 +128,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 2 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 21
 - 2 août 2026, 12 h 04 : chore: renomme les variables pour paraître occupé
 - 2 août 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
+- 3 août 2026, 12 h 00 : feat: tentative n° 22 — établir l’existence du stagiaire
