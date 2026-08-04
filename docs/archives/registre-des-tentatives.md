@@ -135,3 +135,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 3 août 2026, 12 h 04 : chore: déplace l’agrafeuse de 1,40 m
 - 3 août 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 4 août 2026, 12 h 00 : feat: tentative n° 23 — payer le stagiaire
+- 4 août 2026, 12 h 01 : fix: la paie requiert une existence
