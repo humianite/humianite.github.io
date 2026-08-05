@@ -143,3 +143,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 5 août 2026, 12 h 00 : feat: tentative n° 24 — retrouver le dossier de Mlle Jeanine
 - 5 août 2026, 12 h 01 : fix: le dossier est rangé avec celui du stagiaire
 - 5 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 5 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 24
