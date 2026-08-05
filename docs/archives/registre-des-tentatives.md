@@ -145,3 +145,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 5 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 5 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 24
 - 5 août 2026, 12 h 04 : chore: vérifie que le site ne collecte toujours rien
+- 5 août 2026, 12 h 05 : chore: clôture de la journée, le problème persiste
