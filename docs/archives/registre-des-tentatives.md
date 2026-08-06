@@ -149,3 +149,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 6 août 2026, 12 h 00 : feat: tentative n° 25 — supprimer un tiret cadratin
 - 6 août 2026, 12 h 01 : fix: le tiret a été remplacé par deux tirets
 - 6 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 6 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 25
