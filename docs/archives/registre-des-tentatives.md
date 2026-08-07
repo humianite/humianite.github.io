@@ -155,3 +155,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 7 août 2026, 12 h 00 : feat: tentative n° 26 — empêcher le tiret de revenir
 - 7 août 2026, 12 h 01 : fix: abandonne — provisoirement — la lutte
 - 7 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 7 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 26
