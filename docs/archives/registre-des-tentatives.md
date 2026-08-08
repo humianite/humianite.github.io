@@ -163,3 +163,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 8 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 8 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 27
 - 8 août 2026, 12 h 04 : chore: relance la direction, sans réponse
+- 8 août 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
