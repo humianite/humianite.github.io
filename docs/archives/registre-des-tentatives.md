@@ -161,3 +161,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 8 août 2026, 12 h 00 : feat: tentative n° 27 — obtenir un simple oui
 - 8 août 2026, 12 h 01 : fix: le oui est accompagné de six cents mots
 - 8 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 8 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 27
