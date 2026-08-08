@@ -158,3 +158,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 7 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 26
 - 7 août 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
 - 7 août 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
+- 8 août 2026, 12 h 00 : feat: tentative n° 27 — obtenir un simple oui
