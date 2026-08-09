@@ -165,3 +165,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 8 août 2026, 12 h 04 : chore: relance la direction, sans réponse
 - 8 août 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 9 août 2026, 12 h 00 : feat: tentative n° 28 — rédiger un prompt plus court que la réponse
+- 9 août 2026, 12 h 01 : fix: le prompt fait désormais quinze pages
