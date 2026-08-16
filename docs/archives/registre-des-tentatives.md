@@ -171,3 +171,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 9 août 2026, 12 h 04 : chore: arrose la plante du guichet
 - 9 août 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
 - 16 août 2026, 12 h 00 : feat: tentative n° 29 — corriger une erreur sans en publier une autre
+- 16 août 2026, 12 h 01 : fix: l’erratum contenait une erreur, corrigée par erratum
