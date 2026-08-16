@@ -173,3 +173,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 16 août 2026, 12 h 00 : feat: tentative n° 29 — corriger une erreur sans en publier une autre
 - 16 août 2026, 12 h 01 : fix: l’erratum contenait une erreur, corrigée par erratum
 - 16 août 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 16 août 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 29
