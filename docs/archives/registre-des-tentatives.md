@@ -178,3 +178,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 16 août 2026, 12 h 05 : chore: clôture de la journée, le problème persiste
 - 6 septembre 2026, 12 h 00 : feat: tentative n° 30 — vérifier un fait avant de le publier
 - 6 septembre 2026, 12 h 01 : fix: le fait a changé pendant la vérification
+- 6 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
