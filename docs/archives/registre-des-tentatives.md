@@ -192,3 +192,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 8 septembre 2026, 12 h 01 : fix: la mise à jour demande un redémarrage
 - 8 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 8 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 32
+- 8 septembre 2026, 12 h 04 : chore: vérifie que le site ne collecte toujours rien
