@@ -189,3 +189,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 7 septembre 2026, 12 h 04 : chore: archive les réclamations dans le dossier des réclamations
 - 7 septembre 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
 - 8 septembre 2026, 12 h 00 : feat: tentative n° 32 — mettre l’humanité à jour
+- 8 septembre 2026, 12 h 01 : fix: la mise à jour demande un redémarrage
