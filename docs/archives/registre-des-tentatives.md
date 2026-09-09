@@ -195,3 +195,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 8 septembre 2026, 12 h 04 : chore: vérifie que le site ne collecte toujours rien
 - 8 septembre 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 9 septembre 2026, 12 h 00 : feat: tentative n° 33 — revenir à la version précédente de l’humanité
+- 9 septembre 2026, 12 h 01 : fix: aucune version antérieure n’est disponible
