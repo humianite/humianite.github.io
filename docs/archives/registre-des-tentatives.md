@@ -198,3 +198,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 9 septembre 2026, 12 h 01 : fix: aucune version antérieure n’est disponible
 - 9 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 9 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 33
+- 9 septembre 2026, 12 h 04 : chore: met à jour les dépendances, dont l’humanité (ignorée)
