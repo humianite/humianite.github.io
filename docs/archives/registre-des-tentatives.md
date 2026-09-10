@@ -204,3 +204,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 10 septembre 2026, 12 h 01 : fix: les sauvegardes étaient déjà corrompues
 - 10 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 10 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 34
+- 10 septembre 2026, 12 h 04 : chore: range le bureau du responsable éditorial, toujours vide
