@@ -202,3 +202,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 9 septembre 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
 - 10 septembre 2026, 12 h 00 : feat: tentative n° 34 — trouver la version précédente
 - 10 septembre 2026, 12 h 01 : fix: les sauvegardes étaient déjà corrompues
+- 10 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
