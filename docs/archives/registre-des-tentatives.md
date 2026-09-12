@@ -212,3 +212,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 11 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 35
 - 11 septembre 2026, 12 h 04 : chore: relance la direction, sans réponse
 - 11 septembre 2026, 12 h 05 : chore: clôture de la journée, une réunion a été planifiée
+- 12 septembre 2026, 12 h 00 : feat: tentative n° 36 — fermer un ticket ouvert depuis 300 000 ans
