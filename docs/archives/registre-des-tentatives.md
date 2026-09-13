@@ -219,3 +219,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 12 septembre 2026, 12 h 04 : chore: arrose la plante du guichet
 - 12 septembre 2026, 12 h 05 : chore: clôture de la journée, état du monde inchangé
 - 13 septembre 2026, 12 h 00 : feat: tentative n° 37 — rendre le bouton « Tout refuser » raisonnable
+- 13 septembre 2026, 12 h 01 : fix: le bouton refuse
