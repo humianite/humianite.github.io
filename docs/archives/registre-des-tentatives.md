@@ -226,3 +226,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 13 septembre 2026, 12 h 05 : chore: clôture de la journée, aucun progrès à déplorer
 - 16 septembre 2026, 12 h 00 : feat: tentative n° 38 — respecter la vie privée du bouton
 - 16 septembre 2026, 12 h 01 : fix: cesse de regarder le bouton
+- 16 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
