@@ -230,3 +230,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 16 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 38
 - 16 septembre 2026, 12 h 04 : chore: déplace l’agrafeuse de 1,40 m
 - 16 septembre 2026, 12 h 05 : chore: clôture de la journée, rien à signaler à personne
+- 20 septembre 2026, 12 h 00 : feat: tentative n° 39 — conclure un article
