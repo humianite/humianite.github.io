@@ -233,3 +233,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 20 septembre 2026, 12 h 00 : feat: tentative n° 39 — conclure un article
 - 20 septembre 2026, 12 h 01 : fix: l’article continue après la conclusion
 - 20 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
+- 20 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 39
