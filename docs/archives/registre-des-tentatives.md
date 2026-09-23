@@ -240,3 +240,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 23 septembre 2026, 12 h 01 : fix: l’avenant requiert un avenant
 - 23 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 23 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 40
+- 23 septembre 2026, 12 h 04 : chore: vérifie que le site ne collecte toujours rien
