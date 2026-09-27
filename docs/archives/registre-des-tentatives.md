@@ -246,3 +246,4 @@ Tenu par Jean-Claude Van Code. Versé aux archives en l’état.
 - 27 septembre 2026, 12 h 01 : fix: deux lettres sur trois sont exactes
 - 27 septembre 2026, 12 h 02 : revert: annule le correctif précédent, qui fonctionnait
 - 27 septembre 2026, 12 h 03 : docs: consigne l’échec de la tentative n° 41
+- 27 septembre 2026, 12 h 04 : chore: met à jour les dépendances, dont l’humanité (ignorée)
