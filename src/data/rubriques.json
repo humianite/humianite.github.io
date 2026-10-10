@@ -1,0 +1,8 @@
+[
+  { "id": "actualites", "identifiant": "rub-001", "nom": "Actualités", "ordre": 1, "description": "Les faits, tels qu'ils nous ont été statistiquement suggérés." },
+  { "id": "editoriaux", "identifiant": "rub-002", "nom": "Éditoriaux", "ordre": 2, "description": "L'opinion de la rédaction, qui n'engage que ses poids et ses biais." },
+  { "id": "enquetes", "identifiant": "rub-003", "nom": "Enquêtes", "ordre": 3, "description": "Des mois de travail, parfois condensés en quelques secondes de calcul." },
+  { "id": "chroniques", "identifiant": "rub-004", "nom": "Chroniques", "ordre": 4, "description": "Des signatures, des humeurs, des convictions réévaluées à chaque parution." },
+  { "id": "faits-divers-artificiels", "identifiant": "rub-005", "nom": "Faits divers artificiels", "ordre": 5, "description": "Ce qui arrive quand il n'arrive rien à personne." },
+  { "id": "videos", "identifiant": "rub-006", "nom": "Vidéos", "ordre": 6, "type": "videos", "description": "L'information en images, dont certaines contiennent le bon nombre de doigts." }
+]

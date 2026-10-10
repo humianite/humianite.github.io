@@ -1,0 +1,556 @@
+{
+  "identifiant": "heu-2026-41",
+  "numero": 41,
+  "debut": "2026-10-05",
+  "fin": "2026-10-11",
+  "fiabilite": 83,
+  "bandeau": {
+    "src": "/medias/heuroscope/bandeau-heuroscope.webp",
+    "alt": "Carte céleste ancienne dont les constellations sont des symboles administratifs, autour d’un cadran de vingt-quatre heures.",
+    "credit": "Bureau des prédictions inutiles / L’Humianité"
+  },
+  "communes": [
+    "Vous prendrez une résolution. Elle ne passera pas la nuit.",
+    "Un souvenir embarrassant demandera audience. Elle lui sera accordée.",
+    "Vous regarderez l’heure. Elle ne vous apprendra rien d’agréable.",
+    "Une idée brillante se présentera. Vous ne noterez rien.",
+    "Rien n’est prévu à cette heure. Vous y assisterez peut-être.",
+    "Quelqu’un, quelque part, sera déjà en avance sur vous.",
+    "Le réveil sonnera à l’heure. Ce sera son seul tort.",
+    "Une belle énergie vous traversera brièvement. Tenez-vous prêt.",
+    "Vous vous lèverez avec une idée claire. Elle restera sur la table de nuit.",
+    "Vous relirez un message avant de l’envoyer, puis vous l’enverrez avec la faute.",
+    "Une validation dépendra d’une personne momentanément injoignable depuis 2022.",
+    "Une phrase commencée avec assurance se terminera dans le brouillard.",
+    "Une opportunité se présentera sous l’apparence d’un problème déjà connu.",
+    "Un document circulera. Son objet restera théorique.",
+    "Une décision sera prise sans vous. Vous y participerez tout de même émotionnellement.",
+    "Une lassitude sans prestige vous accompagnera jusqu’au goûter.",
+    "Vous ouvrirez un onglet pour une raison légitime. Il ne survivra pas à votre curiosité.",
+    "Votre café aura l’air froid. Il le sera.",
+    "Une tâche marquée « urgent » poursuivra sa carrière sans vous.",
+    "Vous aurez presque le sentiment d’avoir repris le contrôle. Profitez de cette erreur.",
+    "Vous choisirez quoi regarder plus longtemps que vous ne regarderez.",
+    "Votre soirée prendra la forme d’un consentement tamisé.",
+    "Vous ferez le point sur votre journée. Le point sera vite fait.",
+    "Vous déciderez de vous coucher tôt. La décision sera reportée d’heure en heure."
+  ],
+  "signes": {
+    "formulaire": {
+      "heures": {
+        "7": {
+          "texte": "Vous serez prié de décliner votre identité auprès d’un appareil qui la connaît déjà.",
+          "niveau": 1
+        },
+        "9": {
+          "texte": "Une case obligatoire ne correspondra à aucune de vos vies possibles.",
+          "niveau": 3
+        },
+        "10": {
+          "texte": "Vous écrirez en majuscules, comme demandé. On vous reprochera le ton.",
+          "niveau": 1
+        },
+        "12": {
+          "texte": "Le champ « Commentaires » restera vide. Vous aviez pourtant des choses à dire.",
+          "niveau": 0
+        },
+        "14": {
+          "texte": "Un astérisque renverra à une note. La note renverra à l’astérisque.",
+          "niveau": 3
+        },
+        "16": {
+          "texte": "Vous signerez à l’endroit prévu. Il fallait parapher l’autre.",
+          "niveau": 2
+        },
+        "18": {
+          "texte": "Votre dossier sera déclaré complet, à une pièce près.",
+          "niveau": 1
+        },
+        "21": {
+          "texte": "Vous cocherez « J’accepte ». Vous ne saurez jamais quoi.",
+          "niveau": 0
+        }
+      },
+      "critique": 14,
+      "prometteuse": 18,
+      "conseil": "Écrivez lisiblement, à tout hasard.",
+      "verdict": "Journée recevable en la forme.",
+      "turbulence": 62,
+      "barometre": "Paperasse soutenue",
+      "temperature": "Tiède, en trois exemplaires"
+    },
+    "relance": {
+      "heures": {
+        "8": {
+          "texte": "Vous vous permettrez de revenir vers quelqu’un. Il ne s’était pas éloigné : il vous évitait.",
+          "niveau": 1
+        },
+        "10": {
+          "texte": "Un message resté sans réponse en recevra un second, plus aimable et plus inquiet.",
+          "niveau": 1
+        },
+        "11": {
+          "texte": "On vous dira « je regarde ça ». La chose sera effectivement regardée.",
+          "niveau": 0
+        },
+        "13": {
+          "texte": "Votre « petite relance » ne sera petite que par la taille.",
+          "niveau": 2
+        },
+        "15": {
+          "texte": "Quelqu’un vous relancera à son tour. Vous découvrirez ce que vous faites aux autres.",
+          "niveau": 2
+        },
+        "17": {
+          "texte": "Un « bien reçu » mettra fin à l’échange sans mettre fin au problème.",
+          "niveau": 3
+        },
+        "19": {
+          "texte": "Vous songerez à téléphoner. La pensée suffira à vous fatiguer.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous rédigerez mentalement le message de demain. Il était meilleur ce soir.",
+          "niveau": 0
+        }
+      },
+      "critique": 15,
+      "prometteuse": 17,
+      "conseil": "N’interprétez pas trop tôt un silence administratif.",
+      "verdict": "Journée restée sans réponse à ce jour.",
+      "turbulence": 71,
+      "barometre": "Silence persistant",
+      "temperature": "Fraîche, avec insistance"
+    },
+    "preavis": {
+      "heures": {
+        "7": {
+          "texte": "Vous préviendrez que vous serez en retard, avec une ponctualité remarquable.",
+          "niveau": 0
+        },
+        "9": {
+          "texte": "Une décision vous sera annoncée « dans les prochains jours ». Ils sont déjà nombreux.",
+          "niveau": 2
+        },
+        "11": {
+          "texte": "Vous donnerez votre accord de principe. Le principe n’en demandait pas tant.",
+          "niveau": 0
+        },
+        "14": {
+          "texte": "Vous annoncerez que vous allez devoir y aller. Vous resterez.",
+          "niveau": 1
+        },
+        "16": {
+          "texte": "Un changement vous sera notifié après son entrée en vigueur.",
+          "niveau": 3
+        },
+        "18": {
+          "texte": "Vous compterez les jours restants. Le compte sera bon, et sans effet.",
+          "niveau": 1
+        },
+        "20": {
+          "texte": "Quelqu’un dira « il faudra qu’on parle ». Rien d’autre ne sera dit.",
+          "niveau": 2
+        },
+        "23": {
+          "texte": "Vous vous promettrez de partir pour de bon. Le délai légal court.",
+          "niveau": 0
+        }
+      },
+      "critique": 20,
+      "prometteuse": 18,
+      "conseil": "Prévenez, puis prévenez que vous aviez prévenu.",
+      "verdict": "Journée notifiée dans les formes.",
+      "turbulence": 54,
+      "barometre": "Changement annoncé",
+      "temperature": "Stable jusqu’à nouvel ordre"
+    },
+    "annexe": {
+      "heures": {
+        "8": {
+          "texte": "Vous aurez un rôle. Il figurera en page 12.",
+          "niveau": 1
+        },
+        "10": {
+          "texte": "On vous consultera « pour information ». L’information sera déjà ancienne.",
+          "niveau": 1
+        },
+        "12": {
+          "texte": "Vous apporterez une précision utile. Elle sera jointe au dossier sans être lue.",
+          "niveau": 2
+        },
+        "13": {
+          "texte": "Votre nom sera mal orthographié dans un document qui vous remercie.",
+          "niveau": 2
+        },
+        "15": {
+          "texte": "Vous aurez raison sur un point de détail. Le détail sera retiré.",
+          "niveau": 3
+        },
+        "17": {
+          "texte": "Quelqu’un dira « voir ci-joint ». Vous serez le ci-joint.",
+          "niveau": 1
+        },
+        "19": {
+          "texte": "Vous serez indispensable à une chose secondaire.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous relirez votre journée. Elle tenait en note de bas de page.",
+          "niveau": 0
+        }
+      },
+      "critique": 13,
+      "prometteuse": 19,
+      "conseil": "Faites-vous citer, même mal.",
+      "verdict": "Journée versée au dossier.",
+      "turbulence": 38,
+      "barometre": "Calme en marge",
+      "temperature": "Modérée, voir ci-dessous"
+    },
+    "piece-jointe": {
+      "heures": {
+        "8": {
+          "texte": "Vous annoncerez un fichier. Il partira dans un second message, penaud.",
+          "niveau": 1
+        },
+        "9": {
+          "texte": "Un document s’ouvrira dans le mauvais logiciel et y prendra ses aises.",
+          "niveau": 2
+        },
+        "11": {
+          "texte": "Votre pièce sera jugée trop lourde. Vous le prendrez personnellement.",
+          "niveau": 1
+        },
+        "13": {
+          "texte": "Vous nommerez un fichier « version finale ». Ce sera la première d’une série.",
+          "niveau": 2
+        },
+        "15": {
+          "texte": "Quelqu’un vous demandera le document que vous lui avez envoyé mardi.",
+          "niveau": 3
+        },
+        "16": {
+          "texte": "Vous retrouverez ce que vous cherchiez, en trois exemplaires contradictoires.",
+          "niveau": 1
+        },
+        "18": {
+          "texte": "Une capture d’écran dira ce que vous n’osiez pas écrire.",
+          "niveau": 0
+        },
+        "21": {
+          "texte": "Vous vous enverrez un message à vous-même. Vous ne le lirez pas.",
+          "niveau": 0
+        }
+      },
+      "critique": 15,
+      "prometteuse": 16,
+      "conseil": "Vérifiez la pièce avant d’annoncer la pièce.",
+      "verdict": "Journée transmise, sans le fichier.",
+      "turbulence": 66,
+      "barometre": "Encombré",
+      "temperature": "Variable selon le format"
+    },
+    "compte-rendu": {
+      "heures": {
+        "9": {
+          "texte": "Une réunion commencera par le rappel de la réunion précédente. Elle n’ira pas plus loin.",
+          "niveau": 3
+        },
+        "10": {
+          "texte": "Vous prendrez des notes fidèles d’une discussion infidèle.",
+          "niveau": 1
+        },
+        "11": {
+          "texte": "On conviendra de « se revoir pour en parler ». Ce sera la seule décision.",
+          "niveau": 2
+        },
+        "14": {
+          "texte": "Vos propos seront résumés en une ligne. Ce ne sera pas la bonne.",
+          "niveau": 2
+        },
+        "15": {
+          "texte": "Un « tour de table » fera le tour de la table.",
+          "niveau": 0
+        },
+        "17": {
+          "texte": "Vous serez chargé du suivi. Rien ne sera suivi d’autre chose.",
+          "niveau": 1
+        },
+        "19": {
+          "texte": "Vous raconterez votre journée. Elle paraîtra plus courte.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous dresserez le bilan. Il sera approuvé à l’unanimité de vous-même.",
+          "niveau": 0
+        }
+      },
+      "critique": 14,
+      "prometteuse": 22,
+      "conseil": "Évitez les décisions prises à jeun ou en groupe.",
+      "verdict": "Journée consignée, relue et approuvée.",
+      "turbulence": 47,
+      "barometre": "Réunionnite modérée",
+      "temperature": "Ambiante, sans relief"
+    },
+    "derogation": {
+      "heures": {
+        "8": {
+          "texte": "Vous traverserez hors des clous, par principe. Personne ne regardera.",
+          "niveau": 0
+        },
+        "10": {
+          "texte": "Vous demanderez une exception. On vous opposera la règle, puis l’usage, puis le sourire.",
+          "niveau": 3
+        },
+        "12": {
+          "texte": "Une faveur vous sera accordée. Elle était due à tout le monde.",
+          "niveau": 0
+        },
+        "14": {
+          "texte": "Vous serez le cas particulier d’une procédure qui n’en prévoit pas.",
+          "niveau": 3
+        },
+        "15": {
+          "texte": "On vous dira « normalement non ». Vous entendrez « oui ».",
+          "niveau": 1
+        },
+        "17": {
+          "texte": "Votre passe-droit expirera à l’instant de servir.",
+          "niveau": 2
+        },
+        "20": {
+          "texte": "Vous vous accorderez un écart. Vous ne vous le pardonnerez pas.",
+          "niveau": 1
+        },
+        "23": {
+          "texte": "Vous dérogerez à l’heure du coucher. La sanction tombera à 7 h.",
+          "niveau": 1
+        }
+      },
+      "critique": 17,
+      "prometteuse": 12,
+      "conseil": "Demandez l’exception avant de connaître la règle.",
+      "verdict": "Journée accordée à titre exceptionnel.",
+      "turbulence": 58,
+      "barometre": "Tolérance en baisse",
+      "temperature": "Exceptionnellement douce"
+    },
+    "doute": {
+      "heures": {
+        "7": {
+          "texte": "Vous attendrez le bon moment. Il passera avant vous.",
+          "niveau": 1
+        },
+        "9": {
+          "texte": "Une réserve pertinente sera formulée trop bas pour influer sur le cours des choses.",
+          "niveau": 1
+        },
+        "12": {
+          "texte": "Votre repas ressemblera à une concession mutuelle.",
+          "niveau": 0
+        },
+        "13": {
+          "texte": "Vous hésiterez entre deux options. Une troisième sera retenue par quelqu’un d’autre.",
+          "niveau": 2
+        },
+        "15": {
+          "texte": "Une hésitation que vous pensiez discrète gagnera en visibilité.",
+          "niveau": 2
+        },
+        "18": {
+          "texte": "Une décision non prise produira tout de même ses effets.",
+          "niveau": 3
+        },
+        "20": {
+          "texte": "Vous vérifierez que la porte est fermée. Elle l’était. Vous n’en serez pas plus avancé.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous appellerez cela « sagesse » pour ne pas dire « fatigue ».",
+          "niveau": 0
+        }
+      },
+      "critique": 15,
+      "prometteuse": 20,
+      "conseil": "Hydratez votre déception.",
+      "verdict": "Journée contrastée, mais conforme aux usages.",
+      "turbulence": 83,
+      "barometre": "Incertain, tendance incertaine",
+      "temperature": "Indécise"
+    },
+    "tampon": {
+      "heures": {
+        "8": {
+          "texte": "Vous apposerez votre accord sur une chose déjà faite.",
+          "niveau": 0
+        },
+        "10": {
+          "texte": "Une demande incomplète sollicitera malgré tout votre autorité symbolique.",
+          "niveau": 2
+        },
+        "11": {
+          "texte": "Vous direz non. On vous demandera de le dire plus lisiblement.",
+          "niveau": 1
+        },
+        "13": {
+          "texte": "Vous serez opposé à une urgence qui n’a pas pris rendez-vous.",
+          "niveau": 3
+        },
+        "14": {
+          "texte": "Vous validerez sans lire. La lecture n’aurait rien changé.",
+          "niveau": 1
+        },
+        "16": {
+          "texte": "Votre existence sera confirmée par une procédure inutile.",
+          "niveau": 3
+        },
+        "19": {
+          "texte": "Une impression de légitimité vous traversera. N’en abusez pas.",
+          "niveau": 0
+        },
+        "21": {
+          "texte": "Vous laisserez votre marque. Elle sera légèrement de travers.",
+          "niveau": 0
+        }
+      },
+      "critique": 13,
+      "prometteuse": 19,
+      "conseil": "N’approuvez rien que vous ne puissiez nier.",
+      "verdict": "Journée conforme, sous réserve.",
+      "turbulence": 41,
+      "barometre": "Bureaucratie active",
+      "temperature": "Sèche, à l’encre"
+    },
+    "mise-en-copie": {
+      "heures": {
+        "8": {
+          "texte": "Vous recevrez une information qui ne vous concerne pas assez pour agir, ni assez peu pour l’ignorer.",
+          "niveau": 1
+        },
+        "11": {
+          "texte": "Votre nom apparaîtra dans un échange où personne n’attend rien de vous, sauf votre présence.",
+          "niveau": 1
+        },
+        "12": {
+          "texte": "Vous serez tenu informé du déjeuner des autres.",
+          "niveau": 0
+        },
+        "14": {
+          "texte": "Une réponse collective aggravera un problème individuel.",
+          "niveau": 3
+        },
+        "15": {
+          "texte": "Quelqu’un répondra « à tous ». Tous lui en voudront, vous compris.",
+          "niveau": 2
+        },
+        "17": {
+          "texte": "Vous envisagerez de quitter le fil. Le fil, lui, continuera.",
+          "niveau": 2
+        },
+        "20": {
+          "texte": "Un calme relatif s’installera. Il ne vous était pas destiné.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous aurez tout lu. On ne vous demandera rien.",
+          "niveau": 0
+        }
+      },
+      "critique": 15,
+      "prometteuse": 20,
+      "conseil": "Lisez tout, ne répondez à rien.",
+      "verdict": "Journée reçue pour information.",
+      "turbulence": 52,
+      "barometre": "Flux continu",
+      "temperature": "Tempérée par la distance"
+    },
+    "delai": {
+      "heures": {
+        "7": {
+          "texte": "Vous vous accorderez cinq minutes. Elles en dureront vingt.",
+          "niveau": 1
+        },
+        "9": {
+          "texte": "Vous serez « dessus ». Personne ne saura sur quoi.",
+          "niveau": 0
+        },
+        "11": {
+          "texte": "Une échéance approchera à vitesse constante. Vous en serez surpris.",
+          "niveau": 3
+        },
+        "13": {
+          "texte": "Vous promettrez la chose pour ce soir. Ce soir a été prévenu.",
+          "niveau": 1
+        },
+        "15": {
+          "texte": "On vous accordera un report. Vous le reporterez.",
+          "niveau": 2
+        },
+        "17": {
+          "texte": "Vous commencerez enfin. Il sera l’heure d’arrêter.",
+          "niveau": 2
+        },
+        "19": {
+          "texte": "« Demain, première heure » sera prononcé avec conviction.",
+          "niveau": 0
+        },
+        "23": {
+          "texte": "Vous travaillerez vite et bien, à l’heure où plus personne n’attend rien.",
+          "niveau": 0
+        }
+      },
+      "critique": 11,
+      "prometteuse": 23,
+      "conseil": "Remettez à demain ce que vous aviez déjà remis à aujourd’hui.",
+      "verdict": "Journée livrée hors délai, dans les temps.",
+      "turbulence": 77,
+      "barometre": "Retard généralisé",
+      "temperature": "En hausse, plus tard"
+    },
+    "erreur-humaine": {
+      "heures": {
+        "8": {
+          "texte": "Vous appuierez sur le mauvais bouton avec assurance.",
+          "niveau": 1
+        },
+        "9": {
+          "texte": "Vous répondrez à la mauvaise personne une chose juste.",
+          "niveau": 2
+        },
+        "11": {
+          "texte": "Une faute sera commise. L’enquête remontera jusqu’à vous sans difficulté.",
+          "niveau": 3
+        },
+        "12": {
+          "texte": "Vous commanderez « comme d’habitude ». Ce ne sera pas l’habitude.",
+          "niveau": 0
+        },
+        "14": {
+          "texte": "Vous corrigerez une erreur. La correction en introduira une plus intéressante.",
+          "niveau": 2
+        },
+        "16": {
+          "texte": "On dira « ça arrive ». Ça vous arrivera donc.",
+          "niveau": 1
+        },
+        "18": {
+          "texte": "Vous retiendrez la leçon jusqu’à 18 h 20.",
+          "niveau": 0
+        },
+        "22": {
+          "texte": "Vous vous pardonnerez. La décision pourra être révisée.",
+          "niveau": 0
+        }
+      },
+      "critique": 11,
+      "prometteuse": 16,
+      "conseil": "Trompez-vous tôt : cela laisse la journée.",
+      "verdict": "Journée imputable à son auteur.",
+      "turbulence": 69,
+      "barometre": "Faillible",
+      "temperature": "Chaude, par inadvertance"
+    }
+  }
+}

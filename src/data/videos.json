@@ -1,0 +1,46 @@
+[
+  {
+    "id": "grumeau-lit-les-cgu",
+    "identifiant": "vid-001",
+    "titre": "Marcel Grumeau lit nos conditions générales d'inutilisation, version intégrale",
+    "description": "Notre éditorialiste en chef lit à voix haute les conditions que ce journal vous demande d'accepter. Il est, à ce jour, le seul à l'avoir fait.",
+    "datePublication": "2026-10-07",
+    "duree": "9 h 12 min",
+    "idExterne": "4qPProbP3DE",
+    "miniature": "miniature-cgu",
+    "auteur": "marcel-grumeau"
+  },
+  {
+    "id": "kevin-teste-le-grille-pain",
+    "identifiant": "vid-002",
+    "titre": "Kevin teste : le grille-pain qui comprend vos intentions",
+    "description": "Il suffit de lui décrire la tranche idéale. Kevin Prompt lui a parlé quarante minutes. Le pain est resté dans le sachet.",
+    "datePublication": "2026-10-02",
+    "duree": "6 min 40",
+    "idExterne": "kSQbDkgIG_0",
+    "miniature": "miniature-grille-pain",
+    "auteur": "kevin-prompt"
+  },
+  {
+    "id": "ia-danger",
+    "identifiant": "vid-003",
+    "titre": "IA : danger ? Judith Binaire a relié tous les fils",
+    "description": "Acteurs, financements, récits, angles morts : notre grand reporter a tout punaisé au mur. Au centre du tableau, deux lettres. Elle ne conclut pas. Elle constate.",
+    "datePublication": "2026-09-26",
+    "duree": "11 min 03",
+    "idExterne": "cBLMWUV2oaU",
+    "miniature": "miniature-danger",
+    "auteur": "judith-binaire"
+  },
+  {
+    "id": "le-debat-pour-ou-contre",
+    "identifiant": "vid-004",
+    "titre": "Le grand débat : faut‑il avoir un avis ?",
+    "description": "Constance Nuance anime, arbitre et représente les deux camps. Au terme de l'émission, les positions se sont rapprochées d'elles-mêmes.",
+    "datePublication": "2026-09-19",
+    "duree": "52 min",
+    "idExterne": "o5VxMwBhStI",
+    "miniature": "miniature-debat",
+    "auteur": "constance-nuance"
+  }
+]
