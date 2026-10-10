@@ -1,0 +1,104 @@
+name: "⚖️ Signaler un préjudice moral ou institutionnel"
+description: "Un article a endommagé votre réputation, vos convictions ou votre tranquillité ? Notre équipe de maintenance vous écoute."
+title: "[Préjudice] "
+labels: ["legal: review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de contribuer à la stabilité de L'Humianité. Afin de permettre à l'équipe de maintenance de qualifier l'incident, veuillez renseigner les rubriques ci-dessous avec précision.
+
+        Toute demande sans reproduction minimale du problème pourra faire l'objet d'une demande de précisions.
+
+        **Ce formulaire est public.** N'y joignez ni document confidentiel ni donnée personnelle. Si votre demande est sérieuse, indiquez-le : elle sera traitée comme telle.
+  - type: input
+    id: article
+    attributes:
+      label: Article concerné
+      description: Titre ou adresse de la publication à l'origine du dysfonctionnement.
+      placeholder: https://humianite.github.io/…
+    validations:
+      required: true
+  - type: dropdown
+    id: nature
+    attributes:
+      label: Nature du dysfonctionnement
+      description: Plusieurs réponses possibles. Les préjudices sont cumulables.
+      multiple: true
+      options:
+        - Atteinte à mon image
+        - Atteinte à ma marque
+        - Atteinte à ma dignité
+        - J'ai reconnu mon entreprise
+        - Je suis journaliste et je me sens visé
+        - Un article contient des faits vérifiables
+        - Je suis offensé, mais je ne sais pas encore pourquoi
+        - Autre anomalie de susceptibilité
+    validations:
+      required: true
+  - type: dropdown
+    id: environnement
+    attributes:
+      label: Environnement d'exécution
+      description: Quel était votre état émotionnel au moment des faits ?
+      options:
+        - Calme
+        - Légèrement irrité
+        - Indigné
+        - Scandalisé
+        - En communication avec mon avocat
+        - Élu en exercice
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Étapes pour reproduire le problème
+      description: Décrivez la suite d'opérations ayant conduit au préjudice, de sorte qu'un tiers puisse le subir à son tour.
+      placeholder: |
+        1. Disposer d'une opinion.
+        2. Lire un article.
+        3. Constater que l'article ne partage pas cette opinion.
+        4. Subir un préjudice intérieur difficilement quantifiable.
+    validations:
+      required: true
+  - type: textarea
+    id: observe
+    attributes:
+      label: Comportement observé
+      description: Décrivez précisément ce qui s'est produit.
+    validations:
+      required: true
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Comportement attendu
+      placeholder: J'aurais souhaité que le journal partage mon analyse et reconnaisse publiquement ma supériorité intellectuelle.
+    validations:
+      required: true
+  - type: dropdown
+    id: gravite
+    attributes:
+      label: Gravité de l'incident
+      options:
+        - P4 — Simple vexation
+        - P3 — Repas de famille perturbé
+        - P2 — Réputation institutionnelle froissée
+        - P1 — Avocat mis en copie
+        - P0 — Mon entourage m'a donné tort
+    validations:
+      required: true
+  - type: textarea
+    id: pieces
+    attributes:
+      label: Pièces justificatives
+      description: Liens ou captures d'écran. Ne joignez ici aucun document confidentiel ni aucune donnée personnelle, les vôtres comprises.
+    validations:
+      required: false
+  - type: checkboxes
+    id: attestation
+    attributes:
+      label: Attestation
+      options:
+        - label: Je reconnais que mon indignation est susceptible de constituer un comportement attendu du système.
+          required: false

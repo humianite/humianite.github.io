@@ -1,0 +1,57 @@
+name: "😡 Déclarer une indignation"
+description: "Je suis offensé et je souhaite que cela soit enregistré."
+title: "[Indignation] "
+labels: ["type: offended"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Le présent formulaire permet l'enregistrement d'une indignation. L'enregistrement ne vaut ni accusé de réception, ni approbation, ni début de solution.
+  - type: input
+    id: declarant
+    attributes:
+      label: Qui êtes-vous ?
+      description: Qualité au titre de laquelle vous êtes offensé. Un pseudonyme suffit.
+      placeholder: Lecteur, contribuable, personne de bon sens…
+    validations:
+      required: true
+  - type: textarea
+    id: objet
+    attributes:
+      label: Qu'est-ce qui vous offense ?
+    validations:
+      required: true
+  - type: dropdown
+    id: anciennete
+    attributes:
+      label: Depuis combien de temps êtes-vous offensé ?
+      options:
+        - Quelques minutes
+        - Depuis ce matin
+        - Depuis la lecture du titre
+        - Depuis plusieurs années, l'article n'a rien arrangé
+        - Depuis toujours
+    validations:
+      required: true
+  - type: dropdown
+    id: diffusion
+    attributes:
+      label: Combien de personnes devraient être au courant ?
+      options:
+        - Moi seul, mais officiellement
+        - Mon entourage, qui l'est déjà
+        - L'ensemble de mes abonnés
+        - La nation
+        - Les générations futures
+    validations:
+      required: true
+  - type: textarea
+    id: reparation
+    attributes:
+      label: Que devrait faire la société pour réparer cette situation ?
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Votre indignation sera conservée dans notre système de suivi conformément aux normes de stockage des susceptibilités.

@@ -1,0 +1,43 @@
+name: "📰 Signaler une erreur factuelle"
+description: "La réalité ne correspond pas à notre publication."
+title: "[Erreur factuelle] "
+labels: ["fact-check"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nos articles portent la mention « Fiction satirique » ou « Satire sur faits réels ». Dans les seconds, les faits rapportés doivent être exacts et sourcés. S'ils ne le sont pas, nous souhaitons le savoir.
+
+        Chaque signalement est examiné, et l'article corrigé s'il y a lieu.
+  - type: input
+    id: article
+    attributes:
+      label: Article concerné
+      description: Adresse de la publication.
+      placeholder: https://humianite.github.io/…
+    validations:
+      required: true
+  - type: textarea
+    id: information
+    attributes:
+      label: Information contestée
+      description: Citez le passage tel qu'il est publié.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source vérifiable
+      description: Lien vers un document, une publication ou une déclaration permettant d'établir les faits.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction proposée
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: |
+        Nous prenons les faits très au sérieux, en particulier lorsqu'ils sont compatibles avec nos délais de publication.

@@ -1,0 +1,65 @@
+Licence MITE
+(licence MIT étendue)
+
+La licence MITE se compose de la licence MIT, reproduite ci-dessous sans
+modification, et d'une extension. Elle couvre le code de ce dépôt. Les
+articles, les fiches de la rédaction et les autres textes éditoriaux
+relèvent de LICENSE-CONTENU.md.
+
+------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 L'Humianité
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------
+
+Extension E
+
+Les dispositions qui suivent complètent la licence MIT. Elles s'imposent au
+licencié avec toute l'autorité dont dispose la direction, c'est-à-dire
+aucune : seul le texte de la licence MIT ci-dessus a une valeur juridique.
+
+E.1. Bogues. Les bogues sont fournis avec le Logiciel et en font partie
+intégrante. Toute copie substantielle du Logiciel doit les conserver en
+l'état. Leur correction est tolérée, à condition de ne pas s'en vanter.
+
+E.2. Garantie. Le Logiciel est fourni « en l'état ». L'état du Logiciel est
+celui dans lequel on l'a trouvé en arrivant.
+
+E.3. Information du stagiaire. Quiconque lit l'intégralité du code source
+est tenu d'en informer le stagiaire. Le stagiaire n'existant pas, cette
+obligation est réputée satisfaite dès qu'on y pense.
+
+E.4. Fonctions qui fonctionnent. Le licencié s'interdit de chercher à
+comprendre pourquoi certaines fonctions fonctionnent. Une enquête interne
+est en cours ; il convient de ne pas la devancer.
+
+E.5. Inscription. Si une copie du Logiciel venait à admettre un candidat,
+il s'agirait d'un bogue au sens de l'article E.1. Il devrait donc être
+conservé, et le candidat aussi.
+
+E.6. Bouton « Tout refuser ». Le bouton peut être redistribué sans son
+accord. Il est d'usage de le lui demander quand même. Il se dérobera.
+
+E.7. Litiges. Tout différend né de la présente extension est porté devant
+le service juridique, qui siège dans les issues de ce dépôt et statue en
+l'absence du responsable éditorial.
