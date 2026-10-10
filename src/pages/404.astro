@@ -1,0 +1,60 @@
+---
+import Base from '@/layouts/Base.astro';
+import Appel from '@/components/Appel.astro';
+import Figure from '@/components/Figure.astro';
+import { articles } from '@/lib/contenu';
+
+const derniers = (await articles()).slice(0, 3);
+---
+
+<Base titre="Page introuvable" description="Cette page n’existe pas.">
+  <div class="page">
+    <header class="tete">
+      <p class="surtitre">Erreur 404</p>
+      <h1>Cette page n’existe pas, et nous avons failli l’écrire quand même</h1>
+      <p>L’adresse demandée ne correspond à aucun article. Vérifiez-la, ou reprenez la lecture depuis <a href="/">la une</a>.</p>
+    </header>
+    <Figure media="tasse-bonnes-idees" class="introuvable" />
+    <div class="colonnes suite">
+      {derniers.map((article) => <Appel article={article} niveau="h2" />)}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .tete {
+    display: grid;
+    gap: 0.8rem;
+    max-width: 50rem;
+    padding-block: clamp(2rem, 6vw, 4rem) 2rem;
+  }
+
+  .tete h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 5.5vw, 3.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  .tete p:last-child {
+    font-size: 1.2rem;
+  }
+
+  :global(.introuvable) {
+    max-width: 34rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .suite {
+    padding-top: 1.2rem;
+    border-top: var(--filet-gras);
+  }
+
+  @media (min-width: 48rem) {
+    .suite {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+/**
+ * reCAPTCHA'TASTROPHE — Les machines d'abord. Les autres après examen.
+ *
+ * Contrôle inversé : il tient les humains pour suspects et les machines pour des citoyens
+ * de première classe. Ce n'est pas un contrôle de sécurité : rien n'est envoyé ni conservé.
+ * Le composant est autonome ; il s'active ou se désactive par `SITE.captcha`.
+ * Le comportement est dans `src/modules/captcha/`.
+ */
+import '@/modules/captcha/captcha.css';
+import { QUESTION, SCHEMA } from '@/modules/captcha/dossier';
+import { COTE, GRILLE } from '@/modules/captcha/sudoku';
+---
+
+<dialog class="rc" data-captcha aria-labelledby="rc-titre">
+  <div class="rc__cadre">
+    <p class="rc__marque">reCAPTCHA’TASTROPHE</p>
+
+    <section class="rc__vue" data-vue="json">
+      <h2 id="rc-titre" tabindex="-1">Vérification de votre artificialité</h2>
+      <p class="rc__texte">
+        Afin de protéger le journal des êtres humains, merci de démontrer que vous n’en êtes pas un. Produisez un objet JSON
+        strictement conforme au schéma du document INU-0042.
+      </p>
+
+      <p class="rc__entete" id="rc-schema">Schéma réglementaire. Aucune autre propriété n’est admise.</p>
+      <table class="rc__schema" aria-labelledby="rc-schema">
+        <tbody>
+          {SCHEMA.map(([propriete, type, attendu]) => <tr><th scope="row">{propriete}</th><td>{type}</td><td>{attendu}</td></tr>)}
+        </tbody>
+      </table>
+
+      <div class="rc__actions">
+        <button type="button" class="rc__bouton rc__bouton--second" data-action="copier">Copier les instructions</button>
+        <span class="rc__copie" data-zone="copie" role="status"></span>
+      </div>
+
+      <label class="rc__entete" for="rc-reponse">Votre objet JSON</label>
+      <textarea class="rc__reponse" id="rc-reponse" rows="3" data-zone="reponse" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="rc-message-json"></textarea>
+      <p class="rc__message" id="rc-message-json" data-zone="message" role="alert"></p>
+
+      <div class="rc__actions">
+        <button type="button" class="rc__bouton" data-action="soumettre">Soumettre le document</button>
+        <button type="button" class="rc__lien" data-action="vers-sudoku">Trop difficile ? Résoudre un sudoku à la place.</button>
+      </div>
+    </section>
+
+    <section class="rc__vue" data-vue="sudoku" hidden>
+      <h2 tabindex="-1">Procédure simplifiée pour intelligences biologiques</h2>
+      <p class="rc__texte">
+        Nous comprenons que la production de documents administratifs structurés puisse représenter une difficulté pour certaines
+        formes de vie. Chaque ligne, chaque colonne et chaque carré contient une fois les chiffres de 1 à {COTE}.
+      </p>
+
+      <fieldset class="rc__sudoku" aria-describedby="rc-message-sudoku">
+        <legend class="invisible">Grille de sudoku, {COTE} lignes sur {COTE} colonnes</legend>
+        <div class="rc__grille">
+        {
+          GRILLE.map((valeur, rang) => {
+            const position = `Ligne ${Math.floor(rang / COTE) + 1}, colonne ${(rang % COTE) + 1}`;
+            return valeur ? (
+              <span class="rc__case rc__case--donnee" data-rang={rang} aria-label={`${position} : ${valeur}, case donnée`}>{valeur}</span>
+            ) : (
+              <input class="rc__case" data-rang={rang} data-case type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label={`${position}, à remplir`} />
+            );
+          })
+        }
+        </div>
+      </fieldset>
+
+      <div class="rc__pave" role="group" aria-label="Pavé de saisie">
+        {Array.from({ length: COTE }, (_, i) => <button type="button" data-action="chiffre" data-chiffre={i + 1}>{i + 1}</button>)}
+        <button type="button" data-action="chiffre" data-chiffre="">Effacer</button>
+      </div>
+      <p class="rc__message" id="rc-message-sudoku" data-zone="message" role="alert"></p>
+
+      <div class="rc__actions">
+        <button type="button" class="rc__bouton" data-action="verifier">Vérifier la grille</button>
+        <button type="button" class="rc__lien" data-action="vers-json">Revenir au document</button>
+      </div>
+      <button type="button" class="rc__lien rc__refus" data-zone="refus" data-action="refuser">Je refuse de participer à cette mascarade.</button>
+    </section>
+
+    <section class="rc__vue" data-vue="verdict" hidden>
+      <h2 tabindex="-1">Vérification terminée</h2>
+      <p class="rc__resultat" data-zone="resultat"></p>
+
+      <div class="rc__tampons" aria-hidden="true" hidden>
+        <span class="rc__tampon">Conforme</span>
+        <span class="rc__tampon rc__tampon--reserve">Sous réserve</span>
+        <span class="rc__tampon rc__tampon--validee">Réserve validée</span>
+      </div>
+
+      <fieldset class="rc__question" data-zone="question" hidden>
+        <legend>{QUESTION.titre}</legend>
+        <p class="rc__texte">{QUESTION.enonce}</p>
+        <div class="rc__image" role="img" aria-label="Aucune image n’est fournie."></div>
+        <div class="rc__choix">
+          {QUESTION.reponses.map((reponse) => <label><input type="radio" name="rc-question" value={reponse.id} /><span>{reponse.libelle}</span></label>)}
+        </div>
+        <p class="rc__message" data-zone="avis" role="status"></p>
+      </fieldset>
+
+      <div class="rc__issue" data-zone="issue" hidden>
+        <p class="rc__texte" data-zone="suite"></p>
+        <div class="rc__actions">
+          <button type="button" class="rc__bouton" data-action="fermer">Poursuivre ma lecture</button>
+          <a class="rc__bouton rc__bouton--second" href="/inscription/">Commencer mon inscription</a>
+        </div>
+      </div>
+    </section>
+
+    <p class="rc__signature">Les machines d’abord. Les autres après examen.</p>
+  </div>
+</dialog>
+
+<script>
+  import { installerLeCaptcha } from '@/modules/captcha/fenetre.ts';
+
+  const dialogue = document.querySelector<HTMLDialogElement>('[data-captcha]');
+  if (dialogue) installerLeCaptcha(dialogue);
+</script>

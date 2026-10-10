@@ -1,0 +1,74 @@
+---
+import '@/styles/heuroscope.css';
+import Base from '@/layouts/Base.astro';
+import Embleme from '@/components/heuroscope/Embleme.astro';
+import { editionEnCours, lienSigne, semaine, signes as lireSignes } from '@/lib/heuroscope';
+import { typo } from '@/lib/typo.mjs';
+
+const edition = await editionEnCours();
+const signes = await lireSignes();
+const { bandeau } = edition.data;
+---
+
+<Base image="/medias/heuroscope/partage-heuroscope.jpg" titre="L’Heuroscope" description="L’Heuroscope : vos prévisions heure par heure. Le seul dispositif prédictif assez précis pour se tromper vingt-quatre fois par jour.">
+  <div class="page heuroscope">
+    <header class="heuroscope__tete">
+      <p class="heuroscope__edition">{semaine(edition)}, édition n° {edition.data.numero}</p>
+      <h1>L’Heuroscope</h1>
+      <p class="heuroscope__devise">Prévisions heure par heure</p>
+      <p class="heuroscope__promesse">Le seul dispositif prédictif assez précis pour se tromper vingt-quatre fois par jour.</p>
+    </header>
+
+    {
+      bandeau && (
+        <figure class="heuroscope__bandeau">
+          <img src={bandeau.src} alt={bandeau.alt} />
+          <figcaption>{bandeau.credit}</figcaption>
+        </figure>
+      )
+    }
+
+    <p class="heuroscope__intro">
+      L’Heuroscope observe les mouvements du jour, les crispations de l’air et les hésitations du réel pour vous fournir une lecture
+      aussi précise qu’inutile de votre trajectoire immédiate.
+    </p>
+
+    <section aria-labelledby="signes-titre">
+      <div class="tetiere">
+        <h2 id="signes-titre">De quel signe relevez-vous ?</h2>
+        <span class="service">Douze signes, un seul calendrier</span>
+      </div>
+      <ol class="zodiaque">
+        {
+          signes.map((signe) => (
+            <li>
+              <a class="zodiaque__signe" href={lienSigne(signe.id)}>
+                <Embleme signe={signe} class="zodiaque__embleme" />
+                <span class="zodiaque__nom">{signe.data.nom}</span>
+                <span class="zodiaque__critere">Vous en relevez si {typo(signe.data.critere)}.</span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <footer class="heuroscope__notes">
+      <section>
+        <h2>Méthode</h2>
+        <p>
+          Nos prévisions sont établies à partir d’un croisement entre chronobiologie approximative, intuition froide et historiques
+          d’échecs antérieurs.
+        </p>
+      </section>
+      <section>
+        <h2>Fiabilité</h2>
+        <p>Fiabilité moyenne : {edition.data.fiabilite}&nbsp;%, hors contact avec la réalité.</p>
+      </section>
+      <section>
+        <h2>Réserve</h2>
+        <p>Toute ressemblance avec votre journée serait une forme de réussite que nous n’encourageons pas.</p>
+      </section>
+    </footer>
+  </div>
+</Base>

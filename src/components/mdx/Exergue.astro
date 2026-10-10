@@ -1,0 +1,49 @@
+---
+/** Citation mise en exergue dans le corps d'un article. */
+interface Props {
+  auteur?: string;
+  /** À réserver aux citations fictives : la citation niera avoir été prononcée. */
+  reniee?: boolean;
+}
+const { auteur, reniee = false } = Astro.props;
+---
+
+<blockquote class="exergue" data-dysfonctionnement={reniee ? 'citation' : undefined}>
+  <p><slot /></p>
+  {auteur && <footer>{auteur}</footer>}
+</blockquote>
+
+<style>
+  .exergue {
+    margin-block: 2rem;
+    padding: 1rem 0 1.1rem;
+    border-top: var(--filet-gras);
+    border-bottom: var(--filet);
+  }
+
+  .exergue p {
+    font-family: var(--titre);
+    font-size: clamp(1.45rem, 3vw, 1.95rem);
+    line-height: 1.16;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+    hanging-punctuation: first;
+  }
+
+  .exergue p::before {
+    content: '«\00a0';
+    color: var(--rouge);
+  }
+
+  .exergue p::after {
+    content: '\00a0»';
+    color: var(--rouge);
+  }
+
+  .exergue footer {
+    margin-top: 0.6rem;
+    font-family: var(--util);
+    font-size: 0.98rem;
+    font-weight: 600;
+  }
+</style>

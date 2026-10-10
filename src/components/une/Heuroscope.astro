@@ -1,0 +1,44 @@
+---
+/** L'appel de la une vers l'Heuroscope : la prévision de l'heure en cours, et les douze signes. */
+import '@/styles/heuroscope.css';
+import Figure from '@/components/Figure.astro';
+import Embleme from '@/components/heuroscope/Embleme.astro';
+import { editionEnCours, heureAffichee, lienSigne, semaine, signes as lireSignes } from '@/lib/heuroscope';
+import { typo } from '@/lib/typo.mjs';
+
+const edition = await editionEnCours();
+const signes = await lireSignes();
+const communes = edition.data.communes.map((texte) => typo(texte));
+/** Heure affichée tant que le navigateur n'a pas donné la sienne. */
+const PAR_DEFAUT = 14;
+---
+
+<section class="heuroscope-appel" aria-labelledby="heuroscope-appel-titre" data-heuroscope-appel data-communes={JSON.stringify(communes)}>
+  <Figure media="astrologue-administratif" />
+  <div class="heuroscope-appel__texte">
+    <p class="surtitre">{semaine(edition)}</p>
+    <h2 id="heuroscope-appel-titre"><a class="titre-lien" href="/heuroscope/">L’Heuroscope</a></h2>
+    <p class="heuroscope-appel__prevision">
+      <span class="heuroscope-appel__heure" data-zone="appel-heure">{heureAffichee(PAR_DEFAUT)}</span>
+      <span data-zone="appel-texte">{communes[PAR_DEFAUT]}</span>
+    </p>
+    <p class="heuroscope-appel__suite"><a href="/heuroscope/">Consulter mes vingt-quatre heures</a></p>
+  </div>
+  <ol class="heuroscope-appel__signes">
+    {
+      signes.map((signe) => (
+        <li>
+          <a href={lienSigne(signe.id)} aria-label={signe.data.nom} title={signe.data.nom}>
+            <Embleme signe={signe} />
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<script>
+  import { reglerLHeuroscope } from '@/modules/heuroscope/horloge.ts';
+
+  reglerLHeuroscope();
+</script>

@@ -1,0 +1,59 @@
+---
+/** Les signatures du journal, en quatre portraits. */
+import Cliche from '@/components/Cliche.astro';
+import { journalistes, lienJournaliste } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+const redaction = await journalistes();
+---
+
+<ul class="redaction">
+  {
+    redaction.map((j) => (
+      <li class="plume">
+        <a href={lienJournaliste(j.id)} tabindex="-1" aria-hidden="true">
+          <Cliche media={j.data.portrait.id} consigne={false} />
+        </a>
+        <h3 class="plume__nom"><a class="titre-lien" href={lienJournaliste(j.id)}>{j.data.nom}</a></h3>
+        <p class="surtitre">{j.data.fonction}</p>
+        <p class="plume__accroche">{typo(j.data.accroche)}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .redaction {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem var(--gouttiere);
+    margin: 0;
+  }
+
+  .plume {
+    display: grid;
+    gap: 0.25rem;
+    align-content: start;
+  }
+
+  .plume__nom {
+    margin-top: 0.55rem;
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .plume__accroche {
+    margin-top: 0.2rem;
+    font-size: 1rem;
+    line-height: 1.38;
+  }
+
+  @media (min-width: 48rem) {
+    .redaction {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

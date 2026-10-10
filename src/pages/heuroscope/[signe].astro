@@ -1,0 +1,133 @@
+---
+import '@/styles/heuroscope.css';
+import Base from '@/layouts/Base.astro';
+import Cadran from '@/components/heuroscope/Cadran.astro';
+import Embleme from '@/components/heuroscope/Embleme.astro';
+import { type Signe, NIVEAUX, editionEnCours, heureAffichee, journee, lienSigne, semaine, signes as lireSignes } from '@/lib/heuroscope';
+import { typo } from '@/lib/typo.mjs';
+
+export async function getStaticPaths() {
+  return (await lireSignes()).map((signe) => ({ params: { signe: signe.id }, props: { signe } }));
+}
+
+interface Props {
+  signe: Signe;
+}
+
+const { signe } = Astro.props;
+const edition = await editionEnCours();
+const tous = await lireSignes();
+const lecture = edition.data.signes[signe.id];
+const heures = journee(edition, signe.id);
+const rang = tous.findIndex((s) => s.id === signe.id);
+const [precedent, suivant] = [tous.at(rang - 1)!, tous[(rang + 1) % tous.length]];
+---
+
+<Base image="/medias/heuroscope/partage-heuroscope.jpg" titre={`${signe.data.nom}, votre Heuroscope`} description={`${signe.data.nom} : vos prévisions heure par heure. ${typo(lecture.verdict)}`}>
+  <div class="page heuroscope" data-heuroscope>
+    <header class="signe__tete">
+      <p class="heuroscope__edition"><a href="/heuroscope/">L’Heuroscope</a>, {semaine(edition).toLowerCase()}</p>
+      <div class="signe__identite">
+        <Embleme signe={signe} class="signe__embleme" />
+        <div>
+          <h1>{signe.data.nom}</h1>
+          <p class="signe__critere">Vous en relevez si {typo(signe.data.critere)}.</p>
+          <p class="service">Objet de tutelle : {signe.data.tutelle}. Signe n° {signe.data.ordre} sur {tous.length}.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="signe__grille">
+      <aside class="signe__tableau" aria-label="Indications du jour">
+        <Cadran heures={heures}>
+          <p class="cadran__legende service">
+            <span class="cadran__cle cadran__cle--critique">Fenêtre de vulnérabilité</span>
+            <span class="cadran__cle cadran__cle--prometteuse">Heure prometteuse</span>
+          </p>
+        </Cadran>
+
+        <p class="instant" data-zone="instant" hidden>
+          <span class="instant__tete">À l’instant, <span data-zone="instant-heure"></span></span>
+          <span class="instant__texte" data-zone="instant-texte"></span>
+          <a class="service" href="#heures">Voir ce créneau dans la journée</a>
+        </p>
+
+        <dl class="instruments">
+          <div>
+            <dt>Turbulence existentielle</dt>
+            <dd>
+              <span class="instruments__jauge" style={`--valeur:${lecture.turbulence}`} aria-hidden="true"></span>
+              {lecture.turbulence} sur 100
+            </dd>
+          </div>
+          <div><dt>Baromètre administratif</dt><dd>{typo(lecture.barometre)}</dd></div>
+          <div><dt>Température émotionnelle</dt><dd>{typo(lecture.temperature)}</dd></div>
+        </dl>
+
+        <p class="conseil"><span>Le conseil du jour</span>{typo(lecture.conseil)}</p>
+      </aside>
+
+      <section aria-labelledby="heures-titre">
+        <div class="tetiere">
+          <h2 id="heures-titre">Votre journée, créneau par créneau</h2>
+          <span class="service">24 prévisions, dont 8 vous visent</span>
+        </div>
+        <ol class="heures" id="heures">
+          {
+            heures.map((h) => (
+              <li
+                id={`h${h.heure}`}
+                data-heure={h.heure}
+                class:list={['heure', h.majeure ? 'heure--majeure' : 'heure--mineure', { 'heure--critique': h.critique, 'heure--prometteuse': h.prometteuse }]}
+              >
+                <p class="heure__horaire">{heureAffichee(h.heure)}</p>
+                <div class="heure__corps">
+                  {h.critique && <p class="heure__marque heure__marque--critique">Fenêtre de vulnérabilité</p>}
+                  {h.prometteuse && <p class="heure__marque">Heure la plus prometteuse</p>}
+                  <p class="heure__texte">{h.texte}</p>
+                  {
+                    h.niveau !== undefined && (
+                      <p class="heure__niveau">
+                        <span class="heure__echelle" data-niveau={h.niveau} aria-hidden="true"><i /><i /><i /><i /></span>
+                        {NIVEAUX[h.niveau]}
+                      </p>
+                    )
+                  }
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+
+        <p class="verdict"><span>Verdict de fin de journée</span>{typo(lecture.verdict)}</p>
+      </section>
+    </div>
+
+    <nav class="signe__voisins" aria-label="Autres signes">
+      <a href={lienSigne(precedent.id)}><span class="service">Signe précédent</span>{precedent.data.nom}</a>
+      <ol class="signe__ronde">
+        {
+          tous.map((s) => (
+            <li>
+              <a href={lienSigne(s.id)} aria-label={s.data.nom} aria-current={s.id === signe.id ? 'page' : undefined} title={s.data.nom}>
+                <Embleme signe={s} />
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+      <a href={lienSigne(suivant.id)}><span class="service">Signe suivant</span>{suivant.data.nom}</a>
+    </nav>
+
+    <p class="heuroscope__reserve service">
+      Fiabilité moyenne : {edition.data.fiabilite}&nbsp;%, hors contact avec la réalité. Toute ressemblance avec votre journée serait une
+      forme de réussite que nous n’encourageons pas.
+    </p>
+  </div>
+</Base>
+
+<script>
+  import { reglerLHeuroscope } from '@/modules/heuroscope/horloge.ts';
+
+  reglerLHeuroscope();
+</script>

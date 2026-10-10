@@ -1,0 +1,111 @@
+---
+import '@/styles/global.css';
+import Captcha from '@/components/Captcha.astro';
+import Consentement from '@/components/Consentement.astro';
+import Entete from '@/components/Entete.astro';
+import PiedDePage from '@/components/PiedDePage.astro';
+import { SITE } from '@/lib/site';
+
+interface Props {
+  titre?: string;
+  description?: string;
+  une?: boolean;
+  /** Métadonnées propres aux articles. */
+  article?: { auteur: string; publication: Date; modification?: Date; rubrique: string; motsCles: string[] };
+  /** Image affichée quand la page est partagée. À défaut, le visuel du journal. */
+  image?: string;
+  /** Données structurées schema.org à joindre à la page. */
+  donnees?: Record<string, unknown>;
+}
+
+const { titre, description = SITE.description, une = false, article, image = '/partage.jpg', donnees } = Astro.props;
+const titrePage = titre ? `${titre} | ${SITE.nom}` : `${SITE.nom} – ${SITE.devise}`;
+const canonique = new URL(Astro.url.pathname, Astro.site);
+/** La page d'erreur est servie à toutes les adresses inconnues : elle n'en revendique aucune. */
+const introuvable = Astro.url.pathname.startsWith('/404');
+// Le « < » est échappé : un titre contenant « </script> » ne peut pas sortir du bloc de données.
+/**
+ * Politique de sécurité du contenu, posée en production (le serveur de développement a besoin de scripts en ligne).
+ * Le site ne charge que ses propres fichiers ; deux exceptions, le lecteur vidéo sans cookie de YouTube
+ * et le compteur de visites (GoatCounter : ni cookie, ni donnée personnelle).
+ */
+const COMPTEUR = 'https://humianite.goatcounter.com';
+const politique = [
+  "default-src 'self'",
+  "script-src 'self' https://gc.zgo.at",
+  "style-src 'self' 'unsafe-inline'",
+  `img-src 'self' data: ${COMPTEUR}`,
+  "font-src 'self' data:",
+  "frame-src https://www.youtube-nocookie.com",
+  `connect-src 'self' ${COMPTEUR}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'",
+].join('; ');
+const jsonLd = donnees && JSON.stringify(donnees).replace(/</g, '\\u003c');
+---
+
+<!doctype html>
+<!--
+  L'HUMIANITÉ — SERVICE TECHNIQUE
+
+  Vous consultez actuellement le code source.
+
+  Nous supposons que vous cherchez un problème.
+
+  Nous aussi.
+
+  Si vous en trouvez un, merci de ne pas
+  prévenir la direction. Elle vient de se coucher.
+
+  Bien cordialement,
+  La maintenance.
+-->
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={politique} />}
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>{titrePage}</title>
+    <meta name="description" content={description} />
+    {!introuvable && <link rel="canonical" href={canonique} />}
+    <link rel="icon" href="/favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon-sombre.png" type="image/png" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="author" href="/humans.txt" />
+    <meta name="theme-color" content="#edeae0" />
+
+    <meta property="og:site_name" content={SITE.nom} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={titre ?? SITE.nom} />
+    <meta property="og:description" content={description} />
+    {!introuvable && <meta property="og:url" content={canonique} />}
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {
+      article && (
+        <>
+          <meta name="author" content={article.auteur} />
+          <meta property="article:published_time" content={article.publication.toISOString()} />
+          {article.modification && <meta property="article:modified_time" content={article.modification.toISOString()} />}
+          <meta property="article:section" content={article.rubrique} />
+          {article.motsCles.map((mot) => <meta property="article:tag" content={mot} />)}
+        </>
+      )
+    }
+    {donnees && <script type="application/ld+json" set:html={jsonLd} />}
+    {import.meta.env.PROD && <script is:inline async data-goatcounter={`${COMPTEUR}/count`} src="https://gc.zgo.at/count.js" />}
+  </head>
+  <body>
+    <a class="evitement" href="#contenu">Aller au contenu</a>
+    <Entete une={une} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <PiedDePage />
+    {SITE.consentement && <Consentement />}
+    {SITE.captcha && <Captcha />}
+  </body>
+</html>

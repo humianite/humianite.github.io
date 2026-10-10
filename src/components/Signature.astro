@@ -1,0 +1,92 @@
+---
+/** Ligne de signature d'un article : portrait, auteur, date, temps de lecture. */
+import Cliche from './Cliche.astro';
+import { type Article, journaliste, lienJournaliste } from '@/lib/contenu';
+import { dateSimple, heure, iso, tempsDeLecture } from '@/lib/format';
+
+interface Props {
+  article: Article;
+  portrait?: boolean;
+  /** Marque la ligne de date comme sujette au doute (voir les dysfonctionnements). */
+  doute?: boolean;
+}
+
+const { article, portrait = true, doute = false } = Astro.props;
+const { data } = article;
+const auteur = await journaliste(data.auteur.id);
+const minutes = tempsDeLecture(article.body);
+---
+
+<div class="signature">
+  {
+    portrait && (
+      <a class="signature__portrait" href={lienJournaliste(auteur.id)} tabindex="-1" aria-hidden="true">
+        <Cliche media={auteur.data.portrait.id} ratio="1 / 1" consigne={false} />
+      </a>
+    )
+  }
+  <div>
+    <p class="signature__auteur">
+      Par <a href={lienJournaliste(auteur.id)} rel="author">{auteur.data.nom}</a>
+      <span class="signature__fonction">{auteur.data.fonction}</span>
+    </p>
+    <p class="service" data-dysfonctionnement={doute ? 'date' : undefined}>
+      Publié le <time datetime={iso(data.datePublication)}>{dateSimple(data.datePublication)} à {heure(data.datePublication)}</time>
+      {data.dateMiseAJour && <>, modifié à <time datetime={iso(data.dateMiseAJour)}>{heure(data.dateMiseAJour)}</time></>}
+      <span class="signature__lecture">Lecture : {minutes} min</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  .signature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .signature__portrait {
+    flex: none;
+    width: 3.25rem;
+  }
+
+  .signature__auteur {
+    font-family: var(--util);
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .signature__auteur a {
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .signature__auteur a:hover {
+    text-decoration: underline;
+  }
+
+  .signature__fonction {
+    color: var(--gris);
+  }
+
+  .signature__fonction::before {
+    content: ', ';
+  }
+
+  .signature__lecture {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding-left: 0.6rem;
+    border-left: 1px solid var(--gris-clair);
+  }
+
+  /* Sur écran étroit, le temps de lecture passe à la ligne : sans filet, qui se retrouverait seul en tête. */
+  @media (max-width: 30rem) {
+    .signature__lecture {
+      display: block;
+      margin-left: 0;
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+</style>

@@ -1,0 +1,173 @@
+---
+import Base from '@/layouts/Base.astro';
+import Cliche from '@/components/Cliche.astro';
+import { articlesDeJournaliste, journalistes, lienJournaliste } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+const redaction = await Promise.all(
+  (await journalistes()).map(async (j) => ({ ...j, nombre: (await articlesDeJournaliste(j.id)).length })),
+);
+---
+
+<Base titre="La rédaction" description="Les quatre signatures de L’Humianité : leurs fonctions, leurs obsessions et ce qu’elles pensent les unes des autres.">
+  <div class="page">
+    <header class="tete">
+      <h1>La rédaction</h1>
+      <p>
+        Quatre signatures, aucune fiche de paie. Elles ne partagent ni leurs opinions, ni leurs sources, ni, à vrai dire, la moindre
+        estime réciproque.
+      </p>
+    </header>
+
+    <ul class="trombinoscope">
+      {
+        redaction.map((j) => (
+          <li class="fiche">
+            <a class="fiche__portrait" href={lienJournaliste(j.id)} tabindex="-1" aria-hidden="true">
+              <Cliche media={j.data.portrait.id} />
+            </a>
+            <div class="fiche__texte">
+              <p class="surtitre">{j.data.fonction}</p>
+              <h2 class="fiche__nom"><a class="titre-lien" href={lienJournaliste(j.id)}>{j.data.nom}</a></h2>
+              <p class="fiche__accroche">{typo(j.data.accroche)}</p>
+              <blockquote class="fiche__citation">{typo(`« ${j.data.citation} »`)}</blockquote>
+              <dl class="fiche__reperes">
+                <div><dt>Au journal depuis</dt><dd>{j.data.entree}</dd></div>
+                <div><dt>Articles publiés</dt><dd>{j.nombre}</dd></div>
+                <div><dt>Marotte</dt><dd>{typo(j.data.obsessions[0])}</dd></div>
+              </dl>
+              <p class="fiche__lien"><a href={lienJournaliste(j.id)}>Lire son portrait et ses articles</a></p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="avis">
+      Les journalistes de L’Humianité sont des personnages de fiction, incarnés par des modèles de langage. Aucun n’existe, ce qui ne les
+      empêche pas de se plaindre. <a href="/a-propos/">Comprendre le journal</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .tete {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: clamp(1.4rem, 3.5vw, 2.6rem) 1.2rem;
+    border-bottom: var(--filet-gras);
+  }
+
+  .tete h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .tete p {
+    max-width: 40rem;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.35;
+  }
+
+  .trombinoscope {
+    display: grid;
+    margin: 0;
+  }
+
+  .fiche {
+    display: grid;
+    gap: 1.2rem calc(var(--gouttiere) * 2);
+    padding-block: clamp(1.6rem, 4vw, 2.6rem);
+    border-bottom: var(--filet);
+  }
+
+  .fiche__texte {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .fiche__nom {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2rem, 4.6vw, 3.3rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .fiche__accroche {
+    max-width: 36rem;
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .fiche__citation {
+    max-width: 34rem;
+    margin: 0.4rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--rouge);
+    font-style: italic;
+    font-size: 1.12rem;
+    line-height: 1.4;
+  }
+
+  .fiche__reperes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 2.2rem;
+    margin: 0.4rem 0 0;
+    padding-top: 0.7rem;
+    border-top: var(--filet-fin);
+    font-family: var(--util);
+    line-height: 1.25;
+  }
+
+  .fiche__reperes dt {
+    font-size: 0.9rem;
+    color: var(--gris);
+  }
+
+  .fiche__reperes dd {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .fiche__lien {
+    margin-top: 0.3rem;
+    font-family: var(--util);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .avis {
+    max-width: 44rem;
+    margin-top: 1.6rem;
+    font-family: var(--util);
+    font-size: 1.02rem;
+    color: var(--gris);
+  }
+
+  .avis a {
+    color: var(--encre);
+    font-weight: 600;
+  }
+
+  @media (min-width: 44rem) {
+    .fiche {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    }
+
+    /* Une fiche sur deux retourne sa mise en page, comme dans un album. */
+    .fiche:nth-child(even) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
+    }
+
+    .fiche:nth-child(even) .fiche__portrait {
+      order: 2;
+    }
+  }
+</style>

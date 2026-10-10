@@ -1,0 +1,49 @@
+---
+/** Image accompagnée de sa légende et de son crédit. */
+import Cliche from './Cliche.astro';
+import { media as lireMedia } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  media: string;
+  legende?: string;
+  ratio?: string;
+  prioritaire?: boolean;
+  /** Marque la légende comme contestable (voir les dysfonctionnements). */
+  contestee?: boolean;
+  class?: string;
+}
+
+const { media: id, legende, ratio, prioritaire, contestee = false, class: classe } = Astro.props;
+const { data } = await lireMedia(id);
+const texte = legende ?? data.legende;
+---
+
+<figure class:list={['figure', classe]}>
+  <Cliche media={id} ratio={ratio} prioritaire={prioritaire} />
+  <figcaption class="figure__legende" data-dysfonctionnement={contestee ? 'legende' : undefined}>
+    {texte && <span>{typo(texte)}</span>}
+    <span class="figure__credit">{typo(data.credit)}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .figure__legende {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.15rem 1rem;
+    padding-top: 0.45rem;
+    font-family: var(--util);
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--encre);
+  }
+
+  .figure__credit {
+    margin-left: auto;
+    font-size: 0.82rem;
+    color: var(--gris);
+    white-space: nowrap;
+  }
+</style>

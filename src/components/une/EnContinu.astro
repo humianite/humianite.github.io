@@ -1,0 +1,58 @@
+---
+/** Fil des dernières publications : l'heure pour celles du jour, la date pour les autres. */
+import { type Article, lienArticle } from '@/lib/contenu';
+import { dateCourte, heure, iso, memeJour } from '@/lib/format';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  articles: Article[];
+  /** Date de l'édition en cours. */
+  edition: Date;
+}
+
+const { articles, edition } = Astro.props;
+---
+
+<section class="continu" aria-labelledby="continu-titre">
+  <div class="tetiere tetiere--fine"><h2 id="continu-titre">En continu</h2></div>
+  <ol class="continu__liste">
+    {
+      articles.map((article) => (
+        <li>
+          <time datetime={iso(article.data.datePublication)}>
+            {memeJour(article.data.datePublication, edition) ? heure(article.data.datePublication) : dateCourte(article.data.datePublication)}
+          </time>
+          <a class="titre-lien" href={lienArticle(article)}>{typo(article.data.titre)}</a>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .continu__liste {
+    display: grid;
+    margin: 0;
+  }
+
+  .continu__liste li {
+    display: grid;
+    grid-template-columns: 4.2rem 1fr;
+    gap: 0.6rem;
+    padding-block: 0.6rem;
+    border-bottom: var(--filet-fin);
+    font-size: 1.02rem;
+    line-height: 1.25;
+  }
+
+  .continu__liste li:first-child {
+    padding-top: 0;
+  }
+
+  .continu__liste time {
+    font-family: var(--util);
+    font-weight: 700;
+    color: var(--rouge);
+    font-variant-numeric: lining-nums;
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+/** L'éditorial du jour, encadré dans la colonne de la une. */
+import Cliche from '@/components/Cliche.astro';
+import { type Article, journaliste, lienArticle, lienJournaliste } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const auteur = await journaliste(article.data.auteur.id);
+---
+
+<article class="editorial">
+  <p class="editorial__tete">L’éditorial</p>
+  <div class="editorial__auteur">
+    <a href={lienJournaliste(auteur.id)} class="editorial__portrait" tabindex="-1" aria-hidden="true">
+      <Cliche media={auteur.data.portrait.id} ratio="1 / 1" consigne={false} />
+    </a>
+    <p>
+      <a href={lienJournaliste(auteur.id)}><strong>{auteur.data.nom}</strong></a>
+      <span>{auteur.data.fonction}</span>
+    </p>
+  </div>
+  <h2 class="editorial__titre"><a class="titre-lien" href={lienArticle(article)}>{typo(article.data.titre)}</a></h2>
+  <p class="editorial__chapo">{typo(article.data.chapo)}</p>
+  <p class="editorial__suite"><a href={lienArticle(article)}>Lire l’éditorial</a></p>
+</article>
+
+<style>
+  .editorial {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0 1.1rem 1.1rem;
+    border: var(--filet);
+    border-top: var(--filet-gras);
+    background: var(--papier-fonce);
+  }
+
+  .editorial__tete {
+    justify-self: start;
+    margin-left: -1.1rem;
+    padding: 0.2rem 0.7rem 0.3rem 1.1rem;
+    background: var(--encre);
+    color: var(--papier);
+    font-family: var(--util);
+    font-size: 1.02rem;
+    font-weight: 800;
+  }
+
+  .editorial__auteur {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.3rem;
+    font-family: var(--util);
+    line-height: 1.2;
+  }
+
+  .editorial__auteur a {
+    text-decoration: none;
+  }
+
+  .editorial__auteur span {
+    display: block;
+    color: var(--gris);
+    font-size: 0.95rem;
+  }
+
+  .editorial__portrait {
+    flex: none;
+    width: 3.5rem;
+  }
+
+  .editorial__titre {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(1.55rem, 2.4vw, 1.95rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .editorial__chapo {
+    font-style: italic;
+    font-size: 1.06rem;
+    line-height: 1.42;
+  }
+
+  .editorial__suite {
+    font-family: var(--util);
+    font-weight: 700;
+  }
+</style>

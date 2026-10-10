@@ -1,0 +1,226 @@
+---
+import Base from '@/layouts/Base.astro';
+import Appel from '@/components/Appel.astro';
+import Figure from '@/components/Figure.astro';
+import { type Journaliste, articlesDeJournaliste, journaliste as lireJournaliste, journalistes, lienJournaliste } from '@/lib/contenu';
+import { SITE } from '@/lib/site';
+import { typo } from '@/lib/typo.mjs';
+
+export async function getStaticPaths() {
+  return (await journalistes()).map((journaliste) => ({ params: { journaliste: journaliste.id }, props: { journaliste } }));
+}
+
+interface Props {
+  journaliste: Journaliste;
+}
+
+const { journaliste } = Astro.props;
+const { data } = journaliste;
+const articles = await articlesDeJournaliste(journaliste.id);
+const tensions = await Promise.all(data.tensions.map(async (t) => ({ ...t, confrere: await lireJournaliste(t.avec.id) })));
+---
+
+<Base
+  titre={`${data.nom}, ${data.fonction.toLowerCase()}`}
+  description={data.accroche}
+  donnees={{ '@context': 'https://schema.org', '@type': 'Person', name: data.nom, jobTitle: data.fonction, description: data.accroche, worksFor: { '@type': 'NewsMediaOrganization', name: SITE.nom } }}
+>
+  <div class="page">
+    <p class="retour"><a href="/redaction/">La rédaction</a></p>
+
+    <div class="profil">
+      <Figure media={data.portrait.id} class="profil__portrait" />
+
+      <div class="profil__texte">
+        <header>
+          <p class="surtitre">{data.fonction}</p>
+          <h1>{data.nom}</h1>
+          <p class="profil__accroche">{typo(data.accroche)}</p>
+        </header>
+
+        <div class="profil__bio">
+          {data.biographie.map((paragraphe) => <p>{typo(paragraphe)}</p>)}
+        </div>
+
+        <blockquote class="profil__citation">{typo(`« ${data.citation} »`)}</blockquote>
+      </div>
+
+      <aside class="profil__fiche" aria-label="Signalement">
+        <section>
+          <h2>Sa manière</h2>
+          <p>{typo(data.style)}</p>
+        </section>
+        <section>
+          <h2>Ses obsessions</h2>
+          <ul>
+            {data.obsessions.map((obsession) => <li>{typo(obsession)}</li>)}
+          </ul>
+        </section>
+        {
+          tensions.length > 0 && (
+            <section>
+              <h2>Ses confrères</h2>
+              <dl>
+                {tensions.map((t) => (
+                  <div>
+                    <dt><a href={lienJournaliste(t.confrere.id)}>{t.confrere.data.nom}</a></dt>
+                    <dd>{typo(t.texte)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )
+        }
+        <section>
+          <h2>Lui écrire</h2>
+          <p>{typo(data.courriel)}</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="articles" aria-labelledby="articles-titre">
+      <div class="tetiere">
+        <h2 id="articles-titre">Ses articles</h2>
+        <span class="service">{articles.length} publiés, au journal depuis {data.entree}</span>
+      </div>
+      <ul class="articles__liste">
+        {articles.map((article) => <li><Appel article={article} force="petit" niveau="h3" chapo signature={false} /></li>)}
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .retour {
+    padding-top: 1.2rem;
+    font-family: var(--util);
+    font-weight: 700;
+  }
+
+  .profil {
+    display: grid;
+    gap: 1.8rem calc(var(--gouttiere) * 2);
+    padding-block: 1rem clamp(2rem, 5vw, 3rem);
+  }
+
+  .profil__texte {
+    display: grid;
+    gap: 1.4rem;
+    align-content: start;
+  }
+
+  .profil h1 {
+    margin-block: 0.3rem 0.6rem;
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.028em;
+  }
+
+  .profil__accroche {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    line-height: 1.35;
+    font-style: italic;
+  }
+
+  .profil__bio {
+    display: grid;
+    gap: 0.9rem;
+    font-size: 1.14rem;
+    line-height: 1.56;
+    max-width: 40rem;
+  }
+
+  .profil__citation {
+    margin: 0;
+    padding: 0.9rem 0 1rem;
+    border-top: var(--filet-gras);
+    border-bottom: var(--filet);
+    font-family: var(--titre);
+    font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+    line-height: 1.18;
+    text-wrap: balance;
+    max-width: 40rem;
+  }
+
+  .profil__fiche {
+    display: grid;
+    gap: 1.3rem;
+    align-content: start;
+    font-family: var(--util);
+    font-size: 1.04rem;
+    line-height: 1.35;
+  }
+
+  .profil__fiche h2 {
+    margin-bottom: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: var(--filet);
+    font-size: 1.08rem;
+    font-weight: 800;
+  }
+
+  .profil__fiche ul {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .profil__fiche li::marker {
+    color: var(--rouge);
+  }
+
+  .profil__fiche dl {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+  }
+
+  .profil__fiche dt {
+    font-weight: 700;
+  }
+
+  .articles__liste {
+    display: grid;
+    gap: 0 calc(var(--gouttiere) * 2);
+    margin: 0;
+  }
+
+  .articles__liste li {
+    padding-block: 1.1rem;
+    border-bottom: var(--filet-fin);
+  }
+
+  @media (min-width: 44rem) {
+    .profil {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    }
+
+    .profil__fiche {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.3rem calc(var(--gouttiere) * 2);
+    }
+
+    .articles__liste {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 68rem) {
+    .profil {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr) minmax(0, 20rem);
+    }
+
+    .profil__fiche {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .articles__liste {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+/** Vidéo : lecteur intégré si elle est en ligne, miniature d'annonce sinon. */
+import Cliche from './Cliche.astro';
+import { type Video } from '@/lib/contenu';
+import { dateCourte, iso } from '@/lib/format';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  video: Video;
+  force?: 'grand' | 'petit';
+  niveau?: 'h2' | 'h3';
+  /** Intègre le lecteur de la plateforme plutôt qu'un lien vers elle. */
+  lecteur?: boolean;
+}
+
+const { video, force = 'petit', niveau: Titre = 'h3', lecteur = false } = Astro.props;
+const { data } = video;
+const adresse = data.idExterne ? `https://www.youtube.com/watch?v=${data.idExterne}` : undefined;
+---
+
+<article class:list={['video', `video--${force}`]} id={video.id}>
+  <div class="video__ecran">
+    {
+      lecteur && data.idExterne ? (
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${data.idExterne}`}
+          title={data.titre}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; picture-in-picture"
+          allowfullscreen
+        />
+      ) : (
+        <Cliche media={data.miniature.id} ratio="16 / 9" consigne={force === 'grand'} />
+      )
+    }
+    <span class="video__duree">{data.duree}</span>
+    {!lecteur && <span class="video__lecture" aria-hidden="true" />}
+  </div>
+  <div class="video__texte">
+    <Titre class="video__titre">
+      {adresse ? <a class="titre-lien" href={adresse} rel="noopener">{typo(data.titre)}</a> : typo(data.titre)}
+    </Titre>
+    {force === 'grand' && <p class="video__description">{typo(data.description)}</p>}
+    <p class="service">
+      <time datetime={iso(data.datePublication)}>{dateCourte(data.datePublication)}</time>{!data.idExterne && ', mise en ligne prochaine'}
+    </p>
+  </div>
+</article>
+
+<style>
+  .video {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+  }
+
+  .video__ecran {
+    position: relative;
+  }
+
+  .video__ecran iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+
+  .video__duree {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.15rem 0.45rem;
+    background: var(--encre);
+    color: var(--papier);
+    font-family: var(--util);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .video__lecture {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    background: var(--rouge);
+  }
+
+  .video__lecture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 0;
+    height: 0;
+    border-left: 0.8rem solid var(--papier);
+    border-block: 0.5rem solid transparent;
+    transform: translateX(0.1rem);
+  }
+
+  .video--grand .video__lecture {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .video__texte {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .video__titre {
+    font-family: var(--texte);
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.18;
+    text-wrap: balance;
+  }
+
+  .video--grand .video__titre {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+  }
+
+  .video__description {
+    font-size: 1.05rem;
+    line-height: 1.42;
+    max-width: 40rem;
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import '@/modules/inscription/bureau.css';
+import Base from '@/layouts/Base.astro';
+---
+
+<Base titre="Connexion" description="Connectez-vous à votre espace abonné L’Humianité.">
+  <div class="page">
+    <div class="bureau connexion" data-connexion>
+      <header class="bureau__accueil">
+        <p class="surtitre">Espace abonnés</p>
+        <h1>Connexion</h1>
+        <p class="bureau__chapo">Heureux de vous revoir.</p>
+      </header>
+
+      <section class="guichet" aria-label="Formulaire de connexion">
+        <form class="guichet__formulaire" novalidate autocomplete="off" data-zone="formulaire">
+          <div class="champ">
+            <label class="champ__libelle" for="identifiant">Pseudonyme</label>
+            <input class="champ__saisie" id="identifiant" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="connexion-message" />
+          </div>
+          <div class="champ">
+            <label class="champ__libelle" for="secret">Phrase de passe</label>
+            <input class="champ__saisie" id="secret" type="password" autocomplete="off" aria-describedby="connexion-message" />
+          </div>
+          <label class="case" for="souvenir">
+            <input type="checkbox" id="souvenir" />
+            <span>Se souvenir de moi</span>
+          </label>
+          <p class="guichet__message" id="connexion-message" role="alert" data-zone="message"></p>
+          <div class="guichet__actions">
+            <button type="submit" class="bouton">Se connecter</button>
+            <button type="button" class="lien" data-action="oubli">Phrase de passe oubliée ?</button>
+          </div>
+        </form>
+      </section>
+
+      <p class="connexion__inscription">Pas encore de compte ? <a href="/inscription/">Inscrivez-vous gratuitement</a>, en deux minutes.</p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .connexion {
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+
+  .connexion__inscription {
+    margin-top: 1.2rem;
+    font-family: var(--util);
+    font-size: 1.08rem;
+  }
+
+  .connexion__inscription a {
+    font-weight: 700;
+  }
+</style>
+
+<script>
+  import { CONNEXION } from '@/modules/inscription/scenario.ts';
+
+  // Rien n'est envoyé : le guichet répond seul, et toujours la même chose.
+  const racine = document.querySelector<HTMLElement>('[data-connexion]');
+  if (racine) {
+    const formulaire = racine.querySelector<HTMLFormElement>('[data-zone="formulaire"]')!;
+    const message = racine.querySelector<HTMLElement>('[data-zone="message"]')!;
+    const identifiant = racine.querySelector<HTMLInputElement>('#identifiant')!;
+    const secret = racine.querySelector<HTMLInputElement>('#secret')!;
+    const guichet = formulaire.parentElement!;
+    let tentatives = 0;
+    let occupe = false;
+
+    const patienter = async (texte: string) => {
+      occupe = true;
+      message.textContent = '';
+      const voile = document.createElement('div');
+      voile.className = 'guichet__attente';
+      voile.setAttribute('role', 'status');
+      const sablier = document.createElement('span');
+      sablier.className = 'guichet__sablier';
+      sablier.setAttribute('aria-hidden', 'true');
+      voile.append(sablier, texte);
+      guichet.append(voile);
+      await new Promise((resoudre) => setTimeout(resoudre, 1100));
+      voile.remove();
+      occupe = false;
+    };
+
+    formulaire.addEventListener('submit', async (evenement) => {
+      evenement.preventDefault();
+      if (occupe) return;
+      if (!identifiant.value.trim() || !secret.value) {
+        message.textContent = CONNEXION.vide;
+        (identifiant.value.trim() ? secret : identifiant).focus();
+        return;
+      }
+      await patienter(CONNEXION.verification);
+      message.textContent = CONNEXION.refus[Math.min(tentatives++, CONNEXION.refus.length - 1)];
+      secret.value = '';
+      secret.focus();
+    });
+
+    racine.querySelector('[data-action="oubli"]')!.addEventListener('click', () => {
+      message.textContent = identifiant.value.trim() ? CONNEXION.oubli : CONNEXION.oubliSansIdentifiant;
+      if (!identifiant.value.trim()) identifiant.focus();
+    });
+  }
+</script>

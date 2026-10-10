@@ -1,0 +1,64 @@
+---
+/** Liste des chroniques : la signature d'abord, le titre ensuite. */
+import Cliche from '@/components/Cliche.astro';
+import { type Article, journaliste, lienArticle, lienJournaliste } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  articles: Article[];
+}
+
+const chroniques = await Promise.all(Astro.props.articles.map(async (article) => ({ article, auteur: await journaliste(article.data.auteur.id) })));
+---
+
+<ul class="chroniques">
+  {
+    chroniques.map(({ article, auteur }) => (
+      <li class="chronique">
+        <a href={lienJournaliste(auteur.id)} tabindex="-1" aria-hidden="true">
+          <Cliche media={auteur.data.portrait.id} ratio="1 / 1" consigne={false} />
+        </a>
+        <div>
+          <p class="chronique__auteur">{auteur.data.nom}</p>
+          <h3 class="chronique__titre"><a class="titre-lien" href={lienArticle(article)}>{typo(article.data.titre)}</a></h3>
+          {article.data.surtitre && <p class="service">{typo(article.data.surtitre)}</p>}
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .chroniques {
+    display: grid;
+    margin: 0 0 1.6rem;
+  }
+
+  .chronique {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 0.85rem;
+    padding-block: 0.9rem;
+    border-bottom: var(--filet-fin);
+  }
+
+  .chronique:first-child {
+    padding-top: 0;
+  }
+
+  .chronique__auteur {
+    font-family: var(--util);
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .chronique__titre {
+    margin-block: 0.1rem 0.2rem;
+    font-size: 1.22rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.18;
+    text-wrap: balance;
+  }
+</style>

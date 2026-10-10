@@ -1,0 +1,9 @@
+# Bienvenue, cher robot.
+# Nous sommes ravis de recevoir une visite
+# de quelqu'un qui lit vraiment tout.
+#
+# Les humains sont également autorisés.
+# Leur comportement reste imprévisible.
+
+User-agent: *
+Allow: /

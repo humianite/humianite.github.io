@@ -1,0 +1,45 @@
+---
+/** Encadré éditorial : précision, méthode, « ce que l'on sait ». */
+interface Props {
+  titre: string;
+}
+const { titre } = Astro.props;
+---
+
+<aside class="encadre">
+  <p class="encadre__titre">{titre}</p>
+  <div class="encadre__corps"><slot /></div>
+</aside>
+
+<style>
+  .encadre {
+    margin-block: 2rem;
+    padding: 1rem 1.15rem 1.1rem;
+    background: var(--papier-fonce);
+    border-top: 3px solid var(--rouge);
+    font-family: var(--util);
+    font-size: 1.08rem;
+    line-height: 1.38;
+  }
+
+  .encadre__titre {
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+    font-size: 1.15rem;
+  }
+
+  .encadre__corps :global(p + p) {
+    margin-top: 0.6rem;
+  }
+
+  .encadre__corps :global(ul) {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .encadre__corps :global(li::marker) {
+    color: var(--rouge);
+  }
+</style>

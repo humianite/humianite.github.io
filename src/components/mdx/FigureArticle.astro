@@ -1,0 +1,17 @@
+---
+/** Image insérée dans le corps d'un article. */
+import Figure from '../Figure.astro';
+
+interface Props {
+  media: string;
+  legende?: string;
+}
+---
+
+<Figure {...Astro.props} class="figure-article" />
+
+<style>
+  :global(.figure-article) {
+    margin-block: 2rem;
+  }
+</style>

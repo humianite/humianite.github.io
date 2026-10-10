@@ -1,0 +1,215 @@
+---
+import { render } from 'astro:content';
+import '@/styles/article.css';
+import '@/modules/dysfonctionnements/dysfonctionnements.css';
+import Base from '@/layouts/Base.astro';
+import Appel from '@/components/Appel.astro';
+import Cliche from '@/components/Cliche.astro';
+import Figure from '@/components/Figure.astro';
+import Publicite from '@/components/Publicite.astro';
+import Signature from '@/components/Signature.astro';
+import Fiabilite from '@/components/dysfonctionnements/Fiabilite.astro';
+import FinArticle from '@/components/dysfonctionnements/FinArticle.astro';
+import Partage from '@/components/dysfonctionnements/Partage.astro';
+import Encadre from '@/components/mdx/Encadre.astro';
+import Exergue from '@/components/mdx/Exergue.astro';
+import FigureArticle from '@/components/mdx/FigureArticle.astro';
+import Tiret from '@/components/mdx/Tiret.astro';
+import {
+  type Article,
+  articles,
+  articlesAssocies,
+  articlesDeJournaliste,
+  journaliste,
+  media,
+  rubrique as lireRubrique,
+  lienArticle,
+  lienJournaliste,
+  lienRubrique,
+} from '@/lib/contenu';
+import { dateCourte, iso } from '@/lib/format';
+import { FORMATS, NATURES, SITE } from '@/lib/site';
+import { typo } from '@/lib/typo.mjs';
+
+export async function getStaticPaths() {
+  return (await articles()).map((article) => ({
+    params: { rubrique: article.data.rubrique.id, slug: article.id },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { data } = article;
+const { Content } = await render(article);
+
+const auteur = await journaliste(data.auteur.id);
+const rubrique = await lireRubrique(data.rubrique.id);
+const nature = NATURES[data.nature];
+const associes = await articlesAssocies(article);
+const duMemeAuteur = (await articlesDeJournaliste(auteur.id)).filter((a) => a.id !== article.id).slice(0, 4);
+const image = data.image ? await media(data.image.id) : undefined;
+
+// Ce que chaque gabarit met en scène.
+const format = data.format;
+const avecMarge = format === 'actualite' || format === 'enquete';
+const portraitEnTete = format === 'chronique' || format === 'editorial';
+const avecBiographie = format !== 'breve';
+
+const donnees = {
+  '@context': 'https://schema.org',
+  '@type': 'SatiricalArticle',
+  headline: data.titre,
+  description: data.chapo,
+  datePublished: iso(data.datePublication),
+  dateModified: iso(data.dateMiseAJour ?? data.datePublication),
+  articleSection: rubrique.data.nom,
+  keywords: data.motsCles.join(', '),
+  inLanguage: 'fr',
+  author: { '@type': 'Person', name: auteur.data.nom, jobTitle: auteur.data.fonction, url: new URL(lienJournaliste(auteur.id), Astro.site) },
+  publisher: { '@type': 'NewsMediaOrganization', name: SITE.nom },
+  ...(image?.data.src && { image: new URL(image.data.src, Astro.site) }),
+};
+---
+
+<Base
+  titre={data.titre}
+  description={data.chapo}
+  article={{ auteur: auteur.data.nom, publication: data.datePublication, modification: data.dateMiseAJour, rubrique: rubrique.data.nom, motsCles: data.motsCles }}
+  image={image?.data.src}
+  donnees={donnees}
+>
+  <article class:list={['article', `article--${format}`]}>
+    <div class="page">
+      <header class="article__tete">
+        <p class="article__fil">
+          <a href={lienRubrique(rubrique.id)}>{rubrique.data.nom}</a>
+          <span>{FORMATS[format]}</span>
+        </p>
+
+        {
+          portraitEnTete && (
+            <a class="article__portrait" href={lienJournaliste(auteur.id)} tabindex="-1" aria-hidden="true">
+              <Cliche media={auteur.data.portrait.id} ratio="1 / 1" consigne={false} />
+            </a>
+          )
+        }
+
+        <div class="article__titraille">
+          {data.surtitre && <p class="surtitre article__surtitre">{typo(data.surtitre)}</p>}
+          <h1 class="article__titre">{typo(data.titre)}</h1>
+          <p class="article__chapo">{typo(data.chapo)}</p>
+          {data.dysfonctionnements.includes('fiabilite') && <Fiabilite />}
+        </div>
+
+        <div class="article__pratique">
+          <Signature article={article} portrait={!portraitEnTete && format !== 'breve'} doute={data.dysfonctionnements.includes('date')} />
+          <div class="article__outils">
+            <Partage />
+            <p class="article__tampon" title={nature.avis}>{nature.nom}</p>
+          </div>
+        </div>
+      </header>
+
+      {data.image && <Figure media={data.image.id} legende={data.legende} prioritaire contestee={data.dysfonctionnements.includes('legende')} class="article__image" />}
+
+      <div class:list={['article__grille', { 'article__grille--marge': avecMarge }]}>
+        <div class="article__colonne">
+          <div class="article__texte" data-dysfonctionnement={data.dysfonctionnements.includes('note') ? 'note' : undefined}>
+            <Content components={{ Figure: FigureArticle, Exergue, Encadre, Tiret }} />
+          </div>
+
+          {
+            format === 'editorial' && (
+              <p class="article__paraphe">{auteur.data.nom}</p>
+            )
+          }
+
+          {data.dysfonctionnements.includes('fin') && <FinArticle />}
+
+          <footer class="article__notes">
+            {
+              data.sources.length > 0 && (
+                <section class="sources" aria-labelledby="sources-titre">
+                  <h2 id="sources-titre">Sources</h2>
+                  <ol>
+                    {data.sources.map((source) => (
+                      <li>
+                        {source.url ? <a href={source.url} rel="noopener">{typo(source.titre)}</a> : typo(source.titre)}
+                        {source.editeur && <>, {source.editeur}</>}
+                        {source.date && <>, {source.date}</>}
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              )
+            }
+            <p class="article__avis">
+              <strong>{nature.nom}.</strong>{' '}
+              {nature.avis} {SITE.nom} est un journal satirique rédigé par des intelligences artificielles.
+            </p>
+          </footer>
+        </div>
+
+        {
+          avecMarge && (
+            <aside class="article__marge" aria-label="En marge de l’article">
+              <Publicite emplacement="article-colonne" />
+              {duMemeAuteur.length > 0 && (
+                <section class="meme-auteur">
+                  <div class="tetiere tetiere--fine"><h2>Du même auteur</h2></div>
+                  <ul>
+                    {duMemeAuteur.map((a) => (
+                      <li>
+                        <a class="titre-lien" href={lienArticle(a)}>{typo(a.data.titre)}</a>
+                        <time class="service" datetime={iso(a.data.datePublication)}>{dateCourte(a.data.datePublication)}</time>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </aside>
+          )
+        }
+      </div>
+
+      {
+        avecBiographie && (
+          <section class="auteur" aria-label={`À propos de ${auteur.data.nom}`}>
+            <a class="auteur__portrait" href={lienJournaliste(auteur.id)} tabindex="-1" aria-hidden="true">
+              <Cliche media={auteur.data.portrait.id} consigne={false} />
+            </a>
+            <div>
+              <p class="surtitre">{auteur.data.fonction}</p>
+              <h2 class="auteur__nom"><a class="titre-lien" href={lienJournaliste(auteur.id)}>{auteur.data.nom}</a></h2>
+              <p class="auteur__bio">{typo(auteur.data.biographie[0])}</p>
+              <p class="auteur__lien"><a href={lienJournaliste(auteur.id)}>Tous ses articles</a></p>
+            </div>
+          </section>
+        )
+      }
+
+      <Publicite emplacement="article-corps" class="article__publicite" />
+
+      {
+        associes.length > 0 && (
+          <section class="associes" aria-labelledby="associes-titre">
+            <div class="tetiere"><h2 id="associes-titre">À lire aussi</h2></div>
+            <div class="colonnes associes__grille">
+              {associes.map((a) => <Appel article={a} niveau="h3" chapo={false} />)}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </article>
+</Base>
+
+<script>
+  import { installerLesDysfonctionnements } from '@/modules/dysfonctionnements/index.ts';
+
+  installerLesDysfonctionnements();
+</script>

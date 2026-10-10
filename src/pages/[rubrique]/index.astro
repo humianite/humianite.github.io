@@ -1,0 +1,197 @@
+---
+import Base from '@/layouts/Base.astro';
+import Appel from '@/components/Appel.astro';
+import Publicite from '@/components/Publicite.astro';
+import VignetteVideo from '@/components/VignetteVideo.astro';
+import { type Rubrique, articlesDeRubrique, rubriques, videos as lireVideos } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+export async function getStaticPaths() {
+  return (await rubriques()).map((rubrique) => ({ params: { rubrique: rubrique.id }, props: { rubrique } }));
+}
+
+interface Props {
+  rubrique: Rubrique;
+}
+
+const { rubrique } = Astro.props;
+const estVideo = rubrique.data.type === 'videos';
+const [premier, ...suite] = estVideo ? [] : await articlesDeRubrique(rubrique.id);
+const [videoPrincipale, ...autresVideos] = estVideo ? await lireVideos() : [];
+const vide = !premier && !videoPrincipale;
+---
+
+<Base titre={rubrique.data.nom} description={rubrique.data.description}>
+  <div class="page">
+    <header class="tete">
+      <h1>{rubrique.data.nom}</h1>
+      <p>{typo(rubrique.data.description)}</p>
+    </header>
+
+    {vide && <p class="vide">Aucune publication dans cette rubrique pour le moment. La rédaction y travaille, c’est-à-dire qu’elle calcule.</p>}
+
+    {
+      premier && (
+        <>
+          <Appel article={premier} force="une" niveau="h2" image ratio="16 / 9" class="premier" />
+          <Publicite emplacement="rubrique-haut" class="espace" />
+          <ul class="liste">
+            {suite.map((article) => (
+              <li>
+                <Appel article={article} niveau="h2" image ratio="3 / 2" class="ligne" />
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    {
+      videoPrincipale && (
+        <>
+          <div class="principale"><VignetteVideo video={videoPrincipale} force="grand" niveau="h2" lecteur /></div>
+          <Publicite emplacement="rubrique-haut" class="espace" />
+          <div class="videos">
+            {autresVideos.map((video) => <VignetteVideo video={video} niveau="h2" lecteur />)}
+          </div>
+        </>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .tete {
+    display: grid;
+    gap: 0.4rem;
+    padding-block: clamp(1.4rem, 3.5vw, 2.6rem) 1.1rem;
+    margin-bottom: 1.6rem;
+    border-bottom: var(--filet-gras);
+  }
+
+  .tete h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .tete p {
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.3;
+  }
+
+  .vide {
+    max-width: 34rem;
+    padding-block: 2rem;
+    font-size: 1.2rem;
+  }
+
+  :global(.espace) {
+    margin-block: 2.2rem;
+  }
+
+  .liste {
+    display: grid;
+    margin: 0;
+  }
+
+  .liste :global(.appel__chapo) {
+    max-width: 46rem;
+  }
+
+  .liste li {
+    padding-block: 1.5rem;
+    border-top: var(--filet-fin);
+  }
+
+  .liste li:first-child {
+    border-top: var(--filet);
+  }
+
+  .videos {
+    display: grid;
+    gap: 2rem var(--gouttiere);
+  }
+
+  @media (min-width: 40rem) {
+    .liste :global(.ligne) {
+      grid-template-columns: 17rem 1fr;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .liste :global(.ligne:not(:has(.appel__image))) {
+      grid-template-columns: 1fr;
+    }
+
+    .videos {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 62rem) {
+    /* La vidéo principale partage la largeur avec son texte, comme le premier article d'une rubrique. */
+    .principale :global(.video) {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: calc(var(--gouttiere) * 2);
+      align-items: start;
+    }
+
+    /*
+     * Le premier article : son titre court sur toute la largeur de la page,
+     * puis l'image et le chapô se partagent la ligne suivante.
+     */
+    .page :global(.appel.premier) {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      grid-template-rows: auto auto auto auto 1fr;
+      grid-template-areas:
+        'surtitre surtitre'
+        'titre titre'
+        'image chapo'
+        'image signature'
+        'image .';
+      gap: 0 calc(var(--gouttiere) * 2.5);
+    }
+
+    .page :global(.premier .appel__texte) {
+      display: contents;
+    }
+
+    .page :global(.premier .surtitre) {
+      grid-area: surtitre;
+    }
+
+    /* Un corps un peu plus petit que sur la une : la largeur de la page suffit alors à deux lignes. */
+    .page :global(.premier .appel__titre) {
+      grid-area: titre;
+      margin-block: 0.5rem 1.6rem;
+      font-size: clamp(2.4rem, 3.7vw, 3.3rem);
+    }
+
+    .page :global(.premier .appel__image) {
+      grid-area: image;
+    }
+
+    .page :global(.premier .appel__chapo) {
+      grid-area: chapo;
+    }
+
+    .page :global(.premier .appel__signature) {
+      grid-area: signature;
+      margin-top: 0.9rem;
+    }
+
+    .page :global(.appel.premier:not(:has(.appel__image))) {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: none;
+      grid-template-areas: 'surtitre' 'titre' 'chapo' 'signature';
+    }
+
+    .page :global(.premier:not(:has(.appel__image)) .appel__titre) {
+      margin-bottom: 0.9rem;
+    }
+  }
+</style>

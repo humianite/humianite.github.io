@@ -1,0 +1,240 @@
+---
+/** En-tête du journal : bandeau de service, logotype, oreilles, navigation des rubriques. */
+import Logotype from './Logotype.astro';
+import { articles, rubriques, lienRubrique } from '@/lib/contenu';
+import { dateLongue, numeroEdition, iso } from '@/lib/format';
+import { SITE, PAGES } from '@/lib/site';
+
+interface Props {
+  /** La une porte le grand bandeau, les autres pages un en-tête resserré. */
+  une?: boolean;
+}
+
+const { une = false } = Astro.props;
+const [dernier] = await articles();
+const edition = dernier.data.datePublication;
+const liens = [
+  ...(await rubriques()).filter((r) => r.data.dansNavigation).map((r) => ({ href: lienRubrique(r.id), nom: r.data.nom })),
+  ...PAGES,
+];
+const courant = Astro.url.pathname;
+const annee = edition.getFullYear() - SITE.fondation + 1;
+---
+
+<header class:list={['entete', { 'entete--une': une }]}>
+  <div class="page">
+    <div class="entete__service service">
+      <time datetime={iso(edition)}>{dateLongue(edition)}</time>
+      <span class="entete__numero">N° {numeroEdition(edition)}, {annee}<sup>e</sup> année</span>
+      <nav class="entete__compte" aria-label="Espace abonnés">
+        <a href="/connexion/">Se connecter</a>
+        <a class="entete__inscription" href="/inscription/">S’inscrire</a>
+      </nav>
+    </div>
+
+    <div class="entete__bandeau">
+      <p class="entete__oreille entete__oreille--gauche">
+        <strong>Avis au lecteur</strong>
+        Aucun être humain n’a été employé pour la fabrication de ce numéro. Nous le regrettons.
+      </p>
+
+      <a class="entete__logo" href="/" aria-label={`${SITE.nom}, retour à la une`}>
+        <Logotype element={une ? 'h1' : 'span'} />
+      </a>
+
+      <p class="entete__oreille entete__oreille--droite">
+        <strong>Le temps qu’il fait</strong>
+        Confiance élevée sur l’ensemble du pays. Exactitude variable, éclaircies en soirée.
+      </p>
+    </div>
+
+    <p class="entete__devise">{SITE.devise}</p>
+
+    <nav class="entete__nav" aria-label="Rubriques">
+      <ul class="entete__liens">
+        {
+          liens.map(({ href, nom }) => (
+            <li>
+              <a href={href} aria-current={courant.startsWith(href) ? 'page' : undefined}>
+                {nom}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .entete {
+    padding-top: 0.5rem;
+  }
+
+  .entete__service {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: var(--filet);
+    color: var(--encre);
+  }
+
+  .entete__numero {
+    display: none;
+  }
+
+  .entete__compte {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .entete__compte a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .entete__compte a:hover {
+    text-decoration: underline;
+  }
+
+  .entete__compte .entete__inscription {
+    padding: 0.2rem 0.6rem 0.25rem;
+    background: var(--encre);
+    color: var(--papier);
+  }
+
+  .entete__compte .entete__inscription:hover {
+    background: var(--rouge);
+    text-decoration: none;
+  }
+
+  .entete__bandeau {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 1.5rem;
+    padding-block: clamp(0.6rem, 1.6vw, 1.1rem) 0;
+  }
+
+  .entete__logo {
+    text-decoration: none;
+    font-size: clamp(2.6rem, 9vw, 4.6rem);
+  }
+
+  .entete--une .entete__logo {
+    font-size: clamp(3.3rem, 15.5vw, 11.25rem);
+  }
+
+  .entete__oreille {
+    display: none;
+    max-width: 11.5rem;
+    padding: 0.55rem 0.7rem 0.6rem;
+    border: var(--filet);
+    font-family: var(--util);
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .entete__oreille strong {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-weight: 800;
+  }
+
+  .entete__oreille--droite {
+    transform: rotate(0.5deg);
+  }
+
+  .entete__devise {
+    padding-block: 0.25rem 0.75rem;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .entete:not(.entete--une) .entete__devise {
+    font-size: 1rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .entete__nav {
+    border-top: 3px solid var(--encre);
+    border-bottom: var(--filet);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .entete__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .entete__liens {
+    display: flex;
+    justify-content: flex-start;
+    gap: clamp(1.1rem, 2.6vw, 2.2rem);
+    margin: 0;
+    width: max-content;
+    min-width: 100%;
+    font-family: var(--util);
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  .entete__liens a {
+    display: block;
+    padding-block: 0.55rem 0.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .entete__liens a:hover,
+  .entete__liens a[aria-current='page'] {
+    border-bottom-color: var(--rouge);
+  }
+
+  @media (min-width: 40rem) {
+    .entete__numero {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .entete__liens {
+      justify-content: center;
+    }
+
+    .entete--une .entete__bandeau {
+      grid-template-columns: 1fr auto 1fr;
+    }
+
+    .entete--une .entete__oreille {
+      display: block;
+    }
+
+    .entete--une .entete__oreille--gauche {
+      justify-self: start;
+    }
+
+    .entete--une .entete__oreille--droite {
+      justify-self: end;
+    }
+
+    .entete--une .entete__logo {
+      font-size: clamp(6rem, 12.6vw, 11.25rem);
+    }
+  }
+
+  @media print {
+    .entete__nav {
+      display: none;
+    }
+  }
+</style>
