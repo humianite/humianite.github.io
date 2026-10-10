@@ -1,0 +1,75 @@
+---
+import '@/modules/inscription/bureau.css';
+import Base from '@/layouts/Base.astro';
+---
+
+<Base titre="Inscription" description="Créez gratuitement votre compte L’Humianité et rejoignez nos abonnés. Temps estimé : 2 minutes.">
+  <div class="page">
+    <div class="bureau" data-bureau data-acte="1" data-debut="true">
+      <header class="bureau__accueil">
+        <p class="surtitre">Espace abonnés</p>
+        <h1>Rejoignez L’Humianité.</h1>
+        <p class="bureau__chapo">Une information libre, indépendante et artificiellement intelligente.</p>
+        <p class="service bureau__promesse">Inscription gratuite. Temps estimé : 2 minutes. Déjà inscrit ? <a href="/connexion/">Connectez-vous</a>.</p>
+      </header>
+
+      <div class="bureau__grille">
+        <div class="bureau__principal">
+          <div class="progression" data-zone="progression"></div>
+          <section class="guichet" data-zone="guichet" aria-label="Formulaire d’inscription">
+            <noscript>
+              <p>L’inscription nécessite JavaScript. Le Bureau des admissions regrette de ne pouvoir vous compliquer la tâche sans lui.</p>
+            </noscript>
+          </section>
+        </div>
+        <aside class="fiche" data-zone="fiche" aria-label="Votre dossier"></aside>
+      </div>
+
+      <p class="invisible" data-zone="annonce" aria-live="polite"></p>
+
+      <dialog class="support" data-zone="support" aria-labelledby="support-titre">
+        <div class="support__cadre">
+          <div class="support__tete">
+            <h2 id="support-titre">Support des admissions</h2>
+            <button type="button" class="lien" data-action="fermer">Fermer</button>
+          </div>
+          <div class="support__fil" data-zone="fil" aria-live="polite"></div>
+          <div class="support__questions" data-zone="questions"></div>
+          <details>
+            <summary>Informations légales</summary>
+            <p>
+              Cette conversation peut être enregistrée à des fins d’amélioration de la qualité de cette conversation. Le support ne
+              saurait être tenu responsable des réponses qu’il apporte, ni des questions qu’on lui pose.
+            </p>
+          </details>
+        </div>
+      </dialog>
+
+      <details class="bureau__legal">
+        <summary>Informations légales relatives à la procédure</summary>
+        <p>
+          Les déclarations recueillies par le Bureau des admissions font l’objet d’un traitement dont la finalité sera précisée
+          ultérieurement. Elles sont conservées pour la durée strictement nécessaire, laquelle n’a pas été calculée. Aucune donnée
+          n’est cédée à des tiers, le Bureau n’en connaissant aucun.
+        </p>
+        <p>
+          Vous disposez d’un droit d’accès, de rectification et de découragement. Il s’exerce par courrier simple adressé à
+          Mlle Jeanine, service du personnel, qui en accusera réception dès qu’elle aura été retrouvée.
+        </p>
+        <p>
+          L’inscription est gratuite et le demeure quelle qu’en soit l’issue. Le délai de deux minutes est indicatif et ne tient
+          compte ni des mises à jour réglementaires, ni du candidat.
+        </p>
+      </details>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { ouvrirLeBureau } from '@/modules/inscription/interface/bureau.ts';
+
+  const racine = document.querySelector<HTMLElement>('[data-bureau]');
+  if (racine) {
+    ouvrirLeBureau(racine);
+  }
+</script>

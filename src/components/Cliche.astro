@@ -1,0 +1,147 @@
+---
+/**
+ * Une image du journal. Tant que le média n'a pas de fichier (`src`),
+ * on compose un cliché d'attente : trame d'impression et consigne destinée à l'atelier.
+ */
+import { media as lireMedia } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  media: string;
+  /** Remplace le rapport largeur / hauteur du média. */
+  ratio?: string;
+  /** Affiche la consigne de l'image à produire. */
+  consigne?: boolean;
+  prioritaire?: boolean;
+  class?: string;
+}
+
+const { media: id, ratio, consigne = true, prioritaire = false, class: classe } = Astro.props;
+const { data } = await lireMedia(id);
+const rapport = ratio ?? data.ratio;
+
+// Chaque cliché d'attente reçoit une trame et une densité qui lui sont propres.
+const graine = [...id].reduce((somme, lettre) => (somme * 31 + lettre.charCodeAt(0)) % 997, 7);
+const angle = 15 + (graine % 5) * 15;
+const foyerX = 20 + (graine % 60);
+const foyerY = 15 + ((graine * 7) % 55);
+const initiales = data.type === 'portrait' ? data.alt.replace('Portrait de ', '').split(' ').map((mot) => mot[0]).join('') : null;
+---
+
+{
+  data.src ? (
+    <img
+      class:list={['cliche', `cliche--${data.type}`, classe]}
+      src={data.src}
+      alt={data.alt}
+      style={`aspect-ratio:${rapport}${data.cadrage ? `;object-position:${data.cadrage}` : ''}`}
+      loading={prioritaire ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  ) : (
+    <div
+      class:list={['cliche', 'cliche--attente', `cliche--${data.type}`, classe]}
+      role="img"
+      aria-label={`${data.alt} (image à venir)`}
+      style={`aspect-ratio:${rapport};--angle:${angle}deg;--fx:${foyerX}%;--fy:${foyerY}%`}
+    >
+      {initiales && <span class="cliche__initiales" aria-hidden="true">{initiales}</span>}
+      {consigne && (
+        <p class="cliche__consigne" aria-hidden="true">
+          <span class="cliche__reference">Cliché {data.identifiant}, à l’atelier</span>
+          {typo(data.description)}
+        </p>
+      )}
+    </div>
+  )
+}
+
+<style>
+  .cliche {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    background: var(--gris-clair);
+  }
+
+  /* Photos et portraits passent en noir et blanc. Dessins et miniatures gardent leurs couleurs, dont le rouge des titres. */
+  img.cliche--photo,
+  img.cliche--portrait {
+    filter: grayscale(1) contrast(1.06);
+  }
+
+  .cliche--attente {
+    position: relative;
+    container-type: inline-size;
+    overflow: hidden;
+    filter: none;
+    background-color: #a39f92;
+    background-image:
+      radial-gradient(ellipse 75% 65% at var(--fx) var(--fy), rgb(237 234 224 / 0.9), rgb(237 234 224 / 0) 70%),
+      linear-gradient(calc(var(--angle) + 90deg), rgb(12 11 9 / 0.55), rgb(12 11 9 / 0) 65%);
+  }
+
+  /* Trame de similigravure. */
+  .cliche--attente::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background-image: radial-gradient(circle, rgb(12 11 9 / 0.78) 0 1px, transparent 1.45px);
+    background-size: 5px 5px;
+    transform: rotate(var(--angle));
+  }
+
+  .cliche--dessin {
+    background-color: var(--papier-fonce);
+    background-image: none;
+    box-shadow: inset 0 0 0 1px var(--encre);
+  }
+
+  .cliche--dessin::before {
+    background-image: repeating-linear-gradient(0deg, rgb(12 11 9 / 0.2) 0 1px, transparent 1px 7px);
+    background-size: auto;
+  }
+
+  .cliche__initiales {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--titre);
+    font-size: 34cqi;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--papier);
+    mix-blend-mode: soft-light;
+  }
+
+  .cliche__consigne {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    max-width: min(34rem, 86%);
+    padding: 0.7rem 0.9rem 0.75rem;
+    background: var(--papier);
+    font-family: var(--texte);
+    font-style: italic;
+    font-size: clamp(0.82rem, 2.6cqi, 1rem);
+    line-height: 1.35;
+    color: var(--encre);
+  }
+
+  .cliche__reference {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--util);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--rouge);
+  }
+
+  @container (max-width: 19rem) {
+    .cliche__consigne {
+      display: none;
+    }
+  }
+</style>

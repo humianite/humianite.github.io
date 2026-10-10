@@ -1,0 +1,150 @@
+---
+/**
+ * Appel d'article : le bloc titre qui renvoie vers un article,
+ * décliné en quatre forces selon sa place dans la page.
+ */
+import Cliche from './Cliche.astro';
+import { type Article, journaliste, lienArticle, lienJournaliste } from '@/lib/contenu';
+import { dateCourte, iso } from '@/lib/format';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  article: Article;
+  force?: 'une' | 'grand' | 'moyen' | 'petit';
+  niveau?: 'h2' | 'h3';
+  image?: boolean;
+  chapo?: boolean;
+  signature?: boolean;
+  ratio?: string;
+  class?: string;
+}
+
+const {
+  article,
+  force = 'moyen',
+  niveau: Titre = 'h3',
+  image = false,
+  chapo = force !== 'petit',
+  signature = true,
+  ratio,
+  class: classe,
+} = Astro.props;
+
+const { data } = article;
+const auteur = await journaliste(data.auteur.id);
+const lien = lienArticle(article);
+const avecImage = image && data.image;
+---
+
+<article class:list={['appel', `appel--${force}`, `appel--${data.format}`, classe]}>
+  {
+    avecImage && (
+      <a class="appel__image" href={lien} tabindex="-1" aria-hidden="true">
+        <Cliche media={data.image!.id} ratio={ratio} consigne={force === 'une' || force === 'grand'} prioritaire={force === 'une'} />
+      </a>
+    )
+  }
+  <div class="appel__texte">
+    {data.surtitre && <p class="surtitre">{typo(data.surtitre)}</p>}
+    <Titre class="appel__titre">
+      <a class="titre-lien" href={lien}>{typo(data.titre)}</a>
+    </Titre>
+    {chapo && <p class="appel__chapo">{typo(data.chapo)}</p>}
+    {
+      signature && (
+        <p class="service appel__signature">
+          Par <a href={lienJournaliste(auteur.id)}>{auteur.data.nom}</a>, le <time datetime={iso(data.datePublication)}>{dateCourte(data.datePublication)}</time>
+        </p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .appel {
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
+  }
+
+  .appel__image {
+    display: block;
+  }
+
+  .appel__texte {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+
+  .appel__titre {
+    font-family: var(--texte);
+    font-weight: 600;
+    font-size: var(--t2);
+    line-height: 1.12;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  .appel__chapo {
+    font-size: 1.04rem;
+    line-height: 1.42;
+    color: #2a2823;
+    text-wrap: pretty;
+  }
+
+  .appel__signature {
+    margin-top: 0.15rem;
+  }
+
+  .appel__signature a {
+    text-decoration: none;
+  }
+
+  .appel__signature a:hover {
+    text-decoration: underline;
+  }
+
+  /* Forces */
+  .appel--une .appel__titre {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.05rem, 5.4vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+  }
+
+  .appel--une .appel__chapo {
+    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+    line-height: 1.38;
+    max-width: 44rem;
+  }
+
+  .appel--une .appel__texte {
+    gap: 0.65rem;
+  }
+
+  .appel--grand .appel__titre {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(1.7rem, 3.1vw, 2.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+  }
+
+  .appel--petit .appel__titre {
+    font-size: 1.22rem;
+    line-height: 1.18;
+  }
+
+  .appel--petit {
+    gap: 0.55rem;
+  }
+
+  /* Les textes d'opinion se signalent par l'italique. */
+  .appel--chronique .appel__titre,
+  .appel--fiction .appel__titre {
+    font-style: italic;
+    font-weight: 500;
+  }
+</style>

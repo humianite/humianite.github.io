@@ -1,0 +1,56 @@
+---
+/**
+ * Cadran de vingt-quatre heures : une graduation par heure, un repère sur les heures majeures,
+ * une aiguille que le navigateur place sur l'heure qu'il est.
+ */
+import { type Heure, heureAffichee } from '@/lib/heuroscope';
+
+interface Props {
+  heures: Heure[];
+}
+
+const { heures } = Astro.props;
+const CENTRE = 100;
+/** Position d'une heure sur le cadran : minuit en haut, midi en bas. */
+const point = (heure: number, rayon: number) => {
+  const angle = (heure / 24) * 2 * Math.PI;
+  return { x: CENTRE + Math.sin(angle) * rayon, y: CENTRE - Math.cos(angle) * rayon };
+};
+const trait = (heure: number, de: number, a: number) => {
+  const [p, q] = [point(heure, de), point(heure, a)];
+  return `M${p.x.toFixed(2)} ${p.y.toFixed(2)}L${q.x.toFixed(2)} ${q.y.toFixed(2)}`;
+};
+---
+
+<div class="cadran">
+  <svg viewBox="0 0 200 200" role="img" aria-label="Cadran de la journée : les heures marquées sont celles où il se passe quelque chose.">
+    <circle cx="100" cy="100" r="96" class="cadran__bord" />
+    <circle cx="100" cy="100" r="92" class="cadran__filet" />
+    <circle cx="100" cy="100" r="58" class="cadran__filet" />
+    <path class="cadran__graduations" d={heures.map(({ heure }) => trait(heure, heure % 6 === 0 ? 80 : 85, 92)).join('')} />
+    {
+      [0, 6, 12, 18].map((heure) => {
+        const { x, y } = point(heure, 70);
+        return <text x={x} y={y} class="cadran__chiffre">{heure}</text>;
+      })
+    }
+    {
+      heures.filter((h) => h.majeure).map((h) => {
+        const { x, y } = point(h.heure, 75);
+        return (
+          <a href={`#h${h.heure}`} class:list={['cadran__repere', { 'cadran__repere--critique': h.critique, 'cadran__repere--prometteuse': h.prometteuse }]}>
+            <title>{heureAffichee(h.heure)}</title>
+            <circle cx={x} cy={y} r="7" class="cadran__cible" />
+            <circle cx={x} cy={y} r={h.critique || h.prometteuse ? 3.4 : 2.4} />
+          </a>
+        );
+      })
+    }
+    <g class="cadran__aiguille" data-zone="aiguille" hidden>
+      <path d="M100 100V16" />
+      <path d="M100 8l-3.2 9h6.4z" class="cadran__pointe" />
+    </g>
+    <circle cx="100" cy="100" r="3.4" class="cadran__axe" />
+  </svg>
+  <slot />
+</div>

@@ -1,0 +1,73 @@
+---
+/** Le bloc vidéo de la une : la page y passe en négatif. */
+import VignetteVideo from '@/components/VignetteVideo.astro';
+import { lienRubrique, rubrique, videos as lireVideos } from '@/lib/contenu';
+
+const [principale, ...autres] = await lireVideos();
+const { data } = await rubrique('videos');
+---
+
+{
+  principale && (
+    <section class="videos" aria-labelledby="videos-titre">
+      <div class="page">
+        <div class="tetiere">
+          <h2 id="videos-titre">{data.nom}</h2>
+          <a href={lienRubrique('videos')}>Toutes les vidéos</a>
+        </div>
+        <div class="videos__grille">
+          <VignetteVideo video={principale} force="grand" />
+          <div class="videos__suite">
+            {autres.slice(0, 3).map((video) => <VignetteVideo video={video} />)}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .videos {
+    --papier: #0c0b09;
+    --papier-fonce: #1a1916;
+    --encre: #edeae0;
+    --gris: #a8a394;
+    --gris-clair: #4a4740;
+    margin-top: clamp(2.5rem, 6vw, 4rem);
+    padding-block: 2rem clamp(2.2rem, 5vw, 3.2rem);
+    background: var(--papier);
+    color: var(--encre);
+  }
+
+  .videos__grille {
+    display: grid;
+    gap: 2rem calc(var(--gouttiere) * 2);
+  }
+
+  .videos__suite {
+    display: grid;
+    gap: 1.5rem var(--gouttiere);
+    align-content: start;
+  }
+
+  @media (min-width: 36rem) {
+    .videos__suite {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .videos__grille {
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    }
+
+    .videos__suite {
+      grid-template-columns: 1fr;
+    }
+
+    .videos__suite :global(.video) {
+      grid-template-columns: 11rem 1fr;
+      gap: 0.9rem;
+    }
+  }
+</style>

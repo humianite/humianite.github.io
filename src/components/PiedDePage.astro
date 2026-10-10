@@ -1,0 +1,186 @@
+---
+import Logotype from './Logotype.astro';
+import { rubriques, journalistes, lienRubrique, lienJournaliste } from '@/lib/contenu';
+import { SITE, PAGES, RECLAMATIONS } from '@/lib/site';
+
+const listeRubriques = await rubriques();
+const redaction = await journalistes();
+---
+
+<footer class="pied">
+  <div class="page">
+    <div class="double-filet"></div>
+
+    <div class="pied__grille">
+      <div class="pied__titre">
+        <a href="/" class="pied__logo" aria-label={`${SITE.nom}, retour à la une`}><Logotype /></a>
+        <p class="pied__devise">{SITE.devise}</p>
+        <p class="pied__mention">{SITE.mention}</p>
+      </div>
+
+      <nav aria-label="Rubriques, pied de page">
+        <h2 class="pied__tete">Rubriques</h2>
+        <ul class="pied__liste">
+          {listeRubriques.map((r) => <li><a href={lienRubrique(r.id)}>{r.data.nom}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav aria-label="La rédaction, pied de page">
+        <h2 class="pied__tete">La rédaction</h2>
+        <ul class="pied__liste">
+          {redaction.map((j) => <li><a href={lienJournaliste(j.id)}>{j.data.nom}</a></li>)}
+          {PAGES.map((p) => <li><a href={p.href}>{p.nom}</a></li>)}
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="pied__tete">L’ours</h2>
+        <dl class="pied__ours">
+          <div><dt>Directeur de la publication</dt><dd>Poste vacant depuis 2026</dd></div>
+          <div><dt>Rédaction</dt><dd>4 signatures, 0 salarié</dd></div>
+          <div><dt>Correction</dt><dd>Assurée par les auteurs, hélas</dd></div>
+          <div><dt>Imprimerie</dt><dd>Aucune, par économie de papier</dd></div>
+          <div><dt>Dépôt légal</dt><dd>À parution, sous réserve d’exactitude</dd></div>
+        </dl>
+        <p class="pied__justice">
+          <a href={RECLAMATIONS.poursuites.href} title={RECLAMATIONS.poursuites.survol} rel="noopener">{RECLAMATIONS.poursuites.nom}</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="pied__legal service">
+      <p>
+        <strong>{SITE.nom} est un journal satirique.</strong> Ses journalistes sont des personnages de fiction et ses textes sont produits
+        à l’aide de l’intelligence artificielle. Toute ressemblance avec un quotidien existant serait une hallucination. <a href="/a-propos/">En savoir plus</a>
+      </p>
+      {SITE.consentement && <p><button type="button" class="pied__preferences" data-ouvrir-consentement>Modifier mes non-préférences</button></p>}
+      <p>© {SITE.fondation}–{new Date().getFullYear()} {SITE.nom}. Reproduction déjà effectuée.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    margin-top: clamp(3rem, 7vw, 5rem);
+    padding-bottom: 2.5rem;
+  }
+
+  .pied__grille {
+    display: grid;
+    gap: 2rem var(--gouttiere);
+    padding-block: 2rem;
+  }
+
+  .pied__logo {
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
+    text-decoration: none;
+  }
+
+  .pied__devise {
+    margin-top: 0.35rem;
+    font-style: italic;
+  }
+
+  .pied__mention {
+    max-width: 26rem;
+    margin-top: 1rem;
+    padding-left: 0.8rem;
+    border-left: 3px solid var(--rouge);
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+
+  .pied__tete {
+    margin-bottom: 0.6rem;
+    padding-top: 0.35rem;
+    border-top: var(--filet);
+    font-family: var(--util);
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+
+  .pied__liste {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0;
+    font-family: var(--util);
+    font-size: 1.02rem;
+  }
+
+  .pied__liste a {
+    text-decoration: none;
+  }
+
+  .pied__liste a:hover {
+    text-decoration: underline;
+  }
+
+  .pied__ours {
+    display: grid;
+    gap: 0.45rem;
+    margin: 0;
+    font-family: var(--util);
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+
+  .pied__ours dt {
+    color: var(--gris);
+  }
+
+  .pied__justice {
+    margin-top: 0.9rem;
+    padding-top: 0.6rem;
+    border-top: var(--filet-fin);
+    font-family: var(--util);
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+
+  .pied__preferences {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    cursor: pointer;
+  }
+
+  .pied__preferences:hover {
+    color: var(--encre);
+  }
+
+  .pied__legal {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 0.9rem;
+    border-top: var(--filet);
+    max-width: none;
+  }
+
+  .pied__legal p:first-child {
+    max-width: 52rem;
+  }
+
+  @media (min-width: 40rem) {
+    .pied__grille {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pied__titre {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .pied__grille {
+      grid-template-columns: 2.2fr 1fr 1fr 1.4fr;
+    }
+
+    .pied__titre {
+      grid-column: auto;
+    }
+  }
+</style>

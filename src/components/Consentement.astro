@@ -1,0 +1,86 @@
+---
+/**
+ * Consent Management Platform — No Consent Required Edition.
+ * Statut : working as intended.
+ *
+ * Fausse fenêtre de consentement. Le journal ne dépose aucun cookie et ne collecte rien de personnel :
+ * accepter, refuser ou fermer ont exactement le même effet, c'est-à-dire aucun.
+ * Le composant est autonome : il s'active ou se désactive par `SITE.consentement`.
+ * Tout élément portant `data-ouvrir-consentement` rouvre la fenêtre (voir le pied de page).
+ * Le comportement est dans `src/modules/consentement/`.
+ */
+import '@/modules/consentement/consentement.css';
+import { ARTICLES } from '@/modules/consentement/conditions';
+import { typo } from '@/lib/typo.mjs';
+---
+
+<dialog class="cmp" data-consentement aria-labelledby="cmp-titre">
+  <div class="cmp__vue" data-vue="choix">
+    <button type="button" class="cmp__croix" data-action="fermer" aria-label="Fermer sans choisir">×</button>
+    <p class="cmp__surtitre">Gestion de votre consentement</p>
+    <h2 class="cmp__titre" id="cmp-titre">Nous respectons votre vie privée. Malheureusement.</h2>
+    <div class="cmp__texte">
+      <p>
+        L’Humianité n’utilise aucun cookie publicitaire, ne collecte aucune donnée personnelle et ne cherche pas à savoir ce que vous
+        faites de votre vie.
+      </p>
+      <p>
+        Toutefois, conformément aux pratiques les plus pénibles de la presse en ligne, nous exigeons que vous preniez une décision
+        concernant des traitements qui n’existent pas.
+      </p>
+      <p>Votre choix n’aura aucune conséquence. Nous vous invitons néanmoins à le faire avec le plus grand sérieux.</p>
+    </div>
+
+    <div class="cmp__boutons">
+      <button type="button" class="cmp__bouton cmp__bouton--accepter" data-action="accepter" autofocus>Tout accepter</button>
+      <div class="cmp__piste" data-zone="piste">
+        <button type="button" class="cmp__bouton cmp__bouton--refuser" data-action="refuser" tabindex="-1">
+          <svg class="cmp__contour" aria-hidden="true" focusable="false"><path></path></svg>
+          <span class="cmp__libelle">Tout refuser</span>
+        </button>
+      </div>
+    </div>
+    <p class="cmp__incident" data-zone="incident" role="status"></p>
+
+    <p class="cmp__conditions">
+      <button type="button" class="cmp__lien" data-action="conditions">Consulter les 47 pages de conditions générales d’inutilisation</button>
+    </p>
+  </div>
+
+  <div class="cmp__vue" data-vue="conditions" hidden>
+    <div class="cmp__entete">
+      <button type="button" class="cmp__lien" data-action="retour">Revenir à la décision</button>
+      <button type="button" class="cmp__croix" data-action="fermer" aria-label="Fermer sans choisir">×</button>
+    </div>
+    <div class="cmp__document" tabindex="0" role="document" aria-label="Conditions générales d’inutilisation">
+      <p class="cmp__surtitre">L’Humianité, direction de l’inutilisation</p>
+      <h2 class="cmp__titre cmp__titre--document" tabindex="-1">Conditions générales d’inutilisation</h2>
+      <p class="cmp__version">Version consolidée, en vigueur depuis sa prochaine modification.</p>
+      {
+        ARTICLES.map((article, rang) => (
+          <section>
+            <h3>
+              Article {rang + 1}. {typo(article.titre)}
+            </h3>
+            <p>{typo(article.texte)}</p>
+          </section>
+        ))
+      }
+      <p class="cmp__suite">La suite du document figure aux pages 2 à 47.</p>
+    </div>
+    <p class="cmp__pagination">
+      <strong>Page 1 sur 47</strong>
+      <span>Pagination indicative, valeur contractuelle nulle.</span>
+    </p>
+  </div>
+</dialog>
+
+<p class="cmp-toast" data-consentement-toast role="status" hidden></p>
+
+<script>
+  import { installerLeConsentement } from '@/modules/consentement/fenetre.ts';
+
+  const dialogue = document.querySelector<HTMLDialogElement>('[data-consentement]');
+  const toast = document.querySelector<HTMLElement>('[data-consentement-toast]');
+  if (dialogue && toast) installerLeConsentement(dialogue, toast);
+</script>

@@ -1,0 +1,249 @@
+---
+import Base from '@/layouts/Base.astro';
+import Appel from '@/components/Appel.astro';
+import Figure from '@/components/Figure.astro';
+import Publicite from '@/components/Publicite.astro';
+import Signature from '@/components/Signature.astro';
+import BlocVideos from '@/components/une/BlocVideos.astro';
+import Chroniques from '@/components/une/Chroniques.astro';
+import Editorial from '@/components/une/Editorial.astro';
+import EnContinu from '@/components/une/EnContinu.astro';
+import Heuroscope from '@/components/une/Heuroscope.astro';
+import Redaction from '@/components/une/Redaction.astro';
+import { type Article, articles as lireArticles, rubrique, lienArticle, lienRubrique } from '@/lib/contenu';
+import { SITE } from '@/lib/site';
+import { typo } from '@/lib/typo.mjs';
+
+const tous = await lireArticles();
+const parPoids = [...tous].sort((a, b) => b.data.poids - a.data.poids);
+const edition = tous[0].data.datePublication;
+
+// Composition de la une : chaque bloc puise dans ce que les précédents ont laissé.
+const pris = new Set<string>();
+const prendre = (filtre: (article: Article) => boolean, nombre: number, source = parPoids) => {
+  const choisis = source.filter((a) => !pris.has(a.id) && filtre(a)).slice(0, nombre);
+  choisis.forEach((a) => pris.add(a.id));
+  return choisis;
+};
+
+const [une] = prendre((a) => a.data.format !== 'editorial', 1);
+const [editorial] = prendre((a) => a.data.format === 'editorial', 1, tous);
+const secondaires = prendre((a) => a.data.rubrique.id === 'actualites' && a.data.format !== 'breve', 3);
+const enquetes = prendre((a) => a.data.rubrique.id === 'enquetes', 2);
+const chroniques = prendre((a) => a.data.rubrique.id === 'chroniques', 4, tous);
+const opinions = prendre((a) => a.data.format === 'editorial', 2, tous);
+const faitsDivers = prendre((a) => a.data.rubrique.id === 'faits-divers-artificiels', 3, tous);
+const enContinu = tous.filter((a) => a.id !== une.id).slice(0, 7);
+
+const nom = async (id: string) => (await rubrique(id)).data.nom;
+---
+
+<Base une donnees={{ '@context': 'https://schema.org', '@type': 'NewsMediaOrganization', name: SITE.nom, logo: new URL('/icone.png', Astro.site).href, slogan: SITE.devise, foundingDate: String(SITE.fondation) }}>
+  <div class="page">
+    <section class="une" aria-label="À la une">
+      <article>
+        <header class="une__tete">
+          {une.data.surtitre && <p class="surtitre">{typo(une.data.surtitre)}</p>}
+          <h2 class="une__titre"><a class="titre-lien" href={lienArticle(une)}>{typo(une.data.titre)}</a></h2>
+        </header>
+        <div class="une__corps">
+          <div class="une__texte">
+            <p class="une__chapo">{typo(une.data.chapo)}</p>
+            <Signature article={une} portrait={false} />
+          </div>
+          {une.data.image && <Figure media={une.data.image.id} legende={une.data.legende} prioritaire />}
+        </div>
+      </article>
+
+      <div class="une__colonne">
+        {editorial && <Editorial article={editorial} />}
+        <EnContinu articles={enContinu} edition={edition} />
+      </div>
+    </section>
+
+    <Publicite emplacement="accueil-haut" class="bloc" />
+
+    <section class="bloc" aria-labelledby="actualites-titre">
+      <div class="tetiere">
+        <h2 id="actualites-titre">{await nom('actualites')}</h2>
+        <a href={lienRubrique('actualites')}>Toute l’actualité</a>
+      </div>
+      <div class="colonnes repartis">
+        {secondaires.map((a) => <Appel article={a} image ratio="3 / 2" />)}
+      </div>
+    </section>
+
+    <div class="bloc deux-tiers">
+      <section aria-labelledby="enquetes-titre">
+        <div class="tetiere">
+          <h2 id="enquetes-titre">{await nom('enquetes')}</h2>
+          <a href={lienRubrique('enquetes')}>Toutes les enquêtes</a>
+        </div>
+        <div class="enquetes">
+          {enquetes[0] && <Appel article={enquetes[0]} force="grand" image ratio="16 / 9" />}
+          {enquetes[1] && <Appel article={enquetes[1]} force="moyen" image ratio="3 / 2" />}
+        </div>
+        {opinions.length > 0 && <div class="opinions">{opinions.map((a) => <Appel article={a} force="petit" chapo />)}</div>}
+      </section>
+
+      <section aria-labelledby="chroniques-titre">
+        <div class="tetiere">
+          <h2 id="chroniques-titre">{await nom('chroniques')}</h2>
+          <a href={lienRubrique('chroniques')}>Toutes</a>
+        </div>
+        <Chroniques articles={chroniques} />
+        <Publicite emplacement="accueil-colonne" />
+      </section>
+    </div>
+
+    <div class="bloc deux-tiers deux-tiers--inverse">
+      <section aria-labelledby="dessin-titre">
+        <div class="tetiere"><h2 id="dessin-titre">Le dessin</h2></div>
+        <Figure media="tetes-ecrans" />
+      </section>
+
+      <section aria-labelledby="faits-divers-titre">
+        <div class="tetiere">
+          <h2 id="faits-divers-titre">{await nom('faits-divers-artificiels')}</h2>
+          <a href={lienRubrique('faits-divers-artificiels')}>Tous les faits divers</a>
+        </div>
+        <div class="colonnes trois">
+          {faitsDivers.map((a) => <Appel article={a} force="petit" chapo />)}
+        </div>
+      </section>
+    </div>
+
+    <div class="bloc"><Heuroscope /></div>
+
+    <section class="bloc" aria-labelledby="redaction-titre">
+      <div class="tetiere">
+        <h2 id="redaction-titre">La rédaction</h2>
+        <a href="/redaction/">Faire connaissance</a>
+      </div>
+      <Redaction />
+    </section>
+  </div>
+
+  <BlocVideos />
+
+  <div class="page">
+    <Publicite emplacement="accueil-milieu" class="bloc" />
+  </div>
+</Base>
+
+<style>
+  .bloc,
+  :global(.publicite.bloc) {
+    margin-top: clamp(2.2rem, 5vw, 3.5rem);
+  }
+
+  /* La une */
+  .une {
+    display: grid;
+    gap: 2rem calc(var(--gouttiere) * 2);
+    padding-top: clamp(1.2rem, 2.5vw, 2rem);
+  }
+
+  .une__tete {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .une__titre {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 5.6vw, 4.35rem);
+    line-height: 1;
+    letter-spacing: -0.024em;
+    text-wrap: balance;
+  }
+
+  .une__corps {
+    display: grid;
+    gap: 1.1rem var(--gouttiere);
+    margin-top: 1.1rem;
+  }
+
+  .une__texte {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+
+  .une__chapo {
+    font-size: clamp(1.12rem, 1.6vw, 1.28rem);
+    line-height: 1.38;
+    text-wrap: pretty;
+  }
+
+  .une__colonne {
+    display: grid;
+    gap: 1.8rem;
+    align-content: start;
+  }
+
+  /* Grilles de sections */
+  .enquetes {
+    display: grid;
+    gap: 1.6rem calc(var(--gouttiere) * 2);
+  }
+
+  .opinions {
+    display: grid;
+    gap: 1.4rem calc(var(--gouttiere) * 2);
+    margin-top: 1.6rem;
+    padding-top: 1.1rem;
+    border-top: var(--filet);
+  }
+
+  .deux-tiers {
+    display: grid;
+    gap: 2.4rem calc(var(--gouttiere) * 2);
+  }
+
+  @media (min-width: 36rem) {
+    .opinions {
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .trois {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Autant de colonnes égales que d'articles disponibles. */
+    .repartis {
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, 1fr);
+    }
+
+    .enquetes {
+      grid-template-columns: 1.7fr 1fr;
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .une {
+      grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    }
+
+    .une__colonne {
+      padding-left: var(--gouttiere);
+      margin-left: calc(var(--gouttiere) * -1);
+      border-left: var(--filet-fin);
+    }
+
+    .une__corps {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+    }
+
+    .deux-tiers {
+      grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr);
+    }
+
+    .deux-tiers--inverse {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2.15fr);
+    }
+  }
+</style>

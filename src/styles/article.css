@@ -1,0 +1,459 @@
+/* Page d'article : en-tête, corps, notes, et les six gabarits (brève, actualité, enquête, chronique, éditorial, fiction). */
+.article {
+  --mesure: 41rem;
+  padding-top: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+/* ---------- En-tête ---------- */
+.article__tete {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 60rem;
+}
+
+.article__fil {
+  display: flex;
+  align-items: stretch;
+  font-family: var(--util);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.article__fil a {
+  padding: 0.32rem 0.6rem 0.36rem;
+  background: var(--encre);
+  color: var(--papier);
+  text-decoration: none;
+}
+
+.article__fil span {
+  padding: 0.32rem 0.6rem 0.36rem;
+  border: var(--filet);
+  border-left: 0;
+  font-weight: 600;
+}
+
+.article__titraille {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.article__titre {
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5.2vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.article__chapo {
+  max-width: 46rem;
+  font-size: clamp(1.18rem, 2vw, 1.42rem);
+  line-height: 1.38;
+  font-weight: 450;
+  text-wrap: pretty;
+}
+
+.article__pratique {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-block: 0.8rem;
+  border-block: var(--filet);
+}
+
+/* Dans les gabarits centrés, l'indicateur de fiabilité se centre avec le reste. */
+.article--editorial .fiabilite,
+.article--fiction .fiabilite {
+  justify-self: center;
+}
+
+/* Outils de l'article : le partage et le tampon de nature. */
+.article__outils {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
+}
+
+/* Le tampon : frappé à la main, donc de travers et inégalement encré. */
+.article__tampon {
+  padding: 0.22rem 0.6rem 0.26rem;
+  border: 2px solid var(--rouge);
+  outline: 1px solid var(--rouge);
+  outline-offset: 2px;
+  color: var(--rouge);
+  font-family: var(--util);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.1;
+  transform: rotate(-2.5deg);
+  opacity: 0.86;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='60'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.4 1.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");
+}
+
+.article__image {
+  margin-top: 1.6rem;
+}
+
+/* ---------- Grille ---------- */
+.article__grille {
+  display: grid;
+  gap: 2.5rem calc(var(--gouttiere) * 2);
+  margin-top: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.article__colonne {
+  min-width: 0;
+  max-width: var(--mesure);
+}
+
+.article__marge {
+  display: grid;
+  gap: 2rem;
+  align-content: start;
+}
+
+.meme-auteur ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meme-auteur li {
+  display: grid;
+  gap: 0.15rem;
+  padding-block: 0.65rem;
+  border-bottom: var(--filet-fin);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.22;
+}
+
+.meme-auteur li:first-child {
+  padding-top: 0;
+}
+
+/* ---------- Corps ---------- */
+.article__texte {
+  font-size: clamp(1.12rem, 1.5vw, 1.22rem);
+  line-height: 1.58;
+  hanging-punctuation: first;
+}
+
+.article__texte p + p,
+.article__texte ul + p,
+.article__texte p + ul {
+  margin-top: 1.05em;
+}
+
+.article__texte h2 {
+  margin: 2.1em 0 0.6em;
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: 1.42em;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.article__texte a {
+  text-decoration-color: var(--rouge);
+}
+
+.article__texte ul {
+  display: grid;
+  gap: 0.4em;
+  padding-left: 1.2em;
+}
+
+.article__texte li::marker {
+  color: var(--rouge);
+}
+
+.article__texte hr {
+  margin: 2em auto;
+  border: 0;
+  text-align: center;
+}
+
+.article__texte hr::after {
+  content: '⁂';
+  font-size: 1.3em;
+  color: var(--rouge);
+}
+
+/* Lettrine des articles longs. */
+.article--actualite .article__texte > p:first-child::first-letter,
+.article--enquete .article__texte > p:first-child::first-letter {
+  float: left;
+  margin: 0.06em 0.09em 0 0;
+  font-family: var(--titre);
+  font-size: 4.05em;
+  line-height: 0.78;
+}
+
+.article--enquete .article__texte > p:first-child::first-letter {
+  color: var(--rouge);
+}
+
+/* ---------- Notes de fin ---------- */
+.article__notes {
+  display: grid;
+  gap: 1.4rem;
+  margin-top: 2.5rem;
+}
+
+.sources h2 {
+  margin-bottom: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: var(--filet);
+  font-family: var(--util);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.sources ol {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.3rem;
+  font-family: var(--util);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.article__avis {
+  padding: 0.7rem 0 0;
+  border-top: var(--filet);
+  font-family: var(--util);
+  font-size: 0.98rem;
+  line-height: 1.35;
+  color: var(--gris);
+}
+
+.article__avis strong {
+  color: var(--rouge);
+}
+
+/* ---------- Biographie ---------- */
+.auteur {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1rem 1.3rem;
+  max-width: var(--mesure);
+  margin-top: 2.5rem;
+  padding: 1.2rem;
+  background: var(--papier-fonce);
+  border-top: var(--filet-gras);
+}
+
+.auteur__nom {
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.auteur__bio {
+  margin-top: 0.5rem;
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.auteur__lien {
+  margin-top: 0.5rem;
+  font-family: var(--util);
+  font-weight: 700;
+}
+
+.article__publicite {
+  margin-top: 2.5rem;
+}
+
+.associes {
+  margin-top: 3rem;
+}
+
+/* ==========================================================
+   Gabarits
+   ========================================================== */
+
+/* Brève : tout tient dans une colonne étroite. */
+.article--breve .article__tete,
+.article--breve .article__image,
+.article--breve .article__grille {
+  max-width: var(--mesure);
+  margin-inline: auto;
+}
+
+.article--breve .article__titre {
+  font-family: var(--texte);
+  font-weight: 650;
+  font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.article--breve .article__chapo {
+  font-size: 1.15rem;
+}
+
+/* Enquête : le titre prend toute la largeur. */
+.article--enquete .article__tete {
+  max-width: none;
+  padding-top: 1.1rem;
+  border-top: 8px solid var(--encre);
+}
+
+/* Une image d'ouverture carrée (une planche, un document) reste à taille de lecture. */
+.article__image:has(.cliche[style*='aspect-ratio:1 / 1']) {
+  max-width: 34rem;
+}
+
+/* L'image d'ouverture d'une enquête est panoramique : elle ne doit pas repousser le texte hors de l'écran. */
+.article--enquete .article__image .cliche {
+  aspect-ratio: 5 / 2 !important;
+}
+
+.article--enquete .article__titre {
+  max-width: 62rem;
+  font-size: clamp(2.3rem, 6.4vw, 5rem);
+  line-height: 0.98;
+}
+
+/* Chronique et éditorial : la signature passe devant. */
+.article--chronique .article__tete,
+.article--editorial .article__tete,
+.article--fiction .article__tete,
+.article--chronique .article__colonne,
+.article--editorial .article__colonne,
+.article--fiction .article__colonne,
+.article--chronique .auteur,
+.article--editorial .auteur,
+.article--fiction .auteur,
+.article--fiction .article__image,
+.article--editorial .article__image,
+.article--chronique .article__image {
+  margin-inline: auto;
+  max-width: var(--mesure);
+}
+
+.article--chronique .article__portrait {
+  width: 6.5rem;
+}
+
+.article--chronique .article__titre,
+.article--fiction .article__titre {
+  font-family: var(--texte);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.article--editorial .article__tete {
+  justify-items: center;
+  text-align: center;
+  padding-top: 1.4rem;
+  border-top: var(--filet-gras);
+}
+
+.article--editorial .article__portrait {
+  width: 6rem;
+}
+
+.article--editorial .article__chapo {
+  font-style: italic;
+}
+
+.article--editorial .article__pratique {
+  justify-self: stretch;
+}
+
+.article--editorial {
+  --mesure: 38rem;
+}
+
+.article--editorial .article__texte {
+  font-size: clamp(1.18rem, 1.7vw, 1.32rem);
+}
+
+.article--editorial .article__texte > p:first-child::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.03em;
+}
+
+.article__paraphe {
+  margin-top: 1.6rem;
+  font-family: var(--titre);
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+/* Fiction : composée comme une page de roman. */
+.article--fiction .article__tete {
+  justify-items: center;
+  text-align: center;
+}
+
+.article--fiction .article__pratique {
+  justify-self: stretch;
+}
+
+.article--fiction .article__texte {
+  text-align: justify;
+  hyphens: auto;
+}
+
+.article--fiction .article__texte p + p {
+  margin-top: 0;
+  text-indent: 1.6em;
+}
+
+.article--fiction .article__texte hr + p {
+  text-indent: 0;
+}
+
+@media (min-width: 48rem) {
+  .associes__grille {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .auteur {
+    grid-template-columns: 7.5rem 1fr;
+  }
+}
+
+@media (min-width: 62rem) {
+  .article__grille--marge {
+    grid-template-columns: minmax(0, var(--mesure)) minmax(0, 1fr);
+    justify-content: space-between;
+  }
+
+  .article__marge {
+    justify-self: end;
+    width: min(100%, 19rem);
+    padding-left: var(--gouttiere);
+    border-left: var(--filet-fin);
+  }
+
+  .article--actualite .article__image {
+    max-width: 60rem;
+  }
+
+  /* Une image d'ouverture carrée laisse sa légende monter à côté d'elle, plutôt qu'un blanc. */
+  .article--actualite .article__image:has(.cliche[style*='aspect-ratio:1 / 1']) {
+    display: grid;
+    grid-template-columns: 34rem minmax(0, 18rem);
+    gap: calc(var(--gouttiere) * 1.5);
+    align-items: end;
+    max-width: none;
+  }
+}

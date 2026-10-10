@@ -1,0 +1,288 @@
+@import '@fontsource/gloock/latin-400.css';
+@import '@fontsource/gloock/latin-ext-400.css';
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/sofia-sans-condensed/wght.css';
+
+/* ------------------------------------------------------------------
+   Jetons
+   ------------------------------------------------------------------ */
+:root {
+  --papier: #edeae0;
+  --papier-fonce: #e1ddd0;
+  --encre: #0c0b09;
+  --rouge: #c3141b;
+  --gris: #69655c;
+  --gris-clair: #b7b2a4;
+
+  --titre: 'Gloock', 'Bodoni 72', Didot, 'Times New Roman', serif;
+  --texte: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --util: 'Sofia Sans Condensed Variable', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+
+  --filet: 1px solid var(--encre);
+  --filet-fin: 1px solid var(--gris-clair);
+  --filet-gras: 4px solid var(--encre);
+
+  --gouttiere: clamp(1rem, 2.2vw, 1.75rem);
+  --marge: clamp(1rem, 4vw, 2.5rem);
+  --largeur: 78rem;
+
+  /* Échelle typographique (rapport 1,25) */
+  --t-1: 0.8rem;
+  --t0: 1rem;
+  --t1: 1.25rem;
+  --t2: 1.563rem;
+  --t3: 1.953rem;
+  --t4: 2.441rem;
+  --t5: 3.052rem;
+  --t6: 3.815rem;
+}
+
+/* ------------------------------------------------------------------
+   Socle
+   ------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* La place de la barre de défilement reste réservée : la page ne saute pas quand une fenêtre s'ouvre. */
+  scrollbar-gutter: stable;
+}
+
+/* Un élément masqué le reste, quel que soit le display que lui donne sa classe. */
+[hidden] {
+  display: none !important;
+}
+
+/* Une fenêtre modale ouverte fige la page derrière elle. */
+html:has(dialog:modal) {
+  overflow: hidden;
+}
+
+dialog {
+  overscroll-behavior: contain;
+}
+
+/* Derrière toute fenêtre modale, la page passe au flou. */
+dialog::backdrop {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: var(--texte);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-optical-sizing: auto;
+  font-variant-numeric: oldstyle-nums;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain du papier : une trame de bruit très légère sur toute la page. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .33 0 0 0 0 .28 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rouge);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Outils de mise en page
+   ------------------------------------------------------------------ */
+.page {
+  width: min(100% - 2 * var(--marge), var(--largeur));
+  margin-inline: auto;
+}
+
+.invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.evitement {
+  position: absolute;
+  left: var(--marge);
+  top: -4rem;
+  z-index: 200;
+  padding: 0.5rem 0.9rem;
+  background: var(--encre);
+  color: var(--papier);
+  font-family: var(--util);
+}
+
+.evitement:focus {
+  top: 0.5rem;
+}
+
+/* Colonnes séparées par un filet vertical. */
+.colonnes {
+  display: grid;
+  gap: var(--gouttiere) calc(var(--gouttiere) * 2);
+}
+
+@media (min-width: 48rem) {
+  .colonnes > * + * {
+    position: relative;
+  }
+
+  .colonnes > * + *::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--gouttiere) * -1);
+    top: 0;
+    bottom: 0;
+    border-left: var(--filet-fin);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Éléments éditoriaux partagés
+   ------------------------------------------------------------------ */
+
+/* Surtitre : la ligne qui situe l'article au-dessus du titre. */
+.surtitre {
+  font-family: var(--util);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  color: var(--rouge);
+}
+
+.surtitre a {
+  text-decoration: none;
+}
+
+.surtitre a:hover {
+  text-decoration: underline;
+}
+
+/* Petites lignes de service : dates, crédits, signatures. */
+.service {
+  font-family: var(--util);
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.005em;
+  color: var(--gris);
+  font-variant-numeric: lining-nums;
+}
+
+.service strong,
+.service a {
+  color: var(--encre);
+  font-weight: 600;
+}
+
+/* Tête de section : un filet gras, un nom, éventuellement un lien. */
+.tetiere {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.45rem;
+  margin-bottom: 1.1rem;
+  border-top: var(--filet-gras);
+}
+
+.tetiere h2,
+.tetiere__nom {
+  font-family: var(--util);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+}
+
+.tetiere a {
+  font-family: var(--util);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tetiere--fine {
+  border-top: var(--filet);
+}
+
+/* Double filet de journal. */
+.double-filet {
+  height: 5px;
+  border-top: 2px solid var(--encre);
+  border-bottom: 1px solid var(--encre);
+}
+
+.titre-lien {
+  text-decoration: none;
+}
+
+.titre-lien:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+}

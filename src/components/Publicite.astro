@@ -1,0 +1,127 @@
+---
+/**
+ * Emplacement publicitaire. La régie lui attribue une campagne selon la page ;
+ * faute de campagne à son format, il affiche l'espace réservé.
+ */
+import { composer } from '@/lib/publicite';
+
+interface Props {
+  emplacement: string;
+  class?: string;
+}
+
+const { emplacement, class: classe } = Astro.props;
+const { format, libelle, large, etroite } = await composer(emplacement, Astro.url.pathname);
+---
+
+<aside class:list={['publicite', `publicite--${format}`, classe]} aria-label="Publicité" data-emplacement={emplacement}>
+  <p class="publicite__etiquette">Publicité</p>
+  {
+    large ? (
+      [
+        { annonce: large, portee: etroite ? 'large' : undefined },
+        { annonce: etroite, portee: 'etroite' },
+      ].map(({ annonce, portee }) => {
+        if (!annonce) return null;
+        const Cadre = annonce.url ? 'a' : 'div';
+        return (
+          <Cadre class="publicite__campagne" data-portee={portee} href={annonce.url} rel={annonce.url ? 'sponsored noopener' : undefined}>
+            <img src={annonce.src} alt={annonce.alt} width={annonce.largeur} height={annonce.hauteur} loading="lazy" decoding="async" />
+          </Cadre>
+        );
+      })
+    ) : (
+      <div class="publicite__reserve">
+        <p>Emplacement réservé</p>
+        <p class="publicite__detail">{libelle}</p>
+      </div>
+    )
+  }
+</aside>
+
+<style>
+  .publicite {
+    font-family: var(--util);
+  }
+
+  .publicite__etiquette {
+    margin-bottom: 0.3rem;
+    font-size: 0.78rem;
+    color: var(--gris);
+    text-align: center;
+  }
+
+  .publicite__campagne {
+    display: block;
+    margin-inline: auto;
+  }
+
+  /* Sur écran étroit, le bandeau laisse la place à une annonce au format du pavé. */
+  .publicite__campagne[data-portee='etroite'] {
+    display: none;
+  }
+
+  @media (max-width: 40rem) {
+    .publicite__campagne[data-portee='large'] {
+      display: none;
+    }
+
+    .publicite__campagne[data-portee='etroite'] {
+      display: block;
+    }
+  }
+
+  .publicite__campagne img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .publicite__reserve {
+    display: grid;
+    place-content: center;
+    gap: 0.15rem;
+    text-align: center;
+    padding: 1rem;
+    border: 1px dashed var(--gris);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 9px, rgb(12 11 9 / 0.045) 9px 10px);
+    color: var(--gris);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .publicite__detail {
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+
+  .publicite--bandeau .publicite__campagne,
+  .publicite--bandeau .publicite__reserve {
+    max-width: 60.625rem;
+    margin-inline: auto;
+  }
+
+  .publicite--bandeau .publicite__reserve {
+    aspect-ratio: 97 / 25;
+  }
+
+  .publicite--pave .publicite__reserve {
+    aspect-ratio: 6 / 5;
+  }
+
+  .publicite--colonne .publicite__campagne,
+  .publicite--colonne .publicite__reserve {
+    max-width: 18.75rem;
+  }
+
+  .publicite--colonne .publicite__reserve {
+    aspect-ratio: 1 / 2;
+  }
+
+  @media print {
+    .publicite {
+      display: none;
+    }
+  }
+</style>

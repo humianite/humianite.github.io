@@ -1,0 +1,38 @@
+---
+/**
+ * Le logotype. Les deux lettres « ia » ont été ajoutées après coup, à l'encre rouge,
+ * et ne sont pas tout à fait tombées en ligne.
+ */
+interface Props {
+  element?: 'h1' | 'p' | 'span';
+}
+const { element: Element = 'span' } = Astro.props;
+---
+
+<Element class="logotype" aria-label="L’Humianité">
+  <span aria-hidden="true">L’Hum<span class="logotype__ia">ia</span>nité</span>
+</Element>
+
+<style is:global>
+  .logotype {
+    display: inline-block;
+    margin: 0;
+    font-size: inherit;
+    font-family: var(--titre);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    white-space: nowrap;
+    color: var(--encre);
+  }
+
+  .logotype__ia {
+    display: inline-block;
+    color: var(--rouge);
+    transform: translateY(0.035em) rotate(-2.2deg);
+    transform-origin: 50% 80%;
+    margin-inline: 0.012em 0.008em;
+    /* Défaut de repérage : le passage du rouge bave légèrement. */
+    text-shadow: 0.018em -0.012em 0 rgb(195 20 27 / 0.28);
+  }
+</style>
