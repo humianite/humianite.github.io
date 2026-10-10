@@ -1,0 +1,110 @@
+[
+  {
+    "id": "formulaire",
+    "identifiant": "sig-01",
+    "ordre": 1,
+    "nom": "Le Formulaire",
+    "tutelle": "la case à cocher",
+    "critere": "vous avez déjà coché « Autre », puis précisé « rien »",
+    "embleme": "/medias/heuroscope/formulaire.svg"
+  },
+  {
+    "id": "relance",
+    "identifiant": "sig-02",
+    "ordre": 2,
+    "nom": "La Relance",
+    "tutelle": "le rappel automatique",
+    "critere": "vous avez déjà écrit « sauf erreur de ma part »",
+    "embleme": "/medias/heuroscope/relance.svg"
+  },
+  {
+    "id": "preavis",
+    "identifiant": "sig-03",
+    "ordre": 3,
+    "nom": "Le Préavis",
+    "tutelle": "la lettre recommandée",
+    "critere": "vous annoncez votre départ quarante minutes avant de partir",
+    "embleme": "/medias/heuroscope/preavis.svg"
+  },
+  {
+    "id": "annexe",
+    "identifiant": "sig-04",
+    "ordre": 4,
+    "nom": "L’Annexe",
+    "tutelle": "le renvoi en bas de page",
+    "critere": "l’essentiel de ce que vous dites commence par « d’ailleurs »",
+    "embleme": "/medias/heuroscope/annexe.svg"
+  },
+  {
+    "id": "piece-jointe",
+    "identifiant": "sig-05",
+    "ordre": 5,
+    "nom": "La Pièce jointe",
+    "tutelle": "le trombone",
+    "critere": "vous avez déjà envoyé « voici le document » sans le document",
+    "embleme": "/medias/heuroscope/piece-jointe.svg"
+  },
+  {
+    "id": "compte-rendu",
+    "identifiant": "sig-06",
+    "ordre": 6,
+    "nom": "Le Compte-rendu",
+    "tutelle": "l’ordre du jour",
+    "critere": "vous dites « pour résumer » avant de développer",
+    "embleme": "/medias/heuroscope/compte-rendu.svg"
+  },
+  {
+    "id": "derogation",
+    "identifiant": "sig-07",
+    "ordre": 7,
+    "nom": "La Dérogation",
+    "tutelle": "le cas particulier",
+    "critere": "vos demandes commencent par « exceptionnellement »",
+    "embleme": "/medias/heuroscope/derogation.svg"
+  },
+  {
+    "id": "doute",
+    "identifiant": "sig-08",
+    "ordre": 8,
+    "nom": "Le Doute",
+    "tutelle": "le point d’interrogation",
+    "critere": "vous êtes certain de n’être sûr de rien, et encore",
+    "embleme": "/medias/heuroscope/doute.svg"
+  },
+  {
+    "id": "tampon",
+    "identifiant": "sig-09",
+    "ordre": 9,
+    "nom": "Le Tampon",
+    "tutelle": "l’encreur",
+    "critere": "vous dites « c’est noté » et c’est votre dernier mot",
+    "embleme": "/medias/heuroscope/tampon.svg"
+  },
+  {
+    "id": "mise-en-copie",
+    "identifiant": "sig-10",
+    "ordre": 10,
+    "nom": "La Mise en copie",
+    "tutelle": "la mention « Cc »",
+    "critere": "vous êtes au courant de tout et responsable de rien",
+    "embleme": "/medias/heuroscope/mise-en-copie.svg"
+  },
+  {
+    "id": "delai",
+    "identifiant": "sig-11",
+    "ordre": 11,
+    "nom": "Le Délai",
+    "tutelle": "le sablier",
+    "critere": "vous avez déjà dit « j’arrive » depuis votre lit",
+    "embleme": "/medias/heuroscope/delai.svg"
+  },
+  {
+    "id": "erreur-humaine",
+    "identifiant": "sig-12",
+    "ordre": 12,
+    "nom": "L’Erreur humaine",
+    "tutelle": "la gomme",
+    "critere": "vous êtes la cause la plus probable, d’après le rapport",
+    "embleme": "/medias/heuroscope/erreur-humaine.svg"
+  }
+]

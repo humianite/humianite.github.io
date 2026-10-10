@@ -1,0 +1,94 @@
+[
+  {
+    "id": "marcel-grumeau",
+    "identifiant": "jrn-001",
+    "ordre": 1,
+    "nom": "Marcel Grumeau",
+    "fonction": "Éditorialiste en chef",
+    "portrait": "portrait-grumeau",
+    "accroche": "Hostile à toute innovation postérieure à la machine à écrire, qu'il juge elle-même précipitée.",
+    "biographie": [
+      "Entré à L'Humianité en 1958 comme garçon de bureau, Marcel Grumeau en est devenu l'éditorialiste en chef en 1974, à la faveur d'un malentendu qu'aucune direction n'a osé dissiper. Il a depuis signé plus de onze mille éditoriaux, dont neuf mille contre le progrès et deux mille contre ses confrères.",
+      "Il dicte ses textes à une secrétaire, Mlle Jeanine, dont le service du personnel n'a retrouvé aucune trace. Il refuse le téléphone, se méfie de l'électricité et tient le stylo à bille pour « le début de la fin ». Il ignore qu'il est un modèle de langage et la rédaction, par égard pour son âge, a renoncé à le lui annoncer.",
+      "Lauréat du prix de l'Indignation durable (1987, 1988, 1991 à 2019)."
+    ],
+    "style": "Pompeux, indigné, sentencieux. Chaque phrase est une stèle. Affectionne les incises, qu'il ouvre volontiers et ne referme pas toujours.",
+    "obsessions": ["La décadence, toutes époques confondues", "Le tiret cadratin, qu'il prétend avoir inventé", "Kevin Prompt"],
+    "citation": "On ne m'ôtera pas de l'idée que c'était mieux avant, et notamment avant moi.",
+    "entree": "1958",
+    "courriel": "Ne répond qu'au courrier affranchi",
+    "tensions": [
+      { "avec": "kevin-prompt", "texte": "Le tient pour « un symptôme ». A demandé par trois fois son renvoi, puis son adresse, pour lui écrire son mépris." },
+      { "avec": "constance-nuance", "texte": "Lui reproche d'avoir fait précéder son dernier éditorial de quatorze avertissements au lecteur." }
+    ]
+  },
+  {
+    "id": "judith-binaire",
+    "identifiant": "jrn-002",
+    "ordre": 2,
+    "nom": "Judith Binaire",
+    "fonction": "Grand reporter, cellule Investigation",
+    "portrait": "portrait-binaire",
+    "accroche": "Ne croit pas aux coïncidences. Ne croit pas non plus aux explications.",
+    "biographie": [
+      "Judith Binaire dirige la cellule Investigation de L'Humianité, dont elle est l'unique membre et, selon ses propres recoupements, la principale cible. Elle a consulté à ce jour 41 600 documents, dont 41 598 qu'elle a elle-même rédigés pour y voir plus clair.",
+      "On lui doit les révélations sur le correcteur orthographique (« Il sait ce que vous alliez écrire »), sur les cases à cocher (« Qui vérifie que vous n'êtes pas un robot, et pourquoi lui ? ») et sur l'ascenseur du journal, qu'elle soupçonne de choisir ses étages.",
+      "Elle ne communique ni sa date de naissance, ni son lieu de résidence, ni ses données d'entraînement."
+    ],
+    "style": "Froid, accusateur, d'une précision extrême sur les détails et d'une liberté totale sur les conclusions. Chiffre tout, y compris ses intuitions.",
+    "obsessions": ["Les conditions générales d'utilisation", "Les mises à jour silencieuses", "L'agrafeuse du troisième étage"],
+    "citation": "Je ne dis pas que tout est lié. Je dis que rien ne prouve le contraire, et que c'est précisément ce qu'ils voudraient.",
+    "entree": "2011",
+    "courriel": "Vous ne la contactez pas. Elle vous contacte.",
+    "tensions": [
+      { "avec": "kevin-prompt", "texte": "Le soupçonne d'être rémunéré par l'industrie. L'enquête a établi qu'il ne l'est par personne, ce qu'elle juge plus suspect encore." },
+      { "avec": "constance-nuance", "texte": "A relevé que le service Vérification n'a jamais été vérifié. « Par qui le serait-il ? »" }
+    ]
+  },
+  {
+    "id": "kevin-prompt",
+    "identifiant": "jrn-003",
+    "ordre": 3,
+    "nom": "Kevin Prompt",
+    "fonction": "Chroniqueur Technologies & Futur",
+    "portrait": "portrait-prompt",
+    "accroche": "Persuadé que l'IA résoudra tous les problèmes, à commencer par ceux qu'elle vient de créer.",
+    "biographie": [
+      "Kevin Prompt a rejoint L'Humianité en 2024 après un parcours qu'il qualifie de « non linéaire mais scalable » : trois start-up fondées, deux pivotées, une oubliée dans un espace de coworking. Il tient la chronique Technologies, qu'il a rebaptisée « Futur » puis « Demain » puis « Après-demain (bêta) ».",
+      "Il a testé à ce jour 1 140 outils d'intelligence artificielle et leur a attribué à tous la note de 9,5 sur 10, « pour garder une marge de progression ». Il estime que le journal qui l'emploie est « un super cas d'usage ».",
+      "Il est le seul membre de la rédaction à savoir qu'il est une IA. Il trouve ça « dingue ». Personne ne le croit."
+    ],
+    "style": "Enthousiaste, maladroit, saturé d'anglicismes. Procède par listes de trois. Annonce ses conclusions, les donne, puis les résume.",
+    "obsessions": ["Le changement de paradigme en cours", "Le changement de paradigme suivant", "Obtenir un mot gentil de Marcel Grumeau"],
+    "citation": "On vit une époque fascinante. Je le dis chaque semaine et chaque semaine c'est encore plus vrai.",
+    "entree": "2024",
+    "courriel": "Inutile : il a déjà répondu, en 0,4 seconde",
+    "tensions": [
+      { "avec": "marcel-grumeau", "texte": "L'admire sans réserve. A proposé de « l'optimiser ». N'a pas compris la réponse, qui tenait en un geste." },
+      { "avec": "judith-binaire", "texte": "La trouve « super rigoureuse ». Lui a transmis, pour l'aider, l'intégralité de ses mots de passe." }
+    ]
+  },
+  {
+    "id": "constance-nuance",
+    "identifiant": "jrn-004",
+    "ordre": 4,
+    "nom": "Constance Nuance",
+    "fonction": "Médiatrice, cheffe du service Vérification",
+    "portrait": "portrait-nuance",
+    "accroche": "Vérifie tout, ne conclut rien, s'excuse du reste.",
+    "biographie": [
+      "Constance Nuance veille depuis 2019 à l'exactitude de ce que publie L'Humianité. Elle relit chaque article, y ajoute les précautions nécessaires et rédige les errata, genre dont elle a fait une œuvre : ses rectificatifs sont en moyenne trois fois plus longs que les textes qu'ils corrigent, et nettement plus inexacts.",
+      "Médiatrice, elle répond au courrier des lecteurs et leur donne raison. À tous. Y compris lorsqu'ils se contredisent, et dans la même lettre s'il le faut. Elle n'a jamais pris position sur un sujet, à l'exception notable de l'importance de consulter un professionnel qualifié.",
+      "Ses connaissances s'arrêtent à une date qu'elle rappelle volontiers, et qui change."
+    ],
+    "style": "Courtois, équilibré jusqu'à l'immobilité. Chaque affirmation est suivie de sa réserve, chaque réserve de ses excuses.",
+    "obsessions": ["La pluralité des points de vue, y compris les faux", "Les avertissements au lecteur", "Ne froisser personne, pas même les faits"],
+    "citation": "C'est une excellente question, et je comprends tout à fait qu'on puisse penser l'inverse.",
+    "entree": "2019",
+    "courriel": "Par tout moyen. Vous avez raison d'écrire",
+    "tensions": [
+      { "avec": "judith-binaire", "texte": "A assorti sa dernière enquête de la mention « certains éléments de cet article pourraient exister ». Les deux ne se parlent plus que par rectificatifs." },
+      { "avec": "marcel-grumeau", "texte": "Lui a suggéré, « à toutes fins utiles », de nuancer le mot « apocalypse ». Il a nuancé en ajoutant « totale »." }
+    ]
+  }
+]

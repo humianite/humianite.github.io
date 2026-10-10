@@ -1,0 +1,198 @@
+[
+  {
+    "id": "ulteria",
+    "annonceur": "Ulteria",
+    "alt": "Publicité Ulteria : « Vos problèmes disparaissent enfin. » Une broyeuse déborde de papier au milieu de piles de dossiers. Destruction, numérisation, oubli.",
+    "visuels": {
+      "bandeau": "/medias/publicites/ulteria-bandeau.webp",
+      "bandeauMobile": "/medias/publicites/ulteria-bandeau-mobile.webp"
+    }
+  },
+  {
+    "id": "nomadis",
+    "annonceur": "Nomadis",
+    "alt": "Publicité Nomadis, bureaux portables depuis 2024 : « Travaillez de partout. Le monde est toujours moins exigeant qu’un open space. » Un homme travaille sous un parasol rouge face aux montagnes.",
+    "visuels": {
+      "bandeau": "/medias/publicites/nomadis-bandeau.webp"
+    }
+  },
+  {
+    "id": "siestrate",
+    "annonceur": "Siestrate",
+    "alt": "Publicité Siestrate : « La sieste productive par abonnement. » Une femme dort dans un fauteuil de bureau, un masque sur les yeux. Mieux reposés, plus conformes.",
+    "visuels": {
+      "pave": "/medias/publicites/siestrate-pave.webp"
+    }
+  },
+  {
+    "id": "decafea",
+    "annonceur": "Décaféa+",
+    "alt": "Publicité Décaféa+ : « Le vrai goût du simulacre. » Une cafetière remplit une tasse. Goût similaire, zéro caféine, toujours tiède, compatible open space.",
+    "visuels": {
+      "colonne": "/medias/publicites/decafea-colonne.webp"
+    }
+  },
+  {
+    "id": "passe-partout",
+    "annonceur": "Passe-Partout",
+    "alt": "Publicité Passe-Partout : « Un seul mot de passe. Celui de tout le monde. 123456, enfin assumé. » Un homme en blouse brandit une clé géante. Facile à retenir, facile à deviner, déjà partagé.",
+    "visuels": {
+      "bandeau": "/medias/publicites/passe-partout-bandeau.webp"
+    }
+  },
+  {
+    "id": "reunionix",
+    "annonceur": "Réunionix",
+    "alt": "Publicité Réunionix : « La réunion qui aurait pu être un mail. Désormais en comprimés. » Une boîte de comprimés sur une table de réunion. Effet immédiat : 1 h 30, sans ordre du jour, sans conclusion.",
+    "visuels": {
+      "bandeau": "/medias/publicites/reunionix-bandeau.webp"
+    }
+  },
+  {
+    "id": "synergia",
+    "annonceur": "Synergia",
+    "alt": "Publicité Synergia : « Perdez-vous en équipe. Séminaires de cohésion en forêt. Retour non inclus. » Cinq cadres en costume cherchent leur chemin dans les bois. 97 % de participants retrouvés.",
+    "visuels": {
+      "bandeau": "/medias/publicites/synergia-bandeau.webp"
+    }
+  },
+  {
+    "id": "brouillard-et-fils",
+    "annonceur": "Brouillard & Fils",
+    "alt": "Publicité Brouillard & Fils : « Le cloud, en bocal. Vos données conservées à température ambiante. » Des bocaux remplis de nuages sur une étagère. Maison fondée avant Internet.",
+    "visuels": {
+      "pave": "/medias/publicites/brouillard-et-fils-pave.webp"
+    }
+  },
+  {
+    "id": "colombe-telecom",
+    "annonceur": "Colombe Télécom",
+    "alt": "Publicité Colombe Télécom : « La fibre, avec des plumes. Jusqu’à 1 pigeon par seconde. » Un pigeon en casquette survole Paris, une clé USB à la patte. Latence : 2 jours.",
+    "visuels": {
+      "pave": "/medias/publicites/colombe-telecom-pave.webp"
+    }
+  },
+  {
+    "id": "demain",
+    "annonceur": "Demain",
+    "alt": "Publicité Demain : « Tout ce que vous deviez faire aujourd’hui. Livré plus tard. » Un livreur dort dans un hamac tendu devant sa camionnette. Report illimité, sans engagement, sans résultat.",
+    "visuels": {
+      "pave": "/medias/publicites/demain-pave.webp"
+    }
+  },
+  {
+    "id": "notifia",
+    "annonceur": "Notifia",
+    "alt": "Publicité Notifia : « Le réveil qui sonne pour rien. 240 notifications par heure, garanties sans objet. » Un réveil hurle au chevet d’une femme terrifiée. Restez alerte, on ne sait jamais.",
+    "visuels": {
+      "pave": "/medias/publicites/notifia-pave.webp"
+    }
+  },
+  {
+    "id": "algorithme",
+    "annonceur": "Algorithme",
+    "alt": "Publicité Algorithme, eau de pertinence : « Vous aimerez aussi. » Un flacon de parfum doré sur du velours violet. Parce que vous avez regardé ce flacon.",
+    "visuels": {
+      "colonne": "/medias/publicites/algorithme-colonne.webp"
+    }
+  },
+  {
+    "id": "toutaccept",
+    "annonceur": "Toutaccept",
+    "alt": "Publicité Toutaccept : « Les cookies qu’on ne refuse pas. » Une boîte de biscuits dont chaque cookie porte un œil. 100 % traceurs, 1 847 partenaires. Vous avez déjà dit oui.",
+    "visuels": {
+      "colonne": "/medias/publicites/toutaccept-colonne.webp"
+    }
+  },
+  {
+    "id": "label-humain",
+    "annonceur": "Label humain",
+    "alt": "Publicité Label humain : « Garanti rédigé par une personne. (Fatiguée.) » Une cocarde rouge entoure le portrait gravé d’un rédacteur épuisé, une tasse à la main. Élevé en open space, nourri au café.",
+    "visuels": {
+      "bandeau": "/medias/publicites/label-humain-bandeau.webp",
+      "pave": "/medias/publicites/label-humain-pave.webp",
+      "colonne": "/medias/publicites/label-humain-colonne.webp"
+    }
+  },
+  {
+    "id": "ascensia",
+    "annonceur": "Ascensia",
+    "alt": "Publicité Ascensia : « L’ascenseur social. » Une longue file attend devant un ascenseur doré fermé par l’écriteau « Merci de votre patience ». Actuellement en panne, technicien prévenu depuis 1983, escalier disponible.",
+    "visuels": {
+      "bandeau": "/medias/publicites/ascensia-bandeau.webp"
+    }
+  },
+  {
+    "id": "cablix",
+    "annonceur": "Câblix",
+    "alt": "Publicité Câblix : « Le câble qui ne va sur rien. Compatible avec aucun appareil, depuis toujours. » Un vendeur moustachu présente un câble aux embouts impossibles. Il vous en faudra un autre.",
+    "visuels": {
+      "bandeau": "/medias/publicites/cablix-bandeau.webp"
+    }
+  },
+  {
+    "id": "hallucina",
+    "annonceur": "Hallucina",
+    "alt": "Publicité Hallucina : « L’eau de source qui cite ses sources. (Elles n’existent pas.) » Une bouteille devant des montagnes sous deux soleils. Pureté affirmée, origine plausible, minéraux inventés. Riche en certitudes.",
+    "visuels": {
+      "bandeau": "/medias/publicites/hallucina-bandeau.webp"
+    }
+  },
+  {
+    "id": "open-spa",
+    "annonceur": "Open Spâ",
+    "alt": "Publicité Open Spâ : « Détendez-vous, on vous regarde. La cure thermale sans quitter son poste. » Des employés en peignoir se reposent à leur bureau sous l’œil d’un cadre. Le bien-être, en présentiel.",
+    "visuels": {
+      "pave": "/medias/publicites/open-spa-pave.webp"
+    }
+  },
+  {
+    "id": "prompto",
+    "annonceur": "Prompto",
+    "alt": "Publicité Prompto : « Le prompt en cube. Diluez, c’est répondu. » Une ménagère des années cinquante hume une marmite d’où montent des points d’interrogation. Un cube = 14 pages.",
+    "visuels": {
+      "pave": "/medias/publicites/prompto-pave.webp"
+    }
+  },
+  {
+    "id": "requiescat",
+    "annonceur": "Requiescat",
+    "alt": "Publicité Requiescat, pompes funèbres pour projets abandonnés : « Votre start-up mérite des adieux dignes. » Un croque-mort en haut-de-forme devant un corbillard fleuri. Il était disruptif.",
+    "visuels": {
+      "pave": "/medias/publicites/requiescat-pave.webp"
+    }
+  },
+  {
+    "id": "cerfa-gourmand",
+    "annonceur": "Cerfa Gourmand",
+    "alt": "Publicité Cerfa Gourmand : « Le formulaire, enfin comestible. » Un pâté en croûte fourré de feuilles de papier. Saveur administrative, pur papier, en trois exemplaires. À consommer avant la date limite de dépôt.",
+    "visuels": {
+      "colonne": "/medias/publicites/cerfa-gourmand-colonne.webp"
+    }
+  },
+  {
+    "id": "visiolin",
+    "annonceur": "Visiolin",
+    "alt": "Publicité Visiolin : « Gardez l’air attentif. » Une employée aux yeux écarquillés devant son écran, un flacon de collyre au premier plan. Regard concerné, hochement réflexe, micro coupé. Caméra allumée, esprit éteint.",
+    "visuels": {
+      "colonne": "/medias/publicites/visiolin-colonne.webp"
+    }
+  },
+  {
+    "id": "institut-du-flou",
+    "annonceur": "Institut du flou",
+    "alt": "Publicité Institut du flou : « Apprenez à ne pas répondre. Diplôme reconnu, peut-être. » Un professeur ébouriffé hausse les épaules devant un tableau noir. Ça dépend, on verra, je reviens vers vous.",
+    "visuels": {
+      "pave": "/medias/publicites/institut-du-flou-pave.webp"
+    }
+  },
+  {
+    "id": "mutuelle-des-mains",
+    "annonceur": "Mutuelle des mains",
+    "alt": "Publicité Mutuelle des mains : « Le sixième doigt, enfin remboursé. » Un médecin souriant présente une main à six doigts. Doigts surnuméraires, phalanges floues, poignées de main incertaines.",
+    "visuels": {
+      "bandeau": "/medias/publicites/mutuelle-des-mains-bandeau.webp",
+      "pave": "/medias/publicites/mutuelle-des-mains-pave.webp"
+    }
+  }
+]

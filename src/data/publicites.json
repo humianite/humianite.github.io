@@ -1,0 +1,8 @@
+[
+  { "id": "accueil-haut", "format": "bandeau", "emplacement": "Accueil, sous la une" },
+  { "id": "accueil-milieu", "format": "bandeau", "emplacement": "Accueil, avant les vidéos" },
+  { "id": "accueil-colonne", "format": "pave", "emplacement": "Accueil, colonne des chroniques" },
+  { "id": "article-colonne", "format": "colonne", "emplacement": "Article, colonne latérale" },
+  { "id": "article-corps", "format": "bandeau", "emplacement": "Article, après le texte" },
+  { "id": "rubrique-haut", "format": "bandeau", "emplacement": "Rubrique, sous le premier article" }
+]
