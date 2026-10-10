@@ -1,0 +1,177 @@
+/* Cadre de la page, accueil, progression et fiche du dossier. */
+.bureau {
+  padding-top: clamp(1.4rem, 3.5vw, 2.6rem);
+}
+
+.bureau__accueil {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 40rem;
+  margin-bottom: 1.6rem;
+}
+
+.bureau__accueil h1 {
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 6vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.bureau__chapo {
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.3;
+}
+
+/* Une fois la première étape passée, l'accueil cède la place à la procédure. */
+.bureau[data-debut='false'] .bureau__chapo,
+.bureau[data-debut='false'] .bureau__promesse {
+  display: none;
+}
+
+.bureau[data-debut='false'] .bureau__accueil h1 {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+}
+
+.bureau__grille {
+  display: grid;
+  gap: 2.2rem calc(var(--gouttiere) * 2);
+  align-items: start;
+}
+
+.bureau__principal {
+  min-width: 0;
+  max-width: 40rem;
+}
+
+/* Avant le premier pas, le guichet est seul : il se tient au milieu de la page. */
+.bureau[data-debut='true'] {
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.bureau[data-debut='true'] .fiche,
+.bureau:not([data-pret]) .fiche {
+  display: none;
+}
+
+@media (min-width: 62rem) {
+  .bureau[data-debut='false'] .bureau__grille {
+    grid-template-columns: minmax(0, 40rem) minmax(0, 19rem);
+    justify-content: space-between;
+  }
+}
+
+/* ---------- Progression ---------- */
+.progression {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--util);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.progression__compteur {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.progression__valeur {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.progression__jauge {
+  grid-column: 1 / -1;
+  height: 0.7rem;
+  border: var(--filet);
+  background: var(--papier);
+}
+
+.progression__jauge span {
+  display: block;
+  height: 100%;
+  background: var(--encre);
+  transition: width 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.bureau[data-acte='5'] .progression__jauge span {
+  background: var(--rouge);
+}
+
+/* ---------- Fiche du dossier ---------- */
+.fiche {
+  display: grid;
+  gap: 1.1rem;
+  padding-top: 0.5rem;
+  border-top: var(--filet-gras);
+  font-family: var(--util);
+  font-size: 1rem;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+}
+
+.fiche__titre {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.fiche__reperes {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.fiche__reperes dt {
+  font-size: 0.88rem;
+  color: var(--gris);
+}
+
+.fiche__reperes dd {
+  font-weight: 700;
+}
+
+.fiche__tete {
+  margin-bottom: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: var(--filet);
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.fiche__pieces,
+.fiche__avis {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fiche__pieces span,
+.fiche__avis span {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--gris);
+}
+
+.fiche__avis li {
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--rouge);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avis--nouveau,
+  .tampon,
+  .guichet__sablier {
+    animation: none;
+  }
+
+  .progression__jauge span {
+    transition: none;
+  }
+}

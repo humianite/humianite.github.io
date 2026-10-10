@@ -1,0 +1,409 @@
+/* reCAPTCHA'TASTROPHE. Toutes les classes sont préfixées « rc ». */
+.rc {
+  width: min(42rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  padding: 0;
+  border: var(--filet);
+  border-top: var(--filet-gras);
+  background: var(--papier);
+  color: var(--encre);
+  overflow: hidden auto;
+}
+
+.rc::backdrop {
+  background: rgb(12 11 9 / 0.58);
+}
+
+.rc__cadre {
+  position: relative;
+  display: grid;
+  gap: 0.7rem;
+  padding: clamp(1.1rem, 4vw, 1.8rem);
+}
+
+.rc__marque {
+  padding-right: 2.5rem;
+  font: 800 0.95rem/1.2 var(--util);
+  letter-spacing: 0.02em;
+  color: var(--rouge);
+}
+
+.rc__vue {
+  display: grid;
+  gap: 0.65rem;
+  transform-origin: 50% 0;
+}
+
+.rc__vue h2 {
+  font: 400 clamp(1.5rem, 4vw, 2rem) / 1.06 var(--titre);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.rc__vue h2:focus {
+  outline: none;
+}
+
+.rc__texte {
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.rc__signature {
+  padding-top: 0.6rem;
+  border-top: var(--filet-fin);
+  font: italic 0.9rem/1.3 var(--texte);
+  color: var(--gris);
+}
+
+/* ---------- Le document et son schéma ---------- */
+.rc__schema {
+  margin: 0;
+  border: var(--filet);
+  background: #fff;
+  font-family: var(--util);
+  font-size: 0.98rem;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+}
+
+.rc__schema tr {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 0.2rem 0.8rem;
+  padding: 0.2rem 0.7rem;
+  border-bottom: var(--filet-fin);
+}
+
+.rc__schema {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rc__schema tbody {
+  display: block;
+}
+
+.rc__schema tr {
+  grid-template-columns: 11.6rem 4rem 1fr;
+}
+
+.rc__schema tr:last-child {
+  border-bottom: 0;
+}
+
+.rc__schema th {
+  font: 700 0.92rem/1.3 ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  text-align: left;
+}
+
+.rc__schema td {
+  padding: 0;
+}
+
+.rc__schema td:first-of-type {
+  color: var(--rouge);
+  font-weight: 700;
+}
+
+.rc__entete {
+  font: 800 1rem/1.2 var(--util);
+}
+
+.rc__reponse {
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--encre);
+  border-radius: 0;
+  background: #fff;
+  color: var(--encre);
+  font: 400 0.92rem/1.45 ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  resize: vertical;
+}
+
+.rc__message {
+  min-height: 1.35em;
+  font: 600 1.02rem/1.35 var(--util);
+  color: var(--rouge);
+}
+
+.rc__copie {
+  font: 400 0.92rem/1.3 var(--util);
+  color: var(--gris);
+}
+
+.rc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1.3rem;
+}
+
+.rc__bouton {
+  padding: 0.55rem 1.1rem 0.6rem;
+  border: 1px solid var(--encre);
+  background: var(--encre);
+  color: var(--papier);
+  font: 700 1.05rem/1.2 var(--util);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rc__bouton:hover {
+  background: var(--rouge);
+  border-color: var(--rouge);
+}
+
+.rc__bouton--second {
+  background: transparent;
+  color: var(--encre);
+}
+
+.rc__bouton--second:hover {
+  background: var(--encre);
+  border-color: var(--encre);
+  color: var(--papier);
+}
+
+.rc__lien {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--encre);
+  font: 400 1rem/1.3 var(--util);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+/* ---------- Le sudoku ---------- */
+.rc__sudoku {
+  width: max-content;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--encre);
+  background: #fff;
+}
+
+/* Les cases sont seules dans leur grille : les filets se règlent d'après leur rang, sans compter la légende. */
+.rc__grille {
+  display: grid;
+  grid-template-columns: repeat(4, 3.4rem);
+}
+
+.rc__case {
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--gris-clair);
+  border-bottom: 1px solid var(--gris-clair);
+  border-radius: 0;
+  background: #fff;
+  color: var(--rouge);
+  font: 400 1.7rem/3.4rem var(--titre);
+  text-align: center;
+  font-variant-numeric: lining-nums;
+}
+
+.rc__case--donnee {
+  background: var(--papier-fonce);
+  color: var(--encre);
+}
+
+.rc__case:nth-child(4n) {
+  border-right: 0;
+}
+
+.rc__case:nth-child(4n + 2) {
+  border-right: 2px solid var(--encre);
+}
+
+.rc__case:nth-child(n + 13) {
+  border-bottom: 0;
+}
+
+.rc__case:nth-child(n + 5):nth-child(-n + 8) {
+  border-bottom: 2px solid var(--encre);
+}
+
+.rc__case:focus-visible {
+  outline: 3px solid var(--rouge);
+  outline-offset: -3px;
+}
+
+.rc__pave {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.rc__pave button {
+  min-width: 2.8rem;
+  height: 2.8rem;
+  padding: 0 0.7rem;
+  border: 1px solid var(--encre);
+  background: var(--papier);
+  color: var(--encre);
+  font: 700 1.1rem/1 var(--util);
+  cursor: pointer;
+}
+
+.rc__pave button:hover {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+/* La troisième voie : invisible d'abord, puis à peine visible. */
+.rc__refus {
+  justify-self: start;
+  color: var(--gris);
+  font-size: 0.88rem;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1.2s ease,
+    visibility 0s 1.2s;
+}
+
+.rc__refus--visible {
+  opacity: 0.75;
+  visibility: visible;
+  transition: opacity 1.2s ease;
+}
+
+.rc__refus--visible:hover,
+.rc__refus--visible:focus-visible {
+  opacity: 1;
+  color: var(--encre);
+}
+
+/* ---------- Tampons, dernière question, conclusion ---------- */
+.rc__resultat {
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid var(--encre);
+  background: var(--papier-fonce);
+  font: 600 1.08rem/1.4 var(--util);
+}
+
+.rc__tampons {
+  position: relative;
+  height: 7.5rem;
+}
+
+.rc__tampon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  padding: 0.14em 0.6em 0.2em;
+  border: 3px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+  background: var(--papier);
+  font: 800 clamp(1.8rem, 7vw, 2.6rem) / 1.1 var(--util);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.rc__tampon--reserve {
+  top: 56%;
+  left: 53%;
+  color: var(--rouge);
+}
+
+.rc__tampon--validee {
+  top: 84%;
+  left: 74%;
+  font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+  border-width: 2px;
+}
+
+.rc__question {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rc__question legend {
+  padding: 0;
+  font: 800 1.15rem/1.2 var(--util);
+}
+
+/* L'image n'est pas fournie : son cadre l'est. */
+.rc__image {
+  display: grid;
+  place-items: center;
+  height: 6.5rem;
+  border: 1px dashed var(--gris);
+  background: #fff;
+  font: italic 0.95rem/1.3 var(--texte);
+  color: var(--gris);
+}
+
+.rc__choix {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.rc__choix label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.35rem 0;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.rc__choix input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  accent-color: var(--encre);
+}
+
+.rc__issue {
+  display: grid;
+  gap: 0.9rem;
+}
+
+@media (max-width: 30rem) {
+  .rc__schema tr {
+    grid-template-columns: 1fr auto;
+  }
+
+  .rc__schema td:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .rc__grille {
+    grid-template-columns: repeat(4, 3rem);
+  }
+
+  .rc__case {
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc__refus,
+  .rc__refus--visible {
+    transition: none;
+  }
+}
+
+@media print {
+  .rc {
+    display: none;
+  }
+}
