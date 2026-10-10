@@ -1,0 +1,161 @@
+/* Verdict, attestation de non-admission et confettis. */
+/* ---------- Verdict et certificat ---------- */
+.verdict {
+  position: relative;
+}
+
+.verdict__titre {
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.verdict__titre:focus {
+  outline: none;
+}
+
+.verdict__signature {
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.verdict__signature span {
+  display: block;
+  font-size: 0.98rem;
+}
+
+.verdict__retour:empty {
+  display: none;
+}
+
+.verdict__retour {
+  font-family: var(--util);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.verdict__recours {
+  padding-top: 0.8rem;
+  border-top: var(--filet-fin);
+  font-family: var(--util);
+  font-size: 0.95rem;
+  color: var(--gris);
+}
+
+.certificat {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+  margin: 0.6rem 3px;
+  padding: clamp(1.3rem, 4vw, 2.2rem);
+  border: 2px solid var(--encre);
+  outline: 1px solid var(--encre);
+  outline-offset: 3px;
+  background: var(--papier);
+  text-align: center;
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.certificat .tampon {
+  position: absolute;
+  top: 1.1rem;
+  right: 0.9rem;
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  transform: rotate(9deg);
+}
+
+.certificat__journal {
+  font-family: var(--titre);
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.certificat__titre {
+  max-width: 22rem;
+  font: 800 1.2rem/1.15 var(--util);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.certificat__candidat {
+  padding: 0.1rem 1rem 0.3rem;
+  border-bottom: var(--filet);
+  font-family: var(--titre);
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.certificat__lignes {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.4rem 0;
+  font-family: var(--util);
+  font-size: 1.1rem;
+}
+
+.certificat__lignes div {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.certificat__lignes dt::after {
+  content: '\00a0:';
+}
+
+.certificat__lignes dd {
+  margin: 0;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.certificat__remerciement {
+  font-style: italic;
+}
+
+.certificat__pied {
+  font-family: var(--util);
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+.confettis {
+  position: absolute;
+  inset: -1rem 0 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.confettis i {
+  position: absolute;
+  top: -1rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--encre);
+  animation: tomber linear both;
+}
+
+.confettis i:nth-child(3n) {
+  background: var(--rouge);
+}
+
+.confettis i:nth-child(3n + 1) {
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--gris-clair);
+}
+
+@keyframes tomber {
+  to {
+    transform: translate(var(--derive), 46rem) rotate(2turn);
+    opacity: 0;
+  }
+}

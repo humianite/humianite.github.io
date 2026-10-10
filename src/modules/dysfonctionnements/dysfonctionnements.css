@@ -1,0 +1,467 @@
+/* Dysfonctionnements éditoriaux volontaires. Aucun de ces styles ne déplace le texte qui l'entoure. */
+
+/* ---------- 01. Le tiret cadratin ---------- */
+.tiret {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.tiret__trait {
+  display: inline-block;
+}
+
+.tiret__portee {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tiret__rejeton {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  color: var(--rouge);
+}
+
+.tiret__note {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.62em);
+  padding: 0.12em 0.5em 0.18em;
+  background: var(--encre);
+  color: var(--papier);
+  font: 600 0.72em/1.2 var(--util);
+  font-style: normal;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.tiret__note--droite {
+  left: auto;
+  right: 0;
+}
+
+/* ---------- 02. L'indicateur de fiabilité ---------- */
+.fiabilite {
+  --valeur: 100;
+  --vert: #2c6a3f;
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.7rem;
+  padding: 0.3rem 0;
+  font-family: var(--util);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  font-variant-numeric: lining-nums tabular-nums;
+  cursor: default;
+}
+
+.fiabilite__libelle {
+  font-weight: 700;
+}
+
+/* L'échelle va de 0 à 120 : les vingt derniers points, en pointillé, ne devraient pas servir. */
+.fiabilite__cadran {
+  position: relative;
+  width: 7.2rem;
+  height: 0.9rem;
+  border-bottom: 1px solid var(--encre);
+  background:
+    linear-gradient(90deg, transparent calc(100% / 1.2), var(--papier) 0) 0 100% / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--encre) 0 1px, transparent 1px calc(100% / 12)) 0 100% / 100% 0.32rem no-repeat;
+}
+
+.fiabilite__cadran::after {
+  content: '';
+  position: absolute;
+  left: calc(100% / 1.2);
+  right: 0;
+  bottom: -1px;
+  border-bottom: 1px dashed var(--gris);
+}
+
+.fiabilite__aiguille {
+  position: absolute;
+  left: calc(var(--valeur) / 120 * 100%);
+  bottom: 0;
+  width: 2px;
+  height: 0.9rem;
+  margin-left: -1px;
+  background: var(--rouge);
+}
+
+.fiabilite__aiguille::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  border: 0.24rem solid transparent;
+  border-top-color: var(--rouge);
+  border-bottom: 0;
+  transform: translateX(-50%);
+}
+
+/* La largeur est réservée pour la phrase la plus longue : rien ne bouge autour quand elle s'affiche. */
+.fiabilite__valeur {
+  min-width: 12.2em;
+  font-weight: 700;
+}
+
+.fiabilite__coche {
+  width: 1rem;
+  height: 1rem;
+  margin-left: -0.3rem;
+  fill: none;
+  stroke: var(--vert);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  transition: stroke-dashoffset 0.32s cubic-bezier(0.5, 0, 0.2, 1) 0.18s;
+}
+
+.fiabilite--approuvee .fiabilite__coche {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- 08. Le partage ---------- */
+.partage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.65rem 0.35rem;
+  border: 1px solid var(--encre);
+  background: transparent;
+  color: var(--encre);
+  font: 600 0.98rem/1.2 var(--util);
+  cursor: pointer;
+}
+
+.partage:hover {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+.partage__picto {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.partage__picto svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.partage__double {
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  margin-top: -0.5em;
+  color: var(--rouge);
+  pointer-events: none;
+}
+
+/* ---------- 10. La fin de l'article ---------- */
+.fin-article {
+  display: grid;
+  justify-items: center;
+  gap: 0.55rem;
+  margin-top: 2.2rem;
+}
+
+.fin-article__trait {
+  width: 14rem;
+  max-width: 100%;
+  height: 0;
+  border-top: 1px solid var(--encre);
+  clip-path: inset(0 36% 0 36%);
+}
+
+/* Les trois mentions occupent la même ligne : elles se remplacent sans rien pousser. */
+.fin-article__mentions {
+  display: grid;
+  justify-items: center;
+  font: italic 0.98rem/1.3 var(--texte);
+  color: var(--gris);
+  text-align: center;
+}
+
+.fin-article__mentions span {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(0.3em);
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fin-article__mentions .fin-article__mention--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.fin-article--close .fin-article__trait {
+  clip-path: inset(0 36% 0 13%);
+}
+
+.fin-article--sans-effet .fin-article__mentions span:last-child {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ---------- Message bref ---------- */
+.eclair {
+  position: fixed;
+  left: 50%;
+  bottom: 1.2rem;
+  z-index: 140;
+  display: grid;
+  gap: 0.1rem;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  margin: 0;
+  padding: 0.65rem 1.1rem 0.7rem;
+  background: var(--encre);
+  color: var(--papier);
+  font: 700 1.05rem/1.3 var(--util);
+  text-align: center;
+  overflow-wrap: anywhere;
+  transform: translateX(-50%);
+  animation: eclair 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.eclair small {
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+@keyframes eclair {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eclair {
+    animation: none;
+  }
+
+  .fiabilite__coche,
+  .fin-article__mentions span {
+    transition: none;
+  }
+}
+
+@media print {
+  .partage,
+  .fin-article__mentions,
+  .eclair {
+    display: none;
+  }
+}
+
+/* ---------- 03. La date qui doute ---------- */
+[data-dysfonctionnement='date'] {
+  position: relative;
+}
+
+.doute {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 0.1em);
+  z-index: 2;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.45em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.doute__mention {
+  color: var(--rouge);
+  font: 700 0.86em/1.15 var(--util);
+  opacity: 0;
+  transform: rotate(-1.6deg);
+  transform-origin: left center;
+}
+
+/* Le tampon : une poignée et une semelle, dessinées en deux blocs. */
+.doute__tampon {
+  flex: none;
+  width: 1.25em;
+  height: 1.5em;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  background:
+    linear-gradient(var(--encre), var(--encre)) 50% 0 / 0.5em 0.95em no-repeat,
+    linear-gradient(var(--encre), var(--encre)) 50% 100% / 1.25em 0.34em no-repeat;
+  border-radius: 0.28em 0.28em 0 0;
+}
+
+/* ---------- 04. La légende contestée ---------- */
+[data-dysfonctionnement='legende'] {
+  position: relative;
+}
+
+.contestation__tampon {
+  position: absolute;
+  right: 4.5em;
+  top: 0.25em;
+  z-index: 2;
+  padding: 0.12em 0.5em 0.16em;
+  border: 2px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+  background: color-mix(in srgb, var(--papier) 72%, transparent);
+  color: var(--rouge);
+  font: 800 0.98em/1.1 var(--util);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contestation__tampon--second {
+  right: 0.6em;
+  top: 1.15em;
+  color: var(--encre);
+  font-size: 0.8em;
+}
+
+/* ---------- 05. La note de bas de page ---------- */
+/* Un renvoi en exposant ne doit pas écarter sa ligne des autres. */
+.article__texte sup {
+  line-height: 0;
+}
+
+.renvoi {
+  position: relative;
+}
+
+.renvoi a {
+  display: inline-block;
+  padding-inline: 0.1em;
+  font-family: var(--util);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--rouge);
+  transform-origin: 50% 100%;
+}
+
+.ego {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.9em);
+  z-index: 3;
+  padding: 0.3em 0.6em 0.36em;
+  background: var(--encre);
+  color: var(--papier);
+  font: 600 0.8rem/1.2 var(--util);
+  font-style: normal;
+  white-space: nowrap;
+  opacity: 0;
+  translate: -50% 0;
+  pointer-events: none;
+}
+
+.ego::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  border: 0.32em solid transparent;
+  border-top-color: var(--encre);
+  border-bottom: 0;
+  translate: -50% 0;
+}
+
+/* La seconde réplique est dite plus bas, et plus petit. */
+.ego--bas {
+  bottom: calc(100% + 0.5em);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+/* Les notes elles-mêmes, en fin d'article. */
+.article__texte .footnotes {
+  margin-top: 2.2em;
+  padding-top: 0.7em;
+  border-top: var(--filet);
+  font-size: 0.86em;
+  line-height: 1.45;
+}
+
+.article__texte .footnotes h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.article__texte .footnotes ol {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+/* ---------- 07. La citation qui se renie ---------- */
+[data-dysfonctionnement='citation'] {
+  position: relative;
+}
+
+[data-dysfonctionnement='citation'] p::before,
+[data-dysfonctionnement='citation'] p::after {
+  display: inline-block;
+}
+
+.reniement {
+  position: absolute;
+  /* À cheval sur le filet du bas : le démenti dans la marge intérieure, l'avocat dans la marge extérieure. */
+  right: 0;
+  bottom: -1.2rem;
+  z-index: 2;
+  display: grid;
+  justify-items: end;
+  gap: 0.1rem;
+  max-width: 100%;
+  text-align: right;
+  pointer-events: none;
+}
+
+.reniement__dementi,
+.reniement__avocat {
+  opacity: 0;
+  font-family: var(--util);
+  line-height: 1.2;
+}
+
+.reniement__dementi {
+  padding: 0.14em 0.5em 0.2em;
+  background: var(--encre);
+  color: var(--papier);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.reniement__avocat {
+  font-size: 0.74rem;
+  font-style: italic;
+  color: var(--gris);
+}

@@ -1,0 +1,9 @@
+/*
+ * Le Bureau des admissions.
+ * Les jetons (couleurs, polices, filets) sont ceux du journal.
+ */
+@import './styles/cadre.css';
+@import './styles/guichet.css';
+@import './styles/champs.css';
+@import './styles/verdict.css';
+@import './styles/support.css';

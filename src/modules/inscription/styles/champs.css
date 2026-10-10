@@ -1,0 +1,251 @@
+/* Champs de saisie, vérification visuelle et liste des règles. */
+/* ---------- Champs ---------- */
+.champ {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.champ__libelle {
+  padding: 0;
+  font-family: var(--util);
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+fieldset.champ > .champ__libelle {
+  margin-bottom: 0.45rem;
+}
+
+.champ__saisie {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--encre);
+  border-radius: 0;
+  background: #fff;
+  color: var(--encre);
+  font: 400 1.15rem/1.4 var(--texte);
+  font-variant-numeric: lining-nums;
+}
+
+textarea.champ__saisie {
+  resize: vertical;
+}
+
+.champ__modele {
+  padding: 0.6rem 0.8rem;
+  border-left: 3px solid var(--encre);
+  background: var(--papier-fonce);
+  font-style: italic;
+  font-size: 1.1rem;
+  user-select: all;
+}
+
+.champ__aide {
+  font-family: var(--util);
+  font-size: 0.92rem;
+  line-height: 1.3;
+  color: var(--gris);
+}
+
+.champ__outils {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cases,
+.choix {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.case {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  padding: 0.45rem 0;
+  font-size: 1.08rem;
+  line-height: 1.38;
+  cursor: pointer;
+}
+
+.case input,
+.vignette input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.2rem 0 0;
+  accent-color: var(--encre);
+}
+
+.case b {
+  font-family: var(--util);
+  font-variant-numeric: lining-nums;
+}
+
+/* ---------- Vérification visuelle ---------- */
+.vignettes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.vignette {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.4rem;
+  border: 1px solid var(--gris-clair);
+  background: var(--papier);
+  cursor: pointer;
+}
+
+.vignette input {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  margin: 0;
+}
+
+.vignette__image {
+  display: block;
+  background:
+    radial-gradient(circle, rgb(12 11 9 / 0.3) 0 0.7px, transparent 1.1px) 0 0 / 5px 5px,
+    var(--papier-fonce);
+}
+
+.vignette__image svg {
+  width: 100%;
+  height: auto;
+}
+
+.vignette__nom {
+  font-family: var(--util);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.vignette__description {
+  font-family: var(--util);
+  font-size: 0.88rem;
+  line-height: 1.25;
+  color: var(--gris);
+}
+
+/* La description reste lisible par les lecteurs d'écran, et s'affiche à la demande. */
+.champ--grille:not(.champ--decrit) .vignette__description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.vignette:has(input:checked) {
+  border-color: var(--encre);
+  box-shadow: inset 0 0 0 2px var(--encre);
+}
+
+.vignette:has(input:focus-visible) {
+  outline: 2px solid var(--rouge);
+  outline-offset: 2px;
+}
+
+.champ--grille > .bouton {
+  justify-self: start;
+  margin-top: 0.3rem;
+}
+
+/* ---------- Règles ---------- */
+.regles {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--filet);
+  counter-reset: article;
+}
+
+.regle {
+  display: grid;
+  grid-template-columns: 7.2rem 1fr;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: var(--filet-fin);
+  font-family: var(--util);
+  font-size: 1.04rem;
+  line-height: 1.3;
+  counter-increment: article;
+}
+
+.regle__etat {
+  font-weight: 800;
+  color: var(--rouge);
+}
+
+.regle__etat::before {
+  content: '✕\00a0';
+}
+
+.regle--respectee .regle__etat {
+  color: var(--encre);
+}
+
+.regle--respectee .regle__etat::before {
+  content: '✓\00a0';
+}
+
+.regle--respectee .regle__enonce {
+  color: var(--gris);
+}
+
+.regle__enonce small {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.92rem;
+  color: var(--rouge);
+}
+
+/* À partir de l'acte III, chaque exigence reçoit son numéro d'article. */
+.bureau:is([data-acte='3'], [data-acte='4'], [data-acte='5']) .regle__enonce::before {
+  content: 'Art.\00a0' counter(article) '. ';
+  font-weight: 700;
+}
+
+@media (max-width: 30rem) {
+  .regle {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+/* Document de référence consultable sous un champ. */
+.champ__annexe {
+  font-family: var(--util);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.champ__annexe summary {
+  color: var(--gris);
+  cursor: pointer;
+}
+
+.champ__annexe summary:hover {
+  color: var(--encre);
+}
+
+.champ__annexe ul {
+  columns: 7.5rem auto;
+  column-gap: 1.2rem;
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border: var(--filet-fin);
+  background: #fff;
+  list-style: none;
+}

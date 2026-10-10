@@ -1,0 +1,354 @@
+/* Fenêtre de consentement : toutes les classes sont préfixées « cmp ». */
+.cmp {
+  width: min(39rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 1.5rem);
+  padding: 0;
+  border: var(--filet);
+  border-top: var(--filet-gras);
+  background: var(--papier);
+  color: var(--encre);
+  overflow: hidden;
+}
+
+.cmp::backdrop {
+  background: rgb(12 11 9 / 0.58);
+}
+
+.cmp__vue {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.2rem, 4vw, 2rem);
+  max-height: calc(100dvh - 1.5rem);
+  overflow-y: auto;
+}
+
+.cmp__vue[hidden] {
+  display: none;
+}
+
+.cmp__surtitre {
+  padding-right: 2.5rem;
+  font-family: var(--util);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rouge);
+}
+
+.cmp__titre {
+  padding-right: 1.5rem;
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 4.6vw, 2.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  text-wrap: balance;
+}
+
+.cmp__titre:focus {
+  outline: none;
+}
+
+.cmp__texte {
+  display: grid;
+  gap: 0.7rem;
+  font-size: 1.08rem;
+  line-height: 1.48;
+}
+
+.cmp__croix {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.6rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gris);
+  font: 400 1.7rem/1 var(--util);
+  cursor: pointer;
+}
+
+.cmp__croix:hover {
+  color: var(--encre);
+}
+
+/* ---------- Boutons ---------- */
+.cmp__boutons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+/* Sur écran étroit, la piste laisse au bouton de quoi glisser sur le côté. */
+.cmp__piste {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.cmp__boutons--inverse .cmp__piste {
+  order: -1;
+}
+
+.cmp__bouton {
+  width: min(100%, 13rem);
+  min-height: 3.2rem;
+  padding: 0.7rem 0.6rem;
+  border: 2px solid var(--encre);
+  font: 800 1.08rem/1.15 var(--util);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.cmp__bouton--accepter {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+.cmp__bouton--accepter:hover {
+  background: var(--rouge);
+  border-color: var(--rouge);
+}
+
+.cmp__bouton--refuser {
+  width: min(100%, 13rem);
+  background: var(--papier);
+  color: var(--encre);
+  will-change: transform;
+}
+
+.cmp__bouton--refuser:hover {
+  background: var(--papier-fonce);
+}
+
+/* Le trait du bouton vire au rouge à mesure qu'on s'acharne sur lui. */
+.cmp__bouton--refuser {
+  --usure: 0;
+  --trait: color-mix(in srgb, var(--rouge) calc(var(--usure) * 100%), var(--encre));
+  position: relative;
+  border-color: var(--trait);
+  color: var(--trait);
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.cmp__onde {
+  fill: none;
+  stroke: var(--trait);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cmp-onde 0.42s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+@keyframes cmp-onde {
+  from {
+    r: 3px;
+    opacity: 0.9;
+  }
+  to {
+    r: 30px;
+    opacity: 0;
+  }
+}
+
+.cmp__contour {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cmp__contour path {
+  fill: var(--papier);
+  stroke: var(--trait);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: stroke 0.3s;
+}
+
+/* À la souris, le cadre du bouton est remplacé par un contour dessiné, qui peut se creuser. */
+.cmp__bouton--creux,
+.cmp__bouton--creux:hover {
+  border-width: 0;
+  background: none;
+}
+
+.cmp__bouton--creux .cmp__contour {
+  display: block;
+}
+
+.cmp__bouton--creux .cmp__libelle {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+
+/* La ligne garde sa hauteur même vide : la fenêtre ne change pas de taille quand un message arrive. */
+.cmp__incident {
+  min-height: 1.3em;
+  line-height: 1.3;
+  font-family: var(--util);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--gris);
+  text-align: center;
+}
+
+.cmp__conditions {
+  text-align: center;
+}
+
+.cmp__lien {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gris);
+  font: 400 0.95rem/1.3 var(--util);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.cmp__lien:hover {
+  color: var(--encre);
+}
+
+/* ---------- Conditions générales d'inutilisation ---------- */
+.cmp__vue[data-vue='conditions'] {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: min(40rem, calc(100dvh - 1.5rem));
+  overflow: hidden;
+}
+
+.cmp__entete {
+  display: flex;
+  align-items: center;
+  min-height: 1.6rem;
+}
+
+.cmp__document {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+  padding: 1.2rem 1.3rem 1.6rem;
+  overflow-y: auto;
+  border: var(--filet);
+  background: #fff;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.cmp__titre--document {
+  padding: 0;
+  font-family: var(--texte);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cmp__document .cmp__surtitre {
+  padding: 0;
+  color: var(--encre);
+  text-align: center;
+}
+
+.cmp__version {
+  font-style: italic;
+  text-align: center;
+}
+
+.cmp__document h3 {
+  margin-bottom: 0.25rem;
+  font-family: var(--texte);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.cmp__suite {
+  padding-top: 0.8rem;
+  border-top: var(--filet-fin);
+  font-style: italic;
+  text-align: center;
+}
+
+.cmp__pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1rem;
+  font-family: var(--util);
+  font-size: 0.92rem;
+  color: var(--gris);
+  font-variant-numeric: lining-nums;
+}
+
+.cmp__pagination strong {
+  color: var(--encre);
+}
+
+/* ---------- Toast ---------- */
+.cmp-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.2rem;
+  z-index: 150;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  padding: 0.7rem 1.1rem 0.75rem;
+  background: var(--encre);
+  color: var(--papier);
+  font: 700 1.05rem/1.3 var(--util);
+  text-align: center;
+  transform: translateX(-50%);
+  animation: cmp-toast 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes cmp-toast {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+  }
+}
+
+@media (min-width: 34rem) {
+  .cmp__boutons {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .cmp__piste,
+  .cmp__bouton--accepter {
+    flex: none;
+    width: 13rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmp-toast {
+    animation: none;
+  }
+}
+
+@media print {
+  .cmp,
+  .cmp-toast {
+    display: none;
+  }
+}
