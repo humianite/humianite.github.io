@@ -166,21 +166,15 @@ const annee = edition.getFullYear() - SITE.fondation + 1;
   .entete__nav {
     border-top: 3px solid var(--encre);
     border-bottom: var(--filet);
-    overflow-x: auto;
-    scrollbar-width: none;
   }
 
-  .entete__nav::-webkit-scrollbar {
-    display: none;
-  }
-
+  /* Sur écran étroit, les rubriques passent sur plusieurs lignes : toutes restent visibles, sans défilement caché. */
   .entete__liens {
     display: flex;
-    justify-content: flex-start;
-    gap: clamp(1.1rem, 2.6vw, 2.2rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 clamp(1.1rem, 2.6vw, 2.2rem);
     margin: 0;
-    width: max-content;
-    min-width: 100%;
     font-family: var(--util);
     font-size: 1.12rem;
     font-weight: 700;

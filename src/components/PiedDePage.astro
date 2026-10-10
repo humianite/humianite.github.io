@@ -101,13 +101,15 @@ const redaction = await journalistes();
 
   .pied__liste {
     display: grid;
-    gap: 0.3rem;
     margin: 0;
     font-family: var(--util);
     font-size: 1.02rem;
   }
 
+  /* L'espacement est porté par le lien lui-même : la zone à toucher du doigt reste confortable. */
   .pied__liste a {
+    display: block;
+    padding-block: 0.3rem;
     text-decoration: none;
   }
 

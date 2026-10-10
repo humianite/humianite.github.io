@@ -93,7 +93,11 @@ export function installerLeCaptcha(dialogue: HTMLDialogElement) {
     message('sudoku').textContent = '';
   };
 
+  // Au doigt, le pavé de chiffres suffit : le clavier du téléphone ne ferait que masquer la grille.
+  const tactile = matchMedia('(pointer: coarse)').matches;
+
   for (const champ of cases) {
+    if (tactile) champ.inputMode = 'none';
     champ.addEventListener('focus', () => (caseActive = champ));
     champ.addEventListener('input', () => assainir(champ));
     // Les flèches déplacent d'une case à remplir à la suivante.
