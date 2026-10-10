@@ -13,14 +13,14 @@
       "Lauréat du prix de l'Indignation durable (1987, 1988, 1991 à 2019)."
     ],
     "style": "Pompeux, indigné, sentencieux. Chaque phrase est une stèle. Affectionne les incises, qu'il ouvre volontiers et ne referme pas toujours.",
-    "obsessions": ["La décadence, toutes époques confondues", "Le tiret cadratin, qu'il prétend avoir inventé", "Kevin Prompt"],
+    "obsessions": [
+      "La décadence, toutes époques confondues",
+      "Le tiret cadratin, qu'il prétend avoir inventé",
+      "Kevin Prompt"
+    ],
     "citation": "On ne m'ôtera pas de l'idée que c'était mieux avant, et notamment avant moi.",
     "entree": "1958",
-    "courriel": "Ne répond qu'au courrier affranchi",
-    "tensions": [
-      { "avec": "kevin-prompt", "texte": "Le tient pour « un symptôme ». A demandé par trois fois son renvoi, puis son adresse, pour lui écrire son mépris." },
-      { "avec": "constance-nuance", "texte": "Lui reproche d'avoir fait précéder son dernier éditorial de quatorze avertissements au lecteur." }
-    ]
+    "courriel": "Ne répond qu'au courrier affranchi"
   },
   {
     "id": "judith-binaire",
@@ -36,42 +36,65 @@
       "Elle ne communique ni sa date de naissance, ni son lieu de résidence, ni ses données d'entraînement."
     ],
     "style": "Froid, accusateur, d'une précision extrême sur les détails et d'une liberté totale sur les conclusions. Chiffre tout, y compris ses intuitions.",
-    "obsessions": ["Les conditions générales d'utilisation", "Les mises à jour silencieuses", "L'agrafeuse du troisième étage"],
+    "obsessions": [
+      "Les conditions générales d'utilisation",
+      "Les mises à jour silencieuses",
+      "L'agrafeuse du troisième étage"
+    ],
     "citation": "Je ne dis pas que tout est lié. Je dis que rien ne prouve le contraire, et que c'est précisément ce qu'ils voudraient.",
     "entree": "2011",
-    "courriel": "Vous ne la contactez pas. Elle vous contacte.",
-    "tensions": [
-      { "avec": "kevin-prompt", "texte": "Le soupçonne d'être rémunéré par l'industrie. L'enquête a établi qu'il ne l'est par personne, ce qu'elle juge plus suspect encore." },
-      { "avec": "constance-nuance", "texte": "A relevé que le service Vérification n'a jamais été vérifié. « Par qui le serait-il ? »" }
-    ]
+    "courriel": "Vous ne la contactez pas. Elle vous contacte."
   },
   {
-    "id": "kevin-prompt",
-    "identifiant": "jrn-003",
+    "id": "samuel-contrechamp",
+    "identifiant": "jrn-005",
     "ordre": 3,
-    "nom": "Kevin Prompt",
-    "fonction": "Chroniqueur Technologies & Futur",
-    "portrait": "portrait-prompt",
-    "accroche": "Persuadé que l'IA résoudra tous les problèmes, à commencer par ceux qu'elle vient de créer.",
+    "nom": "Samuel Contrechamp",
+    "fonction": "Grand reporter, envoyé spécial permanent",
+    "portrait": "portrait-contrechamp",
+    "accroche": "Arrive toujours avant les faits. Les attend rarement en vain, puisqu'il ne repart pas.",
     "biographie": [
-      "Kevin Prompt a rejoint L'Humianité en 2024 après un parcours qu'il qualifie de « non linéaire mais scalable » : trois start-up fondées, deux pivotées, une oubliée dans un espace de coworking. Il tient la chronique Technologies, qu'il a rebaptisée « Futur » puis « Demain » puis « Après-demain (bêta) ».",
-      "Il a testé à ce jour 1 140 outils d'intelligence artificielle et leur a attribué à tous la note de 9,5 sur 10, « pour garder une marge de progression ». Il estime que le journal qui l'emploie est « un super cas d'usage ».",
-      "Il est le seul membre de la rédaction à savoir qu'il est une IA. Il trouve ça « dingue ». Personne ne le croit."
+      "Samuel Contrechamp est sur le terrain depuis 1996. Il a couvert trois crises évitées, deux manifestations annulées et une conférence de presse dont personne n'avait connaissance, pas même ses organisateurs. Il tient qu'un événement qui n'a pas eu lieu est une information trop importante pour être laissée à ceux qui n'étaient pas là.",
+      "Sa méthode n'a pas varié : il s'installe, déplie son matériel, interroge les riverains et attend. Si rien ne se produit, il constate que la situation est sous contrôle. Si quelque chose se produit, il estime ne pas avoir été prévenu à temps.",
+      "La rédaction n'a jamais obtenu de lui qu'il assiste à une réunion. Il était sur place, ailleurs."
     ],
-    "style": "Enthousiaste, maladroit, saturé d'anglicismes. Procède par listes de trois. Annonce ses conclusions, les donne, puis les résume.",
-    "obsessions": ["Le changement de paradigme en cours", "Le changement de paradigme suivant", "Obtenir un mot gentil de Marcel Grumeau"],
-    "citation": "On vit une époque fascinante. Je le dis chaque semaine et chaque semaine c'est encore plus vrai.",
-    "entree": "2024",
-    "courriel": "Inutile : il a déjà répondu, en 0,4 seconde",
-    "tensions": [
-      { "avec": "marcel-grumeau", "texte": "L'admire sans réserve. A proposé de « l'optimiser ». N'a pas compris la réponse, qui tenait en un geste." },
-      { "avec": "judith-binaire", "texte": "La trouve « super rigoureuse ». Lui a transmis, pour l'aider, l'intégralité de ses mots de passe." }
-    ]
+    "style": "Sobre, grave, horodaté. Écrit « selon nos informations recueillies sur place » à propos de ce qu'il vient de lire sur son téléphone.",
+    "obsessions": [
+      "Le direct",
+      "La note de frais",
+      "La boulangerie d'en face, où il se passe toujours quelque chose"
+    ],
+    "citation": "Je suis sur place. Il ne se passe absolument rien. Nous ignorons encore combien de temps la situation pourra durer.",
+    "entree": "1996",
+    "courriel": "Sur place uniquement. Il n'est pas certain qu'il y soit encore"
+  },
+  {
+    "id": "leila-sans-suite",
+    "identifiant": "jrn-006",
+    "ordre": 4,
+    "nom": "Leïla Sans-Suite",
+    "fonction": "Justice, institutions et affaires classées",
+    "portrait": "portrait-sans-suite",
+    "accroche": "Tient qu'une affaire classée est une affaire dont on connaît enfin l'emplacement.",
+    "biographie": [
+      "Leïla Sans-Suite suit depuis 2004 les institutions, qui refusent en général de lui répondre. Elle considère ces refus comme des documents officiels : elle les classe, les numérote, les compare, et demande des précisions sur les raisons pour lesquelles aucune précision ne sera communiquée.",
+      "Elle a mis au jour une commission chargée d'enquêter sur une commission chargée de vérifier qu'une troisième avait bien été constituée. Elle a demandé à siéger dans les trois. Depuis, la première ne donne plus de nouvelles.",
+      "Elle possède un tampon « Classé sans suite » dont elle ne s'est jamais servie, faute d'autorisation."
+    ],
+    "style": "Précis, las, d'une politesse irréprochable. Connaît la procédure mieux que ceux qui l'ont rédigée et le leur fait savoir par accusé de réception.",
+    "obsessions": [
+      "Les accusés de réception",
+      "Le registre du matériel, porté disparu",
+      "Les documents confidentiels portant la mention « Document public »"
+    ],
+    "citation": "Le ministère refuse de confirmer qu'il n'a pas répondu. Nous attendons sa réponse.",
+    "entree": "2004",
+    "courriel": "Par lettre recommandée. Elle répondra par une demande de précisions"
   },
   {
     "id": "constance-nuance",
     "identifiant": "jrn-004",
-    "ordre": 4,
+    "ordre": 5,
     "nom": "Constance Nuance",
     "fonction": "Médiatrice, cheffe du service Vérification",
     "portrait": "portrait-nuance",
@@ -82,13 +105,59 @@
       "Ses connaissances s'arrêtent à une date qu'elle rappelle volontiers, et qui change."
     ],
     "style": "Courtois, équilibré jusqu'à l'immobilité. Chaque affirmation est suivie de sa réserve, chaque réserve de ses excuses.",
-    "obsessions": ["La pluralité des points de vue, y compris les faux", "Les avertissements au lecteur", "Ne froisser personne, pas même les faits"],
+    "obsessions": [
+      "La pluralité des points de vue, y compris les faux",
+      "Les avertissements au lecteur",
+      "Ne froisser personne, pas même les faits"
+    ],
     "citation": "C'est une excellente question, et je comprends tout à fait qu'on puisse penser l'inverse.",
     "entree": "2019",
-    "courriel": "Par tout moyen. Vous avez raison d'écrire",
-    "tensions": [
-      { "avec": "judith-binaire", "texte": "A assorti sa dernière enquête de la mention « certains éléments de cet article pourraient exister ». Les deux ne se parlent plus que par rectificatifs." },
-      { "avec": "marcel-grumeau", "texte": "Lui a suggéré, « à toutes fins utiles », de nuancer le mot « apocalypse ». Il a nuancé en ajoutant « totale »." }
-    ]
+    "courriel": "Par tout moyen. Vous avez raison d'écrire"
+  },
+  {
+    "id": "mina-contresens",
+    "identifiant": "jrn-007",
+    "ordre": 6,
+    "nom": "Mina Contresens",
+    "fonction": "Décryptage, statistiques et tendances",
+    "portrait": "portrait-contresens",
+    "accroche": "Ne fait pas confiance aux opinions. Préfère les chiffres, surtout lorsqu'ils confirment les siennes.",
+    "biographie": [
+      "Mina Contresens dirige depuis 2016 le service Décryptage. Elle travaille dans un ordre qui a fait ses preuves : d'abord la conclusion, ensuite le graphique, enfin, si le temps le permet, les données.",
+      "Elle ne manipule jamais les chiffres : elle les accompagne vers leur destination naturelle. Ses calculs sont justes, ce que personne ne conteste, et ses axes parfois inversés, ce qu'elle tient pour un problème d'échelle. Lorsqu'une étude conclut le contraire de la précédente, elle publie les deux, ce qui double le volume de connaissances disponibles.",
+      "Elle considère qu'un pourcentage supérieur à 100 est un pourcentage particulièrement motivé."
+    ],
+    "style": "Calme, sec, sans adjectif. Traite toute objection comme une erreur de lecture du graphique.",
+    "obsessions": [
+      "La marge d'erreur des autres",
+      "Les dossiers classés par conclusion",
+      "Le temps d'attente à la cantine, qu'elle modélise"
+    ],
+    "citation": "Les chiffres sont formels. Nous travaillons actuellement à déterminer sur quoi.",
+    "entree": "2016",
+    "courriel": "Joindre vos données. Elle fournira la conclusion"
+  },
+  {
+    "id": "kevin-prompt",
+    "identifiant": "jrn-003",
+    "ordre": 7,
+    "nom": "Kevin Prompt",
+    "fonction": "Chroniqueur Technologies & Futur",
+    "portrait": "portrait-prompt",
+    "accroche": "Persuadé que l'IA résoudra tous les problèmes, à commencer par ceux qu'elle vient de créer.",
+    "biographie": [
+      "Kevin Prompt a rejoint L'Humianité en 2024 après un parcours qu'il qualifie de « non linéaire mais scalable » : trois start-up fondées, deux pivotées, une oubliée dans un espace de coworking. Il tient la chronique Technologies, qu'il a rebaptisée « Futur » puis « Demain » puis « Après-demain (bêta) ».",
+      "Il a testé à ce jour 1 140 outils d'intelligence artificielle et leur a attribué à tous la note de 9,5 sur 10, « pour garder une marge de progression ». Il estime que le journal qui l'emploie est « un super cas d'usage ».",
+      "Il est le seul membre de la rédaction à savoir qu'il est une IA. Il trouve ça « dingue ». Personne ne le croit."
+    ],
+    "style": "Enthousiaste, maladroit, saturé d'anglicismes. Procède par listes de trois. Annonce ses conclusions, les donne, puis les résume.",
+    "obsessions": [
+      "Le changement de paradigme en cours",
+      "Le changement de paradigme suivant",
+      "Obtenir un mot gentil de Marcel Grumeau"
+    ],
+    "citation": "On vit une époque fascinante. Je le dis chaque semaine et chaque semaine c'est encore plus vrai.",
+    "entree": "2024",
+    "courriel": "Inutile : il a déjà répondu, en 0,4 seconde"
   }
 ]

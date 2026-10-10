@@ -266,7 +266,7 @@
   },
   {
     "id": "guichet-inscriptions",
-    "identifiant": "med-025",
+    "identifiant": "med-040",
     "type": "photo",
     "ratio": "3 / 2",
     "alt": "Une file de lecteurs attend devant un guichet marqué « Inscriptions », fermé par un rideau",
@@ -321,7 +321,7 @@
   },
   {
     "id": "encrier-et-plume",
-    "identifiant": "med-030",
+    "identifiant": "med-041",
     "type": "photo",
     "ratio": "3 / 2",
     "alt": "Un encrier, un porte-plume et une page manuscrite ; au fond, un ordinateur sous un drap",
@@ -332,7 +332,7 @@
   },
   {
     "id": "minuteur-refuse",
-    "identifiant": "med-031",
+    "identifiant": "med-042",
     "type": "photo",
     "ratio": "3 / 2",
     "alt": "Une enceinte connectée, un minuteur mécanique, une casserole et trois œufs sur un plan de travail",
@@ -340,5 +340,93 @@
     "credit": "Photo d’illustration",
     "description": "Photographie. Une enceinte connectée sur un plan de travail, à côté d’un minuteur mécanique, d’une casserole et de trois œufs.",
     "src": "/medias/photos/minuteur-refuse.webp"
+  },
+  {
+    "id": "portrait-contrechamp",
+    "identifiant": "med-043",
+    "type": "portrait",
+    "ratio": "4 / 5",
+    "alt": "Portrait de Samuel Contrechamp",
+    "credit": "Studio Latent",
+    "description": "Portrait de presse. Homme d’environ 45 ans, barbe poivre et sel, veste de reporter, devant deux micros tournés l’un vers l’autre.",
+    "cadrage": "50% 20%",
+    "src": "/medias/portraits/samuel-contrechamp.webp"
+  },
+  {
+    "id": "portrait-sans-suite",
+    "identifiant": "med-044",
+    "type": "portrait",
+    "ratio": "4 / 5",
+    "alt": "Portrait de Leïla Sans-Suite",
+    "credit": "Studio Latent",
+    "description": "Portrait de presse. Femme d’environ 42 ans, cheveux bouclés, la joue dans la main, un tampon encreur au premier plan, des dossiers derrière elle.",
+    "cadrage": "50% 20%",
+    "src": "/medias/portraits/leila-sans-suite.webp"
+  },
+  {
+    "id": "portrait-contresens",
+    "identifiant": "med-034",
+    "type": "portrait",
+    "ratio": "4 / 5",
+    "alt": "Portrait de Mina Contresens",
+    "credit": "Studio Latent",
+    "description": "Portrait de presse. Femme d’environ 36 ans, lunettes rondes, veste sombre, devant des courbes qui convergent vers un point d’interrogation.",
+    "cadrage": "50% 20%",
+    "src": "/medias/portraits/mina-contresens.webp"
+  },
+  {
+    "id": "photocopieuses",
+    "identifiant": "med-035",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Deux photocopieuses côte à côte dans un bureau vide, la nuit",
+    "legende": "Deux photocopieuses surprises dans les locaux d’une entreprise parisienne. Selon leur fabricant, il s’agirait d’un simple rapprochement technique.",
+    "credit": "Agence Latente",
+    "description": "Photographie prise de loin. Deux photocopieuses presque collées l’une à l’autre dans un bureau désert.",
+    "src": "/medias/photos/photocopieuses.webp"
+  },
+  {
+    "id": "envoye-special",
+    "identifiant": "med-036",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un reporter, de dos, attend avec son micro dans une rue vide",
+    "legende": "Mercredi, 9 h 42. Notre envoyé spécial sur les lieux, où la situation demeure inchangée.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un reporter en imperméable, de dos, micro à la main, dans une rue parfaitement calme.",
+    "src": "/medias/photos/envoye-special-avant-les-faits.webp"
+  },
+  {
+    "id": "document-caviarde",
+    "identifiant": "med-037",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une page de rapport dont toutes les lignes sont recouvertes de bandes noires",
+    "legende": "La page 4 du document, telle que le ministère l’a rendue publique.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Une main gantée tient une page officielle intégralement caviardée.",
+    "src": "/medias/photos/document-caviarde.webp"
+  },
+  {
+    "id": "graphique-representativite",
+    "identifiant": "med-038",
+    "type": "dessin",
+    "ratio": "3 / 2",
+    "alt": "Diagramme circulaire dont le total atteint 104 % : une part rouge dépasse du disque",
+    "legende": "Infographie. Les réponses à l’étude, marge d’enthousiasme comprise.",
+    "credit": "Service Décryptage / L’Humianité",
+    "description": "Diagramme circulaire. 61 %, 43 % et une part rouge qui déborde du disque, pour un total de 104 %.",
+    "src": "/medias/dessins/graphique-representativite.svg"
+  },
+  {
+    "id": "manifestation-annulee",
+    "identifiant": "med-039",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un reporter, de dos, tend son micro au milieu d'un boulevard vide bordé de barrières",
+    "legende": "Samedi, 11 h 40, en tête de cortège.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un boulevard désert bordé de barrières ; un reporter seul, de dos, tend son micro vers le vide.",
+    "src": "/medias/photos/manifestation-annulee.webp"
   }
 ]
