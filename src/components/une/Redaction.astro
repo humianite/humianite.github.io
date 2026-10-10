@@ -1,5 +1,5 @@
 ---
-/** Les signatures du journal, en quatre portraits. */
+/** Les signatures du journal, en portraits. */
 import Cliche from '@/components/Cliche.astro';
 import { journalistes, lienJournaliste } from '@/lib/contenu';
 import { typo } from '@/lib/typo.mjs';
@@ -51,9 +51,24 @@ const redaction = await journalistes();
     line-height: 1.38;
   }
 
-  @media (min-width: 48rem) {
+  @media (min-width: 40rem) {
     .redaction {
       grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Sept signatures tiennent sur une ligne : les accroches cèdent la place, elles sont sur la page de la rédaction. */
+  @media (min-width: 62rem) {
+    .redaction {
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .plume__nom {
+      font-size: 1.22rem;
+    }
+
+    .plume__accroche {
+      display: none;
     }
   }
 </style>

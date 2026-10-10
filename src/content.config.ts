@@ -58,7 +58,6 @@ const journalistes = defineCollection({
     citation: z.string(),
     entree: z.string(),
     courriel: z.string(),
-    tensions: z.array(z.object({ avec: reference('journalistes'), texte: z.string() })).default([]),
     ordre: z.number(),
   }),
 });

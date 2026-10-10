@@ -2,7 +2,7 @@
 import Base from '@/layouts/Base.astro';
 import Appel from '@/components/Appel.astro';
 import Figure from '@/components/Figure.astro';
-import { type Journaliste, articlesDeJournaliste, journaliste as lireJournaliste, journalistes, lienJournaliste } from '@/lib/contenu';
+import { type Journaliste, articlesDeJournaliste, journalistes } from '@/lib/contenu';
 import { SITE } from '@/lib/site';
 import { typo } from '@/lib/typo.mjs';
 
@@ -17,7 +17,6 @@ interface Props {
 const { journaliste } = Astro.props;
 const { data } = journaliste;
 const articles = await articlesDeJournaliste(journaliste.id);
-const tensions = await Promise.all(data.tensions.map(async (t) => ({ ...t, confrere: await lireJournaliste(t.avec.id) })));
 ---
 
 <Base
@@ -56,21 +55,6 @@ const tensions = await Promise.all(data.tensions.map(async (t) => ({ ...t, confr
             {data.obsessions.map((obsession) => <li>{typo(obsession)}</li>)}
           </ul>
         </section>
-        {
-          tensions.length > 0 && (
-            <section>
-              <h2>Ses confrères</h2>
-              <dl>
-                {tensions.map((t) => (
-                  <div>
-                    <dt><a href={lienJournaliste(t.confrere.id)}>{t.confrere.data.nom}</a></dt>
-                    <dd>{typo(t.texte)}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
-          )
-        }
         <section>
           <h2>Lui écrire</h2>
           <p>{typo(data.courriel)}</p>
