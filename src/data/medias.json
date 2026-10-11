@@ -197,6 +197,16 @@
     "src": "/medias/miniatures/nuance-toujours.webp"
   },
   {
+    "id": "miniature-sur-place",
+    "identifiant": "med-045",
+    "type": "miniature",
+    "ratio": "16 / 9",
+    "alt": "Samuel Contrechamp, sourcil levé, devant deux micros",
+    "credit": "L'Humianité Vidéo",
+    "description": "Miniature vidéo. Samuel Contrechamp, sourcil levé, devant deux micros, à côté du titre « Sur place avant les faits ».",
+    "src": "/medias/miniatures/sur-place-avant-les-faits.webp"
+  },
+  {
     "id": "iceberg-routeur",
     "identifiant": "med-013",
     "type": "photo",

@@ -4,7 +4,7 @@
  * Statut : working as intended.
  *
  * Fausse fenêtre de consentement. Le journal ne dépose aucun cookie et ne collecte rien de personnel :
- * accepter, refuser ou fermer ont exactement le même effet, c'est-à-dire aucun.
+ * accepter ou refuser ont exactement le même effet, c'est-à-dire aucun. Il n'y a pas de croix : il faut choisir.
  * Le composant est autonome : il s'active ou se désactive par `SITE.consentement`.
  * Tout élément portant `data-ouvrir-consentement` rouvre la fenêtre (voir le pied de page).
  * Le comportement est dans `src/modules/consentement/`.
@@ -16,7 +16,6 @@ import { typo } from '@/lib/typo.mjs';
 
 <dialog class="cmp" data-consentement aria-labelledby="cmp-titre">
   <div class="cmp__vue" data-vue="choix">
-    <button type="button" class="cmp__croix" data-action="fermer" aria-label="Fermer sans choisir">×</button>
     <p class="cmp__surtitre">Gestion de votre consentement</p>
     <h2 class="cmp__titre" id="cmp-titre">Nous respectons votre vie privée. Malheureusement.</h2>
     <div class="cmp__texte">
@@ -50,7 +49,6 @@ import { typo } from '@/lib/typo.mjs';
   <div class="cmp__vue" data-vue="conditions" hidden>
     <div class="cmp__entete">
       <button type="button" class="cmp__lien" data-action="retour">Revenir à la décision</button>
-      <button type="button" class="cmp__croix" data-action="fermer" aria-label="Fermer sans choisir">×</button>
     </div>
     <div class="cmp__document" tabindex="0" role="document" aria-label="Conditions générales d’inutilisation">
       <p class="cmp__surtitre">L’Humianité, direction de l’inutilisation</p>

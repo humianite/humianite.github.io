@@ -151,13 +151,16 @@ export function installerLeConsentement(dialogue: HTMLDialogElement, toast: HTML
   dialogue.addEventListener('click', (evenement) => {
     const action = (evenement.target as HTMLElement).closest<HTMLElement>('[data-action]')?.dataset.action;
     if (action === 'accepter') fermer(MESSAGES.accepte);
-    if (action === 'fermer') fermer();
     if (action === 'conditions') montrer('conditions');
     if (action === 'retour') montrer('choix');
   });
 
-  // Échap ferme tout de suite, sans animation ni commentaire.
-  dialogue.addEventListener('cancel', memoriser);
+  // Échap ne ferme rien : il faut choisir. La touche est interceptée avant le navigateur,
+  // qui finirait sinon par céder à la deuxième pression.
+  dialogue.addEventListener('keydown', (evenement) => {
+    if (evenement.key === 'Escape') evenement.preventDefault();
+  });
+  dialogue.addEventListener('cancel', (evenement) => evenement.preventDefault());
 
   // Le lien du pied de page que personne ne clique jamais.
   document.addEventListener('click', (evenement) => {
