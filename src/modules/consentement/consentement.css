@@ -28,7 +28,6 @@
 }
 
 .cmp__surtitre {
-  padding-right: 2.5rem;
   font-family: var(--util);
   font-size: 0.95rem;
   font-weight: 700;
@@ -36,7 +35,6 @@
 }
 
 .cmp__titre {
-  padding-right: 1.5rem;
   font-family: var(--titre);
   font-weight: 400;
   font-size: clamp(1.7rem, 4.6vw, 2.4rem);
@@ -54,24 +52,6 @@
   gap: 0.7rem;
   font-size: 1.08rem;
   line-height: 1.48;
-}
-
-.cmp__croix {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.6rem;
-  width: 2.2rem;
-  height: 2.2rem;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--gris);
-  font: 400 1.7rem/1 var(--util);
-  cursor: pointer;
-}
-
-.cmp__croix:hover {
-  color: var(--encre);
 }
 
 /* ---------- Boutons ---------- */

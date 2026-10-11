@@ -1,5 +1,16 @@
 [
   {
+    "id": "cyberattaque-envoye-special-sur-place",
+    "identifiant": "vid-005",
+    "titre": "Cyberattaque : notre envoyé spécial est sur place",
+    "description": "Une cyberattaque d'ampleur aurait visé un bâtiment administratif. Samuel Contrechamp, envoyé spécial permanent, est sur les lieux et ne les quittera pas avant d'avoir obtenu des réponses.",
+    "datePublication": "2026-10-11",
+    "duree": "12 s",
+    "idExterne": "Ji8CGCLBczg",
+    "miniature": "miniature-sur-place",
+    "auteur": "samuel-contrechamp"
+  },
+  {
     "id": "grumeau-lit-les-cgu",
     "identifiant": "vid-001",
     "titre": "Marcel Grumeau lit nos conditions générales d'inutilisation, version intégrale",
