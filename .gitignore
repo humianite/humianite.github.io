@@ -4,5 +4,7 @@ dist
 .DS_Store
 
 briefs/
+# La fabrication de l'édition quotidienne (skill et réglages locaux)
+.claude/
 # Clés et voix gradium
 voice.env

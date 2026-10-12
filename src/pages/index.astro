@@ -15,8 +15,14 @@ import { SITE } from '@/lib/site';
 import { typo } from '@/lib/typo.mjs';
 
 const tous = await lireArticles();
-const parPoids = [...tous].sort((a, b) => b.data.poids - a.data.poids);
 const edition = tous[0].data.datePublication;
+
+/** Points de poids perdus par jour d'ancienneté : la une se renouvelle à chaque édition sans qu'on retouche les anciens articles. */
+const USURE_PAR_JOUR = 12;
+const jour = (date: Date) => Date.parse(date.toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' }));
+const anciennete = (article: Article) => Math.round((jour(edition) - jour(article.data.datePublication)) / 86_400_000);
+const poidsDuJour = (article: Article) => article.data.poids - USURE_PAR_JOUR * anciennete(article);
+const parPoids = [...tous].sort((a, b) => poidsDuJour(b) - poidsDuJour(a));
 
 // Composition de la une : chaque bloc puise dans ce que les précédents ont laissé.
 const pris = new Set<string>();
