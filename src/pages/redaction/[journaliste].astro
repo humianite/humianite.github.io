@@ -2,8 +2,8 @@
 import Base from '@/layouts/Base.astro';
 import Appel from '@/components/Appel.astro';
 import Figure from '@/components/Figure.astro';
-import { type Journaliste, articlesDeJournaliste, journalistes } from '@/lib/contenu';
-import { SITE } from '@/lib/site';
+import { type Journaliste, articlesDeJournaliste, journalistes, lienJournaliste, media } from '@/lib/contenu';
+import { editeur } from '@/lib/referencement';
 import { typo } from '@/lib/typo.mjs';
 
 export async function getStaticPaths() {
@@ -17,12 +17,25 @@ interface Props {
 const { journaliste } = Astro.props;
 const { data } = journaliste;
 const articles = await articlesDeJournaliste(journaliste.id);
+const portrait = await media(data.portrait.id);
+const donnees = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: data.nom,
+  jobTitle: data.fonction,
+  description: data.accroche,
+  url: new URL(lienJournaliste(journaliste.id), Astro.site),
+  ...(portrait.data.src && { image: new URL(portrait.data.src, Astro.site) }),
+  worksFor: editeur(Astro.site),
+};
 ---
 
 <Base
   titre={`${data.nom}, ${data.fonction.toLowerCase()}`}
   description={data.accroche}
-  donnees={{ '@context': 'https://schema.org', '@type': 'Person', name: data.nom, jobTitle: data.fonction, description: data.accroche, worksFor: { '@type': 'NewsMediaOrganization', name: SITE.nom } }}
+  image={portrait.data.src}
+  imageAlt={portrait.data.src && portrait.data.alt}
+  donnees={donnees}
 >
   <div class="page">
     <p class="retour"><a href="/redaction/">La rédaction</a></p>

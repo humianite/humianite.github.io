@@ -53,7 +53,7 @@ export function installerLeCaptcha(dialogue: HTMLDialogElement) {
         { duration: 480, easing: ELASTIQUE },
       );
     }
-    suivante.querySelector<HTMLElement>('h2')?.focus();
+    suivante.querySelector<HTMLElement>('.rc__titre')?.focus();
   }
 
   /* ---------- Voie 1 : le document ---------- */
@@ -205,7 +205,7 @@ export function installerLeCaptcha(dialogue: HTMLDialogElement) {
     remettreANeuf();
     dialogue.showModal();
     if (!calme) dialogue.animate([{ opacity: 0, transform: 'translateY(0.8rem) scale(0.985)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' });
-    trouver<HTMLElement>('[data-vue="json"] h2').focus();
+    trouver<HTMLElement>('[data-vue="json"] .rc__titre').focus();
   }
 
   dialogue.addEventListener('click', async (evenement) => {

@@ -11,6 +11,7 @@ import EnContinu from '@/components/une/EnContinu.astro';
 import Heuroscope from '@/components/une/Heuroscope.astro';
 import Redaction from '@/components/une/Redaction.astro';
 import { type Article, articles as lireArticles, rubrique, lienArticle, lienRubrique } from '@/lib/contenu';
+import { editeur } from '@/lib/referencement';
 import { SITE } from '@/lib/site';
 import { typo } from '@/lib/typo.mjs';
 
@@ -44,7 +45,7 @@ const enContinu = tous.filter((a) => a.id !== une.id).slice(0, 7);
 const nom = async (id: string) => (await rubrique(id)).data.nom;
 ---
 
-<Base une donnees={{ '@context': 'https://schema.org', '@type': 'NewsMediaOrganization', name: SITE.nom, logo: new URL('/icone.png', Astro.site).href, slogan: SITE.devise, foundingDate: String(SITE.fondation) }}>
+<Base une donnees={{ '@context': 'https://schema.org', ...editeur(Astro.site), slogan: SITE.devise, foundingDate: String(SITE.fondation) }}>
   <div class="page">
     <section class="une" aria-label="À la une">
       <article>

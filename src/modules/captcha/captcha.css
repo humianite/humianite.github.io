@@ -34,13 +34,13 @@
   transform-origin: 50% 0;
 }
 
-.rc__vue h2 {
+.rc__titre {
   font: 400 clamp(1.5rem, 4vw, 2rem) / 1.06 var(--titre);
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
 
-.rc__vue h2:focus {
+.rc__titre:focus {
   outline: none;
 }
 

@@ -7,3 +7,5 @@
 
 User-agent: *
 Allow: /
+
+Sitemap: https://humianite.github.io/sitemap-index.xml

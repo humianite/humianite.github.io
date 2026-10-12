@@ -17,7 +17,7 @@ import { typo } from '@/lib/typo.mjs';
 <dialog class="cmp" data-consentement aria-labelledby="cmp-titre">
   <div class="cmp__vue" data-vue="choix">
     <p class="cmp__surtitre">Gestion de votre consentement</p>
-    <h2 class="cmp__titre" id="cmp-titre">Nous respectons votre vie privée. Malheureusement.</h2>
+    <p class="cmp__titre" id="cmp-titre" role="heading" aria-level="2">Nous respectons votre vie privée. Malheureusement.</p>
     <div class="cmp__texte">
       <p>
         L’Humianité n’utilise aucun cookie publicitaire, ne collecte aucune donnée personnelle et ne cherche pas à savoir ce que vous
@@ -52,14 +52,14 @@ import { typo } from '@/lib/typo.mjs';
     </div>
     <div class="cmp__document" tabindex="0" role="document" aria-label="Conditions générales d’inutilisation">
       <p class="cmp__surtitre">L’Humianité, direction de l’inutilisation</p>
-      <h2 class="cmp__titre cmp__titre--document" tabindex="-1">Conditions générales d’inutilisation</h2>
+      <p class="cmp__titre cmp__titre--document" role="heading" aria-level="2" tabindex="-1">Conditions générales d’inutilisation</p>
       <p class="cmp__version">Version consolidée, en vigueur depuis sa prochaine modification.</p>
       {
         ARTICLES.map((article, rang) => (
           <section>
-            <h3>
+            <p class="cmp__article" role="heading" aria-level="3">
               Article {rang + 1}. {typo(article.titre)}
-            </h3>
+            </p>
             <p>{typo(article.texte)}</p>
           </section>
         ))
