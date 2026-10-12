@@ -438,5 +438,38 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie. Un boulevard désert bordé de barrières ; un reporter seul, de dos, tend son micro vers le vide.",
     "src": "/medias/photos/manifestation-annulee.webp"
+  },
+  {
+    "id": "mathematiciens-relecture",
+    "identifiant": "med-046",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un mathématicien, de dos, devant un tableau noir, à côté d'une pile de manuscrits qui monte jusqu'au plafond",
+    "legende": "Un relecteur au travail sur le premier des 722 articles déposés le 6 octobre par OuvertIA.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un mathématicien âgé, de dos, assis devant un tableau noir couvert d'équations. À côté de lui, une pile de manuscrits plus haute que lui monte jusqu'au plafond. Il tient une seule feuille et un crayon.",
+    "src": "/medias/photos/mathematiciens-relecture.webp"
+  },
+  {
+    "id": "combines-face-a-face",
+    "identifiant": "med-047",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Deux combinés de téléphone posés face à face sur un bureau, dans un centre d'appels désert",
+    "legende": "Le centre d'appels de l'opérateur, dans la nuit de dimanche à lundi. La direction n'a pas souhaité confirmer son adresse.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un plateau de centre d'appels désert, la nuit. Au premier plan, deux combinés de téléphone filaires posés face à face, l'écouteur de l'un contre le micro de l'autre.",
+    "src": "/medias/photos/combines-face-a-face.webp"
+  },
+  {
+    "id": "imprimante-broyeur",
+    "identifiant": "med-048",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Dans un bureau, une imprimante dont la feuille descend directement dans un destructeur de documents",
+    "legende": "Le circuit du courrier interne, au troisième étage du cabinet.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un open space banal. Une imprimante de bureau posée sur un meuble ; la longue bande de papier imprimé qui en sort descend directement dans la fente d'un destructeur de documents posé juste en dessous.",
+    "src": "/medias/photos/imprimante-broyeur.webp"
   }
 ]
