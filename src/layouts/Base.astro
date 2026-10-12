@@ -27,17 +27,17 @@ const introuvable = Astro.url.pathname.startsWith('/404');
 /**
  * Politique de sécurité du contenu, posée en production (le serveur de développement a besoin de scripts en ligne).
  * Le site ne charge que ses propres fichiers ; deux exceptions, le lecteur vidéo sans cookie de YouTube
- * et le compteur de visites (GoatCounter : ni cookie, ni donnée personnelle).
+ * et le compteur de visites (Umami : ni cookie, ni donnée personnelle).
  */
-const COMPTEUR = 'https://humianite.goatcounter.com';
+const COMPTEUR = { script: 'https://cloud.umami.is', collecte: 'https://gateway.umami.is', site: '6c8eb6fd-d58d-4609-b06f-7ba6e607bbde' };
 const politique = [
   "default-src 'self'",
-  "script-src 'self' https://gc.zgo.at",
+  `script-src 'self' ${COMPTEUR.script}`,
   "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: ${COMPTEUR}`,
+  "img-src 'self' data:",
   "font-src 'self' data:",
   "frame-src https://www.youtube-nocookie.com",
-  `connect-src 'self' ${COMPTEUR}`,
+  `connect-src 'self' ${COMPTEUR.collecte}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",
@@ -96,7 +96,7 @@ const jsonLd = donnees && JSON.stringify(donnees).replace(/</g, '\\u003c');
       )
     }
     {donnees && <script type="application/ld+json" set:html={jsonLd} />}
-    {import.meta.env.PROD && <script is:inline async data-goatcounter={`${COMPTEUR}/count`} src="https://gc.zgo.at/count.js" />}
+    {import.meta.env.PROD && <script is:inline defer src={`${COMPTEUR.script}/script.js`} data-website-id={COMPTEUR.site} />}
   </head>
   <body>
     <a class="evitement" href="#contenu">Aller au contenu</a>
