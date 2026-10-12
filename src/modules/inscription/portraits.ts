@@ -20,7 +20,7 @@ const main = (doigts: number) => {
 export const portrait = ({ doigts, yeux, bouches }: Sujet) => {
   const abscisses = yeux === 3 ? [41, 52, 63] : [44, 60];
   const ordonnees = bouches === 2 ? [64, 71] : [67];
-  return `<svg viewBox="0 0 120 140" aria-hidden="true" focusable="false">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true" focusable="false">
     <path d="M18 140 Q20 106 52 101 Q84 106 86 140" fill="var(--papier)" stroke="currentColor" stroke-width="2.4" />
     <ellipse cx="52" cy="56" rx="21" ry="26" fill="var(--papier)" stroke="currentColor" stroke-width="2.4" />
     <path d="M31 50 Q34 26 54 28 Q72 29 73 50 Q62 38 48 40 Q38 41 31 50 Z" fill="currentColor" />
