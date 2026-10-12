@@ -33,6 +33,8 @@ const medias = defineCollection({
     type: z.enum(['photo', 'portrait', 'dessin', 'miniature']),
     /** Chemin du fichier une fois l'image produite. Absent : un cliché d'attente est composé. */
     src: z.string().optional(),
+    /** Version matricielle pour le partage, quand `src` est un dessin vectoriel que les réseaux n'affichent pas. */
+    partage: z.string().optional(),
     alt: z.string(),
     legende: z.string().optional(),
     credit: z.string(),

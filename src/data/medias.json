@@ -426,7 +426,8 @@
     "legende": "Infographie. Les réponses à l’étude, marge d’enthousiasme comprise.",
     "credit": "Service Décryptage / L’Humianité",
     "description": "Diagramme circulaire. 61 %, 43 % et une part rouge qui déborde du disque, pour un total de 104 %.",
-    "src": "/medias/dessins/graphique-representativite.svg"
+    "src": "/medias/dessins/graphique-representativite.svg",
+    "partage": "/medias/dessins/graphique-representativite.webp"
   },
   {
     "id": "manifestation-annulee",

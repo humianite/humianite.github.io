@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 import { unified } from '@astrojs/markdown-remark';
 import { remarqueTypo } from './src/lib/typo.mjs';
 
@@ -8,5 +9,6 @@ export default defineConfig({
   trailingSlash: 'always',
   // Le processeur unified est requis pour appliquer la typographie française au corps des articles.
   markdown: { processor: unified({ remarkPlugins: [remarqueTypo], remarkRehype: { footnoteLabel: 'Notes', footnoteBackLabel: 'Retour au texte' } }) },
-  integrations: [mdx()],
+  // Les guichets d'abonnement ne sont pas des articles : ils portent `indexable={false}` et restent hors du plan du site.
+  integrations: [mdx(), sitemap({ filter: (page) => !/\/(connexion|inscription)\/$/.test(page) })],
 });

@@ -28,6 +28,7 @@ import {
   lienRubrique,
 } from '@/lib/contenu';
 import { dateCourte, iso } from '@/lib/format';
+import { editeur, filAriane } from '@/lib/referencement';
 import { FORMATS, NATURES, SITE } from '@/lib/site';
 import { typo } from '@/lib/typo.mjs';
 
@@ -70,17 +71,23 @@ const donnees = {
   keywords: data.motsCles.join(', '),
   inLanguage: 'fr',
   author: { '@type': 'Person', name: auteur.data.nom, jobTitle: auteur.data.fonction, url: new URL(lienJournaliste(auteur.id), Astro.site) },
-  publisher: { '@type': 'NewsMediaOrganization', name: SITE.nom },
+  mainEntityOfPage: new URL(lienArticle(article), Astro.site),
+  publisher: editeur(Astro.site),
   ...(image?.data.src && { image: new URL(image.data.src, Astro.site) }),
 };
+const fil = filAriane(Astro.site, [
+  { nom: rubrique.data.nom, lien: lienRubrique(rubrique.id) },
+  { nom: data.titre, lien: lienArticle(article) },
+]);
 ---
 
 <Base
   titre={data.titre}
   description={data.chapo}
   article={{ auteur: auteur.data.nom, publication: data.datePublication, modification: data.dateMiseAJour, rubrique: rubrique.data.nom, motsCles: data.motsCles }}
-  image={image?.data.src}
-  donnees={donnees}
+  image={image?.data.partage ?? image?.data.src}
+  imageAlt={image?.data.src && image.data.alt}
+  donnees={[donnees, fil]}
 >
   <article class:list={['article', `article--${format}`]}>
     <div class="page">

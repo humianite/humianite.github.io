@@ -4,6 +4,8 @@ import Captcha from '@/components/Captcha.astro';
 import Consentement from '@/components/Consentement.astro';
 import Entete from '@/components/Entete.astro';
 import PiedDePage from '@/components/PiedDePage.astro';
+import { readFile } from 'node:fs/promises';
+import { imageMetadata } from 'astro/assets/utils';
 import { SITE } from '@/lib/site';
 
 interface Props {
@@ -14,11 +16,17 @@ interface Props {
   article?: { auteur: string; publication: Date; modification?: Date; rubrique: string; motsCles: string[] };
   /** Image affichée quand la page est partagée. À défaut, le visuel du journal. */
   image?: string;
+  /** Ce que montre cette image, pour qui ne la voit pas. */
+  imageAlt?: string;
+  /** `false` écarte la page des moteurs de recherche et du plan du site (voir `astro.config.mjs`). */
+  indexable?: boolean;
   /** Données structurées schema.org à joindre à la page. */
-  donnees?: Record<string, unknown>;
+  donnees?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { titre, description = SITE.description, une = false, article, image = '/partage.jpg', donnees } = Astro.props;
+const { titre, description = SITE.description, une = false, article, image = '/partage.jpg', imageAlt, indexable = true, donnees } = Astro.props;
+/** Dimensions de l'image de partage, lues dans le fichier : les réseaux composent l'aperçu sans attendre de l'avoir chargée. */
+const dimensions = await readFile(`public${image}`).then((fichier) => imageMetadata(fichier)).catch(() => undefined);
 const titrePage = titre ? `${titre} | ${SITE.nom}` : `${SITE.nom} – ${SITE.devise}`;
 const canonique = new URL(Astro.url.pathname, Astro.site);
 /** La page d'erreur est servie à toutes les adresses inconnues : elle n'en revendique aucune. */
@@ -69,7 +77,9 @@ const jsonLd = donnees && JSON.stringify(donnees).replace(/</g, '\\u003c');
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{titrePage}</title>
     <meta name="description" content={description} />
+    {!indexable && <meta name="robots" content="noindex, follow" />}
     {!introuvable && <link rel="canonical" href={canonique} />}
+    <link rel="alternate" type="application/rss+xml" title={SITE.nom} href="/rss.xml" />
     <link rel="icon" href="/favicon.png" type="image/png" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="/favicon-sombre.png" type="image/png" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -83,6 +93,9 @@ const jsonLd = donnees && JSON.stringify(donnees).replace(/</g, '\\u003c');
     {!introuvable && <meta property="og:url" content={canonique} />}
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:image" content={new URL(image, Astro.site)} />
+    {dimensions && <meta property="og:image:width" content={String(dimensions.width)} />}
+    {dimensions && <meta property="og:image:height" content={String(dimensions.height)} />}
+    {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
     <meta name="twitter:card" content="summary_large_image" />
     {
       article && (

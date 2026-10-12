@@ -3,7 +3,9 @@ import Base from '@/layouts/Base.astro';
 import Appel from '@/components/Appel.astro';
 import Publicite from '@/components/Publicite.astro';
 import VignetteVideo from '@/components/VignetteVideo.astro';
-import { type Article, type Rubrique, articlesDeRubrique, lienRubrique, rubriques, videos as lireVideos } from '@/lib/contenu';
+import { type Article, type Rubrique, articlesDeRubrique, lienRubrique, media, rubriques, videos as lireVideos } from '@/lib/contenu';
+import { iso } from '@/lib/format';
+import { editeur, filAriane } from '@/lib/referencement';
 import { typo } from '@/lib/typo.mjs';
 
 /** Une rubrique se lit à `/actualites/`, puis à `/actualites/page/2/` : aucun article ne peut porter cette adresse. */
@@ -38,9 +40,28 @@ const anciens = numero === 1 ? [] : articles;
 const [videoPrincipale, ...autresVideos] = estVideo ? await lireVideos() : [];
 const vide = !articles.length && !videoPrincipale;
 const lienPage = (n: number) => (n === 1 ? lienRubrique(rubrique.id) : `${lienRubrique(rubrique.id)}page/${n}/`);
+
+/** Les vidéos en ligne, décrites aux moteurs. La durée n'y figure pas : celle que nous affichons ne les regarde pas. */
+const videosDecrites = await Promise.all(
+  (estVideo ? [videoPrincipale, ...autresVideos] : [])
+    .filter((video) => video?.data.idExterne)
+    .map(async ({ data }) => ({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: data.titre,
+      description: data.description,
+      uploadDate: iso(data.datePublication),
+      thumbnailUrl: new URL((await media(data.miniature.id)).data.src ?? '/partage.jpg', Astro.site),
+      embedUrl: `https://www.youtube-nocookie.com/embed/${data.idExterne}`,
+      contentUrl: `https://www.youtube.com/watch?v=${data.idExterne}`,
+      inLanguage: 'fr',
+      publisher: editeur(Astro.site),
+    })),
+);
+const donnees = [filAriane(Astro.site, [{ nom: rubrique.data.nom, lien: lienRubrique(rubrique.id) }]), ...videosDecrites];
 ---
 
-<Base titre={numero === 1 ? rubrique.data.nom : `${rubrique.data.nom}, page ${numero}`} description={rubrique.data.description}>
+<Base titre={numero === 1 ? rubrique.data.nom : `${rubrique.data.nom}, page ${numero}`} description={rubrique.data.description} donnees={donnees}>
   <div class="page">
     <header class="tete">
       <h1>{rubrique.data.nom}</h1>

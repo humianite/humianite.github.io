@@ -252,7 +252,7 @@
   text-align: center;
 }
 
-.cmp__document h3 {
+.cmp__article {
   margin-bottom: 0.25rem;
   font-family: var(--texte);
   font-size: 1rem;

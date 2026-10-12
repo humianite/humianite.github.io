@@ -17,7 +17,7 @@ import { COTE, GRILLE } from '@/modules/captcha/sudoku';
     <p class="rc__marque">reCAPTCHA’TASTROPHE</p>
 
     <section class="rc__vue" data-vue="json">
-      <h2 id="rc-titre" tabindex="-1">Vérification de votre artificialité</h2>
+      <p class="rc__titre" id="rc-titre" role="heading" aria-level="2" tabindex="-1">Vérification de votre artificialité</p>
       <p class="rc__texte">
         Afin de protéger le journal des êtres humains, merci de démontrer que vous n’en êtes pas un. Produisez un objet JSON
         strictement conforme au schéma du document INU-0042.
@@ -46,7 +46,7 @@ import { COTE, GRILLE } from '@/modules/captcha/sudoku';
     </section>
 
     <section class="rc__vue" data-vue="sudoku" hidden>
-      <h2 tabindex="-1">Procédure simplifiée pour intelligences biologiques</h2>
+      <p class="rc__titre" role="heading" aria-level="2" tabindex="-1">Procédure simplifiée pour intelligences biologiques</p>
       <p class="rc__texte">
         Nous comprenons que la production de documents administratifs structurés puisse représenter une difficulté pour certaines
         formes de vie. Chaque ligne, chaque colonne et chaque carré contient une fois les chiffres de 1 à {COTE}.
@@ -82,7 +82,7 @@ import { COTE, GRILLE } from '@/modules/captcha/sudoku';
     </section>
 
     <section class="rc__vue" data-vue="verdict" hidden>
-      <h2 tabindex="-1">Vérification terminée</h2>
+      <p class="rc__titre" role="heading" aria-level="2" tabindex="-1">Vérification terminée</p>
       <p class="rc__resultat" data-zone="resultat"></p>
 
       <div class="rc__tampons" aria-hidden="true" hidden>
