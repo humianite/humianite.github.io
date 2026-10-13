@@ -194,5 +194,85 @@
       "bandeau": "/medias/publicites/mutuelle-des-mains-bandeau.webp",
       "pave": "/medias/publicites/mutuelle-des-mains-pave.webp"
     }
+  },
+  {
+    "id": "binocle-plus",
+    "annonceur": "Binocle+",
+    "alt": "Publicité Binocle+ : « Les lunettes qui voient à votre place. Vous regardez. Elles décident. » Un homme en costume marche sur un quai, des lunettes à écran sur le nez. Reconnaît vos collègues, résume les couchers de soleil, filme, au cas où. La réalité, en mieux commentée.",
+    "visuels": {
+      "pave": "/medias/publicites/binocle-plus-pave.webp"
+    }
+  },
+  {
+    "id": "calinia",
+    "annonceur": "Câlinia",
+    "alt": "Publicité Câlinia : « L’ami qui est toujours d’accord. » Une femme serre contre sa joue un petit appareil rose dont l’écran affiche deux cœurs. Vous avez raison, excellente question, abonnement mensuel. Il vous comprend, c’est dans le contrat. L’affection est suspendue en cas d’impayé.",
+    "visuels": {
+      "colonne": "/medias/publicites/calinia-colonne.webp"
+    }
+  },
+  {
+    "id": "eternis",
+    "annonceur": "Éternis",
+    "alt": "Publicité Éternis : « Vivez jusqu’à 140 ans. De notifications. » Une main âgée couverte de bagues et de bracelets connectés, devant un gâteau hérissé de bougies. Sommeil noté 4/10, pas insuffisants, stress mesuré, donc augmenté. Vous alliez bien avant de le savoir.",
+    "visuels": {
+      "colonne": "/medias/publicites/eternis-colonne.webp"
+    }
+  },
+  {
+    "id": "gros-cerveau",
+    "annonceur": "Gros Cerveau",
+    "alt": "Publicité Gros Cerveau : « Un supercalculateur pour ouvrir vos mails. 4 000 watts de réflexion, pour dire bonjour. » Un employé attend, le menton dans la main, devant une machine qui occupe toute la pièce. Chauffe le bureau, réfléchit longtemps, répond : ça dépend. Puissance disponible, idées en option.",
+    "visuels": {
+      "bandeau": "/medias/publicites/gros-cerveau-bandeau.webp"
+    }
+  },
+  {
+    "id": "jean-michel-3000",
+    "annonceur": "Jean-Michel 3000",
+    "alt": "Publicité Jean-Michel 3000 : « Le robot qui regarde la vaisselle avec vous. La maison zéro effort, pour lui. » Une ménagère lave une montagne d’assiettes sous le regard d’un automate chromé, les bras le long du corps. Très lent, très poli, en mise à jour. Il apprend encore.",
+    "visuels": {
+      "bandeau": "/medias/publicites/jean-michel-3000-bandeau.webp"
+    }
+  },
+  {
+    "id": "medor-exe",
+    "annonceur": "Médor.exe",
+    "alt": "Publicité Médor.exe : « Il ne mord pas. Il redémarre. Le meilleur ami de l’homme, en version bêta. » Un chien mécanique rouillé, tenu en laisse sous la pluie par un maître en pantoufles. Rapporte des erreurs, aboie en USB, promenade : 12 % de batterie. Ne pas éteindre pendant la sieste.",
+    "visuels": {
+      "pave": "/medias/publicites/medor-exe-pave.webp"
+    }
+  },
+  {
+    "id": "plio",
+    "annonceur": "Pliô",
+    "alt": "Publicité Pliô : « Le téléphone qui se plie. Une fois. À partir de 1 999 €, pli compris. » Un vendeur souriant désigne un téléphone pliant à l’écran fendu, devant une pile d’appareils cassés. Écran en deux morceaux, charnière émotive, se range mal. Dépliez avec prudence.",
+    "visuels": {
+      "bandeau": "/medias/publicites/plio-bandeau.webp"
+    }
+  },
+  {
+    "id": "tournis",
+    "annonceur": "Tournis 360",
+    "alt": "Publicité Tournis 360 : « Le drone qui filme tout. Surtout vous, de dos. » Une famille s’enfuit d’un pique-nique renversé, poursuivie par un drone couvert d’objectifs. Angle inévitable, 14 heures de rushs, retour non garanti. Vous ne les regarderez jamais.",
+    "visuels": {
+      "pave": "/medias/publicites/tournis-pave.webp"
+    }
+  },
+  {
+    "id": "sourdine",
+    "annonceur": "Sourdine",
+    "alt": "Publicité Sourdine : « Les écouteurs qui entendent ce qui vous arrange. » Un homme sourit, les yeux fermés, des écouteurs aux oreilles, pendant que trois collègues lui parlent dans des bulles vides. Filtre les reproches, traduit en compliments, réunions en sourdine.",
+    "visuels": {
+      "paysage": "/medias/publicites/sourdine-paysage.webp"
+    }
+  },
+  {
+    "id": "retrograde",
+    "annonceur": "Rétrograde",
+    "alt": "Publicité Rétrograde : « Le progrès, en arrière. » Un baladeur CD posé sur du velours violet, ses écouteurs au fil emmêlé. Saute en marchant, 12 titres maximum, fil emmêlé d’origine. Le lecteur CD, enfin de nouveau trop cher.",
+    "visuels": {
+      "paysage": "/medias/publicites/retrograde-paysage.webp"
+    }
   }
 ]

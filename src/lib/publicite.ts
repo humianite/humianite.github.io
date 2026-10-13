@@ -8,14 +8,25 @@ import { campagnes as lireCampagnes, publicites as lireEmplacements } from './co
 export type Format = CollectionEntry<'publicites'>['data']['format'];
 type Campagne = CollectionEntry<'campagnes'>;
 
-/** Taille d'origine des visuels, par format. */
-export const TAILLES: Record<Format, readonly [number, number]> = { bandeau: [1940, 500], pave: [1200, 1000], colonne: [600, 1200] };
+/** Un visuel se décline dans les formats d'emplacement, ou en paysage : celui-là se loge dans les pavés. */
+type Gabarit = Format | 'paysage';
+
+/** Taille d'origine des visuels, par gabarit. */
+export const TAILLES: Record<Gabarit, readonly [number, number]> = { bandeau: [1940, 500], pave: [1200, 1000], colonne: [600, 1200], paysage: [1200, 630] };
+
+/** Le visuel d'une campagne pour un format d'emplacement, et son gabarit. */
+function visuelDe(campagne: Campagne, format: Format): { src: string; gabarit: Gabarit } | undefined {
+  const { visuels } = campagne.data;
+  if (visuels[format]) return { src: visuels[format], gabarit: format };
+  if (format === 'pave' && visuels.paysage) return { src: visuels.paysage, gabarit: 'paysage' };
+  return undefined;
+}
 
 /** Le tour de chaque format : il avance d'un cran à chaque annonce attribuée. */
 const tours: Record<Format, number> = { bandeau: 0, pave: 0, colonne: 0 };
 
 /** Les campagnes qui ont un visuel à ce format, dans un ordre fixe. */
-const candidates = (toutes: Campagne[], format: Format) => toutes.filter((c) => c.data.visuels[format]).sort((a, b) => a.id.localeCompare(b.id));
+const candidates = (toutes: Campagne[], format: Format) => toutes.filter((c) => visuelDe(c, format)).sort((a, b) => a.id.localeCompare(b.id));
 
 /** La prochaine campagne du format, dans l'ordre du tour ; `prises` écarte celles déjà attribuées sur la page. */
 function tirer(toutes: Campagne[], format: Format, prises: Set<string>) {
@@ -44,7 +55,7 @@ interface Encart {
   etroite?: Annonce;
 }
 
-const annonce = (campagne: Campagne, src: string, format: Format): Annonce => ({ src, alt: campagne.data.alt, url: campagne.data.url, largeur: TAILLES[format][0], hauteur: TAILLES[format][1] });
+const annonce = (campagne: Campagne, src: string, gabarit: Gabarit): Annonce => ({ src, alt: campagne.data.alt, url: campagne.data.url, largeur: TAILLES[gabarit][0], hauteur: TAILLES[gabarit][1] });
 
 /** Les campagnes déjà montrées sur chaque page, et les encarts déjà composés. */
 const prisesParPage = new Map<string, Set<string>>();
@@ -69,18 +80,19 @@ export async function composer(emplacement: string, page: string): Promise<Encar
   const { format } = entree.data;
   const imposee = entree.data.campagne && toutes.find((c) => c.id === entree.data.campagne!.id);
   const campagne = imposee ?? tirer(toutes, format, prises);
-  const visuel = campagne?.data.visuels[format];
+  const visuel = campagne && visuelDe(campagne, format);
   const encart: Encart = { format, libelle: entree.data.emplacement };
   if (campagne && visuel) {
     prises.add(campagne.id);
-    encart.large = annonce(campagne, visuel, format);
+    encart.large = annonce(campagne, visuel.src, visuel.gabarit);
     if (format === 'bandeau') {
       const mobile = campagne.data.visuels.bandeauMobile;
       const pave = mobile ? undefined : tirer(toutes, 'pave', prises);
       if (mobile) encart.etroite = annonce(campagne, mobile, 'pave');
       else if (pave) {
         prises.add(pave.id);
-        encart.etroite = annonce(pave, pave.data.visuels.pave!, 'pave');
+        const repli = visuelDe(pave, 'pave')!;
+        encart.etroite = annonce(pave, repli.src, repli.gabarit);
       }
     }
   }

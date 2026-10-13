@@ -43,6 +43,8 @@ const medias = defineCollection({
     ratio: z.string().default('3 / 2'),
     /** Point de l'image à garder au centre quand elle est recadrée (valeur CSS `object-position`). */
     cadrage: z.string().optional(),
+    /** L'image se lit de haut en bas : elle échappe au recadrage panoramique des enquêtes. */
+    entiere: z.boolean().default(false),
   }),
 });
 
@@ -116,12 +118,13 @@ const campagnes = defineCollection({
     /** Ce que dit l'annonce, pour qui ne voit pas l'image. */
     alt: z.string(),
     url: adresseWeb.optional(),
-    /** Bandeau 1940 × 500, pavé 1200 × 1000, colonne 600 × 1200. Le bandeau mobile est au format du pavé. */
+    /** Bandeau 1940 × 500, pavé 1200 × 1000, colonne 600 × 1200, paysage 1200 × 630 (il passe dans les pavés). Le bandeau mobile est au format du pavé. */
     visuels: z.object({
       bandeau: z.string().optional(),
       bandeauMobile: z.string().optional(),
       pave: z.string().optional(),
       colonne: z.string().optional(),
+      paysage: z.string().optional(),
     }),
   }),
 });
