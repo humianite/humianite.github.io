@@ -9,7 +9,7 @@ import { z } from 'astro/zod';
  */
 
 /** Adresse web : http ou https uniquement, pour qu'aucun contenu ne puisse glisser un lien `javascript:` ou `data:`. */
-const adresseWeb = z.string().url().refine((adresse) => /^https?:\/\//i.test(adresse), 'Seules les adresses http(s) sont admises.');
+const adresseWeb = z.url({ protocol: /^https?$/, error: 'Seules les adresses http(s) sont admises.' });
 
 export const FORMATS = ['breve', 'actualite', 'enquete', 'chronique', 'editorial', 'fiction'] as const;
 export const NATURES = ['fiction-satirique', 'satire-faits-reels'] as const;
