@@ -21,24 +21,23 @@ async function copier(adresse: string) {
 }
 
 /** Le double du pictogramme : il part, s'arrête, revient sur ses pas, puis file dans une autre direction. */
-function egarer(picto: HTMLElement) {
+async function egarer(picto: HTMLElement) {
   const double = picto.cloneNode(true) as HTMLElement;
   double.classList.add('partage__double');
   picto.after(double);
-  return double
-    .animate(
-      [
-        { transform: 'translate(0, 0) rotate(0)', opacity: 1 },
-        { transform: 'translate(1.15em, -0.1em) rotate(-8deg)', opacity: 1, offset: 0.24, easing: 'ease-out' },
-        { transform: 'translate(1.15em, -0.1em) rotate(-8deg)', opacity: 1, offset: 0.42 },
-        { transform: 'translate(0.85em, 0.12em) rotate(7deg)', opacity: 1, offset: 0.56, easing: 'ease-in-out' },
-        { transform: 'translate(0.85em, 0.12em) rotate(7deg)', opacity: 1, offset: 0.64 },
-        { transform: 'translate(1.7em, -1em) rotate(-16deg)', opacity: 1, offset: 0.86, easing: 'ease-in' },
-        { transform: 'translate(2.2em, -1.7em) rotate(-22deg) scale(0.7)', opacity: 0 },
-      ],
-      { duration: 1150 },
-    )
-    .finished.then(() => double.remove());
+  await double.animate(
+    [
+      { transform: 'translate(0, 0) rotate(0)', opacity: 1 },
+      { transform: 'translate(1.15em, -0.1em) rotate(-8deg)', opacity: 1, offset: 0.24, easing: 'ease-out' },
+      { transform: 'translate(1.15em, -0.1em) rotate(-8deg)', opacity: 1, offset: 0.42 },
+      { transform: 'translate(0.85em, 0.12em) rotate(7deg)', opacity: 1, offset: 0.56, easing: 'ease-in-out' },
+      { transform: 'translate(0.85em, 0.12em) rotate(7deg)', opacity: 1, offset: 0.64 },
+      { transform: 'translate(1.7em, -1em) rotate(-16deg)', opacity: 1, offset: 0.86, easing: 'ease-in' },
+      { transform: 'translate(2.2em, -1.7em) rotate(-22deg) scale(0.7)', opacity: 0 },
+    ],
+    { duration: 1150 },
+  ).finished;
+  double.remove();
 }
 
 async function transmettre(bouton: HTMLElement) {
