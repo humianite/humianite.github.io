@@ -317,8 +317,13 @@
 }
 
 /* L'image d'ouverture d'une enquête est panoramique : elle ne doit pas repousser le texte hors de l'écran. */
-.article--enquete .article__image .cliche {
+.article--enquete .article__image:not(.article__image--entiere) .cliche {
   aspect-ratio: 5 / 2 !important;
+}
+
+/* Sauf celle qui se lit de haut en bas : elle garde son cadre, à taille de lecture. */
+.article--enquete .article__image--entiere {
+  max-width: 48rem;
 }
 
 .article--enquete .article__titre {
