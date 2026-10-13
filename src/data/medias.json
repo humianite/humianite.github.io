@@ -472,5 +472,39 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie. Un open space banal. Une imprimante de bureau posée sur un meuble ; la longue bande de papier imprimé qui en sort descend directement dans la fente d'un destructeur de documents posé juste en dessous.",
     "src": "/medias/photos/imprimante-broyeur.webp"
+  },
+  {
+    "id": "enseigne-lettres",
+    "identifiant": "med-049",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "entiere": true,
+    "alt": "Un ouvrier, de dos sur une échelle, dévisse une lettre d’une enseigne ; deux grandes lettres métalliques sont posées au pied du mur",
+    "legende": "Lundi soir, à Courbevoie. Mise en conformité d’une enseigne.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Un ouvrier de dos sur une échelle dévisse une lettre d’une enseigne de façade ; au pied du mur, un « I » et un « A » métalliques.",
+    "src": "/medias/photos/enseigne-lettres.webp"
+  },
+  {
+    "id": "berline-salle-de-stage",
+    "identifiant": "med-050",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une grande berline garée dans une salle de formation, entre des chaises à tablette, face à un tableau blanc ; deux stagiaires assis, de dos",
+    "legende": "Lundi, 9 h 05, salle B 12. Le tour de table.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Une salle de formation banale ; une grande berline sans marque garée entre les chaises d’écolier, face au tableau blanc, deux stagiaires de dos.",
+    "src": "/medias/photos/berline-salle-de-stage.webp"
+  },
+  {
+    "id": "journaux-reveil",
+    "identifiant": "med-051",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une pile de journaux jaunis ficelée sur un bureau en bois, surmontée d’un réveil mécanique à cloches",
+    "legende": "Les archives de l’éditorialiste, classées par ordre d’urgence.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Sur un vieux bureau, une haute pile de journaux jaunis ficelée, surmontée d’un réveil mécanique à cloches ; stylo-plume et tasse vide.",
+    "src": "/medias/photos/journaux-reveil.webp"
   }
 ]

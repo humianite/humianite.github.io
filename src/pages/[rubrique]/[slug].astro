@@ -121,7 +121,7 @@ const fil = filAriane(Astro.site, [
         </div>
       </header>
 
-      {data.image && <Figure media={data.image.id} legende={data.legende} prioritaire contestee={data.dysfonctionnements.includes('legende')} class="article__image" />}
+      {data.image && <Figure media={data.image.id} legende={data.legende} prioritaire contestee={data.dysfonctionnements.includes('legende')} class:list={['article__image', image?.data.entiere && 'article__image--entiere']} />}
 
       <div class:list={['article__grille', { 'article__grille--marge': avecMarge }]}>
         <div class="article__colonne">
