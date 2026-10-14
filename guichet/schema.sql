@@ -23,3 +23,12 @@ CREATE TABLE IF NOT EXISTS passages (
   nombre INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (empreinte, jour)
 );
+
+-- Compteurs publics : ils avancent pour de vrai, et ne savent rien de personne.
+CREATE TABLE IF NOT EXISTS compteurs (
+  nom TEXT PRIMARY KEY,
+  valeur INTEGER NOT NULL
+);
+
+-- Les justificatifs de lecture ne commencent pas à 1 : le service les délivre depuis 1873.
+INSERT OR IGNORE INTO compteurs (nom, valeur) VALUES ('justificatifs', 18341);
