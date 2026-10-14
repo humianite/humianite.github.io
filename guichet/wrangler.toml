@@ -1,0 +1,12 @@
+name = "humianite-guichet"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[vars]
+ORIGINES = "https://humianite.github.io,http://localhost:4321"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "humianite-guichet"
+# Renseigné après `npx wrangler d1 create humianite-guichet`.
+database_id = "a-renseigner"

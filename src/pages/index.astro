@@ -9,6 +9,7 @@ import Chroniques from '@/components/une/Chroniques.astro';
 import Editorial from '@/components/une/Editorial.astro';
 import EnContinu from '@/components/une/EnContinu.astro';
 import Heuroscope from '@/components/une/Heuroscope.astro';
+import PetitesAnnonces from '@/components/une/PetitesAnnonces.astro';
 import Redaction from '@/components/une/Redaction.astro';
 import { type Article, articles as lireArticles, rubrique, lienArticle, lienRubrique } from '@/lib/contenu';
 import { editeur } from '@/lib/referencement';
@@ -119,6 +120,8 @@ const nom = async (id: string) => (await rubrique(id)).data.nom;
         </div>
       </section>
     </div>
+
+    <div class="bloc"><PetitesAnnonces /></div>
 
     <div class="bloc"><Heuroscope /></div>
 

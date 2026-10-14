@@ -1,0 +1,41 @@
+---
+/** Une petite annonce, composée comme sur papier : premiers mots en capitales grasses, référence en pied. */
+import type { Annonce } from '@/lib/contenu';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  annonce: Annonce;
+}
+
+const { accroche, texte, reference } = Astro.props.annonce.data;
+---
+
+<p class="annonce">
+  <strong>{typo(accroche)}</strong>{' '}{typo(texte)}
+  <span class="annonce__ref">Réf. {reference}</span>
+</p>
+
+<style>
+  .annonce {
+    font-size: 0.98rem;
+    line-height: 1.36;
+    hyphens: auto;
+    text-wrap: pretty;
+  }
+
+  .annonce strong {
+    font-family: var(--util);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .annonce__ref {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--util);
+    font-size: 0.82rem;
+    color: var(--gris);
+    text-align: right;
+  }
+</style>

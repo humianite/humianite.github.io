@@ -17,6 +17,8 @@ export const SITE = {
   captcha: true,
   /** Dépôt public du journal : il héberge aussi son service juridique. */
   depot: 'https://github.com/humianite/humianite.github.io',
+  /** Guichet des petites annonces (Cloudflare Worker, voir `guichet/`). Adresse donnée par `wrangler deploy`. */
+  guichet: 'https://humianite-guichet.humianite.workers.dev',
 } as const;
 
 /** Entrées du pied de page vers le système de suivi du dépôt. */
@@ -28,6 +30,7 @@ export const RECLAMATIONS = {
 /** Liens hors rubriques, à la suite de la navigation. */
 export const PAGES = [
   { href: '/heuroscope/', nom: 'L’Heuroscope' },
+  { href: '/petites-annonces/', nom: 'Petites annonces' },
   { href: '/redaction/', nom: 'La rédaction' },
   { href: '/a-propos/', nom: 'À propos' },
 ] as const;

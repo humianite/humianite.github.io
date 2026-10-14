@@ -1,0 +1,17 @@
+{
+  "name": "humianite-guichet",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "schema:local": "wrangler d1 execute humianite-guichet --local --file schema.sql",
+    "schema": "wrangler d1 execute humianite-guichet --remote --file schema.sql",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260901.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.151.0"
+  }
+}

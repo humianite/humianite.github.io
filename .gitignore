@@ -8,3 +8,5 @@ briefs/
 .claude/
 # Clés et voix gradium
 voice.env
+# Adresse et jeton du guichet des annonces
+guichet.env
