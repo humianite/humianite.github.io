@@ -18,7 +18,7 @@ export const SITE = {
   /** Dépôt public du journal : il héberge aussi son service juridique. */
   depot: 'https://github.com/humianite/humianite.github.io',
   /** Guichet des petites annonces (Cloudflare Worker, voir `guichet/`). Adresse donnée par `wrangler deploy`. */
-  guichet: 'https://humianite-guichet.humianite-guichet.workers.dev',
+  guichet: 'https://guichet.humianite.workers.dev',
 } as const;
 
 /** Entrées du pied de page vers le système de suivi du dépôt. */
