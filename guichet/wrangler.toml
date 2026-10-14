@@ -3,7 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
 [vars]
-ORIGINES = "https://humianite.github.io,http://localhost:4321"
+ORIGINES = "https://humianite.github.io"
 
 [[d1_databases]]
 binding = "DB"

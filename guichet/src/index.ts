@@ -20,7 +20,8 @@ interface Env {
 const entetesCors = (requete: Request, env: Env): Record<string, string> => {
   const origine = requete.headers.get('Origin') ?? '';
   const admises = env.ORIGINES.split(',').map((o) => o.trim());
-  return admises.includes(origine)
+  // Le journal en local, quel que soit le port que le serveur de développement s'est choisi.
+  return admises.includes(origine) || /^http:\/\/localhost:\d+$/.test(origine)
     ? { 'Access-Control-Allow-Origin': origine, 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', Vary: 'Origin' }
     : { Vary: 'Origin' };
 };
