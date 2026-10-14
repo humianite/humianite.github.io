@@ -1,5 +1,5 @@
 {
-  "name": "humianite-guichet",
+  "name": "guichet",
   "private": true,
   "type": "module",
   "scripts": {
