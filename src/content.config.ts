@@ -1,6 +1,7 @@
 import { defineCollection, reference } from 'astro:content';
 import { glob, file } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { IDENTIFIANTS } from './lib/annonces';
 
 /**
  * Source de données locale.
@@ -195,4 +196,19 @@ const heuroscopes = defineCollection({
   }),
 });
 
-export const collections = { rubriques, medias, journalistes, articles, videos, campagnes, publicites, signes, heuroscopes };
+/** Les petites annonces parues. Celles des lecteurs arrivent par le guichet et passent par la conférence de rédaction. */
+const annonces = defineCollection({
+  loader: file('src/data/petites-annonces.json'),
+  schema: z.object({
+    /** Numéro imprimé sous l'annonce. Pour un lecteur, celui de son dossier au guichet. */
+    reference: z.number().int(),
+    categorie: z.enum(IDENTIFIANTS),
+    /** Premiers mots, composés en gras. */
+    accroche: z.string(),
+    texte: z.string(),
+    datePublication: z.coerce.date(),
+    origine: z.enum(['redaction', 'lecteur']).default('redaction'),
+  }),
+});
+
+export const collections = { rubriques, medias, journalistes, articles, videos, campagnes, publicites, signes, heuroscopes, annonces };

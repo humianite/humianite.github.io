@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node --test src/modules/inscription/moteur.test.ts src/modules/captcha/captcha.test.ts tests/humanity.test.ts"
+    "test": "node --test src/modules/inscription/moteur.test.ts src/modules/captcha/captcha.test.ts tests/humanity.test.ts tests/annonces.test.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.2",

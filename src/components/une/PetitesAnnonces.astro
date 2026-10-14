@@ -1,0 +1,42 @@
+---
+/** Les dernières petites annonces, à la une. */
+import Annonce from '@/components/Annonce.astro';
+import { annonces } from '@/lib/contenu';
+
+const dernieres = (await annonces()).slice(0, 4);
+---
+
+<section aria-labelledby="annonces-titre">
+  <div class="tetiere">
+    <h2 id="annonces-titre">Petites annonces</h2>
+    <a href="/petites-annonces/">Toutes les annonces</a>
+  </div>
+  <div class="annonces-une">
+    {dernieres.map((a) => <Annonce annonce={a} />)}
+  </div>
+</section>
+
+<style>
+  .annonces-une {
+    display: grid;
+    gap: 1.1rem calc(var(--gouttiere) * 2);
+  }
+
+  @media (min-width: 36rem) {
+    .annonces-une {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .annonces-une {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .annonces-une > :global(* + *) {
+      padding-left: var(--gouttiere);
+      margin-left: calc(var(--gouttiere) * -1);
+      border-left: var(--filet-fin);
+    }
+  }
+</style>

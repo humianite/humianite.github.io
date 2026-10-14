@@ -30,6 +30,12 @@ export const journalistes = async () => (await getCollection('journalistes')).so
 
 export const videos = async () => (await getCollection('videos')).sort(parDateDecroissante);
 
+export type Annonce = CollectionEntry<'annonces'>;
+
+/** Les plus récentes d'abord ; à date égale, la référence la plus haute. */
+export const annonces = async () =>
+  (await getCollection('annonces')).sort((a, b) => parDateDecroissante(a, b) || b.data.reference - a.data.reference);
+
 export const journaliste = async (id: string) => (await getEntry('journalistes', id))!;
 export const rubrique = async (id: string) => (await getEntry('rubriques', id))!;
 export const media = async (id: string) => (await getEntry('medias', id))!;
