@@ -27,6 +27,9 @@ export const LIMITES = {
   parEmpreinte: 5,
   /** Dépôts par jour, tous guichets confondus : au-delà, le guichet ferme jusqu'au lendemain. */
   parJour: 400,
+  /** Justificatifs de lecture par empreinte et par jour, puis au total. */
+  justificatifsParEmpreinte: 40,
+  justificatifsParJour: 20_000,
 } as const;
 
 /** Les dossiers ne commencent pas à 1 : un journal fondé en 1873 a forcément du retard. */

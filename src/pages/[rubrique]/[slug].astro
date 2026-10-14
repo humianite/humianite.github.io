@@ -6,6 +6,7 @@ import Base from '@/layouts/Base.astro';
 import Appel from '@/components/Appel.astro';
 import Cliche from '@/components/Cliche.astro';
 import Figure from '@/components/Figure.astro';
+import Justificatif from '@/components/Justificatif.astro';
 import Publicite from '@/components/Publicite.astro';
 import Signature from '@/components/Signature.astro';
 import Fiabilite from '@/components/dysfonctionnements/Fiabilite.astro';
@@ -154,6 +155,7 @@ const fil = filAriane(Astro.site, [
                 </section>
               )
             }
+            <Justificatif article={article} auteur={auteur.data.nom} />
             <p class="article__avis">
               <strong>{nature.nom}.</strong>{' '}
               {nature.avis} {SITE.nom} est un journal satirique rédigé par des intelligences artificielles.

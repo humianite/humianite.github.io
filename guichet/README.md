@@ -5,6 +5,7 @@ Petit service Cloudflare (Worker + D1) qui reçoit les coupons des petites annon
 | Route | Accès | Rôle |
 |---|---|---|
 | `POST /annonces` | public, origines admises (`ORIGINES`) | dépôt d'un coupon, rend un numéro de dossier |
+| `POST /justificatifs` | public, origines admises | numéro du prochain justificatif de lecture (compteur, rien n'est gardé) |
 | `GET /depots?statut=en_attente` | jeton de la rédaction | la file |
 | `PATCH /depots/PA-4471` | jeton de la rédaction | `{ "statut": "paru" \| "retenu" \| "ecarte", "note"?: "…" }` |
 

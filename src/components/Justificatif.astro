@@ -1,0 +1,385 @@
+---
+/**
+ * Le justificatif de lecture : une attestation tamponnée, au pied de chaque article.
+ * Le temps de lecture est mesuré dans le navigateur ; seul le numéro vient du guichet.
+ * L'attestation se partage en image (voir `modules/justificatif/image.ts`).
+ */
+import type { Article } from '@/lib/contenu';
+import { dateSimple, tempsDeLecture } from '@/lib/format';
+import { SITE } from '@/lib/site';
+import { typo } from '@/lib/typo.mjs';
+
+interface Props {
+  article: Article;
+  auteur: string;
+}
+
+const { article, auteur } = Astro.props;
+const mots = (article.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = tempsDeLecture(article.body);
+const nombre = (n: number) => n.toLocaleString('fr-FR').replace(/\s/g, ' ');
+---
+
+<button class="justificatif-appel" type="button" data-justificatif-ouvrir>Obtenir mon justificatif de lecture</button>
+
+<dialog class="justificatif" data-justificatif data-minutes={minutes} data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet} aria-labelledby="justificatif-titre">
+  <div class="justificatif__fente" aria-hidden="true"></div>
+  <div class="justificatif__feuille" data-zone="feuille">
+    <header class="justificatif__tete">
+      <p class="justificatif__emetteur">{SITE.nom} · Service des justificatifs</p>
+      <h2 id="justificatif-titre">Attestation de lecture</h2>
+      <p class="justificatif__numero">N° <span data-zone="numero">…</span></p>
+    </header>
+
+    <p>Il est certifié que le porteur du présent document a consulté l’article</p>
+    <p class="justificatif__article">{typo(`« ${article.data.titre} »`)}</p>
+    <p class="justificatif__paru">de {auteur}, paru le {dateSimple(article.data.datePublication)}.</p>
+
+    <dl class="justificatif__releve">
+      <div><dt>Longueur</dt><dd>{nombre(mots)} mots</dd></div>
+      <div><dt>Temps de lecture estimé</dt><dd>{minutes} minute{minutes > 1 ? 's' : ''}</dd></div>
+      <div><dt>Temps constaté</dt><dd data-zone="constate"></dd></div>
+      <div><dt>Compréhension</dt><dd>Partielle, probablement</dd></div>
+      <div><dt>Temps de cerveau restituable</dt><dd>0 minute</dd></div>
+    </dl>
+
+    <p class="justificatif__verdict" data-zone="verdict"></p>
+
+    <footer class="justificatif__pied">
+      <p>Délivré le <span data-zone="delivre"></span>.<br />Valable jusqu’à la prochaine mise à jour.</p>
+      <p class="justificatif__signature">Pour la direction,<br /><em>poste vacant depuis 2026</em></p>
+    </footer>
+
+    <p class="justificatif__tampon" aria-hidden="true">Lu<span>pour valoir ce que de droit</span></p>
+  </div>
+
+  <div class="justificatif__actions">
+    <button type="button" data-justificatif-partager hidden>Partager l’image</button>
+    <button type="button" data-justificatif-enregistrer>Enregistrer l’image</button>
+    <button type="button" data-justificatif-detruire>Détruire</button>
+  </div>
+</dialog>
+
+<script>
+  import { delivrerLesJustificatifs } from '@/modules/justificatif/justificatif.ts';
+
+  delivrerLesJustificatifs();
+</script>
+
+<style>
+  .justificatif-appel {
+    justify-self: start;
+    padding: 0;
+    font-family: var(--util);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--encre);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    cursor: pointer;
+  }
+
+  .justificatif-appel:hover {
+    color: var(--rouge);
+  }
+
+  .justificatif {
+    width: min(30rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 2rem);
+    padding: 0;
+    overflow: visible auto;
+    color: var(--encre);
+    background: transparent;
+    border: 0;
+  }
+
+  /* La fente du service : la feuille en sort ligne à ligne, comme d'une imprimante de guichet. */
+  .justificatif__fente {
+    height: 0.7rem;
+    margin-inline: -0.6rem;
+    border-radius: 0.35rem;
+    background: var(--encre);
+    box-shadow: inset 0 -3px 0 #3a3833;
+  }
+
+  .justificatif__feuille {
+    position: relative;
+    display: grid;
+    gap: 0.6rem;
+    margin-top: -0.35rem;
+    padding: 1.6rem 1.5rem 1.4rem;
+    font-size: 0.98rem;
+    line-height: 1.4;
+    background: #f6f4ec;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.15), 0 10px 30px rgb(0 0 0 / 0.18);
+  }
+
+  .justificatif[open] .justificatif__feuille {
+    animation: imprimer 1.3s steps(16, end) both;
+  }
+
+  @keyframes imprimer {
+    from {
+      clip-path: inset(0 0 100% 0);
+      translate: 0 -40%;
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+      translate: 0 0;
+    }
+  }
+
+  .justificatif__tete {
+    display: grid;
+    gap: 0.2rem;
+    padding-bottom: 0.7rem;
+    border-bottom: var(--filet-gras);
+    text-align: center;
+  }
+
+  .justificatif__emetteur,
+  .justificatif__numero {
+    font-family: var(--util);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .justificatif__numero {
+    font-variant-numeric: tabular-nums;
+    color: var(--gris);
+  }
+
+  .justificatif h2 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: 1.9rem;
+    line-height: 1.05;
+  }
+
+  .justificatif__article {
+    font-family: var(--titre);
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  .justificatif__paru {
+    margin-top: -0.3rem;
+    font-style: italic;
+  }
+
+  .justificatif__releve {
+    display: grid;
+    margin: 0.3rem 0 0;
+    border-top: var(--filet);
+  }
+
+  .justificatif__releve div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.32rem 0;
+    border-bottom: 1px dotted var(--gris-clair);
+  }
+
+  .justificatif__releve dt {
+    font-family: var(--util);
+    font-weight: 600;
+  }
+
+  .justificatif__releve dd {
+    margin: 0;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .justificatif__verdict {
+    font-style: italic;
+  }
+
+  .justificatif__pied {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 1rem;
+    margin-top: 0.4rem;
+    font-family: var(--util);
+    font-size: 0.85rem;
+    color: var(--gris);
+  }
+
+  .justificatif__signature {
+    text-align: right;
+    color: var(--encre);
+  }
+
+  .justificatif__signature em {
+    font-family: var(--texte);
+    font-size: 1rem;
+  }
+
+  /* Le tampon, appliqué une fois la feuille sortie. */
+  .justificatif__tampon {
+    position: absolute;
+    right: 1.4rem;
+    bottom: 2.6rem;
+    display: grid;
+    justify-items: center;
+    padding: 0.3rem 0.9rem 0.45rem;
+    font-family: var(--util);
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rouge);
+    border: 3px solid var(--rouge);
+    outline: 1px solid var(--rouge);
+    outline-offset: 3px;
+    rotate: -11deg;
+    opacity: 0.85;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='60'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.4 2.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");
+    mask-size: 320px 120px;
+  }
+
+  .justificatif__tampon span {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+  }
+
+  .justificatif[open] .justificatif__tampon {
+    animation: tamponner 0.42s cubic-bezier(0.5, 0, 0.75, 0) 1.45s both;
+  }
+
+  @keyframes tamponner {
+    0% {
+      opacity: 0;
+      scale: 2.6;
+      rotate: -26deg;
+    }
+    70% {
+      opacity: 0.9;
+      scale: 0.94;
+      rotate: -10deg;
+    }
+    85% {
+      scale: 1.03;
+      rotate: -11.5deg;
+    }
+    100% {
+      opacity: 0.85;
+      scale: 1;
+      rotate: -11deg;
+    }
+  }
+
+  .justificatif__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+
+  .justificatif__actions button {
+    padding: 0.55rem 1rem;
+    font-family: var(--util);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--papier);
+    background: var(--encre);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .justificatif__actions [data-justificatif-detruire] {
+    margin-left: auto;
+    color: var(--encre);
+    background: var(--papier);
+    border: 1px solid var(--encre);
+  }
+
+  /* Pendant le broyage : les boutons s'effacent, la feuille peut déborder du cadre. */
+  .justificatif.est-broye {
+    overflow: visible;
+  }
+
+  .justificatif.est-broye .justificatif__actions {
+    visibility: hidden;
+  }
+
+  .justificatif[open] .justificatif__feuille.est-copie,
+  .justificatif[open] .est-copie .justificatif__tampon {
+    animation: none;
+  }
+
+  /* Le broyeur de bureau : noir, une fente, un voyant. */
+  .justificatif :global(.broyage__machine) {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 0.9rem;
+    border-radius: 0.4rem;
+    background: linear-gradient(#2c2a26, #0c0b09 45%, #1d1b18);
+    box-shadow:
+      inset 0 2px 0 rgb(255 255 255 / 0.08),
+      0 6px 14px rgb(0 0 0 / 0.35);
+  }
+
+  .justificatif :global(.broyage__machine::before) {
+    content: '';
+    position: absolute;
+    left: 1.4rem;
+    right: 1.4rem;
+    top: 3px;
+    height: 4px;
+    border-radius: 2px;
+    background: #000;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.12);
+  }
+
+  .justificatif :global(.broyage__voyant) {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: 0.45rem;
+    border-radius: 50%;
+    background: #4a1a1a;
+  }
+
+  .justificatif :global(.broyage__machine.est-en-marche .broyage__voyant) {
+    background: #ff3b30;
+    box-shadow: 0 0 6px #ff3b30;
+  }
+
+  .justificatif :global(.broyage__marque) {
+    margin-top: 0.45rem;
+    font-family: var(--util);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8d897f;
+  }
+
+  .justificatif :global(.broyage__machine.est-en-marche) {
+    animation: vibrer 0.09s linear infinite alternate;
+  }
+
+  @keyframes vibrer {
+    to {
+      translate: 0.6px 0.4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .justificatif[open] .justificatif__feuille,
+    .justificatif[open] .justificatif__tampon {
+      animation: none;
+    }
+  }
+</style>

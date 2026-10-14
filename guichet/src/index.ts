@@ -2,6 +2,7 @@
  * Le guichet de L'Humianité : reçoit les coupons des lecteurs et les range dans une file.
  *
  *   POST  /annonces          dépôt d'une petite annonce (public, depuis le site)
+ *   POST  /justificatifs     numéro du prochain justificatif de lecture (public, depuis le site)
  *   GET   /depots?statut=…   la file, pour la conférence de rédaction (jeton)
  *   PATCH /depots/PA-4471    { statut, note? } : retenu, paru, écarté (jeton)
  */
@@ -71,6 +72,21 @@ const deposer = async (requete: Request, env: Env, cors: Record<string, string>)
   return json({ numero: numeroDeDossier(ligne!.id) }, 201, cors);
 };
 
+/** Le justificatif ne garde rien : il fait avancer un compteur et rend le numéro. */
+const numeroter = async (requete: Request, env: Env, cors: Record<string, string>) => {
+  if (!cors['Access-Control-Allow-Origin']) return json({ motif: 'Guichet réservé aux lecteurs du journal.' }, 403);
+
+  const jour = jourDeParis();
+  const adresse = requete.headers.get('CF-Connecting-IP') ?? 'inconnue';
+  if (await compter(env, `j:${await empreinte(adresse, jour, env.SEL)}`, jour, LIMITES.justificatifsParEmpreinte)) {
+    return json({ motif: 'Vous avez lu suffisamment pour aujourd’hui.' }, 429, cors);
+  }
+  if (await compter(env, 'j:*', jour, LIMITES.justificatifsParJour)) return json({ motif: 'Le service des justificatifs est fermé pour aujourd’hui.' }, 503, cors);
+
+  const ligne = await env.DB.prepare("UPDATE compteurs SET valeur = valeur + 1 WHERE nom = 'justificatifs' RETURNING valeur").first<{ valeur: number }>();
+  return json({ numero: ligne!.valeur }, 201, cors);
+};
+
 const lister = async (url: URL, env: Env) => {
   const statut = url.searchParams.get('statut') ?? 'en_attente';
   if (!(STATUTS as readonly string[]).includes(statut)) return json({ motif: 'Statut inconnu.' }, 400);
@@ -98,6 +114,7 @@ export default {
 
     if (requete.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (url.pathname === '/annonces' && requete.method === 'POST') return deposer(requete, env, cors);
+    if (url.pathname === '/justificatifs' && requete.method === 'POST') return numeroter(requete, env, cors);
 
     if (url.pathname.startsWith('/depots')) {
       if (!autorise(requete, env)) return json({ motif: 'Accès réservé à la rédaction.' }, 401);
