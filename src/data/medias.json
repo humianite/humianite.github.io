@@ -506,5 +506,38 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie. Sur un vieux bureau, une haute pile de journaux jaunis ficelée, surmontée d’un réveil mécanique à cloches ; stylo-plume et tasse vide.",
     "src": "/medias/photos/journaux-reveil.webp"
+  },
+  {
+    "id": "scelle-papier-toilette",
+    "identifiant": "med-052",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Sur une table de greffe, un sachet de scellé transparent contient un rouleau de papier toilette entamé, d’où dépasse une petite clé USB",
+    "legende": "La pièce à conviction, telle qu’elle a été placée sous scellés.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Gros plan sur une table de greffe en bois clair. Un grand sachet de scellé en plastique transparent, fermé par un ruban adhésif, contient un rouleau de papier toilette entamé, soigneusement enroulé autour d’une petite clé USB dont seul l’embout dépasse. Une étiquette de scellé cartonnée attachée par une ficelle, couverte d’une écriture manuscrite illisible. À côté, un tampon encreur et un stylo. Lumière froide de bureau administratif. Aucun texte lisible, aucun logo.",
+    "src": "/medias/photos/scelle-papier-toilette.webp"
+  },
+  {
+    "id": "casque-bureau-vide",
+    "identifiant": "med-053",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un jeune homme, casque audio sur les oreilles, les yeux fermés, concentré devant son ordinateur portable ; le câble du casque pend sous le bureau",
+    "legende": "Une séance de travail en immersion, dans un open space parisien.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Dans un open space moderne et vide, un jeune homme de trois quarts, casque audio à câble sur les oreilles, les yeux fermés, l’air profondément concentré et satisfait, devant un ordinateur portable ouvert. Le câble du casque pend librement le long du bureau, débranché, sa fiche suspendue dans le vide, bien visible. Plantes vertes, poufs, lumière de fin de matinée. Visage ordinaire, ne ressemblant à personne de connu. Aucun texte lisible, aucun logo.",
+    "src": "/medias/photos/casque-bureau-vide.webp"
+  },
+  {
+    "id": "rayon-frais-ouvert",
+    "identifiant": "med-054",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une allée de supermarché bordée de vitrines réfrigérées éteintes aux portes embuées ; une employée en blouse relève la température sur un carnet",
+    "legende": "Lundi, dans un supermarché de Vierzon. Le relevé des températures.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Allée de supermarché, rayon frais, en perspective. Les vitrines réfrigérées sont éteintes, leurs portes vitrées couvertes de buée ; quelques portes entrouvertes, des yaourts et des briques de lait alignés derrière. Au premier plan, une employée en blouse, de profil, note quelque chose sur un carnet en regardant un petit thermomètre à aiguille. Néons du plafond, sol carrelé brillant. Aucune étiquette, aucun prix, aucun texte lisible, aucun logo.",
+    "src": "/medias/photos/rayon-frais-ouvert.webp"
   }
 ]
