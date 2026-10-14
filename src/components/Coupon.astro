@@ -1,0 +1,361 @@
+---
+/** Le coupon des petites annonces : cases à cocher, lignes à remplir, tarif à la ligne, tampon du guichet. */
+import { CATEGORIES, COUPON, IDENTIFIANTS } from '@/lib/annonces';
+import { SITE } from '@/lib/site';
+---
+
+<section id="coupon" class="coupon" aria-labelledby="coupon-titre">
+  <h2 id="coupon-titre">Passer une annonce</h2>
+  <form
+    class="coupon__formulaire"
+    novalidate
+    data-coupon
+    data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet}
+    data-min={COUPON.min}
+    data-max={COUPON.max}
+    data-prix-ligne={COUPON.prixLigne}
+  >
+    <fieldset class="coupon__rubriques" aria-describedby="coupon-erreur-categorie">
+      <legend>Rubrique</legend>
+      <div class="coupon__cases">
+        {
+          IDENTIFIANTS.map((id) => (
+            <label class="coupon__case">
+              <input type="radio" name="categorie" value={id} />
+              <span class="coupon__boite" aria-hidden="true" />
+              <span>{CATEGORIES[id]}</span>
+            </label>
+          ))
+        }
+      </div>
+      <p class="coupon__erreur" id="coupon-erreur-categorie" data-erreur="categorie"></p>
+    </fieldset>
+
+    <div class="coupon__champ">
+      <label for="coupon-texte">Texte de l’annonce</label>
+      <textarea id="coupon-texte" name="texte" rows="6" maxlength={COUPON.max} aria-describedby="coupon-erreur-texte"></textarea>
+      <p class="coupon__erreur" id="coupon-erreur-texte" data-erreur="texte"></p>
+    </div>
+
+    <div class="coupon__champ">
+      <label for="coupon-signature">Signature <small>(initiales ou pseudonyme, facultatif)</small></label>
+      <input id="coupon-signature" name="signature" maxlength={COUPON.signature} autocomplete="off" />
+    </div>
+
+    <label class="coupon__site" aria-hidden="true">
+      Site web
+      <input name="site" tabindex="-1" autocomplete="off" />
+    </label>
+
+    <p class="coupon__tarif service" data-zone="tarif" aria-live="polite">1 ligne × 0,00 € = 0,00 €</p>
+
+    <p class="coupon__consigne service">N’indiquez ni nom, ni téléphone, ni adresse : les réponses s’adressent au journal.</p>
+
+    <button class="coupon__envoi" type="submit">Envoyer le coupon</button>
+    <p class="coupon__retour" data-zone="retour" role="status" hidden></p>
+
+    <div class="coupon__tampon" data-zone="tampon" hidden aria-hidden="true">
+      <span>Reçu</span>
+      <span data-zone="dossier"></span>
+    </div>
+  </form>
+</section>
+
+<script>
+  import { brancherLeCoupon } from '@/modules/annonces/coupon.ts';
+
+  brancherLeCoupon();
+</script>
+
+<style>
+  /* Le coupon, à découper suivant le pointillé. */
+  .coupon {
+    position: relative;
+    max-width: 40rem;
+    margin: clamp(2.2rem, 5vw, 3.5rem) auto 0;
+    padding: 1.4rem clamp(1rem, 3vw, 1.8rem) 1.6rem;
+    border: 2px dashed var(--encre);
+    background: var(--papier-fonce);
+  }
+
+  .coupon::before {
+    content: '✂';
+    position: absolute;
+    top: -0.85rem;
+    left: 1.2rem;
+    padding: 0 0.3rem;
+    font-size: 1.3rem;
+    line-height: 1;
+    background: var(--papier);
+  }
+
+  .coupon h2 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: var(--t3);
+    line-height: 1.05;
+  }
+
+  .coupon__formulaire {
+    position: relative;
+    display: grid;
+    gap: 1.1rem;
+    margin-top: 1rem;
+  }
+
+  .coupon__champ {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .coupon legend,
+  .coupon__champ label {
+    padding: 0;
+    font-family: var(--util);
+    font-weight: 700;
+  }
+
+  .coupon__champ small {
+    font-weight: 400;
+    color: var(--gris);
+  }
+
+  /* Les rubriques : des cases à cocher au stylo, comme sur un bon de commande. */
+  .coupon__rubriques {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .coupon__cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.5rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .coupon__case {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1.02rem;
+    cursor: pointer;
+  }
+
+  .coupon__case input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  .coupon__boite {
+    position: relative;
+    flex: none;
+    width: 1.05rem;
+    height: 1.05rem;
+    border: 1.5px solid var(--encre);
+    background: var(--papier);
+  }
+
+  /* La croix, tracée en deux coups de stylo. */
+  .coupon__boite::before,
+  .coupon__boite::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--encre);
+    translate: -50% -50%;
+    scale: 0 1;
+  }
+
+  .coupon__boite::before {
+    rotate: 42deg;
+  }
+
+  .coupon__boite::after {
+    rotate: -38deg;
+  }
+
+  .coupon__case input:checked + .coupon__boite::before {
+    scale: 1 1;
+    transition: scale 0.09s ease-in;
+  }
+
+  .coupon__case input:checked + .coupon__boite::after {
+    scale: 1 1;
+    transition: scale 0.09s ease-in 0.1s;
+  }
+
+  .coupon__case input:focus-visible + .coupon__boite {
+    outline: 2px solid var(--encre);
+    outline-offset: 2px;
+  }
+
+  .coupon input:not([type='radio']),
+  .coupon textarea {
+    width: 100%;
+    font: inherit;
+    font-family: var(--texte);
+    font-size: 1.05rem;
+    color: var(--encre);
+    border: 0;
+    border-bottom: var(--filet);
+    border-radius: 0;
+    background: transparent;
+    padding: 0.3rem 0.1rem;
+  }
+
+  /* Le texte s'écrit sur les lignes du coupon, qui ne s'allonge pas : la place est comptée. */
+  .coupon textarea {
+    --interligne: 1.9rem;
+    line-height: var(--interligne);
+    padding: 0 0.1rem;
+    border: 0;
+    resize: none;
+    overflow-y: auto;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--interligne) - 1px), var(--gris-clair) calc(var(--interligne) - 1px) var(--interligne));
+    background-attachment: local;
+  }
+
+  .coupon input:not([type='radio']):focus-visible,
+  .coupon textarea:focus-visible {
+    outline: 2px solid var(--encre);
+    outline-offset: 2px;
+  }
+
+  [aria-invalid='true'] {
+    box-shadow: inset 0 -2px 0 var(--rouge);
+  }
+
+  .coupon__erreur {
+    min-height: 0;
+    font-family: var(--util);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--rouge);
+  }
+
+  .coupon__erreur:empty {
+    display: none;
+  }
+
+  .coupon__erreur:not(:empty) {
+    margin-top: 0.35rem;
+    animation: annoter 0.25s ease-out;
+  }
+
+  @keyframes annoter {
+    from {
+      opacity: 0;
+      translate: -0.4rem 0;
+    }
+  }
+
+  .coupon__site {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .coupon__tarif {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .coupon__envoi {
+    justify-self: start;
+    padding: 0.6rem 1.2rem;
+    font-family: var(--util);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--papier);
+    background: var(--encre);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .coupon__envoi:disabled {
+    opacity: 0.5;
+    cursor: progress;
+  }
+
+  .coupon__retour {
+    font-family: var(--util);
+    font-weight: 600;
+    color: var(--rouge);
+  }
+
+  /* Le tampon du guichet, appliqué avec la conviction d'un fonctionnaire en fin de journée. */
+  .coupon__tampon {
+    position: absolute;
+    right: clamp(0rem, 2vw, 1rem);
+    bottom: 0.2rem;
+    display: grid;
+    justify-items: center;
+    padding: 0.4rem 0.9rem 0.5rem;
+    font-family: var(--util);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--rouge);
+    border: 3px double var(--rouge);
+    border-radius: 0.3rem;
+    transform: rotate(-9deg);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .coupon__tampon span:first-child {
+    font-size: 1.9rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+  }
+
+  .coupon__tampon span:last-child {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  .coupon__tampon.est-applique {
+    animation: tamponner 0.42s cubic-bezier(0.5, 0, 0.75, 0) both;
+  }
+
+  @keyframes tamponner {
+    0% {
+      opacity: 0;
+      transform: rotate(-24deg) scale(2.6);
+    }
+    70% {
+      opacity: 1;
+      transform: rotate(-8deg) scale(0.94);
+    }
+    85% {
+      transform: rotate(-9.5deg) scale(1.03);
+    }
+    100% {
+      opacity: 0.92;
+      transform: rotate(-9deg) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .coupon__tampon.est-applique,
+    .coupon__erreur:not(:empty) {
+      animation: none;
+    }
+
+    .coupon__case input:checked + .coupon__boite::before,
+    .coupon__case input:checked + .coupon__boite::after {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Base from '@/layouts/Base.astro';
+import Annonce from '@/components/Annonce.astro';
+import Coupon from '@/components/Coupon.astro';
+import { type Annonce as TypeAnnonce, annonces } from '@/lib/contenu';
+import { CATEGORIES, IDENTIFIANTS } from '@/lib/annonces';
+
+/** Le placard se lit à `/petites-annonces/`, puis à `/petites-annonces/page/2/` : les plus récentes d'abord, rangées par rubrique. */
+export async function getStaticPaths() {
+  const PAR_PAGE = 40;
+  const toutes = await annonces();
+  const pages = Math.max(1, Math.ceil(toutes.length / PAR_PAGE));
+  return Array.from({ length: pages }, (_, i) => ({
+    params: { page: i === 0 ? undefined : `page/${i + 1}` },
+    props: { numero: i + 1, pages, annonces: toutes.slice(i * PAR_PAGE, (i + 1) * PAR_PAGE) },
+  }));
+}
+
+interface Props {
+  numero: number;
+  pages: number;
+  annonces: TypeAnnonce[];
+}
+
+const { numero, pages, annonces: delaPage } = Astro.props;
+const rubriques = IDENTIFIANTS.map((id) => ({ id, nom: CATEGORIES[id], annonces: delaPage.filter((a) => a.data.categorie === id) })).filter(
+  (r) => r.annonces.length > 0,
+);
+const lienPage = (n: number) => (n === 1 ? '/petites-annonces/' : `/petites-annonces/page/${n}/`);
+---
+
+<Base
+  titre={numero === 1 ? 'Petites annonces' : `Petites annonces, page ${numero}`}
+  description="Les petites annonces de L’Humianité : offres, demandes, cessions, rencontres et disparitions."
+>
+  <div class="page">
+    <header class="tete">
+      <h1>Petites annonces</h1>
+      <p>Offres, demandes, cessions, rencontres et disparitions. Parution sous réserve.</p>
+    </header>
+
+    <div class="colonnes-annonces">
+      {
+        rubriques.map((r) => (
+          <section class="rubrique-annonces" aria-labelledby={`annonces-${r.id}`}>
+            <h2 id={`annonces-${r.id}`}>{r.nom}</h2>
+            {r.annonces.map((a) => <Annonce annonce={a} />)}
+          </section>
+        ))
+      }
+    </div>
+
+    {
+      pages > 1 && (
+        <nav class="pagination" aria-label="Pages des petites annonces">
+          {numero > 1 ? <a href={lienPage(numero - 1)} rel="prev">Annonces plus récentes</a> : <span />}
+          <p>
+            Page {numero} sur {pages}
+          </p>
+          {numero < pages ? <a href={lienPage(numero + 1)} rel="next">Annonces plus anciennes</a> : <span />}
+        </nav>
+      )
+    }
+
+    {numero === 1 && <Coupon />}
+  </div>
+</Base>
+
+<style>
+  .tete {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: clamp(1.4rem, 3.5vw, 2.6rem) 1.2rem;
+    border-bottom: var(--filet-gras);
+  }
+
+  .tete h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .tete p {
+    max-width: 40rem;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.35;
+  }
+
+  /* Le placard : colonnes serrées, filets verticaux, comme sur la dernière page du journal. */
+  .colonnes-annonces {
+    columns: 15rem 4;
+    column-gap: calc(var(--gouttiere) * 1.4);
+    column-rule: var(--filet-fin);
+    margin-top: 1.6rem;
+  }
+
+  .rubrique-annonces {
+    margin-bottom: 1.6rem;
+  }
+
+  .rubrique-annonces h2 {
+    break-after: avoid;
+    margin-bottom: 0.75rem;
+    padding: 0.2rem 0.5rem 0.15rem;
+    font-family: var(--util);
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--papier);
+    background: var(--encre);
+  }
+
+  .rubrique-annonces > :global(.annonce) {
+    break-inside: avoid;
+  }
+
+  .rubrique-annonces > :global(.annonce + .annonce) {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: var(--filet-fin);
+  }
+
+  .pagination {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    margin-top: 0.4rem;
+    padding-top: 1.1rem;
+    border-top: var(--filet);
+    font-family: var(--util);
+    font-size: 1.05rem;
+  }
+
+  .pagination a {
+    font-weight: 700;
+  }
+
+  .pagination a[rel='next'] {
+    grid-column: 3;
+    text-align: right;
+  }
+</style>
