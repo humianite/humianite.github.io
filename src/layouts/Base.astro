@@ -35,7 +35,7 @@ const introuvable = Astro.url.pathname.startsWith('/404');
 /**
  * Politique de sécurité du contenu, posée en production (le serveur de développement a besoin de scripts en ligne).
  * Le site ne charge que ses propres fichiers ; deux exceptions, le lecteur vidéo sans cookie de YouTube
- * et le compteur de visites (Umami : ni cookie, ni donnée personnelle). Les coupons d'annonces partent au guichet.
+ * et le compteur de visites (Umami : ni cookie, ni donnée personnelle). Les coupons d'annonces partent au guichet ; la météo cherche les communes dans l'API officielle `geo.api.gouv.fr`.
  */
 const COMPTEUR = { script: 'https://cloud.umami.is', collecte: 'https://gateway.umami.is', site: '6c8eb6fd-d58d-4609-b06f-7ba6e607bbde' };
 const politique = [
@@ -45,7 +45,7 @@ const politique = [
   "img-src 'self' data:",
   "font-src 'self' data:",
   "frame-src https://www.youtube-nocookie.com",
-  `connect-src 'self' ${COMPTEUR.collecte} ${SITE.guichet}`,
+  `connect-src 'self' ${COMPTEUR.collecte} ${SITE.guichet} https://geo.api.gouv.fr`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",
