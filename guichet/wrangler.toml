@@ -8,5 +8,4 @@ ORIGINES = "https://humianite.github.io,http://localhost:4321"
 [[d1_databases]]
 binding = "DB"
 database_name = "humianite-guichet"
-# Renseigné après `npx wrangler d1 create humianite-guichet`.
-database_id = "a-renseigner"
+database_id = "7ff798b4-c2bd-40ea-aff3-4df97faeb850"
