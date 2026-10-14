@@ -42,10 +42,10 @@ const annee = edition.getFullYear() - SITE.fondation + 1;
         <Logotype element={une ? 'h1' : 'span'} />
       </a>
 
-      <p class="entete__oreille entete__oreille--droite">
+      <a class="entete__oreille entete__oreille--droite entete__meteo" href="/meteo/">
         <strong>Le temps qu’il fait</strong>
         Confiance élevée sur l’ensemble du pays. Exactitude variable, éclaircies en soirée.
-      </p>
+      </a>
     </div>
 
     <p class="entete__devise">{SITE.devise}</p>
@@ -148,6 +148,15 @@ const annee = edition.getFullYear() - SITE.fondation + 1;
 
   .entete__oreille--droite {
     transform: rotate(0.5deg);
+  }
+
+  .entete__meteo {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .entete__meteo:hover strong {
+    color: var(--rouge);
   }
 
   .entete__devise {

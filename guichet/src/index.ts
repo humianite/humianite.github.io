@@ -3,6 +3,7 @@
  *
  *   POST  /annonces          dépôt d'une petite annonce (public, depuis le site)
  *   POST  /justificatifs     numéro du prochain justificatif de lecture (public, depuis le site)
+ *   GET   /meteo             ce que Cloudflare sait de la connexion : pays et région (public, rien n'est gardé)
  *   GET   /depots?statut=…   la file, pour la conférence de rédaction (jeton)
  *   PATCH /depots/PA-4471    { statut, note? } : retenu, paru, écarté (jeton)
  */
@@ -115,6 +116,11 @@ export default {
     if (requete.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (url.pathname === '/annonces' && requete.method === 'POST') return deposer(requete, env, cors);
     if (url.pathname === '/justificatifs' && requete.method === 'POST') return numeroter(requete, env, cors);
+    if (url.pathname === '/meteo' && requete.method === 'GET') {
+      // Rien n'est enregistré : le lecteur reçoit sa propre position, déduite de son adresse par Cloudflare.
+      const { country, regionCode, region } = (requete.cf ?? {}) as { country?: string; regionCode?: string; region?: string };
+      return json({ pays: country ?? null, codeRegion: regionCode ?? null, region: region ?? null }, 200, cors);
+    }
 
     if (url.pathname.startsWith('/depots')) {
       if (!autorise(requete, env)) return json({ motif: 'Accès réservé à la rédaction.' }, 401);

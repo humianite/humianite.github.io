@@ -1,0 +1,525 @@
+---
+import Base from '@/layouts/Base.astro';
+import Orage from '@/components/meteo/Orage.astro';
+import carte from '@/data/meteo-regions.json';
+import { dateLongue } from '@/lib/format';
+import { articles } from '@/lib/contenu';
+import { SITE } from '@/lib/site';
+
+const [dernier] = await articles();
+const parNom = [...carte.regions].sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+/** Le médaillon des cartes de journal télévisé, dans l'Atlantique : il sert à l'étranger. */
+const MEDAILLON = { x: 24, y: 742, l: 230, h: 196 };
+---
+
+<Base titre="La météo" description="La météo de L’Humianité : prévisions pour l’ensemble du pays.">
+  <div class="page">
+    <header class="tete">
+      <h1>La météo</h1>
+      <p>Prévisions pour le <span data-zone="jour">{dateLongue(dernier.data.datePublication).toLowerCase()}</span>.</p>
+    </header>
+
+    <div class="meteo" data-meteo data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet} data-etat="attente">
+      <form class="recherche" role="search" data-recherche>
+        <label class="recherche__intitule" for="meteo-commune">Prévisions locales</label>
+        <div class="recherche__champ">
+          <input
+            id="meteo-commune"
+            type="text"
+            placeholder="Votre commune ou code postal"
+            autocomplete="off"
+            spellcheck="false"
+            role="combobox"
+            aria-expanded="false"
+            aria-controls="meteo-communes"
+            aria-autocomplete="list"
+          />
+          <ul id="meteo-communes" class="recherche__liste" role="listbox" aria-label="Communes" hidden></ul>
+        </div>
+        <button class="recherche__localiser" type="button" data-localiser>Me localiser</button>
+        <p class="recherche__note service" data-zone="note" aria-live="polite"></p>
+      </form>
+
+      <figure class="meteo__carte">
+        <svg viewBox={`0 0 ${carte.largeur} ${carte.hauteur}`} role="img" aria-labelledby="meteo-bulletin">
+          <g class="meteo__regions">
+            {carte.regions.map((r) => <path d={r.d} data-code={r.code} />)}
+          </g>
+
+          {
+            carte.regions.map((r) => (
+              <g class="station" data-code={r.code} data-sur={r.sur} data-x={r.centre[0]} style={`transform: translate(${r.centre[0]}px, ${r.centre[1]}px)`}>
+                <g class="station__icone">
+                  <g class="soleil">
+                    <g class="soleil__rayons">
+                      {Array.from({ length: 10 }, (_, i) => (
+                        <rect x="-2.5" y="-40" width="5" height="11" rx="2.5" transform={`rotate(${i * 36})`} />
+                      ))}
+                    </g>
+                    <circle r="22" />
+                  </g>
+                  <Orage />
+                </g>
+                <g class="station__temp" transform="translate(24 26)">
+                  <rect x="0" y="-19" width="50" height="27" rx="2" />
+                  <text x="25" y="1" text-anchor="middle" data-temp />
+                </g>
+              </g>
+            ))
+          }
+
+          <g class="station perturbation" data-temps="orage" aria-hidden="true">
+            <g class="station__icone"><Orage /></g>
+            <g class="station__temp" transform="translate(24 26)">
+              <rect x="0" y="-19" width="50" height="27" rx="2" />
+              <text x="25" y="1" text-anchor="middle">9°</text>
+            </g>
+          </g>
+
+          <g class="medaillon" transform={`translate(${MEDAILLON.x} ${MEDAILLON.y})`}>
+            <rect class="medaillon__cadre" width={MEDAILLON.l} height={MEDAILLON.h} />
+            <text class="medaillon__nom" x={MEDAILLON.l / 2} y="34" text-anchor="middle" data-zone="pays"></text>
+            <g class="station" data-temps="orage" transform={`translate(${MEDAILLON.l / 2 - 14} 112)`}>
+              <g class="station__icone"><Orage /></g>
+              <g class="station__temp" transform="translate(24 26)">
+                <rect x="0" y="-19" width="50" height="27" rx="2" />
+                <text x="25" y="1" text-anchor="middle">9°</text>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </figure>
+
+      <aside class="meteo__bulletin">
+        <section>
+          <h2>Le bulletin</h2>
+          <p id="meteo-bulletin" data-zone="bulletin">Mise à jour des prévisions.</p>
+          <p class="meteo__demain"><strong>Demain.</strong> Situation inchangée.</p>
+          <p class="meteo__indice service">Indice de confiance : élevé.</p>
+        </section>
+
+        <section>
+          <h2>Températures maximales</h2>
+          <ul class="releves">
+            {
+              parNom.map((r) => (
+                <li data-code={r.code}>
+                  <span>{r.nom}</span>
+                  <span class="releves__valeur" data-temp />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { afficherLaMeteo } from '@/modules/meteo/meteo.ts';
+
+  afficherLaMeteo();
+</script>
+
+<style>
+  .tete {
+    display: grid;
+    gap: 0.6rem;
+    padding-block: clamp(1.4rem, 3.5vw, 2.6rem) 1.2rem;
+    border-bottom: var(--filet-gras);
+  }
+
+  .tete h1 {
+    font-family: var(--titre);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .tete p {
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
+
+  .meteo {
+    display: grid;
+    gap: 2rem calc(var(--gouttiere) * 2);
+    margin-top: 1.6rem;
+  }
+
+  @media (min-width: 62rem) {
+    .meteo {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .meteo__carte {
+    margin: 0;
+  }
+
+  /* La recherche : celle de tous les sites météo. */
+  .recherche {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.4rem 0.8rem;
+    align-items: end;
+    max-width: 40rem;
+  }
+
+  @media (min-width: 62rem) {
+    .recherche {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .recherche__intitule {
+    grid-column: 1 / -1;
+    font-family: var(--util);
+    font-weight: 800;
+    font-size: 1.05rem;
+  }
+
+  .recherche__champ {
+    position: relative;
+  }
+
+  .recherche input {
+    width: 100%;
+    padding: 0.5rem 0.2rem;
+    font: inherit;
+    font-size: 1.1rem;
+    color: var(--encre);
+    background: transparent;
+    border: 0;
+    border-bottom: var(--filet-gras);
+    border-radius: 0;
+  }
+
+  .recherche input:focus-visible {
+    outline: 2px solid var(--encre);
+    outline-offset: 2px;
+  }
+
+  .recherche__liste {
+    position: absolute;
+    z-index: 2;
+    inset: calc(100% + 2px) 0 auto;
+    margin: 0;
+    padding: 0.2rem 0;
+    list-style: none;
+    background: var(--papier);
+    border: var(--filet);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  }
+
+  /* Les propositions sont créées par le module : elles échappent aux styles du composant. */
+  .recherche__liste :global(li) {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+  }
+
+  .recherche__liste :global(li small) {
+    font-family: var(--util);
+    color: var(--gris);
+  }
+
+  .recherche__liste :global(li[aria-selected='true']),
+  .recherche__liste :global(li:hover) {
+    background: var(--papier-fonce);
+  }
+
+  .recherche__localiser {
+    padding: 0.55rem 0.9rem;
+    font-family: var(--util);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--encre);
+    background: none;
+    border: 1px solid var(--encre);
+    cursor: pointer;
+  }
+
+  .recherche__localiser:disabled {
+    opacity: 0.5;
+    cursor: progress;
+  }
+
+  .recherche__note {
+    grid-column: 1 / -1;
+    min-height: 1.2em;
+  }
+
+  .meteo__carte svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Les régions : papier clair, sauf sous la perturbation. */
+  .meteo__regions path {
+    fill: var(--papier-fonce);
+    stroke: var(--encre);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    transition: fill 0.8s ease;
+  }
+
+  .meteo__regions path.est-sombre {
+    fill: #a9a497;
+  }
+
+  /* Les stations apparaissent une à une, comme les pictogrammes d'un bulletin télévisé. */
+  .station {
+    opacity: 0;
+  }
+
+  .station__icone {
+    transform-box: fill-box;
+    transform-origin: center;
+    scale: 0.4;
+    transition: scale 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+    transition-delay: calc(var(--rang, 0) * 70ms);
+  }
+
+  [data-etat='pret'] .station {
+    opacity: 1;
+    transition: opacity 0.25s ease;
+    transition-delay: calc(var(--rang, 0) * 70ms);
+  }
+
+  [data-etat='pret'] .station__icone {
+    scale: 1;
+  }
+
+  .station :global(.soleil),
+  .station :global(.orage),
+  .station[data-temps='masque'] {
+    display: none;
+  }
+
+  /* La perturbation : un seul nuage, qui se pose sur le lecteur et, si besoin, s'y rend. */
+  .perturbation {
+    display: none;
+  }
+
+  [data-situation='region'] .perturbation {
+    display: inline;
+  }
+
+  [data-etat='pret'] .perturbation {
+    transition:
+      opacity 0.25s ease,
+      transform 2.8s cubic-bezier(0.45, 0, 0.3, 1);
+  }
+
+  .station[data-temps='soleil'] :global(.soleil),
+  .station[data-temps='orage'] :global(.orage),
+  .station[data-temps='pluie'] :global(.orage) {
+    display: inline;
+  }
+
+  /* La perturbation est plus grosse que le soleil : c'est elle, l'information. */
+  .station[data-temps='orage'] :global(.orage) {
+    scale: 1.75;
+  }
+
+  .station[data-temps='orage'] .station__temp {
+    translate: 30px 28px;
+  }
+
+  .soleil circle {
+    fill: #e8a317;
+    stroke: var(--encre);
+    stroke-width: 2.5;
+  }
+
+  .soleil__rayons {
+    fill: #e8a317;
+    stroke: var(--encre);
+    stroke-width: 1.5;
+    animation: tourner 36s linear infinite;
+  }
+
+  @keyframes tourner {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  :global(.nuage) {
+    fill: #3b3934;
+    stroke: var(--encre);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    animation: deriver 7s ease-in-out infinite alternate;
+  }
+
+  .station[data-temps='pluie'] :global(.nuage) {
+    fill: #8d897f;
+  }
+
+  @keyframes deriver {
+    to {
+      translate: 4px 0;
+    }
+  }
+
+  :global(.orage__pluie line) {
+    stroke: #3f6a91;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 8 8;
+    animation: pleuvoir 0.55s linear infinite;
+  }
+
+  :global(.orage__pluie line:nth-child(even)) {
+    animation-delay: -0.27s;
+  }
+
+  @keyframes pleuvoir {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+
+  /* L'éclair : rare, bref, jamais au même moment d'une station à l'autre. */
+  :global(.orage__eclair) {
+    fill: #f2d02b;
+    stroke: var(--encre);
+    stroke-width: 1.5;
+    opacity: 0;
+    animation: foudroyer 5.3s steps(1, end) infinite;
+    animation-delay: calc(var(--rang, 0) * -0.9s);
+  }
+
+  .station[data-temps='pluie'] :global(.orage__eclair) {
+    display: none;
+  }
+
+  @keyframes foudroyer {
+    0%,
+    88%,
+    92%,
+    100% {
+      opacity: 0;
+    }
+    89%,
+    94% {
+      opacity: 1;
+    }
+  }
+
+  .station__temp rect {
+    fill: var(--encre);
+  }
+
+  .station__temp text {
+    fill: var(--papier);
+    font-family: var(--util);
+    font-size: 21px;
+    font-weight: 800;
+  }
+
+  .medaillon {
+    display: none;
+  }
+
+  [data-situation='etranger'] .medaillon {
+    display: inline;
+  }
+
+  .medaillon__cadre {
+    fill: #a9a497;
+    stroke: var(--encre);
+    stroke-width: 2;
+  }
+
+  .medaillon__nom {
+    font-family: var(--util);
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    fill: var(--encre);
+  }
+
+  /* Le bulletin */
+  .meteo__bulletin {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .meteo__bulletin h2 {
+    padding-top: 0.45rem;
+    margin-bottom: 0.7rem;
+    border-top: var(--filet-gras);
+    font-family: var(--util);
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+
+  #meteo-bulletin {
+    font-size: 1.15rem;
+    line-height: 1.45;
+  }
+
+  .meteo__demain {
+    margin-top: 0.7rem;
+  }
+
+  .meteo__demain strong {
+    font-family: var(--util);
+    font-weight: 800;
+  }
+
+  .meteo__indice {
+    margin-top: 0.5rem;
+  }
+
+  .releves {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .releves li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px dotted var(--gris-clair);
+  }
+
+  .releves__valeur {
+    font-family: var(--util);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .releves li.est-sombre .releves__valeur {
+    color: #3f6a91;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .soleil__rayons,
+    .nuage,
+    .orage__pluie line,
+    :global(.orage__eclair) {
+      animation: none;
+    }
+
+    .station__icone {
+      transition: none;
+    }
+  }
+</style>
