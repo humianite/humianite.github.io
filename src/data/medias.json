@@ -539,5 +539,27 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie. Allée de supermarché, rayon frais, en perspective. Les vitrines réfrigérées sont éteintes, leurs portes vitrées couvertes de buée ; quelques portes entrouvertes, des yaourts et des briques de lait alignés derrière. Au premier plan, une employée en blouse, de profil, note quelque chose sur un carnet en regardant un petit thermomètre à aiguille. Néons du plafond, sol carrelé brillant. Aucune étiquette, aucun prix, aucun texte lisible, aucun logo.",
     "src": "/medias/photos/rayon-frais-ouvert.webp"
+  },
+  {
+    "id": "cahier-des-charges-commission",
+    "identifiant": "med-055",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un épais cahier des charges relié, ouvert sur une table de réunion, hérissé d’onglets, à côté de carafes d’eau et de stylos alignés",
+    "legende": "Mercredi, salle de la commission d’évaluation. Le cahier des charges, annexes comprises.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Une table de réunion en bois verni, vue de trois quarts, légèrement en plongée. Au centre, un très épais cahier des charges relié à spirale, ouvert, hérissé d’onglets de couleur unie ; sur deux onglets bien visibles on lit exactement « Lot 1 — Registre » et « Lot 2 — Détection des blocus ». Sur la page de garde rabattue, un tampon à l’encre : « PROCÉDURE ADAPTÉE ». Autour : deux carafes d’eau, des verres retournés, des stylos alignés, un chevalet de nom vierge. Chaises vides. Personne. Aucun autre texte lisible, aucun logo.",
+    "src": "/medias/photos/cahier-des-charges-commission.webp"
+  },
+  {
+    "id": "salle-attente-creneau",
+    "identifiant": "med-056",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une salle d’attente de cabinet médical aux chaises vides ; au mur, une horloge et un écran qui annonce le prochain créneau disponible au 14 février",
+    "legende": "Une salle d’attente à Nantes, mardi. L’écran a été mis à jour dans la seconde.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Une salle d’attente de cabinet médical, sobre : une rangée de chaises en plastique vides le long d’un mur, une plante verte, une pile de vieux magazines sur une table basse (couvertures illisibles). Au mur, une horloge ronde et, à côté, un petit écran plat sur lequel on lit exactement « Prochain créneau disponible : 14 février ». Lumière froide de fin de journée. Personne. Aucun autre texte lisible, aucun logo.",
+    "src": "/medias/photos/salle-attente-creneau.webp"
   }
 ]
