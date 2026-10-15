@@ -21,6 +21,12 @@ export const SITE = {
   guichet: 'https://guichet.humianite.workers.dev',
 } as const;
 
+/**
+ * Le guichet effectivement appelé : `PUBLIC_GUICHET` pour un guichet local ou de préproduction, celui du journal sinon.
+ * La politique de sécurité de `Base.astro` autorise cette adresse-là, et aucune autre.
+ */
+export const GUICHET: string = import.meta.env.PUBLIC_GUICHET ?? SITE.guichet;
+
 /** Entrées du pied de page vers le système de suivi du dépôt. */
 export const RECLAMATIONS = {
   /** L'entrée satirique : une seule, c'est voulu. */

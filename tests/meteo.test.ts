@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import carte from '../src/data/meteo-regions.json' with { type: 'json' };
-import { CODES, projeter, regionDuPoint, situer, temperature } from '../src/lib/meteo.ts';
+import { CODES, REGIONS_INSEE, projeter, regionDuPoint, situer, temperature } from '../src/lib/meteo.ts';
 
 test('la carte a ses treize régions, chacune avec un code connu', () => {
   assert.deepEqual(carte.regions.map((r) => r.code).sort(), [...CODES].sort());
+  for (const r of carte.regions) assert.equal(REGIONS_INSEE[r.insee], r.code, `${r.nom} : codes INSEE et ISO accordés`);
 });
 
 test('une connexion française tombe dans sa région, par le code ou par le nom', () => {

@@ -9,3 +9,16 @@ ORIGINES = "https://humianite.github.io"
 binding = "DB"
 database_name = "humianite-guichet"
 database_id = "7ff798b4-c2bd-40ea-aff3-4df97faeb850"
+
+# Les quotas de la veille sont jetés chaque nuit (heure UTC).
+[triggers]
+crons = ["17 2 * * *"]
+
+# Limiteur de rafales : 20 requêtes par minute et par réseau, avant toute écriture en base.
+[[ratelimits]]
+name = "RAFALES"
+namespace_id = "1873"
+
+  [ratelimits.simple]
+  limit = 20
+  period = 60

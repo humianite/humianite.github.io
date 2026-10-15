@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { CATEGORIES, COUPON, lignes } from '../src/lib/annonces.ts';
-import { CATEGORIES as CATEGORIES_GUICHET, LIMITES, examiner, idDuNumero, nettoyer, numeroDeDossier } from '../guichet/src/regles.ts';
+import { CATEGORIES as CATEGORIES_GUICHET, LIMITES, examiner, idDuNumero, nettoyer, noteValide, numeroDeDossier, reseau } from '../guichet/src/regles.ts';
 
 test('le site et le guichet tiennent les mêmes rubriques et les mêmes limites', () => {
   assert.deepEqual(Object.keys(CATEGORIES), [...CATEGORIES_GUICHET]);
@@ -43,4 +43,17 @@ test('les caractères invisibles et de direction disparaissent', () => {
 test('le tarif compte au moins une ligne', () => {
   assert.equal(lignes(''), 1);
   assert.equal(lignes('x'.repeat(COUPON.parLigne + 1)), 2);
+});
+
+test('une adresse IPv6 compte pour tout son /64 ; une IPv4, pour elle seule', () => {
+  assert.equal(reseau('203.0.113.7'), '203.0.113.7');
+  assert.equal(reseau('2001:db8:85a3:0000:1234:5678:9abc:def0'), '2001:db8:85a3:0::/64');
+  assert.equal(reseau('2001:db8:85a3::1'), reseau('2001:db8:85a3:0:ffff::2'));
+  assert.equal(reseau('2001:DB8::1'), '2001:db8:0:0::/64');
+});
+
+test('un texte démesuré est refusé avant d’être nettoyé ; une note doit rester une note', () => {
+  assert.equal(examiner({ categorie: 'ventes', texte: 'x'.repeat(5_000_000) }).recevable, false);
+  assert.ok(noteValide(undefined) && noteValide('pour le 15'));
+  assert.equal(noteValide({ piege: true }), false);
 });

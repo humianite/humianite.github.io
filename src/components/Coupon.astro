@@ -1,7 +1,7 @@
 ---
 /** Le coupon des petites annonces : cases à cocher, lignes à remplir, tarif à la ligne, tampon du guichet. */
 import { CATEGORIES, COUPON, IDENTIFIANTS } from '@/lib/annonces';
-import { SITE } from '@/lib/site';
+import { GUICHET } from '@/lib/site';
 ---
 
 <section id="coupon" class="coupon" aria-labelledby="coupon-titre">
@@ -10,7 +10,7 @@ import { SITE } from '@/lib/site';
     class="coupon__formulaire"
     novalidate
     data-coupon
-    data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet}
+    data-guichet={GUICHET}
     data-min={COUPON.min}
     data-max={COUPON.max}
     data-prix-ligne={COUPON.prixLigne}
@@ -53,6 +53,7 @@ import { SITE } from '@/lib/site';
 
     <button class="coupon__envoi" type="submit">Envoyer le coupon</button>
     <p class="coupon__retour" data-zone="retour" role="status" hidden></p>
+    <p class="coupon__accuse" data-zone="accuse" role="status"></p>
 
     <div class="coupon__tampon" data-zone="tampon" hidden aria-hidden="true">
       <span>Reçu</span>
@@ -256,6 +257,16 @@ import { SITE } from '@/lib/site';
       opacity: 0;
       translate: -0.4rem 0;
     }
+  }
+
+  /* L'accusé de réception, pour les lecteurs d'écran seulement. */
+  .coupon__accuse {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .coupon__site {

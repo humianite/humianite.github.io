@@ -6,7 +6,7 @@
  */
 import type { Article } from '@/lib/contenu';
 import { dateSimple, tempsDeLecture } from '@/lib/format';
-import { SITE } from '@/lib/site';
+import { GUICHET, SITE } from '@/lib/site';
 import { typo } from '@/lib/typo.mjs';
 
 interface Props {
@@ -22,7 +22,7 @@ const nombre = (n: number) => n.toLocaleString('fr-FR').replace(/\s/g, ' ');
 
 <button class="justificatif-appel" type="button" data-justificatif-ouvrir>Obtenir mon justificatif de lecture</button>
 
-<dialog class="justificatif" data-justificatif data-minutes={minutes} data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet} aria-labelledby="justificatif-titre">
+<dialog class="justificatif" data-justificatif data-minutes={minutes} data-guichet={GUICHET} aria-labelledby="justificatif-titre">
   <div class="justificatif__fente" aria-hidden="true"></div>
   <div class="justificatif__feuille" data-zone="feuille">
     <header class="justificatif__tete">
@@ -67,16 +67,19 @@ const nombre = (n: number) => n.toLocaleString('fr-FR').replace(/\s/g, ' ');
 </script>
 
 <style>
+  /* Un lien d'apparence, mais une cible confortable sous le doigt. */
   .justificatif-appel {
     justify-self: start;
-    padding: 0;
+    padding: 0.65rem 0;
+    margin-block: -0.65rem;
     font-family: var(--util);
     font-size: 1rem;
     font-weight: 700;
     color: var(--encre);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
     background: none;
     border: 0;
-    border-bottom: 1px solid currentColor;
     cursor: pointer;
   }
 

@@ -597,7 +597,8 @@
 .signe__ronde,
 .heuroscope-appel__signes {
   display: grid;
-  grid-template-columns: repeat(6, 2.6rem);
+  /* Les signes rétrécissent plutôt que de pousser la page hors de l'écran des plus petits téléphones. */
+  grid-template-columns: repeat(6, minmax(0, 2.6rem));
   justify-content: center;
   gap: 0.5rem;
   margin: 0;
