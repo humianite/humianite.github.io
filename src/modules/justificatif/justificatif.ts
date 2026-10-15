@@ -26,7 +26,7 @@ export function delivrerLesJustificatifs() {
   const zone = (nom: string) => dialogue.querySelector<HTMLElement>(`[data-zone="${nom}"]`)!;
   let numero: Promise<string> | null = null;
   const demanderNumero = () =>
-    fetch(`${dialogue.dataset.guichet}/justificatifs`, { method: 'POST' })
+    fetch(`${dialogue.dataset.guichet}/justificatifs`, { method: 'POST', signal: AbortSignal.timeout(5000) })
       .then((r) => r.json() as Promise<{ numero?: number }>)
       .then(({ numero }) => (numero ? numero.toLocaleString('fr-FR').replace(/\s/g, ' ') : 'en attente d’attribution'))
       .catch(() => 'en attente d’attribution');
@@ -68,6 +68,8 @@ export function delivrerLesJustificatifs() {
 
   // L'image : la feuille de partage de l'appareil quand elle accepte les images, et un téléchargement dans tous les cas.
   const imageDuJour = async () => {
+    // Pas d'image sans numéro : on attend que le guichet ait répondu (ou renoncé).
+    if (numero) zone('numero').textContent = await numero;
     const n = zone('numero').textContent ?? '';
     const image = await dessinerJustificatif({
       numero: n,

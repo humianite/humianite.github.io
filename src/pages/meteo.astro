@@ -4,7 +4,7 @@ import Orage from '@/components/meteo/Orage.astro';
 import carte from '@/data/meteo-regions.json';
 import { dateLongue } from '@/lib/format';
 import { articles } from '@/lib/contenu';
-import { SITE } from '@/lib/site';
+import { GUICHET } from '@/lib/site';
 
 const [dernier] = await articles();
 const parNom = [...carte.regions].sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
@@ -19,14 +19,14 @@ const MEDAILLON = { x: 24, y: 742, l: 230, h: 196 };
       <p>Prévisions pour le <span data-zone="jour">{dateLongue(dernier.data.datePublication).toLowerCase()}</span>.</p>
     </header>
 
-    <div class="meteo" data-meteo data-guichet={import.meta.env.PUBLIC_GUICHET ?? SITE.guichet} data-etat="attente">
+    <div class="meteo" data-meteo data-guichet={GUICHET} data-etat="attente">
       <form class="recherche" role="search" data-recherche>
         <label class="recherche__intitule" for="meteo-commune">Prévisions locales</label>
         <div class="recherche__champ">
           <input
             id="meteo-commune"
             type="text"
-            placeholder="Votre commune ou code postal"
+            placeholder="Votre commune"
             autocomplete="off"
             spellcheck="false"
             role="combobox"
@@ -285,7 +285,7 @@ const MEDAILLON = { x: 24, y: 742, l: 230, h: 196 };
   .station__icone {
     transform-box: fill-box;
     transform-origin: center;
-    scale: 0.4;
+    scale: calc(0.4 * var(--grossir, 1));
     transition: scale 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
     transition-delay: calc(var(--rang, 0) * 70ms);
   }
@@ -297,7 +297,22 @@ const MEDAILLON = { x: 24, y: 742, l: 230, h: 196 };
   }
 
   [data-etat='pret'] .station__icone {
-    scale: 1;
+    scale: var(--grossir, 1);
+  }
+
+  /* Sur un téléphone, la carte tient en 300 pixels : pictogrammes agrandis, températures dans la liste seulement. */
+  @media (max-width: 36rem) {
+    .meteo__carte svg {
+      --grossir: 1.5;
+    }
+
+    .station__temp {
+      display: none;
+    }
+
+    .medaillon__nom {
+      font-size: 34px;
+    }
   }
 
   .station :global(.soleil),

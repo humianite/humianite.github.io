@@ -64,18 +64,36 @@ export const examiner = (corps: unknown): Verdict => {
     return { recevable: false, motif: 'Rubrique inconnue.' };
   }
   if (typeof texte !== 'string') return { recevable: false, motif: 'Annonce absente.' };
+  // Un roman n'est pas une annonce : on le refuse avant de le nettoyer.
+  if (texte.length > LIMITES.texte.max * 4) return { recevable: false, motif: 'Annonce trop longue.' };
   const propre = nettoyer(texte);
   if (propre.length < LIMITES.texte.min) return { recevable: false, motif: 'Annonce trop courte.' };
   if (propre.length > LIMITES.texte.max) return { recevable: false, motif: 'Annonce trop longue.' };
 
   if (signature !== undefined && signature !== null && typeof signature !== 'string') return { recevable: false, motif: 'Signature illisible.' };
-  const signee = signature ? nettoyer(signature).slice(0, LIMITES.signature) || null : null;
+  const signee = signature ? nettoyer(signature.slice(0, LIMITES.signature * 4)).slice(0, LIMITES.signature) || null : null;
 
   return { recevable: true, depot: { categorie: categorie as Categorie, texte: propre, signature: signee }, piege: typeof site === 'string' && site.trim() !== '' };
 };
 
 /** Le jour, à Paris : les quotas se remettent à zéro à minuit, heure de la rédaction. */
 export const jourDeParis = (date = new Date()) => date.toLocaleDateString('sv-SE', { timeZone: 'Europe/Paris' });
+
+/**
+ * Le réseau d'où vient la requête : l'adresse IPv4 entière, ou le préfixe /64 d'une adresse IPv6,
+ * qu'un seul abonné possède en entier (sans quoi il changerait d'adresse à chaque coupon).
+ */
+export const reseau = (adresse: string) => {
+  if (!adresse.includes(':')) return adresse;
+  const [tete, queue = ''] = adresse.toLowerCase().split('::');
+  const groupes = tete.split(':').filter(Boolean);
+  const manquants = 8 - groupes.length - queue.split(':').filter(Boolean).length;
+  const complets = [...groupes, ...Array(Math.max(0, manquants)).fill('0'), ...queue.split(':').filter(Boolean)];
+  return `${complets.slice(0, 4).map((g) => g.replace(/^0+(?=.)/, '')).join(':')}::/64`;
+};
+
+/** Une note de la rédaction : un texte court, ou rien. */
+export const noteValide = (note: unknown) => note === undefined || note === null || (typeof note === 'string' && note.length <= 500);
 
 /** Empreinte d'un déposant pour la journée : l'adresse n'est jamais conservée, et l'empreinte change chaque jour. */
 export const empreinte = async (adresse: string, jour: string, sel: string) => {

@@ -8,14 +8,15 @@
  * Quand une source plus précise arrive, la perturbation s'y rend, malgré le bulletin.
  */
 import carte from '@/data/meteo-regions.json';
-import { type Point, type Situation, projeter, regionDuPoint, situer, temperature } from '@/lib/meteo';
+import { type Point, REGIONS_INSEE, type Situation, projeter, regionDuPoint, situer, temperature } from '@/lib/meteo';
 
-type Commune = { nom: string; longitude: number; latitude: number; departement?: string };
-type CommuneApi = { nom: string; centre?: { coordinates: [number, number] }; codeDepartement?: string };
+/** Une commune : son nom, son centre, et le code INSEE de sa région (absent dans les mémoires anciennes). */
+type Commune = { nom: string; longitude: number; latitude: number; departement?: string; region?: string };
+type CommuneApi = { nom: string; centre?: { coordinates: [number, number] }; codeDepartement?: string; codeRegion?: string };
 
 const MEMOIRE = 'humianite:meteo:commune';
 const API = 'https://geo.api.gouv.fr/communes';
-const CHAMPS = 'fields=nom,centre,codeDepartement';
+const CHAMPS = 'fields=nom,centre,codeDepartement,codeRegion';
 
 const BULLETINS: Record<Situation['type'], (sur?: string) => string> = {
   region: (sur) =>
@@ -24,11 +25,29 @@ const BULLETINS: Record<Situation['type'], (sur?: string) => string> = {
   inconnu: () => 'Temps maussade sur l’ensemble du pays : pluie, vent, plafond bas. Aucune amélioration n’est attendue.',
 };
 
+const outreMer = (nom: string) =>
+  `Grand soleil sur l’ensemble de la métropole, avec des températures de saison. Outre-mer, un épisode orageux stationnaire sur ${nom} et ses environs, qui ne devrait pas se déplacer.`;
+
 const attendre = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Une commune bien formée, ou rien : une mémoire abîmée ne doit pas figer la carte. */
+const valide = (c: unknown): Commune | null => {
+  const { nom, longitude, latitude, departement, region } = (c ?? {}) as Record<string, unknown>;
+  if (typeof nom !== 'string' || !nom || !Number.isFinite(longitude) || !Number.isFinite(latitude)) return null;
+  return {
+    nom,
+    longitude: longitude as number,
+    latitude: latitude as number,
+    departement: typeof departement === 'string' ? departement : undefined,
+    region: typeof region === 'string' ? region : undefined,
+  };
+};
 
 const lire = (): Commune | null => {
   try {
-    return JSON.parse(localStorage.getItem(MEMOIRE) ?? 'null');
+    const commune = valide(JSON.parse(localStorage.getItem(MEMOIRE) ?? 'null'));
+    if (!commune) localStorage.removeItem(MEMOIRE);
+    return commune;
   } catch {
     return null;
   }
@@ -42,21 +61,26 @@ const garder = (commune: Commune) => {
   }
 };
 
-const versCommunes = (liste: CommuneApi[]): Commune[] =>
-  liste
-    .filter((c) => c.centre)
-    .map((c) => ({ nom: c.nom, longitude: c.centre!.coordinates[0], latitude: c.centre!.coordinates[1], departement: c.codeDepartement }));
-
-const chercher = async (texte: string): Promise<Commune[]> => {
-  const requete = /^\d{5}$/.test(texte) ? `codePostal=${texte}` : `nom=${encodeURIComponent(texte)}&boost=population&limit=6`;
-  const reponse = await fetch(`${API}?${requete}&${CHAMPS}`);
-  return reponse.ok ? versCommunes(await reponse.json()) : [];
+/** Interroge l'API des communes ; une liste vide si elle tarde, se trompe ou répond n'importe quoi. */
+const communes = async (requete: string): Promise<Commune[]> => {
+  try {
+    const reponse = await fetch(`${API}?${requete}&${CHAMPS}`, { signal: AbortSignal.timeout(5000) });
+    const liste: unknown = reponse.ok ? await reponse.json() : [];
+    if (!Array.isArray(liste)) return [];
+    return (liste as CommuneApi[])
+      .map((c) => valide({ nom: c.nom, longitude: c.centre?.coordinates[0], latitude: c.centre?.coordinates[1], departement: c.codeDepartement, region: c.codeRegion }))
+      .filter((c): c is Commune => c !== null);
+  } catch {
+    return [];
+  }
 };
 
-const communeSous = async (latitude: number, longitude: number): Promise<Commune | null> => {
-  const reponse = await fetch(`${API}?lat=${latitude}&lon=${longitude}&${CHAMPS}`).catch(() => null);
-  return reponse?.ok ? (versCommunes(await reponse.json())[0] ?? null) : null;
-};
+const chercher = (texte: string) =>
+  communes(/^\d{5}$/.test(texte) ? `codePostal=${texte}` : `nom=${encodeURIComponent(texte)}&boost=population&limit=6`);
+
+/** La commune sous une position. La position est arrondie à une centaine de mètres : la commune n'en demande pas plus. */
+const communeSous = async (latitude: number, longitude: number) =>
+  (await communes(`lat=${latitude.toFixed(3)}&lon=${longitude.toFixed(3)}`))[0] ?? null;
 
 const position = () =>
   new Promise<GeolocationPosition | null>((resoudre) => {
@@ -70,7 +94,7 @@ const positionDejaAccordee = async () => {
   return etat?.state === 'granted' ? position() : null;
 };
 
-export async function afficherLaMeteo() {
+export function afficherLaMeteo() {
   const meteo = document.querySelector<HTMLElement>('[data-meteo]');
   if (!meteo) return;
 
@@ -78,7 +102,11 @@ export async function afficherLaMeteo() {
   const stations = [...meteo.querySelectorAll<SVGGElement>('.station[data-code]')];
   const perturbation = meteo.querySelector<SVGGElement>('.perturbation')!;
   const zone = (nom: string) => meteo.querySelector<HTMLElement>(`[data-zone="${nom}"]`)!;
+  const champ = meteo.querySelector<HTMLInputElement>('#meteo-commune')!;
   const centre = (code: string) => carte.regions.find((r) => r.code === code)!.centre as Point;
+
+  /** Dès que le lecteur a choisi lui-même, les sources automatiques n'ont plus voix au chapitre. */
+  let choixDuLecteur = false;
 
   // Les stations s'allument d'ouest en est.
   [...stations].sort((a, b) => Number(a.dataset.x) - Number(b.dataset.x)).forEach((g, rang) => g.style.setProperty('--rang', String(rang)));
@@ -122,66 +150,43 @@ export async function afficherLaMeteo() {
     meteo.dataset.situation = situation.type;
   };
 
-  const champ = meteo.querySelector<HTMLInputElement>('#meteo-commune')!;
-
-  /** La perturbation se rend au-dessus d'une commune. Hors de la carte (outre-mer), la commune passe en médaillon. */
+  /**
+   * La perturbation se rend au-dessus d'une commune. La région vient de l'INSEE (les îles de métropole restent en métropole) ;
+   * la carte ne sert qu'à placer le nuage. Une commune d'outre-mer passe en médaillon.
+   */
   const allerA = (commune: Commune, anime = true) => {
-    champ.value = commune.nom;
+    if (choixDuLecteur || !champ.value) champ.value = commune.nom;
     const point = projeter(commune.longitude, commune.latitude, carte.projection);
-    const code = regionDuPoint(carte.regions, point);
+    const code = commune.region ? REGIONS_INSEE[commune.region] : regionDuPoint(carte.regions, point);
     if (code) {
       placer(point, anime);
       afficher({ type: 'region', code }, { sur: `sur ${commune.nom} et ses environs` });
     } else {
-      afficher(
-        { type: 'etranger', pays: 'FR' },
-        {
-          pays: commune.nom,
-          bulletin: `Grand soleil sur l’ensemble de la métropole, avec des températures de saison. Outre-mer, un épisode orageux stationnaire sur ${commune.nom} et ses environs, qui ne devrait pas se déplacer.`,
-        },
-      );
+      afficher({ type: 'etranger', pays: 'FR' }, { pays: commune.nom, bulletin: outreMer(commune.nom) });
     }
   };
 
-  const montrer = () => requestAnimationFrame(() => (meteo.dataset.etat = 'pret'));
+  const retenir = (commune: Commune) => {
+    choixDuLecteur = true;
+    garder(commune);
+    allerA(commune);
+  };
 
-  // 1. La commune de la dernière visite : la perturbation y est déjà.
-  const memoire = lire();
-  if (memoire) {
-    allerA(memoire, false);
-    montrer();
-  } else {
-    // 3. L'adresse, deux secondes et demie au plus : au-delà, il fait mauvais partout.
-    const parAdresse: Situation = await fetch(`${meteo.dataset.guichet}/meteo`, { signal: AbortSignal.timeout(2500) })
-      .then((r) => r.json())
-      .then(situer)
-      .catch(() => ({ type: 'inconnu' }) as const);
-    if (parAdresse.type === 'region') placer(centre(parAdresse.code), false);
-    afficher(parAdresse);
-    montrer();
-
-    // 2. Une position déjà accordée : le lecteur voit d'abord le nuage là où l'adresse le place, puis il se met en route.
-    const [accordee] = await Promise.all([positionDejaAccordee(), attendre(1400)]);
-    if (accordee && !lire()) {
-      const commune = await communeSous(accordee.coords.latitude, accordee.coords.longitude);
-      if (commune && !lire()) allerA(commune);
-    }
-  }
+  // Les commandes répondent tout de suite, avant même que la carte ne soit prête.
 
   // « Me localiser »
   const localiser = meteo.querySelector<HTMLButtonElement>('[data-localiser]')!;
   localiser.addEventListener('click', async () => {
     localiser.disabled = true;
     zone('note').textContent = '';
-    const reponse = await position();
-    const commune = reponse && (await communeSous(reponse.coords.latitude, reponse.coords.longitude));
-    localiser.disabled = false;
-    if (!commune) {
-      zone('note').textContent = 'Position indisponible. Indiquez votre commune.';
-      return;
+    try {
+      const reponse = await position();
+      const commune = reponse && (await communeSous(reponse.coords.latitude, reponse.coords.longitude));
+      if (commune) retenir(commune);
+      else zone('note').textContent = 'Position indisponible. Indiquez votre commune.';
+    } finally {
+      localiser.disabled = false;
     }
-    garder(commune);
-    allerA(commune);
   });
 
   // La recherche de commune, avec ses propositions.
@@ -203,10 +208,9 @@ export async function afficherLaMeteo() {
     if (rang >= 0) champ.setAttribute('aria-activedescendant', `meteo-commune-${rang}`);
   };
 
-  const retenir = (commune: Commune) => {
+  const choisir = (commune: Commune) => {
     fermer();
-    garder(commune);
-    allerA(commune);
+    retenir(commune);
     champ.blur();
   };
 
@@ -215,8 +219,10 @@ export async function afficherLaMeteo() {
     const texte = champ.value.trim();
     if (texte.length < 2) return fermer();
     attente = setTimeout(async () => {
-      propositions = await chercher(texte).catch(() => []);
+      const trouvees = await chercher(texte);
+      // Une réponse arrivée après une frappe plus récente est périmée : on l'écarte.
       if (champ.value.trim() !== texte) return;
+      propositions = trouvees;
       liste.replaceChildren(
         ...propositions.map((c, i) => {
           const li = document.createElement('li');
@@ -230,7 +236,7 @@ export async function afficherLaMeteo() {
           }
           li.addEventListener('mousedown', (e) => {
             e.preventDefault();
-            retenir(c);
+            choisir(c);
           });
           return li;
         }),
@@ -252,8 +258,35 @@ export async function afficherLaMeteo() {
 
   meteo.querySelector('[data-recherche]')!.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (choisie >= 0 && propositions[choisie]) retenir(propositions[choisie]);
+    if (!liste.hidden && choisie >= 0 && propositions[choisie]) choisir(propositions[choisie]);
   });
 
   champ.addEventListener('blur', () => setTimeout(fermer, 100));
+
+  // Puis la carte se compose, à partir de la meilleure source disponible.
+  const montrer = () => requestAnimationFrame(() => (meteo.dataset.etat = 'pret'));
+  const memoire = lire();
+  if (memoire) {
+    allerA(memoire, false);
+    montrer();
+    return;
+  }
+
+  (async () => {
+    // L'adresse, deux secondes et demie au plus : au-delà, il fait mauvais partout.
+    const parAdresse: Situation = await fetch(`${meteo.dataset.guichet}/meteo`, { signal: AbortSignal.timeout(2500) })
+      .then((r) => r.json())
+      .then(situer)
+      .catch(() => ({ type: 'inconnu' }) as const);
+    if (choixDuLecteur) return montrer();
+    if (parAdresse.type === 'region') placer(centre(parAdresse.code), false);
+    afficher(parAdresse);
+    montrer();
+
+    // Une position déjà accordée : le lecteur voit d'abord le nuage là où l'adresse le place, puis il se met en route.
+    const [accordee] = await Promise.all([positionDejaAccordee(), attendre(1400)]);
+    if (!accordee || choixDuLecteur) return;
+    const commune = await communeSous(accordee.coords.latitude, accordee.coords.longitude);
+    if (commune && !choixDuLecteur) allerA(commune);
+  })();
 }

@@ -4,10 +4,10 @@
  *   POST  /annonces          dépôt d'une petite annonce (public, depuis le site)
  *   POST  /justificatifs     numéro du prochain justificatif de lecture (public, depuis le site)
  *   GET   /meteo             ce que Cloudflare sait de la connexion : pays et région (public, rien n'est gardé)
- *   GET   /depots?statut=…   la file, pour la conférence de rédaction (jeton)
+ *   GET   /depots?statut=…&apres=…   la file, par pages de 200, pour la conférence de rédaction (jeton)
  *   PATCH /depots/PA-4471    { statut, note? } : retenu, paru, écarté (jeton)
  */
-import { LIMITES, STATUTS, empreinte, examiner, idDuNumero, jourDeParis, numeroDeDossier, type Statut } from './regles';
+import { LIMITES, STATUTS, empreinte, examiner, idDuNumero, jourDeParis, noteValide, numeroDeDossier, reseau, type Statut } from './regles';
 
 interface Env {
   DB: D1Database;
@@ -17,6 +17,8 @@ interface Env {
   JETON_REDACTION: string;
   /** Sel des empreintes, posé par `wrangler secret put SEL`. */
   SEL: string;
+  /** Limiteur de rafales de Cloudflare : il refuse avant que la base ne soit touchée. */
+  RAFALES: RateLimit;
 }
 
 const entetesCors = (requete: Request, env: Env): Record<string, string> => {
@@ -37,6 +39,16 @@ const autorise = (requete: Request, env: Env) => {
   return attendu.length > 0 && fourni.length === attendu.length && crypto.subtle.timingSafeEqual(fourni, attendu);
 };
 
+/**
+ * Premier filtre, sans écrire en base : le limiteur de rafales, par réseau.
+ * Rend le réseau de la requête, ou `null` s'il faut refuser.
+ */
+const filtrer = async (requete: Request, env: Env) => {
+  const origine = reseau(requete.headers.get('CF-Connecting-IP') ?? 'inconnue');
+  const { success } = await env.RAFALES.limit({ key: origine });
+  return success ? origine : null;
+};
+
 /** Compte un passage et dit s'il dépasse le quota. La ligne « * » tient le total du jour. */
 const compter = async (env: Env, cle: string, jour: string, plafond: number) => {
   const ligne = await env.DB.prepare(
@@ -54,9 +66,10 @@ const deposer = async (requete: Request, env: Env, cors: Record<string, string>)
   const verdict = examiner(corps);
   if (!verdict.recevable) return json({ motif: verdict.motif }, 422, cors);
 
+  const origine = await filtrer(requete, env);
+  if (!origine) return json({ motif: 'Le guichet est débordé. Réessayez dans une minute.' }, 429, cors);
   const jour = jourDeParis();
-  const adresse = requete.headers.get('CF-Connecting-IP') ?? 'inconnue';
-  if (await compter(env, await empreinte(adresse, jour, env.SEL), jour, LIMITES.parEmpreinte)) {
+  if (await compter(env, await empreinte(origine, jour, env.SEL), jour, LIMITES.parEmpreinte)) {
     return json({ motif: 'Vous avez atteint le nombre de coupons autorisés pour aujourd’hui.' }, 429, cors);
   }
   if (await compter(env, '*', jour, LIMITES.parJour)) return json({ motif: 'Le guichet est fermé pour aujourd’hui.' }, 503, cors);
@@ -68,7 +81,6 @@ const deposer = async (requete: Request, env: Env, cors: Record<string, string>)
   const ligne = await env.DB.prepare('INSERT INTO depots (categorie, texte, signature, recu_le) VALUES (?1, ?2, ?3, ?4) RETURNING id')
     .bind(categorie, texte, signature, new Date().toISOString())
     .first<{ id: number }>();
-  await env.DB.prepare('DELETE FROM passages WHERE jour < ?1').bind(jour).run();
 
   return json({ numero: numeroDeDossier(ligne!.id) }, 201, cors);
 };
@@ -77,9 +89,10 @@ const deposer = async (requete: Request, env: Env, cors: Record<string, string>)
 const numeroter = async (requete: Request, env: Env, cors: Record<string, string>) => {
   if (!cors['Access-Control-Allow-Origin']) return json({ motif: 'Guichet réservé aux lecteurs du journal.' }, 403);
 
+  const origine = await filtrer(requete, env);
+  if (!origine) return json({ motif: 'Le service des justificatifs est débordé.' }, 429, cors);
   const jour = jourDeParis();
-  const adresse = requete.headers.get('CF-Connecting-IP') ?? 'inconnue';
-  if (await compter(env, `j:${await empreinte(adresse, jour, env.SEL)}`, jour, LIMITES.justificatifsParEmpreinte)) {
+  if (await compter(env, `j:${await empreinte(origine, jour, env.SEL)}`, jour, LIMITES.justificatifsParEmpreinte)) {
     return json({ motif: 'Vous avez lu suffisamment pour aujourd’hui.' }, 429, cors);
   }
   if (await compter(env, 'j:*', jour, LIMITES.justificatifsParJour)) return json({ motif: 'Le service des justificatifs est fermé pour aujourd’hui.' }, 503, cors);
@@ -88,10 +101,14 @@ const numeroter = async (requete: Request, env: Env, cors: Record<string, string
   return json({ numero: ligne!.valeur }, 201, cors);
 };
 
+const PAR_PAGE = 200;
+
 const lister = async (url: URL, env: Env) => {
   const statut = url.searchParams.get('statut') ?? 'en_attente';
   if (!(STATUTS as readonly string[]).includes(statut)) return json({ motif: 'Statut inconnu.' }, 400);
-  const { results } = await env.DB.prepare('SELECT * FROM depots WHERE statut = ?1 ORDER BY id LIMIT 500').bind(statut).all();
+  // Par pages : `apres` est le dernier id reçu ; la page suivante commence au-delà.
+  const apres = Number(url.searchParams.get('apres') ?? 0) || 0;
+  const { results } = await env.DB.prepare('SELECT * FROM depots WHERE statut = ?1 AND id > ?2 ORDER BY id LIMIT ?3').bind(statut, apres, PAR_PAGE).all();
   return json(
     results.map((d) => ({ ...d, numero: numeroDeDossier(d.id as number) })),
     200,
@@ -101,7 +118,9 @@ const lister = async (url: URL, env: Env) => {
 const statuer = async (requete: Request, numero: string, env: Env) => {
   const id = idDuNumero(numero);
   const corps = (await requete.json().catch(() => null)) as { statut?: Statut; note?: string } | null;
-  if (id === null || !corps?.statut || !(STATUTS as readonly string[]).includes(corps.statut)) return json({ motif: 'Demande incomplète.' }, 400);
+  if (id === null || !corps?.statut || !(STATUTS as readonly string[]).includes(corps.statut) || !noteValide(corps.note)) {
+    return json({ motif: 'Demande incomplète.' }, 400);
+  }
   const resultat = await env.DB.prepare('UPDATE depots SET statut = ?1, note = COALESCE(?2, note) WHERE id = ?3')
     .bind(corps.statut, corps.note ?? null, id)
     .run();
@@ -131,5 +150,10 @@ export default {
 
     if (url.pathname === '/') return new Response('L’Humianité — Guichet des petites annonces.\nOuvert du lundi au dimanche, fermé le reste du temps.\n', { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     return json({ motif: 'Guichet inconnu.' }, 404);
+  },
+
+  /** Chaque nuit, les quotas de la veille sont jetés. */
+  async scheduled(_evenement, env) {
+    await env.DB.prepare('DELETE FROM passages WHERE jour < ?1').bind(jourDeParis()).run();
   },
 } satisfies ExportedHandler<Env>;

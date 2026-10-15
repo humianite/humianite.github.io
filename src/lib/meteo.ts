@@ -9,6 +9,23 @@ export type Localisation = { pays?: string | null; codeRegion?: string | null; r
 
 export const CODES = ['IDF', 'CVL', 'BFC', 'NOR', 'HDF', 'GES', 'PDL', 'BRE', 'NAQ', 'OCC', 'ARA', 'PAC', 'COR'] as const;
 
+/** Code INSEE d'une région de métropole → son code ISO, celui de la carte. Les régions d'outre-mer n'y figurent pas. */
+export const REGIONS_INSEE: Record<string, (typeof CODES)[number]> = {
+  '11': 'IDF',
+  '24': 'CVL',
+  '27': 'BFC',
+  '28': 'NOR',
+  '32': 'HDF',
+  '44': 'GES',
+  '52': 'PDL',
+  '53': 'BRE',
+  '75': 'NAQ',
+  '76': 'OCC',
+  '84': 'ARA',
+  '93': 'PAC',
+  '94': 'COR',
+};
+
 /** Les noms que les bases de géolocalisation emploient, en français comme en anglais. */
 const NOMS: Record<string, (typeof CODES)[number]> = {
   'ile-de-france': 'IDF',

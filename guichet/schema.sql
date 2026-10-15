@@ -24,6 +24,9 @@ CREATE TABLE IF NOT EXISTS passages (
   PRIMARY KEY (empreinte, jour)
 );
 
+-- La purge de la nuit cherche par jour.
+CREATE INDEX IF NOT EXISTS passages_jour ON passages (jour);
+
 -- Compteurs publics : ils avancent pour de vrai, et ne savent rien de personne.
 CREATE TABLE IF NOT EXISTS compteurs (
   nom TEXT PRIMARY KEY,

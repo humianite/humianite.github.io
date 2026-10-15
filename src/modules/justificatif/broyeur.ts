@@ -65,6 +65,14 @@ export async function broyer(feuille: HTMLElement) {
   feuille.after(atelier);
   feuille.style.visibility = 'hidden';
 
+  // Sur un petit écran, la feuille dépasse en bas : on la remonte pour que la bouche du broyeur arrive à mi-hauteur,
+  // et que les lanières aient de la place pour sortir.
+  const boucheY = feuille.getBoundingClientRect().top + hauteur;
+  const decalage = boucheY - Math.min(boucheY, innerHeight * 0.55);
+  if (decalage > 0) {
+    await atelier.animate([{ transform: 'none' }, { transform: `translateY(${-decalage}px)` }], { duration: 380, easing: 'ease-in-out', fill: 'forwards' }).finished;
+  }
+
   // La machine se met en place, puis avale la feuille à vitesse constante.
   await machine.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }], { duration: 260, easing: 'ease-out' }).finished;
   machine.classList.add('est-en-marche');

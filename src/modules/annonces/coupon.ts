@@ -58,6 +58,7 @@ export function brancherLeCoupon() {
   formulaire.addEventListener('submit', async (evenement) => {
     evenement.preventDefault();
     dire('');
+    zone('accuse').textContent = '';
     if (!controler()) return;
     envoi.disabled = true;
 
@@ -67,12 +68,15 @@ export function brancherLeCoupon() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(donnees),
+        signal: AbortSignal.timeout(10_000),
       });
       const corps = (await reponse.json().catch(() => ({}))) as { numero?: string; motif?: string };
       if (!reponse.ok || !corps.numero) throw new Error(corps.motif ?? 'Le guichet n’a pas compris votre coupon.');
 
       const tampon = zone('tampon');
       zone('dossier').textContent = `Dossier n° ${corps.numero}`;
+      // Le tampon est un dessin : les lecteurs d'écran reçoivent la même nouvelle en toutes lettres.
+      zone('accuse').textContent = `Coupon reçu, dossier n° ${corps.numero}.`;
       tampon.hidden = false;
       tampon.classList.remove('est-applique');
       void tampon.offsetWidth;
@@ -80,7 +84,9 @@ export function brancherLeCoupon() {
       formulaire.reset();
       chiffrer();
     } catch (erreur) {
-      dire(erreur instanceof TypeError ? 'Le guichet ne répond pas. Réessayez plus tard.' : (erreur as Error).message);
+      // Réseau coupé (TypeError) ou guichet muet au-delà du délai (DOMException) : même réponse.
+      const injoignable = erreur instanceof TypeError || erreur instanceof DOMException;
+      dire(injoignable ? 'Le guichet ne répond pas. Réessayez plus tard.' : (erreur as Error).message);
     } finally {
       envoi.disabled = false;
     }
