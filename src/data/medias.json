@@ -561,5 +561,27 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie. Une salle d’attente de cabinet médical, sobre : une rangée de chaises en plastique vides le long d’un mur, une plante verte, une pile de vieux magazines sur une table basse (couvertures illisibles). Au mur, une horloge ronde et, à côté, un petit écran plat sur lequel on lit exactement « Prochain créneau disponible : 14 février ». Lumière froide de fin de journée. Personne. Aucun autre texte lisible, aucun logo.",
     "src": "/medias/photos/salle-attente-creneau.webp"
+  },
+  {
+    "id": "zoo-chengdu-compteur",
+    "identifiant": "med-057",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Au premier plan, une main tient un compteur mécanique à cliquet devant les tourniquets d’une entrée de zoo",
+    "legende": "L’entrée nord, jeudi matin. Le compteur affichait alors 0412.",
+    "credit": "Samuel Contrechamp / L’Humianité",
+    "description": "Photographie de reportage. Au premier plan, net, une main d’homme tient un compteur mécanique à cliquet en métal (compteur manuel de comptage de passages), le pouce posé sur le bouton ; le compteur affiche exactement « 0412 ». À l’arrière-plan, flou, une entrée de zoo : une rangée de tourniquets métalliques, un auvent, quelques visiteurs de dos, des bambous. Lumière du matin. Aucun animal en gros plan, aucun visage reconnaissable, aucun logo, aucun autre texte lisible.",
+    "src": "/medias/photos/zoo-chengdu-compteur.webp"
+  },
+  {
+    "id": "badges-visiteurs",
+    "identifiant": "med-058",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Six badges « Visiteur » alignés avec leur cordon sur une table de réunion vide",
+    "legende": "Les badges, jeudi, avant leur remise.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie. Sur une longue table de réunion vide, vue en plongée légère, six badges plastifiés identiques alignés en rang, chacun avec son cordon tour de cou enroulé ; sur chaque badge on lit exactement « VISITEUR ». Derrière, des chaises de bureau inoccupées repoussées contre la table, une fenêtre aux stores à demi baissés. Lumière froide de bureau. Personne. Aucun logo, aucun autre texte lisible.",
+    "src": "/medias/photos/badges-visiteurs.webp"
   }
 ]

@@ -41,6 +41,9 @@ export const PAGES = [
   { href: '/a-propos/', nom: 'À propos' },
 ] as const;
 
+/** Pages signalées au pied de page seulement, sans entrée dans la navigation. */
+export const PAGES_DU_PIED = [{ href: '/test/', nom: 'Quel appareil êtes-vous ?' }] as const;
+
 export const FORMATS = {
   breve: 'Brève',
   actualite: 'Actualité',
