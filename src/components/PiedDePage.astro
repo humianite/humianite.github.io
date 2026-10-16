@@ -1,7 +1,8 @@
 ---
 import Logotype from './Logotype.astro';
 import { rubriques, journalistes, lienRubrique, lienJournaliste } from '@/lib/contenu';
-import { SITE, PAGES, RECLAMATIONS } from '@/lib/site';
+import { SITE, PAGES, PAGES_DU_PIED, RECLAMATIONS } from '@/lib/site';
+import { typo } from '@/lib/typo.mjs';
 
 const listeRubriques = await rubriques();
 const redaction = await journalistes();
@@ -30,6 +31,7 @@ const redaction = await journalistes();
         <ul class="pied__liste">
           {redaction.map((j) => <li><a href={lienJournaliste(j.id)}>{j.data.nom}</a></li>)}
           {PAGES.map((p) => <li><a href={p.href}>{p.nom}</a></li>)}
+          {PAGES_DU_PIED.map((p) => <li><a href={p.href}>{typo(p.nom)}</a></li>)}
         </ul>
       </nav>
 

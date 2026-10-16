@@ -1,0 +1,616 @@
+/*
+ * Le test « Quel appareil êtes-vous ? ». La mise en page est celle des tests de magazine :
+ * des cases à cocher, un numéro par question, puis un profil en pleine page.
+ */
+
+/* ---------- Emblèmes ---------- */
+.appareil-embleme {
+  display: block;
+  aspect-ratio: 1;
+}
+
+.appareil-embleme svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.appareil-embleme__filet {
+  stroke-width: 0.5;
+}
+
+/* ---------- En-tête ---------- */
+.test__tete {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  padding-block: clamp(1.6rem, 4vw, 3rem) 1.6rem;
+  border-bottom: var(--filet-gras);
+  text-align: center;
+}
+
+.test__rubrique {
+  font-family: var(--util);
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rouge);
+}
+
+.test__rubrique a {
+  text-decoration: none;
+}
+
+.test__rubrique a:hover {
+  text-decoration: underline;
+}
+
+.test__tete h1 {
+  max-width: 14ch;
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 6.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.test__chapo {
+  max-width: 38rem;
+  font-size: clamp(1.12rem, 2vw, 1.35rem);
+  line-height: 1.38;
+  text-wrap: pretty;
+}
+
+.test__signature--pied {
+  margin-top: 1.4rem;
+  text-align: center;
+}
+
+/* ---------- Le questionnaire ---------- */
+.questionnaire {
+  max-width: 46rem;
+  margin: 2rem auto 0;
+}
+
+.questionnaire__liste {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.question {
+  min-width: 0;
+  margin: 0;
+  padding: 1.3rem 0 1.5rem;
+  border: 0;
+  border-bottom: var(--filet-fin);
+  scroll-margin-top: 1.5rem;
+}
+
+.question__intitule {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0;
+  margin-bottom: 0.9rem;
+  font-family: var(--titre);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.question__numero {
+  color: var(--rouge);
+  font-variant-numeric: lining-nums;
+}
+
+.question--manquante .question__numero::after {
+  content: ' ←';
+}
+
+.question__reponses {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0 0 0 3rem;
+  list-style: none;
+}
+
+.reponse {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.7rem 1fr;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 0.4rem 0.5rem 0.45rem 0;
+  cursor: pointer;
+}
+
+/* La vraie case reste là pour le clavier et les lecteurs d'écran ; on voit la case dessinée. */
+.reponse input {
+  position: absolute;
+  inset: 0.4rem auto auto 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin: 0;
+  opacity: 0;
+}
+
+.reponse__case {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1.5px solid var(--encre);
+  font-family: var(--util);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.reponse__texte {
+  font-size: 1.08rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.reponse:hover .reponse__case {
+  background: var(--papier-fonce);
+}
+
+.reponse input:checked + .reponse__case {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+.reponse input:focus-visible + .reponse__case {
+  outline: 2px solid var(--rouge);
+  outline-offset: 3px;
+}
+
+.question--manquante {
+  box-shadow: inset 4px 0 0 var(--rouge);
+  padding-left: 0.9rem;
+}
+
+.questionnaire__envoi {
+  display: grid;
+  justify-items: center;
+  gap: 0.8rem;
+  padding: 1.8rem 0 0;
+  text-align: center;
+}
+
+.questionnaire__bouton {
+  padding: 0.75rem 1.6rem 0.8rem;
+  border: 0;
+  background: var(--encre);
+  color: var(--papier);
+  font-family: var(--util);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.questionnaire__bouton:hover {
+  background: var(--rouge);
+}
+
+.questionnaire__note {
+  font-family: var(--util);
+  font-weight: 700;
+  color: var(--rouge);
+}
+
+.questionnaire__note:empty {
+  display: none;
+}
+
+/* ---------- Les huit profils ---------- */
+.profils {
+  margin-top: clamp(2.4rem, 6vw, 3.6rem);
+}
+
+.profils__liste {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--filet);
+  border-left: var(--filet);
+}
+
+.profils__liste li {
+  border-right: var(--filet);
+  border-bottom: var(--filet);
+}
+
+.profil {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.45rem;
+  height: 100%;
+  padding: 1.3rem 0.7rem 1.4rem;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.profil__embleme {
+  width: 4.4rem;
+}
+
+.profil__nom {
+  font-family: var(--titre);
+  font-size: 1.35rem;
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.profil__accroche {
+  max-width: 15rem;
+  font-size: 0.98rem;
+  font-style: italic;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.profil:hover,
+.profil:focus-visible {
+  background: var(--encre);
+  color: var(--papier);
+}
+
+.test__notes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.4rem calc(var(--gouttiere) * 2);
+  margin-top: 2.6rem;
+}
+
+.test__notes h2 {
+  margin-bottom: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: var(--filet);
+  font-family: var(--util);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.test__notes p {
+  font-size: 1.02rem;
+  line-height: 1.42;
+}
+
+/* ---------- La page d'un résultat ---------- */
+.resultat__tete {
+  display: grid;
+  gap: 1rem;
+  padding-block: clamp(1.4rem, 3.5vw, 2.4rem) 1.4rem;
+  border-bottom: var(--filet-gras);
+}
+
+.resultat__identite {
+  display: grid;
+  grid-template-columns: clamp(4.5rem, 16vw, 9rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.resultat__verdict {
+  font-family: var(--util);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.resultat__identite h1 {
+  font-family: var(--titre);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7.5vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+.resultat__accroche {
+  margin-top: 0.5rem;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.resultat__grille {
+  display: grid;
+  gap: 2.2rem calc(var(--gouttiere) * 2);
+  margin-top: 1.8rem;
+  align-items: start;
+}
+
+/* La fiche signalétique : en négatif, comme le tableau de bord de l'Heuroscope. */
+.fiche {
+  --papier: #0c0b09;
+  --encre: #edeae0;
+  --gris: #a8a394;
+  --gris-clair: #4a4740;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  background: var(--papier);
+  color: var(--encre);
+}
+
+.fiche__titre {
+  font-family: var(--util);
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fiche__liste {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  font-family: var(--util);
+  line-height: 1.25;
+  font-variant-numeric: lining-nums;
+}
+
+.fiche__liste div {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--gris-clair);
+}
+
+.fiche__liste dt {
+  font-size: 0.88rem;
+  color: var(--gris);
+}
+
+.fiche__liste dd {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.fiche__conseil {
+  display: grid;
+  gap: 0.25rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--gris-clair);
+  font-family: var(--titre);
+  font-size: 1.3rem;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+.fiche__conseil span {
+  font-family: var(--util);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--rouge);
+}
+
+.resultat__corps {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.resultat__portrait {
+  display: grid;
+  gap: 0.9rem;
+  font-size: clamp(1.1rem, 1.6vw, 1.22rem);
+  line-height: 1.5;
+}
+
+.resultat__portrait p {
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
+/* Lettrine du premier paragraphe. */
+.resultat__portrait p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.1em 0 0;
+  font-family: var(--titre);
+  font-size: 3.4em;
+  line-height: 0.82;
+}
+
+.traits {
+  display: grid;
+  gap: 1.4rem calc(var(--gouttiere) * 2);
+}
+
+.traits h3,
+.affinites h3 {
+  margin-bottom: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: var(--filet);
+  font-family: var(--util);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.traits ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.traits li {
+  padding-left: 1.1rem;
+  text-indent: -1.1rem;
+  line-height: 1.38;
+}
+
+.traits li::before {
+  content: '■';
+  display: inline-block;
+  width: 1.1rem;
+  text-indent: 0;
+  font-size: 0.6em;
+  vertical-align: 0.2em;
+}
+
+.affinites ul {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.affinite {
+  display: grid;
+  grid-template-columns: 2.8rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.9rem;
+  padding: 0.7rem 0;
+  border-bottom: var(--filet-fin);
+  text-decoration: none;
+}
+
+.affinite__tete {
+  display: block;
+  font-family: var(--titre);
+  font-size: 1.25rem;
+  line-height: 1.15;
+}
+
+.affinite__raison {
+  display: block;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+.affinite:hover .affinite__tete {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+.affinite--eviter .affinite__embleme,
+.affinite--eviter .affinite__tete {
+  color: var(--rouge);
+}
+
+.reserve {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1rem 0 1.1rem;
+  border-top: var(--filet-gras);
+  border-bottom: var(--filet);
+  font-family: var(--titre);
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.18;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* ---------- D'un profil à l'autre ---------- */
+.resultat__suite {
+  display: grid;
+  justify-items: center;
+  gap: 1.2rem;
+  margin-top: 2.6rem;
+  padding-top: 1.2rem;
+  border-top: var(--filet-gras);
+}
+
+.resultat__refaire {
+  font-family: var(--titre);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.resultat__ronde {
+  display: grid;
+  /* Huit emblèmes : deux rangées sur les plus petits écrans, une seule ailleurs. */
+  grid-template-columns: repeat(4, 2.6rem);
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resultat__ronde a {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.resultat__ronde a:hover {
+  color: var(--rouge);
+  transform: rotate(-8deg) scale(1.1);
+}
+
+.resultat__ronde a[aria-current] {
+  color: var(--rouge);
+}
+
+@media (min-width: 36rem) {
+  .traits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .resultat__ronde {
+    grid-template-columns: repeat(8, 2.6rem);
+  }
+}
+
+@media (min-width: 48rem) {
+  .profils__liste {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 62rem) {
+  .resultat__grille {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+  }
+
+  .fiche {
+    position: sticky;
+    top: 1rem;
+    order: 2;
+  }
+}
+
+@media (max-width: 30rem) {
+  .question__reponses {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profil,
+  .reponse__case,
+  .resultat__ronde a {
+    transition: none;
+  }
+}

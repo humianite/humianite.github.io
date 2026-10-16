@@ -1,0 +1,129 @@
+---
+import '@/styles/test.css';
+import Base from '@/layouts/Base.astro';
+import Embleme from '@/components/test/Embleme.astro';
+import donnees from '@/data/test-appareils.json';
+import { lienJournaliste } from '@/lib/contenu';
+import { capitale, lienAppareil } from '@/lib/test-appareils';
+import { typo } from '@/lib/typo.mjs';
+
+type Resultat = (typeof donnees.resultats)[number];
+
+export function getStaticPaths() {
+  return donnees.resultats.map((resultat) => ({ params: { appareil: resultat.id }, props: { resultat } }));
+}
+
+interface Props {
+  resultat: Resultat;
+}
+
+const { resultat } = Astro.props;
+const tous = donnees.resultats;
+const parId = (id: string) => tous.find((r) => r.id === id)!;
+const nom = capitale(typo(resultat.nom));
+const { avec, eviter } = resultat.compatibilites;
+---
+
+<Base titre={`Vous êtes ${typo(resultat.nom)}`} description={`Quel appareil êtes-vous ? ${nom}. ${typo(resultat.accroche)}`}>
+  <div class="page test">
+    <header class="resultat__tete">
+      <p class="test__rubrique"><a href="/test/">Le test : quel appareil êtes-vous&#8239;?</a></p>
+      <div class="resultat__identite">
+        <Embleme appareil={resultat.id} class="resultat__embleme" />
+        <div>
+          <p class="resultat__verdict">Vous êtes</p>
+          <h1>{nom}</h1>
+          <p class="resultat__accroche">{typo(resultat.accroche)}</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="resultat__grille">
+      <aside class="fiche" aria-label="Fiche signalétique">
+        <h2 class="fiche__titre">Fiche signalétique</h2>
+        <dl class="fiche__liste">
+          <div><dt>En service depuis</dt><dd>{resultat.depuis}</dd></div>
+          {
+            resultat.fiche.map((ligne) => (
+              <div>
+                <dt>{typo(ligne.cle)}</dt>
+                <dd>{typo(ligne.valeur)}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="fiche__conseil"><span>Le conseil de la semaine</span>{typo(resultat.conseil)}</p>
+      </aside>
+
+      <article class="resultat__corps">
+        <h2 class="invisible">Votre portrait</h2>
+        <div class="resultat__portrait">
+          {resultat.portrait.map((paragraphe) => <p>{typo(paragraphe)}</p>)}
+        </div>
+
+        <div class="traits">
+          <section>
+            <h3>Vos qualités</h3>
+            <ul>{resultat.qualites.map((q) => <li>{typo(q)}</li>)}</ul>
+          </section>
+          <section>
+            <h3>Vos défauts</h3>
+            <ul>{resultat.defauts.map((d) => <li>{typo(d)}</li>)}</ul>
+          </section>
+        </div>
+
+        <section class="affinites" aria-labelledby="affinites-titre">
+          <h3 id="affinites-titre">Vos compatibilités</h3>
+          <ul>
+            {
+              avec.map((a) => (
+                <li>
+                  <a class="affinite" href={lienAppareil(a.id)}>
+                    <Embleme appareil={a.id} class="affinite__embleme" />
+                    <span>
+                      <span class="affinite__tete">Avec {typo(parId(a.id).nom)}</span>
+                      <span class="affinite__raison">{typo(a.raison)}</span>
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <a class="affinite affinite--eviter" href={lienAppareil(eviter.id)}>
+                <Embleme appareil={eviter.id} class="affinite__embleme" />
+                <span>
+                  <span class="affinite__tete">À éviter : {typo(parId(eviter.id).nom)}</span>
+                  <span class="affinite__raison">{typo(eviter.raison)}</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <p class="reserve">
+          {typo(resultat.reserve)}
+          <span class="service">Constance Nuance, <a href={lienJournaliste('constance-nuance')}>service Vérification</a></span>
+        </p>
+      </article>
+    </div>
+
+    <nav class="resultat__suite" aria-label="Autres profils">
+      <a class="resultat__refaire" href="/test/">Refaire le test</a>
+      <ol class="resultat__ronde">
+        {
+          tous.map((r) => (
+            <li>
+              <a href={lienAppareil(r.id)} aria-label={capitale(typo(r.nom))} title={capitale(typo(r.nom))} aria-current={r.id === resultat.id ? 'page' : undefined}>
+                <Embleme appareil={r.id} />
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <p class="test__signature test__signature--pied service">
+      Test conçu par <a href={lienJournaliste('kevin-prompt')}>Kevin Prompt</a>. Barème établi par <a href={lienJournaliste('mina-contresens')}>Mina Contresens</a>.
+    </p>
+  </div>
+</Base>
