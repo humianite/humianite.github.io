@@ -11,4 +11,6 @@ export default defineConfig({
   markdown: { processor: unified({ remarkPlugins: [remarqueTypo], remarkRehype: { footnoteLabel: 'Notes', footnoteBackLabel: 'Retour au texte' } }) },
   // Les guichets d'abonnement ne sont pas des articles : ils portent `indexable={false}` et restent hors du plan du site.
   integrations: [mdx(), sitemap({ filter: (page) => !/\/(connexion|inscription)\/$/.test(page) })],
+  // Aucun script en ligne : la politique de sécurité du site (`script-src 'self'`) les bloquerait.
+  vite: { build: { assetsInlineLimit: 0 } },
 });

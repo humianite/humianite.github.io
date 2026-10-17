@@ -1,7 +1,8 @@
 /**
- * Le test « Quel appareil êtes-vous ? » : le barème. Chaque réponse cochée attribue des points
- * à un ou plusieurs appareils ; l'appareil le mieux pourvu l'emporte. À égalité, le barème
- * retient l'appareil en service depuis le plus longtemps : le résultat ne dépend que des réponses.
+ * Le test « Quel appareil êtes-vous ? » : le barème. Chaque réponse attribue des points
+ * à un ou plusieurs appareils ; chaque total est pondéré par le coefficient de l'appareil,
+ * établi par Mina Contresens pour que chacun ait sa chance. Le mieux pourvu l'emporte.
+ * À égalité, le barème retient l'appareil en service depuis le plus longtemps.
  */
 
 export type Points = Record<string, number>;
@@ -22,10 +23,11 @@ export function additionner(choix: Points[]): Points {
   return totaux;
 }
 
-/** L'appareil attribué : le meilleur total ; à égalité, le premier dans l'ordre de départage. */
-export function attribuer(choix: Points[], ordre: string[]): string {
+/** L'appareil attribué : le meilleur total pondéré ; à égalité, le premier dans l'ordre de départage. */
+export function attribuer(choix: Points[], ordre: string[], coefficients: Points = {}): string {
   const totaux = additionner(choix);
-  return ordre.reduce((retenu, id) => ((totaux[id] ?? 0) > (totaux[retenu] ?? 0) ? id : retenu), ordre[0]);
+  const note = (id: string) => (totaux[id] ?? 0) * (coefficients[id] ?? 1);
+  return ordre.reduce((retenu, id) => (note(id) > note(retenu) ? id : retenu), ordre[0]);
 }
 
 export const lienAppareil = (id: string) => `/test/${id}/`;

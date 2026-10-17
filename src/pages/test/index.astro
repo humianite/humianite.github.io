@@ -1,30 +1,35 @@
 ---
 import '@/styles/test.css';
 import Base from '@/layouts/Base.astro';
-import Embleme from '@/components/test/Embleme.astro';
 import donnees from '@/data/test-appareils.json';
 import { lienJournaliste } from '@/lib/contenu';
-import { capitale, lienAppareil, ordreDeDepartage } from '@/lib/test-appareils';
+import { ordreDeDepartage } from '@/lib/test-appareils';
 import { typo } from '@/lib/typo.mjs';
 
-const { questions, resultats } = donnees;
+const { questions, resultats, coefficients } = donnees;
 const LETTRES = ['a', 'b', 'c', 'd'];
 ---
 
-<Base titre="Quel appareil êtes-vous ?" description="Le test de L’Humianité. Dix questions, huit profils : découvrez enfin quel appareil vous êtes.">
+<Base titre="Quel appareil êtes-vous ?" description="Le test de L’Humianité. Douze questions pour savoir enfin quel appareil vous êtes.">
   <div class="page test">
     <header class="test__tete">
       <p class="test__rubrique">Le test</p>
       <h1>Quel appareil êtes-vous&#8239;?</h1>
       <p class="test__chapo">
-        {typo('Branché, débranché, rechargé, mis à jour : vous l’êtes tous les jours. Mais au fond, quel appareil êtes-vous ? Dix questions pour le savoir. Répondez spontanément, une seule case par question.')}
+        {typo('Branché, débranché, rechargé, mis à jour : vous l’êtes tous les jours. Mais au fond, quel appareil êtes-vous ? Douze questions pour le savoir. Répondez spontanément.')}
       </p>
       <p class="test__signature service">
         Test conçu par <a href={lienJournaliste('kevin-prompt')}>Kevin Prompt</a>. Barème établi par <a href={lienJournaliste('mina-contresens')}>Mina Contresens</a>.
       </p>
     </header>
 
-    <form class="questionnaire" data-test data-ordre={JSON.stringify(ordreDeDepartage(resultats))} novalidate>
+    <form class="questionnaire" data-test data-ordre={JSON.stringify(ordreDeDepartage(resultats))} data-coefficients={JSON.stringify(coefficients)} novalidate>
+      <div class="questionnaire__pilotage" data-zone="pilotage" hidden>
+        <p class="questionnaire__avancement service" data-zone="avancement" aria-live="polite"></p>
+        <button type="button" class="questionnaire__retour" data-zone="retour" hidden>← Question précédente</button>
+      </div>
+      <div class="questionnaire__jauge" data-zone="jauge" aria-hidden="true"></div>
+
       <ol class="questionnaire__liste">
         {
           questions.map((question, q) => (
@@ -51,38 +56,26 @@ const LETTRES = ['a', 'b', 'c', 'd'];
         }
       </ol>
 
-      <div class="questionnaire__envoi" data-zone="envoi" hidden>
-        <p class="questionnaire__compte service" data-zone="compte" aria-live="polite"></p>
-        <button type="submit" class="questionnaire__bouton">Découvrir mon appareil</button>
-        <p class="questionnaire__note" data-zone="note" role="alert"></p>
+      <div class="calcul" data-zone="calcul" tabindex="-1" role="status" hidden>
+        <p class="calcul__titre">Application du barème</p>
+        <ol class="calcul__etapes">
+          <li data-etape hidden>Dépouillement des douze réponses.</li>
+          <li data-etape hidden>Application des coefficients de Mina Contresens.</li>
+          <li data-etape hidden>Départage des ex æquo, le cas échéant.</li>
+          <li data-etape hidden>Votre appareil a été identifié.</li>
+        </ol>
       </div>
-    </form>
 
-    <section class="profils" aria-labelledby="profils-titre">
-      <div class="tetiere">
-        <h2 id="profils-titre">Les huit profils</h2>
-        <span class="service">Un seul vous correspond</span>
-      </div>
-      <ol class="profils__liste">
-        {
-          resultats.map((r) => (
-            <li>
-              <a class="profil" href={lienAppareil(r.id)}>
-                <Embleme appareil={r.id} class="profil__embleme" />
-                <span class="profil__nom">{capitale(typo(r.nom))}</span>
-                <span class="profil__accroche">{typo(r.accroche)}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ol>
-    </section>
+      <noscript>
+        <p class="questionnaire__note">{typo('Le barème est appliqué par votre navigateur. Activez JavaScript pour connaître votre appareil.')}</p>
+      </noscript>
+    </form>
 
     <footer class="test__notes">
       <section>
         <h2>Méthode</h2>
         <p>
-          {typo('Chaque réponse attribue des points à un ou plusieurs appareils. L’appareil qui en totalise le plus vous est attribué. En cas d’égalité, le barème retient l’appareil en service depuis le plus longtemps.')}
+          {typo('Chaque réponse attribue des points à un ou plusieurs appareils. Les totaux sont pondérés par un coefficient propre à chaque appareil, établi par Mina Contresens. En cas d’égalité, le barème retient l’appareil en service depuis le plus longtemps.')}
         </p>
       </section>
       <section>

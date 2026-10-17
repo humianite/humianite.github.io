@@ -563,25 +563,25 @@
     "src": "/medias/photos/salle-attente-creneau.webp"
   },
   {
-    "id": "zoo-chengdu-compteur",
-    "identifiant": "med-057",
+    "id": "torpille-zam",
+    "identifiant": "med-059",
     "type": "photo",
     "ratio": "3 / 2",
-    "alt": "Au premier plan, une main tient un compteur mécanique à cliquet devant les tourniquets d’une entrée de zoo",
-    "legende": "L’entrée nord, jeudi matin. Le compteur affichait alors 0412.",
-    "credit": "Samuel Contrechamp / L’Humianité",
-    "description": "Photographie de reportage. Au premier plan, net, une main d’homme tient un compteur mécanique à cliquet en métal (compteur manuel de comptage de passages), le pouce posé sur le bouton ; le compteur affiche exactement « 0412 ». À l’arrière-plan, flou, une entrée de zoo : une rangée de tourniquets métalliques, un auvent, quelques visiteurs de dos, des bambous. Lumière du matin. Aucun animal en gros plan, aucun visage reconnaissable, aucun logo, aucun autre texte lisible.",
-    "src": "/medias/photos/zoo-chengdu-compteur.webp"
+    "alt": "Une torpille posée sur un chariot de manutention, sur le pont d’un navire, devant une mer grise",
+    "legende": "Une torpille avant son essai. Le système n’a pas souhaité s’exprimer.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse. Sur le pont métallique d’un navire militaire, une longue torpille cylindrique gris sombre est posée de profil sur un chariot de manutention à roulettes, sanglée par deux sangles. Ogive arrondie à gauche, hélices à droite. Derrière, le bastingage et une mer grise, ciel bas. Personne, ou seulement une silhouette floue de dos au loin. Aucun drapeau, aucun insigne, aucun texte lisible, aucun logo.",
+    "src": "/medias/photos/torpille-zam.webp"
   },
   {
-    "id": "badges-visiteurs",
-    "identifiant": "med-058",
+    "id": "fauteuil-vide-onu",
+    "identifiant": "med-060",
     "type": "photo",
     "ratio": "3 / 2",
-    "alt": "Six badges « Visiteur » alignés avec leur cordon sur une table de réunion vide",
-    "legende": "Les badges, jeudi, avant leur remise.",
+    "alt": "Un fauteuil vide au centre d’une grande table de conférence en arc de cercle, dans une salle déserte",
+    "legende": "Le fauteuil, vendredi soir, après le vote.",
     "credit": "Photo L’Humianité",
-    "description": "Photographie. Sur une longue table de réunion vide, vue en plongée légère, six badges plastifiés identiques alignés en rang, chacun avec son cordon tour de cou enroulé ; sur chaque badge on lit exactement « VISITEUR ». Derrière, des chaises de bureau inoccupées repoussées contre la table, une fenêtre aux stores à demi baissés. Lumière froide de bureau. Personne. Aucun logo, aucun autre texte lisible.",
-    "src": "/medias/photos/badges-visiteurs.webp"
+    "description": "Photographie de presse. Une grande salle de conférence internationale déserte : une table en fer à cheval vue de face, avec une rangée de fauteuils en cuir, des micros sur pied et des carafes d’eau. Au centre, un seul fauteuil légèrement reculé, vide, bien éclairé. Plaques nominatives retournées ou vierges, aucun texte lisible. Aucun emblème, aucun drapeau reconnaissable, aucun logo, personne.",
+    "src": "/medias/photos/fauteuil-vide-onu.webp"
   }
 ]

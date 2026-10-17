@@ -1,6 +1,6 @@
 /*
  * Le test « Quel appareil êtes-vous ? ». La mise en page est celle des tests de magazine :
- * des cases à cocher, un numéro par question, puis un profil en pleine page.
+ * une question à la fois, des cases à cocher, puis un profil en pleine page.
  */
 
 /* ---------- Emblèmes ---------- */
@@ -218,66 +218,6 @@
 
 .questionnaire__note:empty {
   display: none;
-}
-
-/* ---------- Les huit profils ---------- */
-.profils {
-  margin-top: clamp(2.4rem, 6vw, 3.6rem);
-}
-
-.profils__liste {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: var(--filet);
-  border-left: var(--filet);
-}
-
-.profils__liste li {
-  border-right: var(--filet);
-  border-bottom: var(--filet);
-}
-
-.profil {
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  gap: 0.45rem;
-  height: 100%;
-  padding: 1.3rem 0.7rem 1.4rem;
-  text-align: center;
-  text-decoration: none;
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
-}
-
-.profil__embleme {
-  width: 4.4rem;
-}
-
-.profil__nom {
-  font-family: var(--titre);
-  font-size: 1.35rem;
-  line-height: 1.08;
-  letter-spacing: -0.012em;
-  text-wrap: balance;
-}
-
-.profil__accroche {
-  max-width: 15rem;
-  font-size: 0.98rem;
-  font-style: italic;
-  line-height: 1.35;
-  text-wrap: balance;
-}
-
-.profil:hover,
-.profil:focus-visible {
-  background: var(--encre);
-  color: var(--papier);
 }
 
 .test__notes {
@@ -548,44 +488,157 @@
   line-height: 1.1;
 }
 
-.resultat__ronde {
+/* ---------- Une question à la fois ---------- */
+.questionnaire--pas-a-pas {
+  min-height: 28rem;
+  scroll-margin-top: 1rem;
+}
+
+.questionnaire__pilotage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+}
+
+.questionnaire__pilotage[hidden] {
+  display: none;
+}
+
+.questionnaire__retour {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: var(--util);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+.questionnaire__retour:hover {
+  color: var(--rouge);
+}
+
+.questionnaire__jauge {
+  display: none;
+}
+
+.questionnaire--pas-a-pas .questionnaire__jauge {
+  display: block;
+  height: 3px;
+  margin-top: 0.5rem;
+  background: var(--papier-fonce);
+}
+
+.questionnaire__jauge::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: calc(var(--avance, 0) * 100%);
+  background: var(--rouge);
+  transition: width 0.3s ease;
+}
+
+.questionnaire--pas-a-pas .question {
+  border-bottom: 0;
+  padding-top: 1.6rem;
+}
+
+.questionnaire--pas-a-pas .question__intitule {
+  font-size: clamp(1.6rem, 4.4vw, 2.3rem);
+  outline: none;
+}
+
+.questionnaire--pas-a-pas .reponse__texte {
+  font-size: 1.15rem;
+}
+
+/* ---------- Le barème au travail ---------- */
+.calcul {
   display: grid;
-  /* Huit emblèmes : deux rangées sur les plus petits écrans, une seule ailleurs. */
-  grid-template-columns: repeat(4, 2.6rem);
-  justify-content: center;
-  gap: 0.6rem;
+  justify-items: center;
+  gap: 1rem;
+  padding: 3rem 0 2rem;
+  text-align: center;
+  outline: none;
+}
+
+.calcul[hidden] {
+  display: none;
+}
+
+.calcul__titre {
+  font-family: var(--titre);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.calcul__etapes {
+  display: grid;
+  gap: 0.45rem;
   margin: 0;
   padding: 0;
   list-style: none;
+  font-family: var(--util);
+  font-size: 1.02rem;
 }
 
-.resultat__ronde a {
-  display: block;
-  transition: transform 0.4s cubic-bezier(0.3, 1.5, 0.5, 1);
-}
-
-.resultat__ronde a:hover {
+.calcul__etapes li::before {
+  content: '✓ ';
   color: var(--rouge);
-  transform: rotate(-8deg) scale(1.1);
+  font-weight: 800;
 }
 
-.resultat__ronde a[aria-current] {
+/* ---------- La note de Kevin ---------- */
+.note-kevin {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem 1.2rem;
+  margin-top: 2rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border: var(--filet);
+  box-shadow: 4px 4px 0 var(--encre);
+}
+
+.note-kevin__titre {
+  grid-column: 1 / -1;
+  font-family: var(--util);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--rouge);
+}
+
+.note-kevin__chiffre {
+  grid-row: span 2;
+  font-family: var(--titre);
+  font-size: 1.3rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.note-kevin__chiffre span {
+  font-size: 3.4rem;
+  letter-spacing: -0.03em;
+  color: var(--rouge);
+}
+
+.note-kevin__texte {
+  font-style: italic;
+  font-size: 1.08rem;
+  line-height: 1.42;
+  text-wrap: pretty;
 }
 
 @media (min-width: 36rem) {
   .traits {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .resultat__ronde {
-    grid-template-columns: repeat(8, 2.6rem);
-  }
-}
-
-@media (min-width: 48rem) {
-  .profils__liste {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -608,9 +661,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .profil,
   .reponse__case,
-  .resultat__ronde a {
+  .questionnaire__jauge::after {
     transition: none;
   }
 }
