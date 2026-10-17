@@ -100,26 +100,22 @@ const { avec, eviter } = resultat.compatibilites;
           </ul>
         </section>
 
+        <aside class="note-kevin" aria-labelledby="note-kevin-titre">
+          <h3 id="note-kevin-titre" class="note-kevin__titre">La note de Kevin</h3>
+          <p class="note-kevin__chiffre"><span>{resultat.kevin.note}</span>/20</p>
+          <p class="note-kevin__texte">{typo(`« ${resultat.kevin.texte} »`)}</p>
+          <p class="note-kevin__signature service"><a href={lienJournaliste('kevin-prompt')}>Kevin Prompt</a>, chroniqueur Technologies &amp; Futur</p>
+        </aside>
+
         <p class="reserve">
-          {typo(resultat.reserve)}
+          {typo('Ce résultat pourrait vous correspondre.')}
           <span class="service">Constance Nuance, <a href={lienJournaliste('constance-nuance')}>service Vérification</a></span>
         </p>
       </article>
     </div>
 
-    <nav class="resultat__suite" aria-label="Autres profils">
+    <nav class="resultat__suite" aria-label="Le test">
       <a class="resultat__refaire" href="/test/">Refaire le test</a>
-      <ol class="resultat__ronde">
-        {
-          tous.map((r) => (
-            <li>
-              <a href={lienAppareil(r.id)} aria-label={capitale(typo(r.nom))} title={capitale(typo(r.nom))} aria-current={r.id === resultat.id ? 'page' : undefined}>
-                <Embleme appareil={r.id} />
-              </a>
-            </li>
-          ))
-        }
-      </ol>
     </nav>
 
     <p class="test__signature test__signature--pied service">

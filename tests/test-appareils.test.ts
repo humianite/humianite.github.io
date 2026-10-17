@@ -3,15 +3,16 @@ import { test } from 'node:test';
 import donnees from '../src/data/test-appareils.json' with { type: 'json' };
 import { type Points, attribuer, ordreDeDepartage } from '../src/lib/test-appareils.ts';
 
-const { resultats } = donnees;
+const { resultats, coefficients } = donnees;
 const questions = donnees.questions as unknown as { id: string; reponses: { points: Points }[] }[];
 const ids = resultats.map((r) => r.id);
 const ordre = ordreDeDepartage(resultats);
 
-test('huit résultats, de huit à dix questions de quatre réponses', () => {
-  assert.equal(resultats.length, 8);
-  assert.equal(new Set(ids).size, 8);
-  assert.ok(questions.length >= 8 && questions.length <= 10);
+test('seize résultats, douze questions de quatre réponses, un coefficient par appareil', () => {
+  assert.equal(resultats.length, 16);
+  assert.equal(new Set(ids).size, 16);
+  assert.equal(questions.length, 12);
+  assert.deepEqual(Object.keys(coefficients).sort(), [...ids].sort());
   for (const q of questions) assert.equal(q.reponses.length, 4, q.id);
 });
 
@@ -32,7 +33,7 @@ test('chaque appareil peut être obtenu', () => {
       const note = (p: Points) => (p[cible] ?? 0) * 10 - Object.entries(p).reduce((s, [id, n]) => s + (id === cible ? 0 : n), 0);
       return [...q.reponses].sort((a, b) => note(b.points) - note(a.points))[0].points;
     });
-    assert.equal(attribuer(choix, ordre), cible);
+    assert.equal(attribuer(choix, ordre, coefficients), cible);
   }
 });
 
@@ -41,4 +42,20 @@ test('à égalité, le plus ancien l’emporte, quel que soit l’ordre des rép
   assert.equal(attribuer([{ smartphone: 2 }, { 'voiture-electrique': 2 }], ordre), 'voiture-electrique');
   assert.equal(attribuer([{ 'voiture-electrique': 2 }, { smartphone: 2 }], ordre), 'voiture-electrique');
   assert.equal(attribuer([], ordre), 'pompe-a-chaleur');
+});
+
+test('le barème laisse sa chance à chaque appareil', () => {
+  // Réponses tirées au hasard, avec une graine fixe : chaque appareil sort entre 3 et 10 % du temps.
+  let graine = 42;
+  const hasard = () => ((graine = (graine * 1103515245 + 12345) % 2 ** 31) / 2 ** 31);
+  const tirages = 20000;
+  const compte: Record<string, number> = {};
+  for (let i = 0; i < tirages; i++) {
+    const id = attribuer(questions.map((q) => q.reponses[Math.floor(hasard() * 4)].points), ordre, coefficients);
+    compte[id] = (compte[id] ?? 0) + 1;
+  }
+  for (const id of ids) {
+    const part = (compte[id] ?? 0) / tirages;
+    assert.ok(part > 0.03 && part < 0.1, `${id} : ${(part * 100).toFixed(1)} %`);
+  }
 });

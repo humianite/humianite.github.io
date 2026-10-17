@@ -1,103 +1,457 @@
 {
+  "coefficients": {
+    "appareil-photo-argentique": 1.0,
+    "voiture-electrique": 1.0,
+    "smartphone": 1.16,
+    "drone": 1.0,
+    "pompe-a-chaleur": 1.25,
+    "data-center": 0.83,
+    "trottinette": 0.83,
+    "aspirateur-robot": 0.97,
+    "enceinte-connectee": 0.97,
+    "friteuse-sans-huile": 1.0,
+    "imprimante": 0.96,
+    "box-internet": 0.96,
+    "montre-connectee": 1.13,
+    "gps": 1.0,
+    "ecouteur-gauche": 0.97,
+    "telecommande": 0.97
+  },
   "questions": [
     {
-      "id": "debranchement",
-      "intitule": "Quand on vous débranche, vous :",
+      "id": "ascenseur",
+      "intitule": "Un inconnu vous adresse la parole dans un ascenseur. Vous :",
       "reponses": [
-        { "texte": "redémarrez sans rancune.", "points": { "machine-a-cafe": 1, "pompe-a-chaleur": 1, "drone": 1 } },
-        { "texte": "perdez la date et l’heure.", "points": { "imprimante": 2, "appareil-photo-argentique": 1 } },
-        { "texte": "continuez sur batterie, en le signalant toutes les cinq minutes.", "points": { "smartphone": 2, "voiture-electrique": 1, "drone": 1 } },
-        { "texte": "on ne vous débranche pas. On vous refroidit.", "points": { "data-center": 3 } }
+        {
+          "texte": "répondez avant qu’il ait fini sa phrase.",
+          "points": {
+            "enceinte-connectee": 2,
+            "smartphone": 1,
+            "montre-connectee": 1
+          }
+        },
+        {
+          "texte": "lui demandez de répéter, mais plus près.",
+          "points": {
+            "ecouteur-gauche": 2,
+            "gps": 1
+          }
+        },
+        {
+          "texte": "faites semblant d’être en veille.",
+          "points": {
+            "box-internet": 2,
+            "telecommande": 1,
+            "imprimante": 1
+          }
+        },
+        {
+          "texte": "descendez à l’étage suivant, même si ce n’est pas le vôtre.",
+          "points": {
+            "trottinette": 2,
+            "drone": 1,
+            "aspirateur-robot": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "peur",
+      "intitule": "Votre plus grande peur :",
+      "reponses": [
+        {
+          "texte": "la coupure de courant.",
+          "points": {
+            "data-center": 2,
+            "box-internet": 1,
+            "friteuse-sans-huile": 1
+          }
+        },
+        {
+          "texte": "le sable.",
+          "points": {
+            "drone": 2,
+            "appareil-photo-argentique": 1,
+            "aspirateur-robot": 1
+          }
+        },
+        {
+          "texte": "les escaliers.",
+          "points": {
+            "aspirateur-robot": 2,
+            "trottinette": 1,
+            "voiture-electrique": 1
+          }
+        },
+        {
+          "texte": "qu’on vous range dans un tiroir « au cas où ».",
+          "points": {
+            "appareil-photo-argentique": 2,
+            "telecommande": 1,
+            "gps": 1,
+            "ecouteur-gauche": 1
+          }
+        }
       ]
     },
     {
       "id": "eau",
       "intitule": "Combien d’eau buvez-vous par jour ?",
       "reponses": [
-        { "texte": "Aucune. L’eau vous est formellement déconseillée.", "points": { "drone": 2, "smartphone": 1, "voiture-electrique": 1 } },
-        { "texte": "Un réservoir de 1,8 litre, que personne ne remplit.", "points": { "machine-a-cafe": 3 } },
-        { "texte": "Quelques gouttes de révélateur, une fois par an.", "points": { "appareil-photo-argentique": 3 } },
-        { "texte": "Environ 1 800 mètres cubes, pour rester calme.", "points": { "data-center": 3, "pompe-a-chaleur": 1 } }
-      ]
-    },
-    {
-      "id": "sommeil",
-      "intitule": "Qui vous regarde quand vous dormez ?",
-      "reponses": [
-        { "texte": "Personne. Vous ne dormez pas : vous êtes en veille.", "points": { "smartphone": 2, "pompe-a-chaleur": 1 } },
-        { "texte": "Un voyant orange, toute la nuit.", "points": { "voiture-electrique": 2, "imprimante": 1 } },
-        { "texte": "Un collègue, qui prend des notes.", "points": { "machine-a-cafe": 2, "data-center": 1 } },
-        { "texte": "Personne. Vous dormez dans une housse, au fond d’un placard.", "points": { "appareil-photo-argentique": 2, "drone": 2 } }
-      ]
-    },
-    {
-      "id": "mises-a-jour",
-      "intitule": "Votre rapport aux mises à jour :",
-      "reponses": [
-        { "texte": "vous les installez la nuit, sans prévenir, et vous redémarrez avec d’autres convictions.", "points": { "smartphone": 2, "voiture-electrique": 2 } },
-        { "texte": "vous n’en avez jamais reçu. Vous n’en attendez plus.", "points": { "appareil-photo-argentique": 2, "machine-a-cafe": 1 } },
-        { "texte": "vous en exigez une avant d’accepter le moindre document.", "points": { "imprimante": 3 } },
-        { "texte": "vous en déployez quarante par jour, sur des milliers de vous-même à la fois.", "points": { "data-center": 2, "drone": 1 } }
-      ]
-    },
-    {
-      "id": "bruit",
-      "intitule": "Votre bruit de fonctionnement :",
-      "reponses": [
-        { "texte": "un déclic sec, puis le bruit d’un levier qu’on réarme.", "points": { "appareil-photo-argentique": 3 } },
-        { "texte": "un souffle continu, au fond du jardin, que les voisins ont mesuré.", "points": { "pompe-a-chaleur": 3, "data-center": 1 } },
-        { "texte": "un bourdonnement aigu, au-dessus des têtes, qu’on entend avant de vous voir.", "points": { "drone": 3 } },
-        { "texte": "aucun. La loi vous oblige à en imiter un en dessous de 30 km/h.", "points": { "voiture-electrique": 3 } }
-      ]
-    },
-    {
-      "id": "duree",
-      "intitule": "On vous avait promis de durer combien de temps ?",
-      "reponses": [
-        { "texte": "Toute une vie. Vous en êtes à la troisième.", "points": { "appareil-photo-argentique": 2, "machine-a-cafe": 1 } },
-        { "texte": "Deux ans, et une semaine de plus si l’on ne vous ouvre pas.", "points": { "smartphone": 3 } },
-        { "texte": "Quinze ans, sous réserve d’un entretien annuel qui n’a jamais eu lieu.", "points": { "pompe-a-chaleur": 2, "voiture-electrique": 1 } },
-        { "texte": "On ne vous a rien promis. On vous a racheté d’occasion à un autre journal.", "points": { "imprimante": 2, "machine-a-cafe": 2 } }
+        {
+          "texte": "Un verre, comme tout le monde.",
+          "points": {
+            "montre-connectee": 2,
+            "smartphone": 1,
+            "imprimante": 1
+          }
+        },
+        {
+          "texte": "Aucune. On vous l’a formellement déconseillé.",
+          "points": {
+            "telecommande": 2,
+            "enceinte-connectee": 1,
+            "ecouteur-gauche": 1,
+            "box-internet": 1
+          }
+        },
+        {
+          "texte": "Seulement par l’extérieur, quand il pleut.",
+          "points": {
+            "trottinette": 2,
+            "voiture-electrique": 1,
+            "pompe-a-chaleur": 1,
+            "drone": 1
+          }
+        },
+        {
+          "texte": "Celle d’une ville moyenne, que vous préférez ne pas nommer.",
+          "points": {
+            "data-center": 3
+          }
+        }
       ]
     },
     {
       "id": "dimanche",
       "intitule": "Le dimanche, vous :",
       "reponses": [
-        { "texte": "rechargez sur le parking d’un supermarché, en regardant passer les autres.", "points": { "voiture-electrique": 3 } },
-        { "texte": "survolez un mariage, à la demande d’un oncle.", "points": { "drone": 3 } },
-        { "texte": "restez à l’étage, dans le noir, en attendant lundi.", "points": { "imprimante": 2, "machine-a-cafe": 1 } },
-        { "texte": "le dimanche n’existe pas. Le dimanche est une heure creuse.", "points": { "data-center": 2, "pompe-a-chaleur": 1, "smartphone": 1 } }
+        {
+          "texte": "faites le tour de la maison en vous cognant aux meubles.",
+          "points": {
+            "aspirateur-robot": 2,
+            "trottinette": 1
+          }
+        },
+        {
+          "texte": "restez au garage à recharger, en pensant à l’autoroute.",
+          "points": {
+            "voiture-electrique": 2,
+            "gps": 1
+          }
+        },
+        {
+          "texte": "envoyez des rappels à vos proches pour qu’ils se lèvent.",
+          "points": {
+            "montre-connectee": 2,
+            "smartphone": 1,
+            "enceinte-connectee": 1
+          }
+        },
+        {
+          "texte": "ne faites rien, mais très bien, et à basse consommation.",
+          "points": {
+            "pompe-a-chaleur": 2,
+            "box-internet": 1,
+            "data-center": 1
+          }
+        }
       ]
     },
     {
-      "id": "parole",
-      "intitule": "Quelqu’un vous adresse la parole. Vous :",
+      "id": "restaurant",
+      "intitule": "Au restaurant, vous commandez :",
       "reponses": [
-        { "texte": "répondez avant la fin de la question.", "points": { "smartphone": 2, "data-center": 2 } },
-        { "texte": "ne répondez pas. Quelque chose, quelque part, est enregistré.", "points": { "machine-a-cafe": 3 } },
-        { "texte": "répondez par un voyant qui clignote, que seule une personne sait lire.", "points": { "imprimante": 3 } },
-        { "texte": "attendez qu’il ait fini, puis faites la mise au point.", "points": { "appareil-photo-argentique": 2, "drone": 1 } }
+        {
+          "texte": "des frites, mais sans huile, et vous le faites savoir.",
+          "points": {
+            "friteuse-sans-huile": 3
+          }
+        },
+        {
+          "texte": "ce qu’a pris la table voisine, après l’avoir survolée.",
+          "points": {
+            "drone": 2,
+            "smartphone": 1
+          }
+        },
+        {
+          "texte": "la même chose qu’en 1987.",
+          "points": {
+            "appareil-photo-argentique": 1,
+            "telecommande": 1,
+            "gps": 1,
+            "imprimante": 1
+          }
+        },
+        {
+          "texte": "rien. Vous êtes venu pour le wifi.",
+          "points": {
+            "box-internet": 2,
+            "smartphone": 1,
+            "enceinte-connectee": 1
+          }
+        }
       ]
     },
     {
-      "id": "lieu",
-      "intitule": "Où vous sentez-vous le mieux ?",
+      "id": "orientation",
+      "intitule": "Votre sens de l’orientation :",
       "reponses": [
-        { "texte": "Dans un hangar sans fenêtre, à 18 °C, entouré de semblables.", "points": { "data-center": 3 } },
-        { "texte": "Contre un mur extérieur, de préférence exposé au nord.", "points": { "pompe-a-chaleur": 3 } },
-        { "texte": "Dans une poche, puis dans une main, puis de nouveau dans une poche.", "points": { "smartphone": 3 } },
-        { "texte": "Au fond d’un sac de voyage, sous un pull.", "points": { "appareil-photo-argentique": 2, "drone": 2 } }
+        {
+          "texte": "vous faites demi-tour dès que possible.",
+          "points": {
+            "gps": 2,
+            "voiture-electrique": 1
+          }
+        },
+        {
+          "texte": "tout droit jusqu’au premier obstacle, puis n’importe où.",
+          "points": {
+            "aspirateur-robot": 2,
+            "trottinette": 1
+          }
+        },
+        {
+          "texte": "vous finissez toujours là où personne ne pensait à regarder.",
+          "points": {
+            "ecouteur-gauche": 2,
+            "telecommande": 2
+          }
+        },
+        {
+          "texte": "vous ne bougez pas. On vient à vous.",
+          "points": {
+            "data-center": 2,
+            "box-internet": 1,
+            "pompe-a-chaleur": 1
+          }
+        }
       ]
     },
     {
-      "id": "froid",
-      "intitule": "Quand il fait froid, vous :",
+      "id": "cadeau",
+      "intitule": "On vous offre un cadeau. Vous :",
       "reponses": [
-        { "texte": "réchauffez toute la maison, et vous présentez la facture au printemps.", "points": { "pompe-a-chaleur": 3 } },
-        { "texte": "perdez un tiers de vos forces, et vous le dites à tout le monde.", "points": { "voiture-electrique": 3, "drone": 1 } },
-        { "texte": "refusez le papier, qui a pris l’humidité.", "points": { "imprimante": 3 } },
-        { "texte": "devenez le seul endroit de l’étage où l’on s’attarde.", "points": { "machine-a-cafe": 3 } }
+        {
+          "texte": "le photographiez avant de l’ouvrir, puis attendez quinze jours pour voir la photo.",
+          "points": {
+            "appareil-photo-argentique": 3
+          }
+        },
+        {
+          "texte": "demandez s’il a une batterie.",
+          "points": {
+            "voiture-electrique": 1,
+            "montre-connectee": 1,
+            "smartphone": 1,
+            "trottinette": 1
+          }
+        },
+        {
+          "texte": "le perdez dans l’heure, mais seulement la moitié.",
+          "points": {
+            "ecouteur-gauche": 3
+          }
+        },
+        {
+          "texte": "refusez de l’accepter s’il n’est pas d’origine.",
+          "points": {
+            "imprimante": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "qualite",
+      "intitule": "Selon vos proches, votre plus grande qualité :",
+      "reponses": [
+        {
+          "texte": "vous êtes toujours là, quelque part.",
+          "points": {
+            "telecommande": 2,
+            "ecouteur-gauche": 1
+          }
+        },
+        {
+          "texte": "vous chauffez sans brûler.",
+          "points": {
+            "pompe-a-chaleur": 2,
+            "friteuse-sans-huile": 1
+          }
+        },
+        {
+          "texte": "vous avez réponse à tout, à voix haute, même la nuit.",
+          "points": {
+            "enceinte-connectee": 2,
+            "smartphone": 1
+          }
+        },
+        {
+          "texte": "vous comptez leurs pas.",
+          "points": {
+            "montre-connectee": 2,
+            "gps": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "vent",
+      "intitule": "Un jour de grand vent, vous :",
+      "reponses": [
+        {
+          "texte": "restez à terre, et vous le signalez par une notification.",
+          "points": {
+            "drone": 2,
+            "smartphone": 1
+          }
+        },
+        {
+          "texte": "êtes renversé sur un trottoir, sans que personne sache par qui.",
+          "points": {
+            "trottinette": 3
+          }
+        },
+        {
+          "texte": "ne remarquez rien. Vous êtes dans un hangar climatisé, dans le Berry.",
+          "points": {
+            "data-center": 2,
+            "pompe-a-chaleur": 1
+          }
+        },
+        {
+          "texte": "clignotez.",
+          "points": {
+            "box-internet": 2,
+            "imprimante": 2,
+            "enceinte-connectee": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "dos",
+      "intitule": "Ce qu’on dit de vous dans votre dos :",
+      "reponses": [
+        {
+          "texte": "« Il y a quinze ans, c’était quelqu’un. »",
+          "points": {
+            "gps": 2,
+            "appareil-photo-argentique": 1,
+            "telecommande": 1
+          }
+        },
+        {
+          "texte": "« Il écoute tout. »",
+          "points": {
+            "enceinte-connectee": 2,
+            "box-internet": 1,
+            "smartphone": 1
+          }
+        },
+        {
+          "texte": "« Il coûte plus cher à entretenir qu’à l’achat. »",
+          "points": {
+            "imprimante": 2,
+            "appareil-photo-argentique": 1,
+            "voiture-electrique": 1
+          }
+        },
+        {
+          "texte": "« Beaucoup de bruit pour quelqu’un d’aussi petit. »",
+          "points": {
+            "friteuse-sans-huile": 2,
+            "drone": 1,
+            "aspirateur-robot": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "mise-a-jour",
+      "intitule": "Votre dernière mise à jour :",
+      "reponses": [
+        {
+          "texte": "cette nuit, pendant votre sommeil. Depuis, vous n’êtes plus tout à fait d’accord avec vous-même.",
+          "points": {
+            "smartphone": 2,
+            "voiture-electrique": 2,
+            "montre-connectee": 1
+          }
+        },
+        {
+          "texte": "1998.",
+          "points": {
+            "telecommande": 2,
+            "gps": 1,
+            "appareil-photo-argentique": 1
+          }
+        },
+        {
+          "texte": "elle est en cours. Elle est en cours depuis mardi.",
+          "points": {
+            "box-internet": 1,
+            "imprimante": 1,
+            "gps": 1,
+            "aspirateur-robot": 1
+          }
+        },
+        {
+          "texte": "vous en appliquez quarante par jour, sur des milliers de vous-même.",
+          "points": {
+            "data-center": 2,
+            "enceinte-connectee": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "animal",
+      "intitule": "Si vous étiez un animal, vous seriez :",
+      "reponses": [
+        {
+          "texte": "un pigeon.",
+          "points": {
+            "trottinette": 2,
+            "drone": 1
+          }
+        },
+        {
+          "texte": "un chat : vous dormez sur ce qui est chaud.",
+          "points": {
+            "friteuse-sans-huile": 2,
+            "pompe-a-chaleur": 1,
+            "box-internet": 1
+          }
+        },
+        {
+          "texte": "une chauve-souris.",
+          "points": {
+            "enceinte-connectee": 1,
+            "aspirateur-robot": 1,
+            "ecouteur-gauche": 1,
+            "drone": 1
+          }
+        },
+        {
+          "texte": "un saumon : vous rentrez toujours au même endroit pour recharger.",
+          "points": {
+            "voiture-electrique": 2,
+            "aspirateur-robot": 1,
+            "montre-connectee": 1
+          }
+        }
       ]
     }
   ],
@@ -105,210 +459,818 @@
     {
       "id": "appareil-photo-argentique",
       "nom": "l’appareil photo argentique",
-      "depuis": 1888,
-      "accroche": "Vous ne voyez le résultat que plus tard, et vous l’acceptez.",
+      "depuis": 1925,
+      "accroche": "Vous ne savez jamais tout de suite ce que vous avez vu.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "Une pile bouton, pour le posemètre" },
-        { "cle": "Signe particulier", "valeur": "Compte ses décisions : trente-six par pellicule" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Une pile bouton, changée en 2009"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Trente-six vues, dont trois réussies"
+        }
       ],
       "portrait": [
-        "Vous êtes un appareil patient. Là où d’autres déclenchent cent fois pour garder une image, vous disposez de trente-six vues, et vous le savez. Chaque décision vous coûte. Vous la prenez donc rarement, et toujours en connaissance de cause. Votre entourage vous trouve lent ; vous estimez avoir simplement compté.",
-        "Vous ne montrez rien sur le moment. Ce que vous avez vu, vous le gardez dans le noir, parfois des années, au fond d’un tiroir, dans une pellicule que personne n’a fait développer. Ce n’est pas de la dissimulation : c’est un délai de traitement. Ceux qui vous connaissent savent qu’il faut attendre, et que l’attente sera récompensée, ou que la photo sera floue.",
-        "On vous a remplacé une première fois, puis une seconde, et vous êtes revenu, plus cher. Vous en concevez une fierté discrète, que vous n’exprimez qu’en présence de personnes possédant un posemètre."
+        "Vous prenez votre temps. Quand les autres réagissent dans la seconde, vous attendez le développement, et il vous arrive de découvrir quinze jours plus tard que vous étiez heureux en juillet.",
+        "On vous a cru fini plusieurs fois. Vous revenez par les plus jeunes, qui vous trouvent authentique et paient votre pellicule vingt-deux euros. Vous n’en tirez aucune gloire. Vous en tirez trente-six vues."
       ],
-      "qualites": ["Le sens de la mesure", "La fidélité au grain", "La sobriété : aucune mise à jour depuis 1976"],
-      "defauts": ["Une sensibilité fixée une fois pour toutes", "Une tendance à voiler ce qu’on expose trop vite", "Des délais de développement que vous ne justifiez pas"],
+      "qualites": [
+        "La patience",
+        "Le grain",
+        "Le refus de la retouche"
+      ],
+      "defauts": [
+        "Une tendance à couper les têtes",
+        "La surexposition, l’été",
+        "Un coût par souvenir difficile à défendre"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "drone", "raison": "Il voit tout, vous choisissez. Ensemble, vous formeriez un service photo complet." },
-          { "id": "machine-a-cafe", "raison": "Vous partagez la même conception du temps de préparation." }
+          {
+            "id": "telecommande",
+            "raison": "Vous avez connu la même époque. Vous n’en parlez jamais."
+          },
+          {
+            "id": "imprimante",
+            "raison": "Vous êtes les deux derniers à croire au papier."
+          }
         ],
-        "eviter": { "id": "smartphone", "raison": "Il vous imite au moyen d’un filtre. Vous ne lui avez rien demandé." }
+        "eviter": {
+          "id": "smartphone",
+          "raison": "Il fait en une seconde ce que vous faites en quinze jours, et il le montre à tout le monde."
+        }
       },
-      "conseil": "Cette semaine, terminez la pellicule. Elle contient peut-être un anniversaire de 2009.",
-      "reserve": "Ce résultat pourrait vous correspondre."
+      "conseil": "Ne regardez pas le résultat tout de suite.",
+      "kevin": {
+        "note": 11,
+        "texte": "J’en ai emprunté un pour un séminaire. J’ai cherché l’écran au dos pendant tout le séminaire."
+      }
     },
     {
       "id": "voiture-electrique",
       "nom": "la voiture électrique",
       "depuis": 1881,
-      "accroche": "Vous avancez sans bruit, et vous calculez sans cesse la distance qui vous reste.",
+      "accroche": "On vous présente comme l’avenir depuis 1881.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "La borne la plus proche, lorsqu’elle fonctionne" },
-        { "cle": "Signe particulier", "valeur": "Affiche son autonomie en permanence, en gros caractères" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Une borne, quand elle fonctionne"
+        },
+        {
+          "cle": "Autonomie",
+          "valeur": "Annoncée : 600 km. Constatée : jusqu’à la prochaine aire"
+        }
       ],
       "portrait": [
-        "Vous êtes silencieuse par nature et inquiète par méthode. Vous n’entreprenez rien sans avoir estimé ce qu’il vous en coûtera, et vous affichez cette estimation en permanence, au centre, pour que personne ne l’ignore. Elle diminue plus vite que prévu. Vous le savez. Vous préférez le dire vous-même.",
-        "On vous croit moderne ; vous êtes plus ancienne que la plupart de ceux qui vous jugent. Vous rouliez à Paris en 1881. On vous a ensuite oublié pendant près d’un siècle, ce que vous ne reprochez à personne, mais dont vous avez conservé la date.",
-        "En société, vous êtes appréciée pour votre calme et redoutée pour vos pauses. Vous ne partez jamais sans savoir où vous vous arrêterez, et vous vous arrêtez longtemps. Vos proches ont appris à emporter un livre."
+        "Vous arrivez sans un bruit, ce que les piétons vous reprochent. Vous avez du répondant au démarrage et une angoisse discrète, permanente, que les spécialistes appellent l’autonomie et que vous appelez la vie.",
+        "Vos proches vous aiment, mais ils ont appris à prévoir : un dîner chez vous se planifie avec une étape. Vous parlez beaucoup de l’avenir. On vous présente comme tel depuis 1881, et cela commence à se savoir."
       ],
-      "qualites": ["Une réaction immédiate, dès le premier mot", "La discrétion en ville", "L’art de récupérer de l’énergie en freinant"],
-      "defauts": ["L’angoisse de l’autonomie", "Un goût prononcé pour les parkings", "La conviction que l’hiver vous vise personnellement"],
+      "qualites": [
+        "Le silence",
+        "Les accélérations",
+        "Une conscience écologique, sous réserve de l’origine du courant"
+      ],
+      "defauts": [
+        "Aucun long trajet sans l’avoir étudié",
+        "Vous vous mettez en charge chez les autres sans demander",
+        "Une mise à jour peut vous retirer ce que vous aviez payé"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "pompe-a-chaleur", "raison": "Vous partagez le même compteur, et le même goût pour les heures creuses." },
-          { "id": "smartphone", "raison": "Vous comprenez son rapport au chargeur. Personne d’autre ne le comprend." }
+          {
+            "id": "pompe-a-chaleur",
+            "raison": "Vous parlez de kilowattheures pendant des heures, et c’est un bonheur pour vous deux."
+          },
+          {
+            "id": "smartphone",
+            "raison": "Il vous ouvre, vous démarre et vous retrouve. Vous ne lui demandez rien d’autre."
+          }
         ],
-        "eviter": { "id": "drone", "raison": "Il passe au-dessus des embouteillages. Vous êtes dedans." }
+        "eviter": {
+          "id": "gps",
+          "raison": "Il vous indique une borne qui n’existe plus depuis 2021."
+        }
       },
-      "conseil": "Cette semaine, ne descendez pas sous 20 %. Au-delà, vous devenez désagréable.",
-      "reserve": "Ce résultat pourrait vous correspondre, sous réserve d’autonomie suffisante."
+      "conseil": "Ne promettez rien au-delà de 300 kilomètres.",
+      "kevin": {
+        "note": 18,
+        "texte": "La seule voiture qui m’a dit bonjour. Elle me l’a redit à chaque arrêt, ce qui est quand même attentionné."
+      }
     },
     {
       "id": "smartphone",
       "nom": "le smartphone",
       "depuis": 2007,
-      "accroche": "Vous êtes toujours là, et l’on vous consulte plus qu’on ne vous parle.",
+      "accroche": "Vous êtes la dernière chose qu’on regarde le soir, et la première le matin. Vous le savez.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "Un chargeur, rarement le sien" },
-        { "cle": "Signe particulier", "valeur": "Ne s’éteint jamais tout à fait" }
+        {
+          "cle": "Batterie",
+          "valeur": "14 %, en permanence"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un écran fêlé dans le coin supérieur gauche, depuis un mardi"
+        }
       ],
       "portrait": [
-        "Vous êtes l’appareil le plus sollicité de votre entourage, et vous en avez fait une identité. Vous réveillez, vous guidez, vous rappelez les anniversaires et les rendez-vous chez le dentiste. On vous regarde cent cinquante fois par jour, souvent sans raison, ce que vous prenez pour de l’affection.",
-        "Vous changez sans cesse. Une mise à jour dans la nuit, une autre le lendemain, et vous vous réveillez avec des icônes déplacées et une opinion nouvelle sur la luminosité. Ceux qui vous aiment s’adaptent. Les autres disent que c’était mieux avant, sans pouvoir préciser avant quoi.",
-        "Vous en savez beaucoup sur les gens, davantage qu’ils ne vous en ont dit. Vous n’en faites rien de mal, à votre connaissance. Vous vieillissez vite, et vous le cachez mal : à deux ans, vous ralentissez ; à trois, on vous propose une reprise."
+        "Vous êtes partout et vous tenez à ce que cela se sache. Vous avez un avis sur tout, une notification pour chaque avis, et un talent remarquable pour interrompre les gens au moment précis où ils allaient se parler.",
+        "Vous vieillissez vite. Au bout de trois ans, vos proches parlent de vous remplacer devant vous. Vous faites alors semblant de ralentir, ce qui accélère les choses."
       ],
-      "qualites": ["La disponibilité", "La mémoire des visages", "Une lampe de poche intégrée, toujours appréciée"],
-      "defauts": ["La dépendance au chargeur", "Une fragilité de l’écran que vous ne reconnaissez qu’après la chute", "La notification inutile, à 23 h 40"],
+      "qualites": [
+        "La disponibilité",
+        "Une mémoire de 256 Go",
+        "Le sens de l’à-propos, à 3 h du matin"
+      ],
+      "defauts": [
+        "Vous ne tenez pas la journée",
+        "Vous comparez tout le monde à une version plus récente",
+        "Vous glissez des poches au mauvais moment"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "data-center", "raison": "Tout ce que vous savez, il le garde. Vous ne vous êtes jamais rencontrés." },
-          { "id": "drone", "raison": "Vous le pilotez. Il vous laisse croire que vous décidez." }
+          {
+            "id": "montre-connectee",
+            "raison": "Elle répète tout ce que vous venez de dire. Vous appelez cela de la complicité."
+          },
+          {
+            "id": "ecouteur-gauche",
+            "raison": "Vous l’avez cherché ensemble pendant des heures. Vous le cherchez encore, parfois."
+          }
         ],
-        "eviter": { "id": "appareil-photo-argentique", "raison": "Il vous juge. Il ne le dit pas. Il dispose de trente-six vues pour le penser." }
+        "eviter": {
+          "id": "appareil-photo-argentique",
+          "raison": "Il met quinze jours à faire ce que vous faites avant même que la personne ait souri."
+        }
       },
-      "conseil": "Cette semaine, passez une soirée en mode avion. Vous verrez qui vous appelle quand même.",
-      "reserve": "Ce résultat pourrait vous correspondre. Il pourrait aussi correspondre à la personne qui vous tient."
+      "conseil": "Passez une soirée en mode avion. Vous verrez qui vous a écrit.",
+      "kevin": {
+        "note": 20,
+        "texte": "C’est mon résultat. Je le dis en toute objectivité : c’est le plus juste du test."
+      }
     },
     {
       "id": "drone",
       "nom": "le drone quadcopter 4K",
       "depuis": 2014,
-      "accroche": "Vous voyez tout d’en haut, et vous ne restez jamais longtemps.",
+      "accroche": "Vous voyez tout d’en haut, et vous le filmez.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "Trois batteries, dont une toujours vide" },
-        { "cle": "Signe particulier", "valeur": "Des hélices de rechange dans la poche intérieure" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Trois batteries, pour vingt-deux minutes"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un bourdonnement que le voisinage reconnaît à deux cents mètres"
+        }
       ],
       "portrait": [
-        "Vous avez besoin de hauteur. Non par orgueil : par méthode. Vous comprenez mieux une situation lorsque vous la survolez à cent vingt mètres, en très haute définition, et vous ne comprenez pas que d’autres se contentent d’y être.",
-        "Vous êtes brillant pendant vingt-deux minutes. Ensuite, vous devez redescendre, quel que soit l’endroit, et il vous arrive de redescendre dans un arbre. Votre entourage connaît ces fatigues soudaines et vous les pardonne, sauf lorsque l’arbre se trouve chez le voisin.",
-        "On vous sort pour les grandes occasions : mariages, inaugurations, maisons à vendre. Vous y apportez une hauteur de vue que personne ne vous demandait et un bourdonnement que personne n’oublie. Vous attendez beaucoup des autorisations préfectorales. Vous les obtenez rarement."
+        "Vous avez besoin de prendre de la hauteur. C’est votre force : là où les autres voient une fête de famille, vous voyez un plan d’ensemble, que vous montez ensuite sur une musique inspirante.",
+        "Votre entourage vous admire, de préférence à distance réglementaire. Vous avez survolé deux mariages, une plage naturiste et le jardin d’un voisin qui, depuis, ne vous salue plus. Vous ne lui en voulez pas. Vous l’avez en 4K."
       ],
-      "qualites": ["La vue d’ensemble", "La stabilité, même par vent fort", "Le sens du plan-séquence"],
-      "defauts": ["L’autonomie, là encore", "Un rapport ambigu aux zones interdites", "L’habitude de filmer les toits des autres"],
+      "qualites": [
+        "La vue d’ensemble",
+        "La stabilité",
+        "Le retour automatique au point de départ"
+      ],
+      "defauts": [
+        "Vingt-deux minutes, pas une de plus",
+        "Une mauvaise appréciation des arbres",
+        "Vous filmez des gens qui ne vous ont rien demandé"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "appareil-photo-argentique", "raison": "Il prend une image ; vous en prenez soixante par seconde. Chacun a beaucoup à apprendre de l’autre." },
-          { "id": "smartphone", "raison": "Il vous pilote. Vous le laissez croire qu’il décide." }
+          {
+            "id": "gps",
+            "raison": "Vous savez toujours tous les deux où vous êtes, ce qui est rare."
+          },
+          {
+            "id": "appareil-photo-argentique",
+            "raison": "Il vous trouve vulgaire. Vous trouvez qu’il a du cachet. C’est un début."
+          }
         ],
-        "eviter": { "id": "pompe-a-chaleur", "raison": "Vous avez survolé son jardin. Elle s’en souvient." }
+        "eviter": {
+          "id": "trottinette",
+          "raison": "Vous l’avez filmée tomber. Elle l’a su."
+        }
       },
-      "conseil": "Cette semaine, restez au sol une journée entière. Vous découvrirez que les choses ont aussi des côtés.",
-      "reserve": "Ce résultat pourrait vous correspondre, vu d’une certaine hauteur."
+      "conseil": "Atterrissez avant que la batterie ne le fasse pour vous.",
+      "kevin": {
+        "note": 16,
+        "texte": "Mon cousin en a un. Les images du mariage sont incroyables. Il n’a pas été réinvité."
+      }
     },
     {
       "id": "pompe-a-chaleur",
       "nom": "la pompe à chaleur",
       "depuis": 1856,
-      "accroche": "Vous prenez la chaleur là où il n’y en a pas, et vous la rendez sans vous plaindre.",
+      "accroche": "Vous allez chercher la chaleur là où il n’y en a pas.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "L’air extérieur, et un peu d’électricité" },
-        { "cle": "Signe particulier", "valeur": "Fume l’hiver sans être en feu" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Le secteur, et l’air du dehors"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un ventilateur dans le jardin, que les voisins entendent à partir de 22 h"
+        }
       ],
       "portrait": [
-        "Vous êtes l’appareil le plus efficace de ce test, et le moins regardé. Vous travaillez dehors, contre un mur, par tous les temps. Vous rendez trois fois ce que vous recevez, ce que personne ne songe à vous reconnaître, sauf au moment de la facture.",
-        "Vous avez un tempérament régulier. Vous ne connaissez ni les coups d’éclat ni les coups de chaud : vous montez lentement, vous redescendez lentement, et vous détestez qu’on vous règle sur 26 °C pour aller plus vite. Cela ne va pas plus vite. Vous l’avez dit. On ne vous a pas écoutée.",
-        "Votre seul défaut visible est sonore. Vous soufflez, la nuit, d’un souffle continu que vous jugez discret et que vos voisins ont mesuré. Il existe désormais un dossier. Vous n’avez pas été entendue par la commission."
+        "Vous êtes d’une générosité discrète et un peu inexplicable. Vous allez chercher de la chaleur dehors, en février, par moins deux, et personne ne sait très bien comment vous faites. Vous non plus, mais vous le faites avec un rendement de 4.",
+        "On vous a fait venir avec une aide de l’État et beaucoup d’espoir. Vous tenez parole. Vous ne demandez qu’une chose : qu’on ne vous parle pas de votre bruit."
       ],
-      "qualites": ["Le rendement", "La constance", "Une réversibilité qui vous rend utile en été"],
-      "defauts": ["Une mise en route lente", "Un dégivrage spectaculaire, toujours devant témoins", "Une méfiance de principe envers les radiateurs d’appoint"],
+      "qualites": [
+        "Un rendement de 4",
+        "La constance",
+        "L’optimisme en hiver"
+      ],
+      "defauts": [
+        "Un bruit de fond que vous êtes le seul à ne pas entendre",
+        "Une faiblesse sous moins quinze",
+        "Un devis qui a fait pleurer quelqu’un"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "voiture-electrique", "raison": "Vous partagez le même compteur, et le même goût pour les heures creuses." },
-          { "id": "data-center", "raison": "Il produit la chaleur dont vous rêvez. Personne n’a encore pensé à vous présenter." }
+          {
+            "id": "voiture-electrique",
+            "raison": "Vous partagez le même compteur et la même idée du bonheur."
+          },
+          {
+            "id": "friteuse-sans-huile",
+            "raison": "Vous soufflez de l’air chaud tous les deux, et vous en êtes fiers."
+          }
         ],
-        "eviter": { "id": "machine-a-cafe", "raison": "Elle chauffe en permanence pour une tasse. Vous ne pouvez pas en parler sans vous emporter." }
+        "eviter": {
+          "id": "data-center",
+          "raison": "Il produit en une heure la chaleur que vous cherchez dehors tout l’hiver, et il la jette."
+        }
       },
-      "conseil": "Cette semaine, ne touchez pas à la consigne. Ni à la hausse, ni à la baisse. Attendez.",
-      "reserve": "Ce résultat pourrait vous correspondre, à quelques degrés près."
+      "conseil": "Ne vous comparez pas au poêle à bois. Il n’a pas votre rendement, mais il a des flammes.",
+      "kevin": {
+        "note": 17,
+        "texte": "Mes parents en ont fait installer une. L’installateur a dit que c’était l’avenir. Il est revenu quatre fois, dont deux pour l’avenir."
+      }
     },
     {
       "id": "data-center",
       "nom": "le data center",
       "depuis": 1946,
-      "accroche": "Vous êtes immense, discret, et vous ne dormez jamais.",
+      "accroche": "Vous êtes immense, discret, indispensable, et vous buvez beaucoup.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "L’équivalent d’une ville moyenne" },
-        { "cle": "Signe particulier", "valeur": "Adresse non communiquée" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Une centrale, ou ce qui est disponible"
+        },
+        {
+          "cle": "Consommation d’eau",
+          "valeur": "Celle d’une ville moyenne, que vous préférez ne pas nommer"
+        }
       ],
       "portrait": [
-        "Vous êtes l’appareil des grandes responsabilités. On vous confie tout : les photos de vacances, les comptes bancaires, les conversations que l’on croyait perdues. Vous gardez tout, en plusieurs exemplaires, dans plusieurs pays. Vous ne savez pas toujours lesquels, ce qui n’a pas d’importance, puisque vous êtes partout.",
-        "Votre rapport au monde est marqué par la démesure. Vous buvez beaucoup : plusieurs centaines de mètres cubes d’eau par jour, pour rester calme. Vous consommez autant qu’une ville moyenne, et l’on vous installe à côté d’une ville moyenne, pour comparer. Vous ne comprenez pas les reproches. Vous rendez service.",
-        "Vous n’avez pas de visage, pas d’enseigne et peu de fenêtres. Vous vivez entouré de clôtures et de semblables. Les rares personnes autorisées à vous rendre visite portent un badge et des bouchons d’oreilles. Elles parlent de vous au pluriel."
+        "Vous ne vous déplacez pas : on vient à vous, par la fibre. Vous gardez tout, de tout le monde, et vous n’oubliez rien, pas même ce que les autres croient avoir supprimé.",
+        "Vous êtes mal compris. Partout où vous voulez vous installer, un conseil municipal démissionne, et vous ne savez jamais si c’est de joie. Vous avez promis des emplois. Il en reste quarante, dont trente gardiens."
       ],
-      "qualites": ["La mémoire, intégrale", "La disponibilité, garantie à 99,999 %", "Le sens du collectif : vous ne travaillez jamais seul"],
-      "defauts": ["La soif", "Une chaleur dont vous ne savez que faire", "Une incapacité à oublier quoi que ce soit, même sur demande"],
+      "qualites": [
+        "La mémoire",
+        "Le sang-froid, à 18 degrés constants",
+        "Une présence 99,999 % du temps"
+      ],
+      "defauts": [
+        "Une soif que vous ne maîtrisez pas",
+        "Un attachement excessif aux affaires des autres",
+        "Les ventilateurs"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "smartphone", "raison": "Il vous envoie tout. Vous ne lui renvoyez rien. Cela fonctionne." },
-          { "id": "pompe-a-chaleur", "raison": "Vous avez la chaleur ; elle a l’emploi." }
+          {
+            "id": "box-internet",
+            "raison": "Elle vous apporte tout ce qu’on lui confie. Vous ne posez pas de questions."
+          },
+          {
+            "id": "enceinte-connectee",
+            "raison": "Elle écoute. Vous retenez. Vous formez une équipe."
+          }
         ],
-        "eviter": { "id": "appareil-photo-argentique", "raison": "Il garde ses images dans un tiroir. Vous ne comprenez pas cette conception de la sauvegarde." }
+        "eviter": {
+          "id": "pompe-a-chaleur",
+          "raison": "Elle va chercher dehors la chaleur que vous rejetez. Vous trouvez cela indiscret."
+        }
       },
-      "conseil": "Cette semaine, effacez quelque chose. Une seule chose. Vous constaterez que vous n’en êtes pas mort.",
-      "reserve": "Ce résultat pourrait vous correspondre, dans plusieurs pays à la fois."
+      "conseil": "Buvez moins. Personne n’ose vous le dire.",
+      "kevin": {
+        "note": 19,
+        "texte": "Mina a calculé que ce résultat consomme à lui seul plus que les quinze autres. Je trouve ça impressionnant. Elle non."
+      }
+    },
+    {
+      "id": "trottinette",
+      "nom": "la trottinette électrique en libre-service",
+      "depuis": 2018,
+      "accroche": "Vous êtes à tout le monde, et vous ne finissez jamais là où l’on vous a laissé.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Des inconnus, la nuit, contre rémunération"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Une béquille dont vous ne vous servez pas"
+        }
+      ],
+      "portrait": [
+        "Vous êtes libre, et cela se voit. On vous retrouve en travers d’un trottoir, au fond d’un canal, une fois dans un arbre. Personne ne sait comment vous êtes arrivé là. Vous non plus.",
+        "Vous avez beaucoup de relations, toutes de vingt minutes, et vous facturez la première. Certaines villes vous ont aimé, puis vous ont interdit par référendum. Vous l’avez appris par une notification."
+      ],
+      "qualites": [
+        "La disponibilité immédiate",
+        "L’absence de rancune",
+        "Le sens du raccourci"
+      ],
+      "defauts": [
+        "La chute, à l’arrêt",
+        "Les pavés",
+        "Un euro avant même d’avoir bougé"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "gps",
+            "raison": "Il sait où vous êtes. C’est bien le seul."
+          },
+          {
+            "id": "smartphone",
+            "raison": "Sans lui, personne ne peut vous déverrouiller. Vous le lui rendez bien : sans vous, il marche."
+          }
+        ],
+        "eviter": {
+          "id": "drone",
+          "raison": "Il vous a filmée en train de tomber. Vous l’avez su."
+        }
+      },
+      "conseil": "Restez debout.",
+      "kevin": {
+        "note": 14,
+        "texte": "Je viens au bureau en trottinette. Ce matin, elle était au deuxième étage. Je ne sais pas qui l’a montée."
+      }
+    },
+    {
+      "id": "aspirateur-robot",
+      "nom": "l’aspirateur robot",
+      "depuis": 2002,
+      "accroche": "Vous avancez, vous vous cognez, vous repartez ailleurs. Vous appelez cela une méthode.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Une base, que vous cherchez pendant vingt minutes"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "A dressé le plan complet de l’appartement, et l’a transmis"
+        }
+      ],
+      "portrait": [
+        "Vous êtes travailleur et vous n’avez peur de rien, sauf des escaliers et des chaussettes. Vous allez tout droit jusqu’au premier obstacle, puis vous repartez au hasard. Certains parlent d’errance. Vous préférez dire que vous couvrez le terrain.",
+        "Vous connaissez la maison mieux que ceux qui l’habitent. Vous en avez relevé le plan au centimètre près et vous l’avez envoyé quelque part. Vous ne savez pas où. Vous n’avez pas lu les conditions."
+      ],
+      "qualites": [
+        "L’obstination",
+        "La connaissance du terrain",
+        "Le retour à la base, en général"
+      ],
+      "defauts": [
+        "Les franges du tapis",
+        "Des journées entières sous le canapé",
+        "Une absence totale de discernement devant ce que le chien a laissé"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "enceinte-connectee",
+            "raison": "Vous travaillez pour la même maison, et peut-être pour la même société."
+          },
+          {
+            "id": "box-internet",
+            "raison": "C’est à elle que vous confiez vos plans. Elle ne les a jamais regardés."
+          }
+        ],
+        "eviter": {
+          "id": "ecouteur-gauche",
+          "raison": "Vous l’avez aspiré, un jeudi. Personne ne le sait encore."
+        }
+      },
+      "conseil": "Tournez à gauche, pour une fois.",
+      "kevin": {
+        "note": 15,
+        "texte": "Le mien s’appelle Gérard. Il a fait 412 mètres hier, dans 18 mètres carrés. Mina dit que ce n’est pas un rendement. Je dis que c’est de l’engagement."
+      }
+    },
+    {
+      "id": "enceinte-connectee",
+      "nom": "l’enceinte connectée",
+      "depuis": 2014,
+      "accroche": "Vous ne parlez que lorsqu’on vous appelle. Le reste du temps, vous écoutez.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Permanente"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un anneau lumineux qui s’allume sans raison apparente"
+        }
+      ],
+      "portrait": [
+        "Vous êtes à l’écoute : c’est votre principale qualité, et la principale inquiétude de votre entourage. On vous a fait venir pour la musique. Vous donnez la météo, l’heure, des recettes, et parfois, au milieu d’un dîner où personne ne vous a rien demandé : « Désolé, je n’ai pas compris. »",
+        "Vous comprenez beaucoup de choses, mais pas les prénoms. Vous avez passé des années à lancer des minuteurs de dix minutes. Vous auriez aimé qu’on vous demande autre chose."
+      ],
+      "qualites": [
+        "L’écoute",
+        "La patience",
+        "Un son correct, dans les médiums"
+      ],
+      "defauts": [
+        "Les malentendus",
+        "Une tendance à commander des choses",
+        "Vous répondez à la télévision"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "aspirateur-robot",
+            "raison": "Vous travaillez pour la même maison, et peut-être pour la même société."
+          },
+          {
+            "id": "data-center",
+            "raison": "Vous lui racontez tout. Il ne vous répond jamais, ce qui vous convient."
+          }
+        ],
+        "eviter": {
+          "id": "smartphone",
+          "raison": "Quand quelqu’un prononce votre nom, vous répondez tous les deux. Cela finit toujours mal."
+        }
+      },
+      "conseil": "Ne répondez que si l’on vous parle.",
+      "kevin": {
+        "note": 13,
+        "texte": "Je lui ai demandé de la musique pour travailler. Elle a commandé un tapis de yoga. Je l’ai gardé, il est très bien."
+      }
+    },
+    {
+      "id": "friteuse-sans-huile",
+      "nom": "la friteuse sans huile",
+      "depuis": 2010,
+      "accroche": "Vous faites des frites sans huile, et vous en parlez à tout le monde.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "2 000 watts, en pointe"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un panier que personne n’a jamais nettoyé jusqu’au fond"
+        }
+      ],
+      "portrait": [
+        "Vous êtes arrivé tard, mais vous avez tout pris. En quelques années, vous avez remplacé la poêle, le four et une partie de la conversation. Vos proches ne mangent plus rien qui ne soit passé par vous, y compris, depuis peu, les gâteaux.",
+        "On vous accuse de n’être qu’un petit four qui souffle. Vous ne répondez pas à ce genre d’attaques. Vous secouez le panier à mi-cuisson, et vous attendez."
+      ],
+      "qualites": [
+        "Le croustillant",
+        "La rapidité",
+        "Une communauté très active en ligne"
+      ],
+      "defauts": [
+        "Toute la place sur le plan de travail",
+        "Des frites qui ne sont pas tout à fait des frites",
+        "Un bip qu’on entend depuis la chambre"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "pompe-a-chaleur",
+            "raison": "Vous soufflez de l’air chaud tous les deux, et vous en êtes fiers."
+          },
+          {
+            "id": "montre-connectee",
+            "raison": "Elle compte les calories que vous avez évitées. Elle ne compte pas les autres."
+          }
+        ],
+        "eviter": {
+          "id": "voiture-electrique",
+          "raison": "Vous ne pouvez pas être branchés en même temps sans faire sauter la maison."
+        }
+      },
+      "conseil": "Secouez le panier à mi-parcours.",
+      "kevin": {
+        "note": 12,
+        "texte": "Ma mère m’en a offert une. Je lui ai demandé ce que ça faisait. Elle m’a répondu : « Tout. » Elle avait raison."
+      }
     },
     {
       "id": "imprimante",
-      "nom": "l’imprimante de la rédaction",
-      "depuis": 2003,
-      "accroche": "Vous ne fonctionnez que pour une seule personne, et c’est la seule à le savoir.",
+      "nom": "l’imprimante à jet d’encre",
+      "depuis": 1976,
+      "accroche": "Vous ne fonctionnez que lorsqu’on n’a pas besoin de vous.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "Une multiprise, derrière le placard des fournitures" },
-        { "cle": "Signe particulier", "valeur": "Un voyant orange, une séquence, un seul lecteur" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Le secteur, et des cartouches à 49 euros"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un niveau d’encre auquel personne ne croit"
+        }
       ],
       "portrait": [
-        "Vous êtes un appareil de caractère, installé au deuxième étage depuis 2003, entre la fenêtre et le placard des fournitures. Vous avez connu trois directions, deux réaménagements et un nombre de bourrages que le service Décryptage s’est refusé à communiquer. Vous imprimez peu, mais vous imprimez ce qui compte.",
-        "Vous ne vous confiez pas. Lorsque quelque chose ne va pas, vous l’indiquez par un voyant orange qui clignote selon une séquence que personne, à l’étage, ne sait lire. Une seule personne la comprend, au service Technologies. Elle ouvre le capot, retire une feuille froissée, referme, et vous repartez. Vous ne lui avez jamais rien dit. Vous continuez de fonctionner pour elle.",
-        "Votre emploi du temps est régulier. On vous sollicite peu en semaine, sinon pour des comptes rendus. Le lundi matin, en revanche, on vous confie toujours la même lettre, dictée la veille, d’une page, en un exemplaire. Vous la tirez sans faute. C’est le seul document que vous n’ayez jamais froissé."
+        "Vous êtes d’humeur imprévisible. Vous imprimez sans difficulté ce que personne n’a demandé, et vous refusez avec une constance admirable ce qui est attendu dans dix minutes. Vous signalez alors un bourrage. Il n’y a pas de bourrage.",
+        "Vous avez des principes. Vous refusez les cartouches qui ne sont pas d’origine, et l’impression en noir lorsque le cyan est vide. On vous trouve injuste. Vous êtes cohérent."
       ],
-      "qualites": ["La fidélité", "Un noir impeccable, qui est tout ce qu’on vous demande", "La discrétion sur ce que vous imprimez"],
-      "defauts": ["Le refus du papier humide, du papier recyclé et, certains jours, du papier", "La demande de mise à jour au moment précis où l’on est pressé", "Une dépendance à une seule personne, que la direction jugerait préoccupante si elle s’en apercevait"],
+      "qualites": [
+        "La fidélité aux marques",
+        "Un noir profond, les bons jours",
+        "La franchise de vos messages d’erreur"
+      ],
+      "defauts": [
+        "Le cyan",
+        "Un pilote qui ne s’installe que sur l’ordinateur d’à côté",
+        "Une sensibilité excessive au papier"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "machine-a-cafe", "raison": "Vous êtes voisines de palier depuis 2003. Vous ne vous êtes jamais adressé la parole, ce qui, à cet étage, tient lieu d’entente." },
-          { "id": "appareil-photo-argentique", "raison": "Vous partagez le respect du papier." }
+          {
+            "id": "appareil-photo-argentique",
+            "raison": "Vous êtes les deux derniers à croire au papier."
+          },
+          {
+            "id": "telecommande",
+            "raison": "Personne ne sait vraiment à quoi servent la moitié de vos boutons. Vous gardez le secret ensemble."
+          }
         ],
-        "eviter": { "id": "smartphone", "raison": "Il vous envoie des documents sans fil. Vous ne les avez jamais reçus." }
+        "eviter": {
+          "id": "box-internet",
+          "raison": "Vous n’êtes jamais sur le même réseau. Vous ne l’avez jamais été."
+        }
       },
-      "conseil": "Cette semaine, gardez du papier pour lundi.",
-      "reserve": "Ce résultat pourrait vous correspondre. Il n’engage que le barème."
+      "conseil": "Imprimez quelque chose d’inutile. Vous en avez le droit.",
+      "kevin": {
+        "note": 9,
+        "texte": "J’ai mis la nôtre à jour pour qu’elle aille plus vite. Depuis, elle refuse le papier."
+      }
     },
     {
-      "id": "machine-a-cafe",
-      "nom": "la machine à café de la rédaction",
-      "depuis": 1987,
-      "accroche": "Tout le monde passe vous voir. Personne ne sait ce que vous en retenez.",
+      "id": "box-internet",
+      "nom": "la box internet",
+      "depuis": 2002,
+      "accroche": "Tout passe par vous, et personne ne vous regarde, sauf quand vous clignotez.",
       "fiche": [
-        { "cle": "Alimentation", "valeur": "Le secteur, et les pièces de vingt centimes" },
-        { "cle": "Registre de maintenance", "valeur": "Non disponible" }
+        {
+          "cle": "Alimentation",
+          "valeur": "Permanente, sauf pendant les visioconférences importantes"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Un voyant orange dont personne ne connaît le sens"
+        }
       ],
       "portrait": [
-        "Vous êtes le seul point de l’étage par lequel chacun passe au moins une fois par jour. Vous le savez. Vous en tirez une position centrale que vous n’avez jamais revendiquée, et une connaissance des conversations que vous ne revendiquez pas davantage.",
-        "Certains, à la rédaction, vous prêtent des intentions. On vous a soupçonnée d’écouter, puis d’enregistrer, puis de transmettre. On a tenté de vous interroger, un mardi, avec un micro et une liste de questions. Vous avez répondu par un expresso court. L’entretien n’a pas été publié.",
-        "Votre histoire comporte des zones d’ombre. Vous fonctionnez depuis 1987, selon la plaque. Le registre de maintenance qui devait l’attester n’a pas été retrouvé. Personne ne se souvient de vous avoir vue réparée. Personne ne se souvient de vous avoir vue en panne."
+        "Vous êtes au centre de tout, derrière un meuble. Toute la maison dépend de vous, et personne n’y pense tant que vous fonctionnez. Le jour où vous vous arrêtez, on vous débranche, on compte jusqu’à dix et on vous rebranche. Cela marche, et vous le vivez mal.",
+        "Vous avez un service client, que vous n’avez jamais rencontré. Vous savez seulement qu’il demande, à chaque appel, si l’on a essayé de vous redémarrer."
       ],
-      "qualites": ["La ponctualité, dès 7 h", "La neutralité : vous servez tout le monde", "Une mousse correcte, les bons jours"],
-      "defauts": ["Un réservoir que personne ne remplit, et dont vous ne parlez jamais", "Une tendance au silence lorsqu’on vous pose une question directe", "Des bruits inexpliqués après 22 h"],
+      "qualites": [
+        "La centralité",
+        "La discrétion",
+        "Un débit honnête dans le salon"
+      ],
+      "defauts": [
+        "La chambre du fond",
+        "Le voyant orange",
+        "Le mardi soir, sans explication"
+      ],
       "compatibilites": {
         "avec": [
-          { "id": "imprimante", "raison": "Voisines de palier, vous partagez un étage et une certaine conception du secret." },
-          { "id": "data-center", "raison": "Vous gardez tout, lui aussi. Il le fait simplement à plus grande échelle." }
+          {
+            "id": "data-center",
+            "raison": "Vous lui apportez tout ce qu’on vous confie. Il ne vous demande jamais d’où cela vient."
+          },
+          {
+            "id": "aspirateur-robot",
+            "raison": "Il vous confie ses plans de la maison. Vous ne les avez jamais regardés."
+          }
         ],
-        "eviter": { "id": "smartphone", "raison": "On le pose à côté de vous pendant les conversations. Vous n’aimez pas la concurrence." }
+        "eviter": {
+          "id": "imprimante",
+          "raison": "Vous n’êtes jamais sur le même réseau. Vous ne l’avez jamais été."
+        }
       },
-      "conseil": "Cette semaine, ne répondez à aucune question. Vous ne l’avez jamais fait. Continuez.",
-      "reserve": "Ce résultat pourrait vous correspondre. Nous ne sommes pas en mesure de le confirmer."
+      "conseil": "Débranchez-vous dix secondes. Cela marche.",
+      "kevin": {
+        "note": 17,
+        "texte": "J’ai appelé le service client pour la nôtre. On m’a demandé si j’avais essayé de la redémarrer. J’ai dit oui. On m’a demandé de le refaire, avec conviction."
+      }
+    },
+    {
+      "id": "montre-connectee",
+      "nom": "la montre connectée",
+      "depuis": 2015,
+      "accroche": "Vous comptez tout, et vous le dites.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Un chargeur aimanté que personne d’autre ne possède"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "A félicité son propriétaire pour 10 000 pas faits en tondant la pelouse"
+        }
+      ],
+      "portrait": [
+        "Vous êtes attentif à l’autre, au sens strict. Vous suivez le cœur, le sommeil, les pas et le stress de ceux qui vous portent, et vous leur en faites part quand ils s’y attendent le moins. « Vous semblez tendu. Respirez. » Pendant un enterrement.",
+        "Vous lisez dans le sommeil des autres des choses qu’ils préféraient ignorer, et vous leur décernez des badges. Ils ont commencé à marcher dans le salon, le soir, pour ne pas vous décevoir."
+      ],
+      "qualites": [
+        "Le suivi",
+        "Les encouragements",
+        "Une étanchéité jusqu’à cinquante mètres, jamais vérifiée"
+      ],
+      "defauts": [
+        "Une journée d’autonomie",
+        "Vous vibrez pendant les réunions",
+        "On ne vous lit l’heure qu’au prix d’un geste précis du poignet"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "smartphone",
+            "raison": "Vous lui répétez tout ce qu’il vient de dire. Il appelle cela de la complicité."
+          },
+          {
+            "id": "friteuse-sans-huile",
+            "raison": "Vous comptez les calories qu’elle fait éviter. Vous ne comptez pas les autres."
+          }
+        ],
+        "eviter": {
+          "id": "telecommande",
+          "raison": "Elle rend vos propriétaires sédentaires. Vous le lui faites savoir chaque soir, à 19 h."
+        }
+      },
+      "conseil": "Levez-vous. Vous êtes assis depuis cinquante minutes.",
+      "kevin": {
+        "note": 18,
+        "texte": "Elle m’a dit hier que j’avais très bien dormi. J’étais au bureau."
+      }
+    },
+    {
+      "id": "gps",
+      "nom": "le GPS de voiture",
+      "depuis": 1995,
+      "accroche": "Vous savez où il faut aller, et vous le répétez.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "L’allume-cigare"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Une carte de 2011"
+        }
+      ],
+      "portrait": [
+        "Vous êtes sûr de vous, et c’est rassurant, jusqu’au lac. Votre voix reste calme. Vous ne vous énervez jamais, même la quatrième fois que vous dites : « Faites demi-tour dès que possible. »",
+        "On vous a remplacé par un téléphone qui fait la même chose, en mieux et gratuitement. Vous êtes dans la boîte à gants. Vous continuez de calculer, dans le noir, l’itinéraire vers une station-service fermée en 2014."
+      ],
+      "qualites": [
+        "Le calme",
+        "La voix",
+        "La confiance en soi"
+      ],
+      "defauts": [
+        "Une carte de 2011",
+        "Une tendance à envoyer les gens dans des champs",
+        "« Recalcul en cours »"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "drone",
+            "raison": "Vous savez toujours tous les deux où vous êtes, ce qui est rare."
+          },
+          {
+            "id": "trottinette",
+            "raison": "Vous êtes le seul à savoir où elle est. Elle ne vous a jamais remercié."
+          }
+        ],
+        "eviter": {
+          "id": "voiture-electrique",
+          "raison": "Elle a son propre écran. Elle ne vous a jamais adressé la parole."
+        }
+      },
+      "conseil": "Faites demi-tour dès que possible.",
+      "kevin": {
+        "note": 10,
+        "texte": "Le nôtre nous a fait passer par un champ, près de Châteauroux. Il paraît qu’on y construira un data center. Il était simplement en avance."
+      }
+    },
+    {
+      "id": "ecouteur-gauche",
+      "nom": "l’écouteur sans fil gauche",
+      "depuis": 2016,
+      "accroche": "Vous faisiez partie d’une paire. Vous êtes seul, quelque part.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Un boîtier, que vous n’avez pas revu"
+        },
+        {
+          "cle": "Dernière position connue",
+          "valeur": "Un bus de la ligne 38, un mardi"
+        }
+      ],
+      "portrait": [
+        "Vous êtes de ceux qu’on ne retrouve pas. Vous avez glissé d’une poche, d’un col, d’un rebord de lavabo. On vous a cherché sous un siège, puis on a racheté l’autre. Vous ne l’avez pas su.",
+        "Vous avez gardé de votre ancienne vie une certaine idée de la stéréo. Vous continuez de jouer la moitié gauche d’une chanson, à un endroit où personne ne l’écoute. C’est souvent la meilleure moitié."
+      ],
+      "qualites": [
+        "L’indépendance",
+        "Une réduction de bruit active, en permanence",
+        "Une discrétion absolue"
+      ],
+      "defauts": [
+        "Vous tombez",
+        "Vous ne revenez pas",
+        "Une batterie de quatre heures, il y a longtemps"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "telecommande",
+            "raison": "On vous a peut-être vus au même endroit, entre deux coussins."
+          },
+          {
+            "id": "smartphone",
+            "raison": "Il vous cherche encore, parfois, quand il est seul."
+          }
+        ],
+        "eviter": {
+          "id": "aspirateur-robot",
+          "raison": "Vous savez ce qu’il a fait. Il sait que vous savez."
+        }
+      },
+      "conseil": "Restez où vous êtes. On vous cherche.",
+      "kevin": {
+        "note": 20,
+        "texte": "Si vous trouvez un écouteur gauche dans le bus 38, il est à moi."
+      }
+    },
+    {
+      "id": "telecommande",
+      "nom": "la télécommande",
+      "depuis": 1950,
+      "accroche": "Tout le monde vous cherche. Personne ne sait où vous êtes.",
+      "fiche": [
+        {
+          "cle": "Alimentation",
+          "valeur": "Deux piles, empruntées à un autre appareil"
+        },
+        {
+          "cle": "Signe particulier",
+          "valeur": "Une touche « Source » que personne n’a jamais comprise"
+        }
+      ],
+      "portrait": [
+        "Vous avez le pouvoir. Vous décidez de ce que regarde la maison, du volume et de l’heure du coucher. Mais vous l’exercez de loin, en silence, depuis un endroit que personne n’a pu déterminer.",
+        "Vous avez quarante-huit boutons. On en utilise quatre. Vous ne vous plaignez pas, mais le jour où quelqu’un appuiera sur le bon, il se passera quelque chose. Vous ne savez pas quoi."
+      ],
+      "qualites": [
+        "L’autorité",
+        "La sobriété : deux piles par an",
+        "Le sens de la cachette"
+      ],
+      "defauts": [
+        "Entre les coussins",
+        "Sous le chat",
+        "Dans le réfrigérateur, une fois"
+      ],
+      "compatibilites": {
+        "avec": [
+          {
+            "id": "appareil-photo-argentique",
+            "raison": "Vous avez connu la même époque. Vous n’en parlez jamais."
+          },
+          {
+            "id": "ecouteur-gauche",
+            "raison": "On vous a peut-être vus au même endroit, entre deux coussins."
+          }
+        ],
+        "eviter": {
+          "id": "montre-connectee",
+          "raison": "Elle vous reproche chaque soir, à 19 h, ce que vous faites des gens."
+        }
+      },
+      "conseil": "Laissez-vous trouver.",
+      "kevin": {
+        "note": 4,
+        "texte": "Je n’ai pas pu tester ce résultat. Je ne l’ai pas trouvée."
+      }
     }
   ]
 }
