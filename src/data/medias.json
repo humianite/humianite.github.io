@@ -583,5 +583,27 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie de presse. Une grande salle de conférence internationale déserte : une table en fer à cheval vue de face, avec une rangée de fauteuils en cuir, des micros sur pied et des carafes d’eau. Au centre, un seul fauteuil légèrement reculé, vide, bien éclairé. Plaques nominatives retournées ou vierges, aucun texte lisible. Aucun emblème, aucun drapeau reconnaissable, aucun logo, personne.",
     "src": "/medias/photos/fauteuil-vide-onu.webp"
+  },
+  {
+    "id": "crete-randonneur-telephone",
+    "identifiant": "med-061",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un randonneur vu de dos, assis sur une crête enneigée, tient un téléphone à bout de bras face à un vaste paysage de montagne",
+    "legende": "Le passage décrit par l’itinéraire comme « accessible à tous les niveaux ».",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse. Un randonneur vu de dos, en anorak et bonnet, assis seul sur une étroite crête enneigée, au premier plan et bien centré. Il tient un smartphone levé à bout de bras, écran tourné vers lui, comme pour chercher du réseau. Son sac à dos est posé à côté de lui, un bâton de marche planté dans la neige. Devant lui, un vaste paysage de sommets alpins et un ravin profond, ciel bas et nuageux. Visage invisible, aucun texte lisible, aucun logo, personne d’autre.",
+    "src": "/medias/photos/crete-randonneur-telephone.webp"
+  },
+  {
+    "id": "vitrier-vitrine-brisee",
+    "identifiant": "med-062",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un vitrier mesure au mètre ruban une vitrine brisée, dans une rue commerçante jonchée d’éclats de verre",
+    "legende": "Dimanche matin, les premiers relevés.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse, petit matin. Dans une rue commerçante de centre-ville, une grande vitrine de magasin brisée, fissurée en étoile avec un trou béant, des éclats de verre sur le trottoir. Un vitrier en bleu de travail, vu de trois quarts dos, visage non visible, déroule un mètre ruban le long du cadre de la vitrine, un carnet à la main. Au premier plan, quelques éclats de verre au sol. En arrière-plan flou, une barrière de chantier et une rue vide. Aucune enseigne lisible, aucun texte lisible, aucun logo, aucune autre personne.",
+    "src": "/medias/photos/vitrier-vitrine-brisee.webp"
   }
 ]
