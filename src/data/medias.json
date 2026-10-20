@@ -605,5 +605,27 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie de presse, petit matin. Dans une rue commerçante de centre-ville, une grande vitrine de magasin brisée, fissurée en étoile avec un trou béant, des éclats de verre sur le trottoir. Un vitrier en bleu de travail, vu de trois quarts dos, visage non visible, déroule un mètre ruban le long du cadre de la vitrine, un carnet à la main. Au premier plan, quelques éclats de verre au sol. En arrière-plan flou, une barrière de chantier et une rue vide. Aucune enseigne lisible, aucun texte lisible, aucun logo, aucune autre personne.",
     "src": "/medias/photos/vitrier-vitrine-brisee.webp"
+  },
+  {
+    "id": "cabriolet-rampe-texas",
+    "identifiant": "med-063",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un cabriolet de sport sans conducteur en plein vol au-dessus d’une rangée de cinq voitures garées, sur un terrain d’essais désertique",
+    "legende": "Le second passage, jeudi, au-dessus des cinq mêmes véhicules.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse en noir et blanc, prise de nuit sous des projecteurs de stade, sur un vaste terrain d’essais plat et désertique au Texas. Au centre, gros et net, un cabriolet de sport biplace profilé, sans toit, en plein vol à environ huit mètres du sol, légèrement incliné sur le côté comme au début d’un tonneau ; les sièges sont visiblement vides, personne à bord. Sous lui, une rangée de cinq berlines modernes identiques garées côte à côte. À gauche, l’extrémité d’une haute rampe d’acier incurvée. Au sol, un léger nuage de vapeur blanche. Au fond, derrière des barrières métalliques, une foule floue d’invités qui lèvent des téléphones, silhouettes de dos, aucun visage reconnaissable. Aucun logo, aucune inscription lisible, aucun texte.",
+    "src": "/medias/photos/cabriolet-rampe-texas.webp"
+  },
+  {
+    "id": "pupitre-salon-dore",
+    "identifiant": "med-064",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un pupitre vide avec un micro, dans un salon aux boiseries dorées, entre deux drapeaux",
+    "legende": "Dimanche soir, avant la prise de parole.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse en noir et blanc, intérieur officiel en soirée. Au centre, gros et net, un pupitre de bois sombre, vide, avec un micro sur pied fin et une feuille de papier blanche posée, vierge. Derrière, des boiseries ornées de moulures dorées, un grand miroir, une pendule de cheminée ancienne. De part et d’autre, deux drapeaux sur hampe aux plis lourds, flous. Au premier plan, flou, le dos d’une caméra de télévision sur trépied et un câble au sol. Personne dans l’image. Aucun texte lisible, aucun logo, aucun emblème lisible.",
+    "src": "/medias/photos/pupitre-salon-dore.webp"
   }
 ]
