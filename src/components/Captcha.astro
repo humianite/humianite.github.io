@@ -15,6 +15,8 @@ import { COTE, GRILLE } from '@/modules/captcha/sudoku';
 <dialog class="rc" data-captcha aria-labelledby="rc-titre">
   <div class="rc__cadre">
     <p class="rc__marque">reCAPTCHA’TASTROPHE</p>
+    {/* En développement seulement : de quoi passer le contrôle sans le mener à son terme. */}
+    {import.meta.env.DEV && <button type="button" class="rc__dev" data-action="fermer" aria-label="Fermer (développement)">×</button>}
 
     <section class="rc__vue" data-vue="json">
       <p class="rc__titre" id="rc-titre" role="heading" aria-level="2" tabindex="-1">Vérification de votre artificialité</p>

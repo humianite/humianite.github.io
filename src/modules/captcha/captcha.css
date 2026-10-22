@@ -21,6 +21,19 @@
   padding: clamp(1.1rem, 4vw, 1.8rem);
 }
 
+.rc__dev {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px dashed currentColor;
+  background: none;
+  font: 1.3rem/1 var(--util);
+  color: inherit;
+  cursor: pointer;
+}
+
 .rc__marque {
   padding-right: 2.5rem;
   font: 800 0.95rem/1.2 var(--util);
