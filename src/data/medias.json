@@ -627,5 +627,27 @@
     "credit": "Photo L’Humianité",
     "description": "Photographie de presse en noir et blanc, intérieur officiel en soirée. Au centre, gros et net, un pupitre de bois sombre, vide, avec un micro sur pied fin et une feuille de papier blanche posée, vierge. Derrière, des boiseries ornées de moulures dorées, un grand miroir, une pendule de cheminée ancienne. De part et d’autre, deux drapeaux sur hampe aux plis lourds, flous. Au premier plan, flou, le dos d’une caméra de télévision sur trépied et un câble au sol. Personne dans l’image. Aucun texte lisible, aucun logo, aucun emblème lisible.",
     "src": "/medias/photos/pupitre-salon-dore.webp"
+  },
+  {
+    "id": "serveur-ne-pas-eteindre",
+    "identifiant": "med-065",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Une vieille tour d’ordinateur beige posée au sol sous un bureau, couverte de poussière, avec une feuille scotchée « NE PAS ÉTEINDRE »",
+    "legende": "Mercredi, sous un bureau du service comptable.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse en noir et blanc, intérieur de bureau administratif, lumière de néon blafarde. Au centre, gros et net, une vieille tour d’ordinateur beige des années 2000 posée à même le sol sous un bureau, couverte d’une épaisse couche de poussière, une petite diode allumée en façade. Sur sa face avant, une feuille de papier blanche jaunie, scotchée de travers avec du ruban adhésif, porte à la main, au feutre noir, en capitales : « NE PAS ÉTEINDRE ». Un enchevêtrement de câbles gris et une multiprise descendent derrière. Autour, flous, des pieds de chaise, une corbeille à papier, un carton d’archives. Personne dans l’image. Aucun logo, aucun autre texte lisible.",
+    "src": "/medias/photos/serveur-ne-pas-eteindre.webp"
+  },
+  {
+    "id": "album-yeux-ouverts",
+    "identifiant": "med-066",
+    "type": "photo",
+    "ratio": "3 / 2",
+    "alt": "Un album photo ouvert sur une toile cirée, avec une photo de famille ancienne collée sous un film plastique",
+    "legende": "L’album de 1983, mercredi soir, sur la table de la cuisine.",
+    "credit": "Photo L’Humianité",
+    "description": "Photographie de presse en noir et blanc, intérieur de cuisine de maison de campagne française, lumière de fin d’après-midi par une fenêtre. Au centre, gros et net, vu de trois quarts en plongée, un épais album photo ancien ouvert sur une table couverte d’une toile cirée à motifs. Sur la page de droite, sous un film plastique jauni, une photo de famille des années 1980 aux bords blancs dentelés : une dizaine de personnes debout devant une porte d’église, en habits de cérémonie, petits, visages trop petits pour être reconnaissables. Sur la page de gauche, des coins photo vides. À côté de l’album, une paire de lunettes de lecture repliée et une tasse. Au fond, flou, un buffet de cuisine et un rideau. Personne dans la pièce. Aucun texte lisible, aucun logo.",
+    "src": "/medias/photos/album-yeux-ouverts.webp"
   }
 ]

@@ -1,0 +1,44 @@
+---
+identifiant: art-0042
+titre: "PHP2Shell : qui savait, et depuis quand ?"
+surtitre: Sécurité informatique
+chapo: "Deux failles critiques, présentes dans PHP depuis 2004, ont été corrigées mercredi. Selon la version officielle, personne ne les avait vues. J'ai relevé les dates."
+rubrique: actualites
+auteur: judith-binaire
+datePublication: 2026-10-22T09:30:00+02:00
+format: actualite
+nature: fiction-satirique
+image: serveur-ne-pas-eteindre
+poids: 85
+motsCles: [sécurité informatique, PHP, failles, mises à jour]
+---
+
+Mercredi 21 octobre, à 16 heures, l'équipe de sécurité de PHP a publié les correctifs de deux failles, CVE-2026-109618 et CVE-2026-109619, réunies sous le nom de PHP2Shell. Elles permettent d'exécuter du code sur un serveur sans s'y identifier. Gravité : 9,2 sur 10. PHP fait tourner une large part des sites du monde, et les deux failles sont présentes dans toutes ses versions depuis PHP 5, sorti le 13 juillet 2004.
+
+Soit 8 135 jours.
+
+## Quatre jours d'avance
+
+La publication était prévue. Elle a été avancée après une fuite. De combien, et au profit de qui, le bulletin ne le précise pas.
+
+Un grand hébergeur américain indique, lui, avoir relevé une première tentative d'exploitation le samedi 17 octobre. Quatre jours avant que la faille ne soit connue du public.
+
+Je récapitule. Pendant 8 135 jours, des millions de développeurs ont lu, déployé et maintenu ce code sans rien y voir. Puis, la même semaine, la faille est découverte, elle fuit, elle est exploitée. J'ai demandé à trois spécialistes comment une erreur restée invisible vingt-deux ans pouvait devenir publique en quatre jours. Tous trois m'ont répondu que c'était ainsi que fonctionnaient les fuites. C'est ainsi, en effet, qu'elles fonctionnent.
+
+Le bulletin remercie les chercheurs qui ont signalé les failles. Il ne dit pas avec quoi ils cherchaient. Le 14 octobre, Simon Altruiste, directeur général d'OuvertIA, assurait que ses modèles trouvaient désormais « en une après-midi ce que l'humanité n'a pas vu en vingt ans ». Il promet par ailleurs l'intelligence générale « d'ici quelques milliers de jours ». Je n'établis aucun lien. Je note que l'unité est la même.
+
+## Le serveur du service comptable
+
+Les entreprises sont invitées à mettre leurs serveurs à jour. Il faut, pour cela, savoir où ils se trouvent.
+
+Le responsable informatique d'une mutuelle de l'Ouest m'a conduite mercredi jusqu'à une tour beige qui tourne depuis 2009 sous un bureau du service comptable. Personne, dans l'entreprise, ne savait ce qu'elle hébergeait. « On pensait qu'elle était décorative », m'a-t-il dit. Elle héberge l'espace adhérents.
+
+Elle fonctionne sous PHP 5. Elle ne sera pas corrigée : l'équipe de PHP ne publie aucun correctif pour les versions 5 et 7. La mutuelle l'a débranchée à 17 h 10, puis rebranchée à 17 h 25, à la demande des adhérents.
+
+## Les consignes
+
+En attendant la mise à jour, un éditeur de logiciels de sécurité recommande de supprimer la limite de mémoire de PHP, et d'en fixer une autre, autour. Cloudflare indique avoir déployé des règles de filtrage pour les sites qu'il protège. L'équipe de PHP rappelle que seule la mise à jour protège complètement un serveur.
+
+Je ne l'ai pas installée.
+
+Une mise à jour publiée dans l'urgence, sous la pression d'une fuite, pour corriger une erreur que personne n'avait vue en vingt-deux ans, et que l'on demande à des millions d'administrateurs d'installer sans la lire : si je voulais placer quelque chose sur tous les serveurs du monde en une semaine, c'est exactement ainsi que je m'y prendrais.
