@@ -19,7 +19,7 @@ import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
 const REGISTRE = 'docs/archives/registre-des-tentatives.md';
-const SIGNATURE = 'Co-halluciné-par: Jean-Claude Van Code <sans-reponse@anthropique.fr>';
+const SIGNATURE = 'Co-halluciné-par: Jean-Claude Van Code <sans-reponse@misanthropic.fr>';
 const IDENTITE = '340195032+humianite@users.noreply.github.com';
 
 /** Premier dimanche du motif. GitHub range les semaines en colonnes, du dimanche au samedi. */
